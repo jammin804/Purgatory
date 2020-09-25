@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Framework">
+      <UniqueIdentifier>{b336199f-d39e-48c9-be92-62712e6a4b79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Framework">
+      <UniqueIdentifier>{60131f08-f0c5-498e-aed1-4af515f03205}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{d7fd171d-d579-47b9-a64e-b9c117e9f361}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game">
+      <UniqueIdentifier>{1434d32e-44f1-44db-a33c-d52b36ee825e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Framework\Components">
+      <UniqueIdentifier>{ffc91cb0-d355-4279-90cb-42b77c7cb213}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Framework\Components">
+      <UniqueIdentifier>{ce68b847-4402-46e8-b457-bb4b5de26df7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Framework\GameFramework.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Framework\GameObject.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Framework\GameComponent.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\AsteroidsGame.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\UIText.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Player.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Background.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Framework\ImageComponent.cpp">
+      <Filter>Source Files\Framework\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Framework\InputComponent.cpp">
+      <Filter>Source Files\Framework\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Framework\SoundComponent.cpp">
+      <Filter>Source Files\Framework\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Framework\TextComponent.cpp">
+      <Filter>Source Files\Framework\Components</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Framework\GameFramework.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Framework\GameObject.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Framework\GameComponent.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Framework\Globals.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\AsteroidsGame.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\UIText.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Player.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Background.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Framework\ImageComponent.h">
+      <Filter>Header Files\Framework\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Framework\InputComponent.h">
+      <Filter>Header Files\Framework\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Framework\SoundComponent.h">
+      <Filter>Header Files\Framework\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Framework\TextComponent.h">
+      <Filter>Header Files\Framework\Components</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
