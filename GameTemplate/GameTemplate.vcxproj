@@ -28,6 +28,7 @@
     <ClCompile Include="Source\Framework\TextComponent.cpp" />
     <ClCompile Include="Source\Game\AsteroidsGame.cpp" />
     <ClCompile Include="Source\Game\Background.cpp" />
+    <ClCompile Include="Source\Game\Enemy.cpp" />
     <ClCompile Include="Source\Game\Player.cpp" />
     <ClCompile Include="Source\Game\UIText.cpp" />
     <ClCompile Include="Source\main.cpp" />
@@ -46,6 +47,7 @@
     <ClInclude Include="Source\Framework\TextComponent.h" />
     <ClInclude Include="Source\Game\AsteroidsGame.h" />
     <ClInclude Include="Source\Game\Background.h" />
+    <ClInclude Include="Source\Game\Enemy.h" />
     <ClInclude Include="Source\Game\Player.h" />
     <ClInclude Include="Source\Game\UIText.h" />
   </ItemGroup>

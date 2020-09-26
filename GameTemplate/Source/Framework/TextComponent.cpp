@@ -20,5 +20,5 @@ void TextComponent::OnUpdate()
 void TextComponent::OnRender()
 {
     const GameObject* Owner = GetOwner();
-    al_draw_text(Globals::DefaultFont, al_map_rgb(255, 255, 255), Owner->GetPosX() + GetOffsetX(), Owner->GetPosY() + GetOffsetY(), 0, Text.c_str());
+    al_draw_text(Globals::DefaultFont, al_map_rgb(255, 255, 255), Owner->GetPositionX() + GetOffsetX(), Owner->GetPositionY() + GetOffsetY(), 0, Text.c_str());
 }

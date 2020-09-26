@@ -16,11 +16,11 @@ public:
 
     void SetPosX(float NewPosX) { PositionX = NewPosX; }
     void SetPosY(float NewPosY) { PositionY = NewPosY; }
-    void SetPos(float NewPosX, float NewPosY) { SetPosX(NewPosX); SetPosY(NewPosY); }
+    void SetPosition(float NewPosX, float NewPosY) { SetPosX(NewPosX); SetPosY(NewPosY); }
     void SetRotation(float NewRotation) { Rotation = NewRotation; }
 
-    float GetPosX() const { return PositionX; }
-    float GetPosY() const { return PositionY; }
+    float GetPositionX() const { return PositionX; }
+    float GetPositionY() const { return PositionY; }
     float GetRotation() const { return Rotation; }
 
 protected:   

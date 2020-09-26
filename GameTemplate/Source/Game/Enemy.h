@@ -8,7 +8,7 @@ class ImageComponent;
 class InputComponent;
 class SoundComponent;
 
-class Player : public GameObject
+class Enemy : public GameObject
 {
 protected:
     virtual void OnInit() override;
@@ -20,12 +20,11 @@ public:
     void SetThrustersImage(string ImagePath);
     void SetThrustersSound(string SoundPath);
 private:
-    ImageComponent* PlayerAvatarImageComponent = nullptr;
-    ImageComponent* PlayerAvatarThrustersImageComponent = nullptr;
-    InputComponent* InputComp = nullptr;
+    ImageComponent* EnemyAvatarImageComponent = nullptr;
+    ImageComponent* EnemyAvatarThrustersImageComponent = nullptr;
     SoundComponent* ThrusterSoundComponent = nullptr;
 
-    float PlayerMovementSpeed = 10.0f;
+    float EnemyMovementSpeed = 10.0f;
     float RotationSpeed = 0.2f;
 };
 

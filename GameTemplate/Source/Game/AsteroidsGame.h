@@ -16,6 +16,7 @@ protected:
 private:
     class UIText* PlayerScore;
     class Player* Player1;
+    class Enemy* Enemy1;
     class Background* BG;
     int CurrentScore = 0;
 };

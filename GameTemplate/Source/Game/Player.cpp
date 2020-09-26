@@ -6,35 +6,39 @@
 
 void Player::OnInit()
 {
-    PlayerAvatarThrusters = new ImageComponent(this);
-    PlayerAvatar = new ImageComponent(this);
+    PlayerAvatarThrustersImageComponent = new ImageComponent(this);
+    PlayerAvatarThrustersImageComponent->SetVisible(false);
+    PlayerAvatarImageComponent = new ImageComponent(this);
     InputComp = new InputComponent(this);
-    ThrusterSound = new SoundComponent(this);
-    ThrusterSound->SetLooped(true);
-    ThrusterSound->SetVolume(0.3f);
+    ThrusterSoundComponent = new SoundComponent(this);
+    ThrusterSoundComponent->SetLooped(true);
+    ThrusterSoundComponent->SetVolume(0.3f);
 }
 
 void Player::OnUpdate()
 {
     if (InputComp->IsKeyPressed(ALLEGRO_KEY_UP) || InputComp->IsKeyPressed(ALLEGRO_KEY_W))
     {
-        float DirectionY = cos(GetRotation()) * PlayerMovementSpeed;
-        float DirectionX = sin(GetRotation()) * PlayerMovementSpeed;
-
-        SetPos(GetPosX() + DirectionX, GetPosY() - DirectionY);
-
-        PlayerAvatarThrusters->SetVisible(true);
-        if (!ThrusterSound->IsPlaying())
+        // Move the player forward in the direction he's facing
         {
-            ThrusterSound->Play();
+            float DirectionY = cos(GetRotation()) * PlayerMovementSpeed;
+            float DirectionX = sin(GetRotation()) * PlayerMovementSpeed;
+
+            SetPosition(GetPositionX() + DirectionX, GetPositionY() - DirectionY);
+        }
+
+        if (!ThrusterSoundComponent->IsPlaying())
+        {
+            PlayerAvatarThrustersImageComponent->SetVisible(true);
+            ThrusterSoundComponent->Play();
         }
     }
     else
     {
-        PlayerAvatarThrusters->SetVisible(false);
-        if (ThrusterSound->IsPlaying())
+        if (ThrusterSoundComponent->IsPlaying())
         {
-            ThrusterSound->Stop();
+            PlayerAvatarThrustersImageComponent->SetVisible(false);
+            ThrusterSoundComponent->Stop();
         }
     }
     
@@ -50,39 +54,39 @@ void Player::OnUpdate()
 
 void Player::OnShutdown()
 {
-    delete PlayerAvatarThrusters;
-    PlayerAvatarThrusters = nullptr;
+    delete PlayerAvatarThrustersImageComponent;
+    PlayerAvatarThrustersImageComponent = nullptr;
 
-    delete PlayerAvatar;
-    PlayerAvatar = nullptr;
+    delete PlayerAvatarImageComponent;
+    PlayerAvatarImageComponent = nullptr;
 
     delete InputComp;
     InputComp = nullptr;
 
-    delete ThrusterSound;
-    ThrusterSound = nullptr;
+    delete ThrusterSoundComponent;
+    ThrusterSoundComponent = nullptr;
 }
 
 void Player::SetAvatarImage(string ImagePath)
 {
-    if (PlayerAvatar)
+    if (PlayerAvatarImageComponent)
     {
-        PlayerAvatar->LoadImage(ImagePath);
+        PlayerAvatarImageComponent->LoadImage(ImagePath);
     }
 }
 
 void Player::SetThrustersImage(string ImagePath)
 {
-    if (PlayerAvatarThrusters)
+    if (PlayerAvatarThrustersImageComponent)
     {
-        PlayerAvatarThrusters->LoadImage(ImagePath);
+        PlayerAvatarThrustersImageComponent->LoadImage(ImagePath);
     }
 }
 
 void Player::SetThrustersSound(string SoundPath)
 {
-    if (ThrusterSound)
+    if (ThrusterSoundComponent)
     {
-        ThrusterSound->LoadSample(SoundPath);
+        ThrusterSoundComponent->LoadSample(SoundPath);
     }
 }
