@@ -1,7 +1,5 @@
 import Framework.GameObject
 import Framework.ImageComponent
-import Framework.InputComponent
-import Framework.SoundComponent
 import Framework.BoxCollisionComponent
 import pygame
 import math

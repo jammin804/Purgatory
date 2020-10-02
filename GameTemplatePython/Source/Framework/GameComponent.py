@@ -8,7 +8,7 @@ class GameComponent(object):
         self.OffsetY = 0.0
 
     def OnInit(self):
-        print("Component Init")
+        pass
 
     def OnUpdate(self, DeltaTime):
         pass

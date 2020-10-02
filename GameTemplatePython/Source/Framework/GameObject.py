@@ -7,6 +7,10 @@ class GameObject(object):
         self.Rotation = 0.0
         self.GameComponents = []
         self.bEnabled = True
+        self.bInitialised = False
+        
+    def Destroy(self):
+        Globals.MyGameFramework.UnregisterGameObject(self)
   
     def OnInit(self):
         pass
@@ -24,11 +28,14 @@ class GameObject(object):
         self.OnInit()
         for Component in self.GameComponents:
             Component._Init_()
+        self.bInitialised = True
     
     def _PostInit_(self):
         self.OnPostInit()
     
     def _Update_(self, DeltaTime):
+        if not self.bInitialised:
+            return
         self.OnUpdate(DeltaTime)
         for Component in self.GameComponents:
             Component._Update_(DeltaTime)
@@ -40,6 +47,7 @@ class GameObject(object):
     def _Shutdown_(self):
         for Component in self.GameComponents:
             Component._Shutdown_()
+            self.GameComponents.remove(Component)
         self.OnShutdown()
 
     def RegisterComponent(self, NewComponent):

@@ -12,6 +12,13 @@ class GameFramework(object):
 
     def RegisterGameObject(self, NewGameObject):
         self.GameObjects.append(NewGameObject)
+    def UnregisterGameObject(self, GameObjectToUnregister):
+        for GameObject in self.GameObjects:
+            if GameObject == GameObjectToUnregister:
+                GameObject._Shutdown_()
+                self.GameObjects.remove(GameObject)
+                break        
+        
     
     def OnInit(self):
         pass
@@ -33,10 +40,6 @@ class GameFramework(object):
         self.Screen = pygame.display.set_mode(self.ScreenSize)
         
         self.OnInit()
-        for GameObject in self.GameObjects:
-            GameObject._Init_()
-            GameObject._PostInit_()
-
         self.OnPostInit()
 
         #register things here
@@ -52,6 +55,11 @@ class GameFramework(object):
                 pass
             elif event.type == pygame.KEYUP:
                 pass
+            
+        for GameObject in self.GameObjects:
+            if not GameObject.bInitialised:
+                GameObject._Init_()
+                GameObject._PostInit_()
         
         self.OnUpdate(self.GetTimeElapsed())
         for GameObject in self.GameObjects:

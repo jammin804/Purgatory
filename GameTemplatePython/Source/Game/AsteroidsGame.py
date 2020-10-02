@@ -1,6 +1,7 @@
 import Globals
 import Game.Player
 import Game.Rock
+import Game.Explosion
 import Game.Background
 import Game.UIText
 import Framework.GameFramework
@@ -19,14 +20,24 @@ class Asteroids(Framework.GameFramework.GameFramework):
         self.Player1 = Game.Player.Player()
         self.Rock = Game.Rock.Rock()
         self.UI = Game.UIText.UIText()
+        self.Explosion = None
         
     def OnPostInit(self):
-        print("On Post Init")
+        pass
         
     def OnUpdate(self, DeltaTime):
-        if self.Player1.Collision.DoesCollide(self.Rock.Collision):
-            self.Player1.bEnabled = False
+        if self.Explosion is not None:
+            if self.Explosion.IsFinished():
+                self.Explosion.Destroy()
+                self.Explosion = None
+        
+        if self.Player1 is not None:
+            if self.Player1.Collision.DoesCollide(self.Rock.Collision):
+                self.Explosion = Game.Explosion.Explosion()
+                self.Explosion.Position = self.Player1.Position
+                self.Player1.Destroy()
+                self.Player1 = None
         #print("On Update")
         
     def OnShutdown(self):
-        print("On Shutdown")
+        pass
