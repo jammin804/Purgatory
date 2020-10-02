@@ -1,14 +1,12 @@
-import Game.AsteroidsGame as AsteroidsGame
-
-MyGame = AsteroidsGame.Asteroids()
+import Globals
 
 def Main(): 
-    if (MyGame.Init() == False):
+    if (Globals.MyGameFramework.Init() == False):
         return
     
-    while (MyGame.Update()):
+    while (Globals.MyGameFramework.Update()):
         continue
     
-    MyGame.Shutdown()
+    Globals.MyGameFramework.Shutdown()
     
 Main()

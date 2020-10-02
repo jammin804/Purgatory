@@ -1,32 +1,35 @@
-#include "GameComponent.h"
-#include "GameObject.h"
+import Framework.GameObject
 
-GameComponent::GameComponent(GameObject* GOOwner)
-{
-    Owner = GOOwner;
-    if (Owner)
-    {
-        Owner->RegisterComponent(this);
-    }
-}
+class GameComponent(object):
+    def __init__(self, Owner):
+        self.Owner = Owner
+        self.Owner.RegisterComponent(self)
+        self.OffsetX = 0.0
+        self.OffsetY = 0.0
 
-void GameComponent::Init()
-{
-    OnInit();
-}
+    def OnInit(self):
+        print("Component Init")
 
-void GameComponent::Update()
-{
-    OnUpdate();
-}
+    def OnUpdate(self):
+        pass
 
-void GameComponent::Shutdown()
-{
-    OnShutdown();
-}
+    def OnRender(self):
+        pass
 
-void GameComponent::Render()
-{
-    OnRender();
-}
+    def OnShutdown(self):
+        pass
 
+    def GetOwner(self):
+        return self.Owner
+
+    def _Init_(self):
+        self.OnInit()
+        
+    def _Update_(self):
+        self.OnUpdate()
+        
+    def _Render_(self):
+        self.OnRender()
+        
+    def _Shutdown_(self):
+        self.OnShutdown()

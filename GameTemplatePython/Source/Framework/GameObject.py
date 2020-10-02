@@ -1,53 +1,47 @@
-#include "GameObject.h"
-#include "GameFramework.h"
-#include "GameComponent.h"
+import Globals
 
-GameObject::GameObject()
-{
-    GameFramework::RegisterGameObject(this);
-}
+class GameObject(object):
+    
+    Position = [0.0,0.0]
+    Rotation = 0.0
+    GameComponents = []
+    
+    def __init__(self):
+        Globals.MyGameFramework.RegisterGameObject(self)
+  
+    def OnInit(self):
+        pass
+    
+    def OnPostInit(self):
+        pass
+    
+    def OnUpdate(self):
+        pass
+    
+    def OnShutdown(self):
+        pass
 
-void GameObject::RegisterComponent(GameComponent* Component)
-{
-    GameComponents.push_back(Component);
-}
+    def _Init_(self):
+        self.OnInit()
+        for Component in self.GameComponents:
+            Component._Init_()
+    
+    def _PostInit_(self):
+        self.OnPostInit()
+    
+    def _Update_(self):
+        self.OnUpdate()
+        for Component in self.GameComponents:
+            Component._Update_()
+            
+    def _Render_(self):
+        for Component in self.GameComponents:
+            Component._Render_()
+            
+    def _Shutdown_(self):
+        for Component in self.GameComponents:
+            Component._Shutdown_()
+        OnShutdown()
 
-void GameObject::Init()
-{
-    OnInit();
-    for (GameComponent* Component : GameComponents)
-    {
-        Component->Init();
-    }
-}
-
-void GameObject::PostInit()
-{
-    OnPostInit();
-}
-
-void GameObject::Update()
-{
-    OnUpdate();
-    for (GameComponent* Component : GameComponents)
-    {
-        Component->Update();
-    }
-}
-
-void GameObject::Render()
-{
-    for (GameComponent* Component : GameComponents)
-    {
-        Component->Render();
-    }
-}
-
-void GameObject::Shutdown()
-{
-    for (GameComponent* Component : GameComponents)
-    {
-        Component->Shutdown();
-    }
-    OnShutdown();
-}
+    def RegisterComponent(self, NewComponent):
+        self.GameComponents.append(NewComponent)

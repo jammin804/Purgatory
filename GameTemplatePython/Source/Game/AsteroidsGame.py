@@ -1,24 +1,19 @@
 
 #include "Framework/GameFramework.h"
-
-import Framework.GameFramework as FW
-
-#include "Background.h"
-#include "Enemy.h"
-#include "Player.h"
-#include "UIText.h"
-#include <sstream>
+import Globals
+import Game.Player
+import Framework.GameFramework
 
 #todo AsteroidsGame(GameFramework)
-class Asteroids(FW.GameFramework):
+class Asteroids(Framework.GameFramework.GameFramework):
     # PlayerScore = UIText()
-    # Player1 = Player()
     # Enemy1 = Enemy()
     # BG = Background()
     
     CurrentScore = 0
     
     def OnInit(self):
+        self.Player1 = Game.Player.Player()
         print("On Init")
         
     def OnPostInit(self):
@@ -52,7 +47,8 @@ class Asteroids(FW.GameFramework):
     # }
         
     def OnUpdate(self):
-        print("On Update")
+        pass
+        #print("On Update")
         
     def OnShutdown(self):
         print("On Shutdown")

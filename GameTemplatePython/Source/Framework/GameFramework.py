@@ -1,15 +1,15 @@
 #include "GameFramework.h"
 
 #import pygame
-
-#include <allegro5/allegro5.h>
-#include <allegro5/allegro_image.h>
-#include <allegro5/allegro_audio.h>
-#include <allegro5/allegro_acodec.h>
 #include "GameObject.h"
 #include "InputComponent.h"
 
 class GameFramework(object):
+
+    GameObjects = []
+
+    def RegisterGameObject(self, NewGameObject):
+        self.GameObjects.append(NewGameObject)
     
     def OnInit(self):
         pass
@@ -22,30 +22,20 @@ class GameFramework(object):
     
     def Init(self):
         self.OnInit()
-
-        # for (GO in GameObjects)
-        # {
-        #     GO.Init();
-        #     GO.PostInit();
-        # }
+        for GameObject in self.GameObjects:
+            GameObject._Init_()
+            GameObject._PostInit_()
 
         self.OnPostInit()
 
         #register things here
 
-        # Globals::DefaultFont = al_create_builtin_font();
-        # if (!Globals::DefaultFont)
-        # {
-        #     printf("couldn't initialize font\n");
-        #     return false;
-        # }
-
         return True
 
     def Update(self):
         self.OnUpdate()
-        # for (GO in GameObjects):
-        #     GO.Update()
+        for GameObject in self.GameObjects:
+            GameObject._Update_()
         # case ALLEGRO_EVENT_KEY_DOWN:
         #     for (InputComponent* InputComp : InputComponents)
         #     {
@@ -59,8 +49,8 @@ class GameFramework(object):
         #     }
         #     break;
         
-        # for (GO in GameObjects):
-        #     GO.Render()
+        for GameObject in self.GameObjects:
+            GameObject._Render_()
         
         # TODO Flip Display
 
@@ -68,10 +58,8 @@ class GameFramework(object):
     
     def Shutdown(self):
         self.OnShutdown()
-        #     for (GameObject* GO : GameObjects)
-        #     {
-        #         GO->Shutdown();
-        #     }
+        for GameObject in self.GameObjects:
+            GameObject._Shutdown_()
 
 
 # private:
