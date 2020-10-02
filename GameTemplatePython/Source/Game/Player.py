@@ -1,10 +1,11 @@
 import Framework.GameObject
-import Framework.GameComponent
+import Framework.ImageComponent
 
 class Player(Framework.GameObject.GameObject):
     
     def OnInit(self):
-        self.PlayerAvatar = Framework.GameComponent.GameComponent(self)
+        self.PlayerAvatar = Framework.ImageComponent.ImageComponent(self)
+        self.PlayerAvatar.LoadImage("Art/Ship.png")
     #         ImageComponent* PlayerAvatarThrustersImageComponent = nullptr;
     # InputComponent* InputComp = nullptr;
     # SoundComponent* ThrusterSoundComponent = nullptr;

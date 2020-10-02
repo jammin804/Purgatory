@@ -34,14 +34,14 @@ class GameObject(object):
         for Component in self.GameComponents:
             Component._Update_()
             
-    def _Render_(self):
+    def _Render_(self, Screen):
         for Component in self.GameComponents:
-            Component._Render_()
+            Component._Render_(Screen)
             
     def _Shutdown_(self):
         for Component in self.GameComponents:
             Component._Shutdown_()
-        OnShutdown()
+        self.OnShutdown()
 
     def RegisterComponent(self, NewComponent):
         self.GameComponents.append(NewComponent)

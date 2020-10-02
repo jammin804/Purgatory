@@ -1,10 +1,16 @@
 #include "GameFramework.h"
 
-#import pygame
+import pygame
 #include "GameObject.h"
 #include "InputComponent.h"
 
+ColorBlue = 0, 0, 100
+
 class GameFramework(object):
+
+    def __init__(self, ScreenSize, TargetFPS):
+        self.ScreenSize = ScreenSize
+        self.TargetFPS = TargetFPS
 
     GameObjects = []
 
@@ -20,7 +26,14 @@ class GameFramework(object):
     def OnShutdown(self):
         pass
     
+    def GetTimeElapsed(self):
+        return self.FPSClock.get_time() * 0.001
+    
     def Init(self):
+        pygame.init()
+        self.FPSClock = pygame.time.Clock()
+        self.Screen = pygame.display.set_mode(self.ScreenSize)
+        
         self.OnInit()
         for GameObject in self.GameObjects:
             GameObject._Init_()
@@ -33,6 +46,11 @@ class GameFramework(object):
         return True
 
     def Update(self):
+        
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT: 
+                return False
+        
         self.OnUpdate()
         for GameObject in self.GameObjects:
             GameObject._Update_()
@@ -49,9 +67,13 @@ class GameFramework(object):
         #     }
         #     break;
         
-        for GameObject in self.GameObjects:
-            GameObject._Render_()
+        self.Screen.fill(ColorBlue)
         
+        for GameObject in self.GameObjects:
+            GameObject._Render_(self.Screen)
+        
+        pygame.display.update()
+        self.FPSClock.tick(self.TargetFPS)
         # TODO Flip Display
 
         return True

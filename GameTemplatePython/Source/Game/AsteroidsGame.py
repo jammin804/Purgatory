@@ -6,6 +6,8 @@ import Framework.GameFramework
 
 #todo AsteroidsGame(GameFramework)
 class Asteroids(Framework.GameFramework.GameFramework):
+    def __init__(self, ScreenSize, TargetFPS):
+        super().__init__(ScreenSize, TargetFPS)
     # PlayerScore = UIText()
     # Enemy1 = Enemy()
     # BG = Background()

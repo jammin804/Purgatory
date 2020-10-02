@@ -13,7 +13,7 @@ class GameComponent(object):
     def OnUpdate(self):
         pass
 
-    def OnRender(self):
+    def OnRender(self, Screen):
         pass
 
     def OnShutdown(self):
@@ -28,8 +28,8 @@ class GameComponent(object):
     def _Update_(self):
         self.OnUpdate()
         
-    def _Render_(self):
-        self.OnRender()
+    def _Render_(self, Screen):
+        self.OnRender(Screen)
         
     def _Shutdown_(self):
         self.OnShutdown()
