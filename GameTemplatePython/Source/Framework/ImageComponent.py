@@ -10,18 +10,21 @@ class ImageComponent(Framework.GameComponent.GameComponent):
         self.Image = pygame.image.load(ImagePath)
         self.OriginalImage = self.Image
         self.ImageRect = self.Image.get_rect()
+        self.OnUpdate(0.0)
         
     def SetVisible(self, bIsNowVisible):
         self.bIsVisible = bIsNowVisible
     
     def GetImageRect(self):
         return self.ImageRect
+    
+    def OnUpdate(self, DeltaTime):
+        for axis in range(0, 2):
+            self.ImageRect[axis] = int(self.Owner.Position[axis])
             
     def OnRender(self, Screen):
         if (not self.bIsVisible):
             return
-        for axis in range(0, 2):
-            self.ImageRect[axis] = int(self.Owner.Position[axis])
         rotated_image = pygame.transform.rotate(self.OriginalImage, -self.Owner.Rotation)
         new_rect = rotated_image.get_rect(center = self.OriginalImage.get_rect(topleft = self.ImageRect.topleft).center)
         Screen.blit(rotated_image, new_rect.topleft)

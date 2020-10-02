@@ -6,6 +6,7 @@ class GameObject(object):
         self.Position = [0.0,0.0]
         self.Rotation = 0.0
         self.GameComponents = []
+        self.bEnabled = True
   
     def OnInit(self):
         pass

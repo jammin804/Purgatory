@@ -55,12 +55,14 @@ class GameFramework(object):
         
         self.OnUpdate(self.GetTimeElapsed())
         for GameObject in self.GameObjects:
-            GameObject._Update_(self.GetTimeElapsed())
+            if GameObject.bEnabled:
+                GameObject._Update_(self.GetTimeElapsed())
         
         self.Screen.fill(ColorBlue)
         
         for GameObject in self.GameObjects:
-            GameObject._Render_(self.Screen)
+            if GameObject.bEnabled:
+                GameObject._Render_(self.Screen)
         
         pygame.display.update()
         self.FPSClock.tick(self.TargetFPS)

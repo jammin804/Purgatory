@@ -23,6 +23,8 @@ class Player(Framework.GameObject.GameObject):
         self.ThrusterSound.LoadSample("Audio/Thruster.wav")
         self.ThrusterSound.SetVolume(0.1)
         self.Collision = Framework.BoxCollisionComponent.BoxCollisionComponent(self)
+        self.Collision.SetScale(0.5)
+        self.Collision.SetRect(self.PlayerAvatar.GetImageRect())
     
     def OnUpdate(self, DeltaTime):
         
