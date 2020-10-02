@@ -21,7 +21,7 @@ class GameFramework(object):
         pass
     def OnPostInit(self):
         pass
-    def OnUpdate(self):
+    def OnUpdate(self, DeltaTime):
         pass
     def OnShutdown(self):
         pass
@@ -50,10 +50,14 @@ class GameFramework(object):
         for event in pygame.event.get():
             if event.type == pygame.QUIT: 
                 return False
+            elif event.type == pygame.KEYDOWN:
+                pass
+            elif event.type == pygame.KEYUP:
+                pass
         
-        self.OnUpdate()
+        self.OnUpdate(self.GetTimeElapsed())
         for GameObject in self.GameObjects:
-            GameObject._Update_()
+            GameObject._Update_(self.GetTimeElapsed())
         # case ALLEGRO_EVENT_KEY_DOWN:
         #     for (InputComponent* InputComp : InputComponents)
         #     {

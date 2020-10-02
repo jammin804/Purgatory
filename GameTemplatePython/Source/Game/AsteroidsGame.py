@@ -3,6 +3,7 @@
 import Globals
 import Game.Player
 import Framework.GameFramework
+import pygame
 
 #todo AsteroidsGame(GameFramework)
 class Asteroids(Framework.GameFramework.GameFramework):
@@ -15,6 +16,7 @@ class Asteroids(Framework.GameFramework.GameFramework):
     CurrentScore = 0
     
     def OnInit(self):
+        pygame.display.set_caption('Asteroids Game')
         self.Player1 = Game.Player.Player()
         print("On Init")
         
@@ -48,7 +50,7 @@ class Asteroids(Framework.GameFramework.GameFramework):
     #     PlayerScore->SetPosition(100.0f, 100.0f);
     # }
         
-    def OnUpdate(self):
+    def OnUpdate(self, DeltaTime):
         pass
         #print("On Update")
         

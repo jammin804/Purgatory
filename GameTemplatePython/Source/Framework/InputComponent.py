@@ -1,45 +1,17 @@
-#include "InputComponent.h"
-#include "GameObject.h"
-#include "GameFramework.h"
+import Framework.GameComponent
+import pygame
 
-#define KEY_SEEN     1
-#define KEY_RELEASED 2
-#define KEY_PRESSED  3
-
-InputComponent::InputComponent(class GameObject* Owner)
-    : GameComponent(Owner)
-{
-    GameFramework::RegisterInputComponent(this);
-}
-
-
-bool InputComponent::IsKeyPressed(int KeyCode) const
-{
-    return Keys[KeyCode] & KEY_PRESSED;
-}
-
-bool InputComponent::IsKeyReleased(int KeyCode) const
-{
-    return Keys[KeyCode] & KEY_RELEASED;
-}
-
-void InputComponent::OnKeyPressed(int Keycode)
-{
-    Keys[Keycode] = KEY_SEEN | KEY_RELEASED;
-}
-
-void InputComponent::OnKeyReleased(int Keycode)
-{
-    Keys[Keycode] &= KEY_RELEASED;
-}
-
-void InputComponent::OnInit()
-{
+class InputComponent(Framework.GameComponent.GameComponent):
+    def __init__(self, Owner):
+        super().__init__(Owner)
+        self.Keys = pygame.key.get_pressed()
+        
+        
+    def IsKeyPressed(self, KeyCode):
+        return self.Keys[KeyCode] == True
     
-}
-
-void InputComponent::OnUpdate()
-{
-    for (int i = 0; i < ALLEGRO_KEY_MAX; i++)
-        Keys[i] &= KEY_SEEN;
-}
+    def IsKeyReleased(self, KeyCode):
+        return self.Keys[KeyCode] == False
+        
+    def OnUpdate(self, DeltaTime):
+        self.Keys = pygame.key.get_pressed()

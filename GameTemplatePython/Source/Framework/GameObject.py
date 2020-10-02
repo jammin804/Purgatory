@@ -1,13 +1,11 @@
 import Globals
 
-class GameObject(object):
-    
-    Position = [0.0,0.0]
-    Rotation = 0.0
-    GameComponents = []
-    
+class GameObject(object):    
     def __init__(self):
         Globals.MyGameFramework.RegisterGameObject(self)
+        self.Position = [0.0,0.0]
+        self.Rotation = 0.0
+        self.GameComponents = []
   
     def OnInit(self):
         pass
@@ -15,7 +13,7 @@ class GameObject(object):
     def OnPostInit(self):
         pass
     
-    def OnUpdate(self):
+    def OnUpdate(self, DeltaTime):
         pass
     
     def OnShutdown(self):
@@ -29,10 +27,10 @@ class GameObject(object):
     def _PostInit_(self):
         self.OnPostInit()
     
-    def _Update_(self):
-        self.OnUpdate()
+    def _Update_(self, DeltaTime):
+        self.OnUpdate(DeltaTime)
         for Component in self.GameComponents:
-            Component._Update_()
+            Component._Update_(DeltaTime)
             
     def _Render_(self, Screen):
         for Component in self.GameComponents:

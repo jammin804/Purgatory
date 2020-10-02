@@ -10,7 +10,7 @@ class GameComponent(object):
     def OnInit(self):
         print("Component Init")
 
-    def OnUpdate(self):
+    def OnUpdate(self, DeltaTime):
         pass
 
     def OnRender(self, Screen):
@@ -25,8 +25,8 @@ class GameComponent(object):
     def _Init_(self):
         self.OnInit()
         
-    def _Update_(self):
-        self.OnUpdate()
+    def _Update_(self, DeltaTime):
+        self.OnUpdate(DeltaTime)
         
     def _Render_(self, Screen):
         self.OnRender(Screen)
