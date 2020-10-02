@@ -1,6 +1,7 @@
 import Framework.GameObject
 import Framework.ImageComponent
 import Framework.InputComponent
+import Framework.SoundComponent
 import pygame
 import math
 
@@ -12,34 +13,32 @@ class Player(Framework.GameObject.GameObject):
         self.Position = [1280*0.5, 720*0.5]
         self.PlayerAvatar = Framework.ImageComponent.ImageComponent(self)
         self.PlayerAvatar.LoadImage("Art/Ship.png")
-    #         ImageComponent* PlayerAvatarThrustersImageComponent = nullptr;
-        self.InputComponent = Framework.InputComponent.InputComponent(self)
-    # SoundComponent* ThrusterSoundComponent = nullptr;
+        self.PlayerThruster = Framework.ImageComponent.ImageComponent(self)
+        self.PlayerThruster.LoadImage("Art/Thrusters.png")
+        self.PlayerThruster.SetVisible(False)
+        self.Input = Framework.InputComponent.InputComponent(self)
+        self.ThrusterSound = Framework.SoundComponent.SoundComponent(self)
+        self.ThrusterSound.SetLooped(True)
+        self.ThrusterSound.LoadSample("Audio/Thruster.wav")
+        self.ThrusterSound.SetVolume(0.1)
     
     def OnUpdate(self, DeltaTime):
-        if self.InputComponent.IsKeyPressed(pygame.K_UP) or self.InputComponent.IsKeyPressed(pygame.K_w):
+        if self.Input.IsKeyPressed(pygame.K_UP) or self.Input.IsKeyPressed(pygame.K_w):
         # Move the player forward in the direction he's facing
             DirectionY = math.cos(math.radians(self.Rotation)) * self.PlayerMovementSpeed 
             DirectionX = math.sin(math.radians(self.Rotation)) * self.PlayerMovementSpeed
             self.Position[0] += (DirectionX * DeltaTime)
             self.Position[1] += -(DirectionY * DeltaTime)
 
-    #     if (!ThrusterSoundComponent->IsPlaying())
-    #     {
-    #         PlayerAvatarThrustersImageComponent->SetVisible(true);
-    #         ThrusterSoundComponent->Play();
-    #     }
-    # }
-    # else
-    # {
-    #     if (ThrusterSoundComponent->IsPlaying())
-    #     {
-    #         PlayerAvatarThrustersImageComponent->SetVisible(false);
-    #         ThrusterSoundComponent->Stop();
-    #     }
-    # }
-    
-        if self.InputComponent.IsKeyPressed(pygame.K_LEFT) or self.InputComponent.IsKeyPressed(pygame.K_a):
+            if not self.ThrusterSound.IsPlaying():
+                self.PlayerThruster.SetVisible(True)
+                self.ThrusterSound.Play()
+        else:
+            if self.ThrusterSound.IsPlaying():
+                self.PlayerThruster.SetVisible(False)
+                self.ThrusterSound.Stop()
+        
+        if self.Input.IsKeyPressed(pygame.K_LEFT) or self.Input.IsKeyPressed(pygame.K_a):
             self.Rotation -= self.RotationSpeed * DeltaTime
-        elif self.InputComponent.IsKeyPressed(pygame.K_RIGHT) or self.InputComponent.IsKeyPressed(pygame.K_d):
+        elif self.Input.IsKeyPressed(pygame.K_RIGHT) or self.Input.IsKeyPressed(pygame.K_d):
             self.Rotation += self.RotationSpeed * DeltaTime

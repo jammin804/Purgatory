@@ -1,24 +1,22 @@
-
-#include "Framework/GameFramework.h"
 import Globals
 import Game.Player
+import Game.Background
+import Game.UIText
 import Framework.GameFramework
 import pygame
 
-#todo AsteroidsGame(GameFramework)
 class Asteroids(Framework.GameFramework.GameFramework):
     def __init__(self, ScreenSize, TargetFPS):
         super().__init__(ScreenSize, TargetFPS)
-    # PlayerScore = UIText()
-    # Enemy1 = Enemy()
-    # BG = Background()
+        self.CurrentScore = 0
     
-    CurrentScore = 0
     
     def OnInit(self):
         pygame.display.set_caption('Asteroids Game')
+        Globals.DefaultFont = pygame.font.Font('Font/arial.ttf', 32)
+        self.BG = Game.Background.Background()
         self.Player1 = Game.Player.Player()
-        print("On Init")
+        self.UI = Game.UIText.UIText()
         
     def OnPostInit(self):
         print("On Post Init")

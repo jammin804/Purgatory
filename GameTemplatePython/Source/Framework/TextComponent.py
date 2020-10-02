@@ -1,24 +1,23 @@
-#include "TextComponent.h"
-#include "allegro5/allegro_font.h"
-#include "Globals.h"
-#include "GameObject.h"
+import pygame
+import Globals
+import Framework.GameComponent
 
-
-TextComponent::TextComponent(class GameObject* Owner)
-    : GameComponent(Owner){}
-
-void TextComponent::OnInit()
-{
+class TextComponent(Framework.GameComponent.GameComponent):
+    def __init__(self, Owner):
+        super().__init__(Owner)
+        self.TextString = ""
+        self.TextObject = None
+        
+        
+    def SetText(self, Text):
+        self.TextString = Text
+        white = (255, 255, 255) 
+        self.TextObject = Globals.DefaultFont.render(self.TextString, True, white, None) 
+        self.TextObjectRect = self.TextObject.get_rect()  
     
-}
-
-void TextComponent::OnUpdate()
-{
-
-}
-
-void TextComponent::OnRender()
-{
-    const GameObject* Owner = GetOwner();
-    al_draw_text(Globals::DefaultFont, al_map_rgb(255, 255, 255), Owner->GetPositionX() + GetOffsetX(), Owner->GetPositionY() + GetOffsetY(), 0, Text.c_str());
-}
+    def OnUpdate(self, DeltaTime):
+        self.TextObjectRect.center = self.Owner.Position
+    
+    def OnRender(self, Screen):
+        Screen.blit(self.TextObject, self.TextObjectRect)
+        

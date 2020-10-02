@@ -1,41 +1,13 @@
-#include "Background.h"
+import Framework.GameObject
+import Framework.ImageComponent
+import Framework.MusicComponent
 
-#include "Framework/ImageComponent.h"
-#include "Framework/SoundComponent.h"
-
-void Background::OnInit()
-{
-    BackgroundImage = new ImageComponent(this);
-    BackgroundMusic = new SoundComponent(this);
-}
-
-void Background::OnUpdate()
-{
-}
-
-void Background::OnShutdown()
-{
-    delete BackgroundImage;
-    BackgroundImage = nullptr;
-
-    delete BackgroundMusic;
-    BackgroundMusic = nullptr;
-}
-
-void Background::SetImage(string ImagePath)
-{
-    if (BackgroundImage)
-    {
-        BackgroundImage->LoadImage(ImagePath);
-    }
-}
-
-void Background::SetMusic(string MusicPath)
-{
-    if (BackgroundMusic)
-    {
-        BackgroundMusic->LoadSample(MusicPath);
-        BackgroundMusic->SetLooped(true);
-        BackgroundMusic->Play();
-    }
-}
+class Background(Framework.GameObject.GameObject):
+    
+    def OnInit(self):
+        self.BackgroundImage = Framework.ImageComponent.ImageComponent(self)
+        self.BackgroundImage.LoadImage("Art/Background.png")
+        self.BGMusic = Framework.MusicComponent.MusicComponent(self)
+        self.BGMusic.SetLooped(True)
+        self.BGMusic.LoadSample("Audio/Music.wav")
+        self.BGMusic.Play()
