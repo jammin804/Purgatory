@@ -2,6 +2,7 @@ import Framework.GameObject
 import Framework.ImageComponent
 import Framework.InputComponent
 import Framework.SoundComponent
+import Framework.BoxCollisionComponent
 import pygame
 import math
 
@@ -21,8 +22,10 @@ class Player(Framework.GameObject.GameObject):
         self.ThrusterSound.SetLooped(True)
         self.ThrusterSound.LoadSample("Audio/Thruster.wav")
         self.ThrusterSound.SetVolume(0.1)
+        self.Collision = Framework.BoxCollisionComponent.BoxCollisionComponent(self)
     
     def OnUpdate(self, DeltaTime):
+        
         if self.Input.IsKeyPressed(pygame.K_UP) or self.Input.IsKeyPressed(pygame.K_w):
         # Move the player forward in the direction he's facing
             DirectionY = math.cos(math.radians(self.Rotation)) * self.PlayerMovementSpeed 
@@ -42,3 +45,5 @@ class Player(Framework.GameObject.GameObject):
             self.Rotation -= self.RotationSpeed * DeltaTime
         elif self.Input.IsKeyPressed(pygame.K_RIGHT) or self.Input.IsKeyPressed(pygame.K_d):
             self.Rotation += self.RotationSpeed * DeltaTime
+            
+        self.Collision.SetRect(self.PlayerAvatar.GetImageRect())

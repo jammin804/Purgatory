@@ -13,6 +13,9 @@ class ImageComponent(Framework.GameComponent.GameComponent):
         
     def SetVisible(self, bIsNowVisible):
         self.bIsVisible = bIsNowVisible
+    
+    def GetImageRect(self):
+        return self.ImageRect
             
     def OnRender(self, Screen):
         if (not self.bIsVisible):
