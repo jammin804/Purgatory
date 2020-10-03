@@ -11,6 +11,7 @@ class Explosion(Framework.GameObject.GameObject):
         self.RotationSpeed = 80.0
         self.ExplosionImage = Framework.ImageComponent.ImageComponent(self)
         self.ExplosionImage.LoadImage("Art/Explosion.png")
+        self.ExplosionImage.Scale = self.Scale
         self.DestroyedSound = Framework.SoundComponent.SoundComponent(self)
         self.DestroyedSound.LoadSample("Audio/Explosion.wav")
         self.DestroyedSound.Play()

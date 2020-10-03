@@ -7,7 +7,13 @@ class TextComponent(Framework.GameComponent.GameComponent):
         super().__init__(Owner)
         self.TextString = ""
         self.TextObject = None
-        
+        self.bIsVisible = True
+      
+    def SetVisible(self, bIsNowVisible):
+        self.bIsVisible = bIsNowVisible
+
+    def IsVisible(self):
+        return self.bIsVisible         
         
     def SetText(self, Text):
         self.TextString = Text
@@ -16,8 +22,11 @@ class TextComponent(Framework.GameComponent.GameComponent):
         self.TextObjectRect = self.TextObject.get_rect()  
     
     def OnUpdate(self, DeltaTime):
-        self.TextObjectRect.center = self.Owner.Position
+        for axis in range(0, 2):
+            self.TextObjectRect[axis] = int(self.Owner.Position[axis] + self.Offset[axis])
     
     def OnRender(self, Screen):
+        if (not self.bIsVisible):
+            return
         Screen.blit(self.TextObject, self.TextObjectRect)
         

@@ -7,6 +7,7 @@ class Background(Framework.GameObject.GameObject):
     def OnInit(self):
         self.BackgroundImage = Framework.ImageComponent.ImageComponent(self)
         self.BackgroundImage.LoadImage("Art/Background.png")
+        self.BackgroundImage.Scale = 1.1
         self.BGMusic = Framework.MusicComponent.MusicComponent(self)
         self.BGMusic.SetLooped(True)
         self.BGMusic.LoadSample("Audio/Music.wav")

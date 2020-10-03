@@ -29,6 +29,30 @@ class Player(Framework.GameObject.GameObject):
         self.Collision.SetRect(self.PlayerAvatar.GetImageRect())
         self.bCanMakeLaser = True
         self.Lasers = []
+        self.LivesLeft = 2
+        self.bInvulnerable = False
+        self.bRespawning = False
+        self.bExploding = False
+        self.ExplodingTimer = 0.0
+        self.RespawnTimer = 0.0
+    
+    def HandleDeath(self):
+        if self.ThrusterSound.IsPlaying():
+                self.PlayerThruster.SetVisible(False)
+                self.ThrusterSound.Stop()
+        
+        self.PlayerAvatar.SetVisible(False)
+        
+        if (self.LivesLeft > 0):
+            self.bExploding = True
+            self.LivesLeft -= 1
+            self.bInvulnerable = True
+            self.ExplodingTimer = 0.0
+            self.RespawnTimer = 0.0
+            return False
+        else:
+            self.bEnabled = False
+            return True
     
     def CreateLaser(self):
         Laser = Game.Laser.Laser()
@@ -43,6 +67,22 @@ class Player(Framework.GameObject.GameObject):
             if (Laser.bIsDestroyed):
                 self.Lasers.remove(Laser)
         
+        if (self.bExploding):
+            self.ExplodingTimer += DeltaTime
+            if (self.ExplodingTimer > 3.0):
+                self.bExploding = False
+                self.bRespawning = True
+            return
+        
+        if self.bRespawning:
+            self.PlayerAvatar.SetVisible(not self.PlayerAvatar.IsVisible())
+            self.RespawnTimer += DeltaTime
+            if (self.RespawnTimer > 3.0):
+                self.bRespawning = False
+                self.bInvulnerable = False
+                self.PlayerAvatar.SetVisible(True)
+
+        
         if self.Input.IsKeyPressed(pygame.K_UP) or self.Input.IsKeyPressed(pygame.K_w):
         # Move the player forward in the direction he's facing
             DirectionY = math.cos(math.radians(self.Rotation)) * self.PlayerMovementSpeed 
@@ -50,7 +90,7 @@ class Player(Framework.GameObject.GameObject):
             self.Position[0] += (DirectionX * DeltaTime)
             self.Position[1] += -(DirectionY * DeltaTime)
 
-            if not self.ThrusterSound.IsPlaying():
+            if not self.bRespawning and not self.ThrusterSound.IsPlaying():
                 self.PlayerThruster.SetVisible(True)
                 self.ThrusterSound.Play()
         else:
@@ -58,7 +98,7 @@ class Player(Framework.GameObject.GameObject):
                 self.PlayerThruster.SetVisible(False)
                 self.ThrusterSound.Stop()
         
-        if self.Input.IsKeyPressed(pygame.K_SPACE):
+        if not self.bRespawning and self.Input.IsKeyPressed(pygame.K_SPACE):
             if self.bCanMakeLaser:
                 self.CreateLaser()
             self.bCanMakeLaser = False

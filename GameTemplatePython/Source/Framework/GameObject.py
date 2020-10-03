@@ -9,6 +9,7 @@ class GameObject(object):
         self.bEnabled = True
         self.bInitialised = False
         self.bIsDestroyed = False
+        self.RenderDepth = 0.0 #Higher values will be rendered on top
         
     def Destroy(self):
         Globals.MyGameFramework.UnregisterGameObject(self)
@@ -30,10 +31,10 @@ class GameObject(object):
         self.OnInit()
         for Component in self.GameComponents:
             Component._Init_()
-        self.bInitialised = True
     
     def _PostInit_(self):
         self.OnPostInit()
+        self.bInitialised = True
     
     def _Update_(self, DeltaTime):
         if not self.bInitialised:

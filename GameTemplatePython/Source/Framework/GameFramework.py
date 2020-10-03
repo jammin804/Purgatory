@@ -7,6 +7,7 @@ class GameFramework(object):
     def __init__(self, ScreenSize, TargetFPS):
         self.ScreenSize = ScreenSize
         self.TargetFPS = TargetFPS
+        self.GameOver = False
 
     GameObjects = []
 
@@ -44,7 +45,13 @@ class GameFramework(object):
 
         return True
 
+    def GameObjectRenderSort(self, GameObject):
+        return GameObject.RenderDepth
+
     def Update(self):
+    
+        if (self.GameOver):
+            return False
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT: 
@@ -57,6 +64,9 @@ class GameFramework(object):
         for GameObject in self.GameObjects:
             if not GameObject.bInitialised:
                 GameObject._Init_()
+
+        for GameObject in self.GameObjects:
+            if not GameObject.bInitialised:                
                 GameObject._PostInit_()
         
         self.OnUpdate(self.GetTimeElapsed())
@@ -66,7 +76,7 @@ class GameFramework(object):
         
         self.Screen.fill(ColorBlue)
         
-        for GameObject in self.GameObjects:
+        for GameObject in sorted(self.GameObjects, key=self.GameObjectRenderSort):
             if GameObject.bEnabled:
                 GameObject._Render_(self.Screen)
         

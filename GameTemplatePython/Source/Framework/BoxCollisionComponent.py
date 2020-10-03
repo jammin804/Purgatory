@@ -10,6 +10,9 @@ class BoxCollisionComponent(Framework.GameComponent.GameComponent):
     
     def SetScale(self, NewScale):
         self.Scale = NewScale
+        
+    def GetScale(self):
+        return self.Scale
             
     def ShowDebug(self, bShowDebug):
         self.bShowDebug = bShowDebug

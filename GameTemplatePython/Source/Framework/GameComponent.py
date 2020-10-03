@@ -4,8 +4,7 @@ class GameComponent(object):
     def __init__(self, Owner):
         self.Owner = Owner
         self.Owner.RegisterComponent(self)
-        self.OffsetX = 0.0
-        self.OffsetY = 0.0
+        self.Offset = [0,0]
 
     def OnInit(self):
         pass
