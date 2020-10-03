@@ -4,17 +4,18 @@ import Framework.BoxCollisionComponent
 import Framework.SoundComponent
 import pygame
 import math
+import Globals
 
 class Laser(Framework.GameObject.GameObject):
     
     def OnInit(self):
         self.LaserSpeed = 500.0
         self.LaserImage = Framework.ImageComponent.ImageComponent(self)
-        self.LaserImage.LoadImage("Art/Laser.png")
+        self.LaserImage.LoadImage(Globals.path_to_art + "/Laser.png")
         self.Collision = Framework.BoxCollisionComponent.BoxCollisionComponent(self)
         self.Collision.SetRect(self.LaserImage.GetImageRect())
         self.LaserSound = Framework.SoundComponent.SoundComponent(self)
-        self.LaserSound.LoadSample("Audio/Laser.wav")
+        self.LaserSound.LoadSample(Globals.path_to_audio + "/Laser.wav")
         self.LaserSound.SetVolume(0.1)
         self.LaserSound.Play()
         self.LifeTimer = 0.0

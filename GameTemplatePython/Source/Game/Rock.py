@@ -3,6 +3,7 @@ import Framework.ImageComponent
 import Framework.BoxCollisionComponent
 import pygame
 import math
+import Globals
 
 class Rock(Framework.GameObject.GameObject):
     
@@ -10,7 +11,7 @@ class Rock(Framework.GameObject.GameObject):
         self.bNeedsSplit = False
         self.RotationSpeed = 80.0
         self.RockImage = Framework.ImageComponent.ImageComponent(self)
-        self.RockImage.LoadImage("Art/Rock.png")
+        self.RockImage.LoadImage(Globals.path_to_art + "/Rock.png")
         self.RockImage.Scale = (self.SplitsLeft + 1) * 0.33
         self.Collision = Framework.BoxCollisionComponent.BoxCollisionComponent(self)
         self.Collision.SetScale((self.SplitsLeft + 1) * 0.16)

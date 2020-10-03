@@ -7,22 +7,23 @@ import Game.Laser
 import pygame
 import math
 import copy
+import Globals
 
 class Player(Framework.GameObject.GameObject):
     
     def OnInit(self):
         self.PlayerMovementSpeed = 150.0
-        self.RotationSpeed = 60.0
+        self.RotationSpeed = 100.0
         self.Position = [1280*0.5, 720*0.5]
         self.PlayerAvatar = Framework.ImageComponent.ImageComponent(self)
-        self.PlayerAvatar.LoadImage("Art/Ship.png")
+        self.PlayerAvatar.LoadImage(Globals.path_to_art + "/Ship.png")
         self.PlayerThruster = Framework.ImageComponent.ImageComponent(self)
-        self.PlayerThruster.LoadImage("Art/Thrusters.png")
+        self.PlayerThruster.LoadImage(Globals.path_to_art + "/Thrusters.png")
         self.PlayerThruster.SetVisible(False)
         self.Input = Framework.InputComponent.InputComponent(self)
         self.ThrusterSound = Framework.SoundComponent.SoundComponent(self)
         self.ThrusterSound.SetLooped(True)
-        self.ThrusterSound.LoadSample("Audio/Thruster.wav")
+        self.ThrusterSound.LoadSample(Globals.path_to_audio + "/Thruster.wav")
         self.ThrusterSound.SetVolume(0.1)
         self.Collision = Framework.BoxCollisionComponent.BoxCollisionComponent(self)
         self.Collision.SetScale(0.5)

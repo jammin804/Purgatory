@@ -14,7 +14,7 @@ class GameFlow(Framework.GameObject.GameObject):
         self.bStarting = True
         self.bInGame = False
         self.Input = Framework.InputComponent.InputComponent(self)
-        self.TimeRemaining = 180.0
+        self.TimeRemaining = 120.0
         self.UI = Game.UIText.UIText()          
         self.ReturnPressed = False
         self.bEndGame = False

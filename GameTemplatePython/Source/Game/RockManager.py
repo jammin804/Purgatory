@@ -60,7 +60,7 @@ class RockManager(Framework.GameObject.GameObject):
          
         self.TimeSinceSpawn += DeltaTime
         if self.TimeSinceSpawn > self.SpawnTimer:
-            self.SpawnTimer *= 0.991
+            self.SpawnTimer *= 0.979
             self.TimeSinceSpawn = 0.0
             NewRock = self.CreateRock(2)
             self.SetRandomPosition(NewRock)

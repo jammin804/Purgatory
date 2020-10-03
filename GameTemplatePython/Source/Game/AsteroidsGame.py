@@ -14,7 +14,7 @@ class Asteroids(Framework.GameFramework.GameFramework):
     
     def OnInit(self):
         pygame.display.set_caption('Asteroids Game')
-        Globals.DefaultFont = pygame.font.Font('Font/arial.ttf', 32)
+        Globals.DefaultFont = pygame.font.Font(Globals.path_to_font + "/arial.ttf", 32)
         self.BG = Game.Background.Background()
         self.Player1 = Game.Player.Player()
         self.RockManager = Game.RockManager.RockManager()
