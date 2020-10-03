@@ -8,9 +8,11 @@ class GameObject(object):
         self.GameComponents = []
         self.bEnabled = True
         self.bInitialised = False
+        self.bIsDestroyed = False
         
     def Destroy(self):
         Globals.MyGameFramework.UnregisterGameObject(self)
+        self.bIsDestroyed = True
   
     def OnInit(self):
         pass

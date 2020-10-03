@@ -3,8 +3,10 @@ import Framework.ImageComponent
 import Framework.InputComponent
 import Framework.SoundComponent
 import Framework.BoxCollisionComponent
+import Game.Laser
 import pygame
 import math
+import copy
 
 class Player(Framework.GameObject.GameObject):
     
@@ -25,8 +27,21 @@ class Player(Framework.GameObject.GameObject):
         self.Collision = Framework.BoxCollisionComponent.BoxCollisionComponent(self)
         self.Collision.SetScale(0.5)
         self.Collision.SetRect(self.PlayerAvatar.GetImageRect())
+        self.bCanMakeLaser = True
+        self.Lasers = []
+    
+    def CreateLaser(self):
+        Laser = Game.Laser.Laser()
+        PlayerRect = self.PlayerAvatar.GetImageRect()
+        Laser.Position = [PlayerRect[0] + (PlayerRect[2] * 0.5), PlayerRect[1] + (PlayerRect[3] * 0.5)]
+        Laser.Rotation = copy.copy(self.Rotation)
+        self.Lasers.append(Laser)
     
     def OnUpdate(self, DeltaTime):
+        
+        for Laser in self.Lasers:
+            if (Laser.bIsDestroyed):
+                self.Lasers.remove(Laser)
         
         if self.Input.IsKeyPressed(pygame.K_UP) or self.Input.IsKeyPressed(pygame.K_w):
         # Move the player forward in the direction he's facing
@@ -42,6 +57,13 @@ class Player(Framework.GameObject.GameObject):
             if self.ThrusterSound.IsPlaying():
                 self.PlayerThruster.SetVisible(False)
                 self.ThrusterSound.Stop()
+        
+        if self.Input.IsKeyPressed(pygame.K_SPACE):
+            if self.bCanMakeLaser:
+                self.CreateLaser()
+            self.bCanMakeLaser = False
+        elif self.Input.IsKeyReleased(pygame.K_SPACE):
+            self.bCanMakeLaser = True
         
         if self.Input.IsKeyPressed(pygame.K_LEFT) or self.Input.IsKeyPressed(pygame.K_a):
             self.Rotation -= self.RotationSpeed * DeltaTime

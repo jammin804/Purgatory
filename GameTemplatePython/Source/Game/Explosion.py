@@ -15,14 +15,8 @@ class Explosion(Framework.GameObject.GameObject):
         self.DestroyedSound.LoadSample("Audio/Explosion.wav")
         self.DestroyedSound.Play()
         self.Timer = 0.0
-        self.bIsFinished = False
-        
-    def IsFinished(self):
-        if not self.bInitialised:
-            return False
-        return self.bIsFinished
         
     def OnUpdate(self, DeltaTime):       
         self.Timer += DeltaTime
         if self.Timer > 2.0:
-            self.bIsFinished = True
+            self.Destroy()

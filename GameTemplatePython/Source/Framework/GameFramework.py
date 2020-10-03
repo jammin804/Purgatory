@@ -42,8 +42,6 @@ class GameFramework(object):
         self.OnInit()
         self.OnPostInit()
 
-        #register things here
-
         return True
 
     def Update(self):
