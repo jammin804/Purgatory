@@ -12,11 +12,7 @@ public:
     void LoadImage(string ImagePath);
 
     void SetVisible(bool bIsNowVisible);
-protected:
-    virtual void OnInit() override;
-
-    virtual void OnUpdate() override;
-    
+protected:    
     virtual void OnShutdown() override;
 
     virtual void OnRender() override;

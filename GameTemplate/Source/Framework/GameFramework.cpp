@@ -1,6 +1,7 @@
 #include "GameFramework.h"
 
 #include <allegro5/allegro5.h>
+#include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
@@ -38,7 +39,7 @@ bool GameFramework::InitInternal()
         return false;
     }
 
-    Timer = al_create_timer(1.0 / 30.0);
+    Timer = al_create_timer(1.0 / 120.0);
     if (!Timer)
     {
         printf("couldn't initialize timer\n");
@@ -52,6 +53,10 @@ bool GameFramework::InitInternal()
         return false;
     }
 
+    al_set_new_display_option(ALLEGRO_SAMPLE_BUFFERS, 1, ALLEGRO_SUGGEST);
+    al_set_new_display_option(ALLEGRO_SAMPLES, 8, ALLEGRO_SUGGEST);
+    al_set_new_bitmap_flags(ALLEGRO_MIN_LINEAR | ALLEGRO_MAG_LINEAR);
+
     Display = al_create_display(WindowSizeX, WindowSizeY);
     if (!Display)
     {
@@ -62,6 +67,12 @@ bool GameFramework::InitInternal()
     if (!al_init_image_addon())
     {
         printf("couldn't initialize image addon\n");
+        return false;
+    }
+
+    if (!al_init_primitives_addon())
+    {
+        printf("couldn't initialize primitives addon\n");
         return false;
     }
 
@@ -135,13 +146,24 @@ bool GameFramework::UpdateInternal()
 
     switch (Event.type)
     {
-    case ALLEGRO_EVENT_TIMER:
-        OnUpdate();
-        for (GameObject* GO : GameObjects)
+    case ALLEGRO_EVENT_TIMER:   
         {
-            GO->Update();
+            float DeltaTime = al_get_time() - TimeOfLastUpdate;
+            TimeOfLastUpdate = al_get_time();
+            OnUpdate(DeltaTime);
+            for (auto GOIter = GameObjects.begin(); GOIter != GameObjects.end(); ++GOIter)
+            {
+                if ((*GOIter)->bShouldDestroy)
+                {
+                    (*GOIter)->Shutdown();
+                    GOIter = GameObjects.erase(GOIter);
+                    continue;
+                }
+                (*GOIter)->Update(DeltaTime);
+            }
+        
+            redraw = true;
         }
-        redraw = true;
         break;
 
     case ALLEGRO_EVENT_KEY_DOWN:

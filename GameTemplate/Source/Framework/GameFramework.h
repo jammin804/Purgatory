@@ -33,7 +33,7 @@ public:
 
     virtual void OnPostInit() {}
 
-    virtual void OnUpdate(){}
+    virtual void OnUpdate(float DeltaTime){}
 
     virtual void OnShutdown(){}
 
@@ -60,6 +60,8 @@ private:
     struct ALLEGRO_TIMER* Timer;
     struct ALLEGRO_EVENT_QUEUE* EventQueue;
     struct ALLEGRO_DISPLAY* Display;
+
+    double TimeOfLastUpdate = 0.0;
 };
 
 template<typename T>

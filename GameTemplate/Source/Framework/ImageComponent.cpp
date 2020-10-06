@@ -4,18 +4,10 @@
 #include <allegro5/bitmap_draw.h>
 #include <allegro5/bitmap_io.h>
 
-ImageComponent::ImageComponent(class GameObject* Owner)
+ImageComponent::ImageComponent(GameObject* Owner)
     : GameComponent(Owner)
 {
 
-}
-
-void ImageComponent::OnInit()
-{
-}
-
-void ImageComponent::OnUpdate()
-{
 }
 
 void ImageComponent::OnShutdown()

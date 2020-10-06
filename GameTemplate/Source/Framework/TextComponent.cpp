@@ -7,16 +7,6 @@
 TextComponent::TextComponent(class GameObject* Owner)
     : GameComponent(Owner){}
 
-void TextComponent::OnInit()
-{
-    
-}
-
-void TextComponent::OnUpdate()
-{
-
-}
-
 void TextComponent::OnRender()
 {
     const GameObject* Owner = GetOwner();

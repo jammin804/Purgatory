@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Framework\BoxCollisionComponent.cpp" />
     <ClCompile Include="Source\Framework\GameComponent.cpp" />
     <ClCompile Include="Source\Framework\GameFramework.cpp" />
     <ClCompile Include="Source\Framework\GameObject.cpp" />
@@ -28,8 +29,12 @@
     <ClCompile Include="Source\Framework\TextComponent.cpp" />
     <ClCompile Include="Source\Game\AsteroidsGame.cpp" />
     <ClCompile Include="Source\Game\Background.cpp" />
-    <ClCompile Include="Source\Game\Enemy.cpp" />
+    <ClCompile Include="Source\Game\Explosion.cpp" />
+    <ClCompile Include="Source\Game\GameFlow.cpp" />
+    <ClCompile Include="Source\Game\Laser.cpp" />
+    <ClCompile Include="Source\Game\Rock.cpp" />
     <ClCompile Include="Source\Game\Player.cpp" />
+    <ClCompile Include="Source\Game\RockManager.cpp" />
     <ClCompile Include="Source\Game\UIText.cpp" />
     <ClCompile Include="Source\main.cpp" />
   </ItemGroup>
@@ -37,6 +42,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Framework\BoxCollisionComponent.h" />
     <ClInclude Include="Source\Framework\GameComponent.h" />
     <ClInclude Include="Source\Framework\GameFramework.h" />
     <ClInclude Include="Source\Framework\GameObject.h" />
@@ -47,8 +53,12 @@
     <ClInclude Include="Source\Framework\TextComponent.h" />
     <ClInclude Include="Source\Game\AsteroidsGame.h" />
     <ClInclude Include="Source\Game\Background.h" />
-    <ClInclude Include="Source\Game\Enemy.h" />
+    <ClInclude Include="Source\Game\Explosion.h" />
+    <ClInclude Include="Source\Game\GameFlow.h" />
+    <ClInclude Include="Source\Game\Laser.h" />
+    <ClInclude Include="Source\Game\Rock.h" />
     <ClInclude Include="Source\Game\Player.h" />
+    <ClInclude Include="Source\Game\RockManager.h" />
     <ClInclude Include="Source\Game\UIText.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -108,6 +118,7 @@
     <Allegro_AddonImage>true</Allegro_AddonImage>
     <Allegro_AddonAudio>true</Allegro_AddonAudio>
     <Allegro_AddonAcodec>true</Allegro_AddonAcodec>
+    <Allegro_AddonPrimitives>true</Allegro_AddonPrimitives>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Allegro_LibraryType>DynamicDebug</Allegro_LibraryType>
@@ -115,6 +126,7 @@
     <Allegro_AddonImage>true</Allegro_AddonImage>
     <Allegro_AddonAudio>true</Allegro_AddonAudio>
     <Allegro_AddonAcodec>true</Allegro_AddonAcodec>
+    <Allegro_AddonPrimitives>true</Allegro_AddonPrimitives>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

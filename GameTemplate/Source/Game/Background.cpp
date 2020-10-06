@@ -9,7 +9,7 @@ void Background::OnInit()
     BackgroundMusic = new SoundComponent(this);
 }
 
-void Background::OnUpdate()
+void Background::OnUpdate(float DeltaTime)
 {
 }
 

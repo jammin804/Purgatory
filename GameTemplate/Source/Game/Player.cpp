@@ -15,14 +15,14 @@ void Player::OnInit()
     ThrusterSoundComponent->SetVolume(0.3f);
 }
 
-void Player::OnUpdate()
+void Player::OnUpdate(float DeltaTime)
 {
     if (InputComp->IsKeyPressed(ALLEGRO_KEY_UP) || InputComp->IsKeyPressed(ALLEGRO_KEY_W))
     {
         // Move the player forward in the direction he's facing
         {
-            float DirectionY = cos(GetRotation()) * PlayerMovementSpeed;
-            float DirectionX = sin(GetRotation()) * PlayerMovementSpeed;
+            float DirectionY = cos(GetRotation()) * PlayerMovementSpeed * DeltaTime;
+            float DirectionX = sin(GetRotation()) * PlayerMovementSpeed * DeltaTime;
 
             SetPosition(GetPositionX() + DirectionX, GetPositionY() - DirectionY);
         }
@@ -44,11 +44,11 @@ void Player::OnUpdate()
     
     if (InputComp->IsKeyPressed(ALLEGRO_KEY_LEFT) || InputComp->IsKeyPressed(ALLEGRO_KEY_A))
     {
-        SetRotation(GetRotation() - RotationSpeed);
+        SetRotation(GetRotation() - RotationSpeed * DeltaTime);
     }
     else if (InputComp->IsKeyPressed(ALLEGRO_KEY_RIGHT) || InputComp->IsKeyPressed(ALLEGRO_KEY_D))
     {
-        SetRotation(GetRotation() + RotationSpeed);
+        SetRotation(GetRotation() + RotationSpeed * DeltaTime);
     }
 }
 

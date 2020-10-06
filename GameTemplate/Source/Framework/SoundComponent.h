@@ -18,11 +18,7 @@ public:
     void SetVolume(float NewVolume);
     bool IsPlaying() const { return bIsPlaying; }
 
-protected:
-    virtual void OnInit() override;
-
-    virtual void OnUpdate() override;
-    
+protected:    
     virtual void OnShutdown() override;
 
 private:

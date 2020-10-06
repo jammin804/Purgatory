@@ -18,9 +18,9 @@ public:
     float GetOffsetY() const { return OffsetY; }
 
 protected:   
-    virtual void OnInit() = 0;
+    virtual void OnInit(){}
 
-    virtual void OnUpdate() = 0;
+    virtual void OnUpdate(float DeltaTime){}
 
     virtual void OnRender() {}
 
@@ -30,7 +30,7 @@ protected:
 
 private:
     void Init();
-    void Update();
+    void Update(float DeltaTime);
     void Shutdown();
     void Render();
 

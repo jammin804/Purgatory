@@ -15,9 +15,7 @@ public:
     bool IsKeyReleased(int KeyCode) const;
 
 protected:
-    virtual void OnInit() override;
-
-    virtual void OnUpdate() override;
+    virtual void OnUpdate(float DeltaTime) override;
 
 private:
     void OnKeyPressed(int Keycode);

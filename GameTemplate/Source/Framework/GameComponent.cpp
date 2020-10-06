@@ -15,9 +15,9 @@ void GameComponent::Init()
     OnInit();
 }
 
-void GameComponent::Update()
+void GameComponent::Update(float DeltaTime)
 {
-    OnUpdate();
+    OnUpdate(DeltaTime);
 }
 
 void GameComponent::Shutdown()

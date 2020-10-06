@@ -23,17 +23,17 @@ public:
     float GetPositionY() const { return PositionY; }
     float GetRotation() const { return Rotation; }
 
+    void RequestDestroy() { bShouldDestroy = true; }
 protected:   
-    virtual void OnInit() = 0;
+    virtual void OnInit(){}
     virtual void OnPostInit(){}
-    virtual void OnUpdate() = 0;
-
+    virtual void OnUpdate(float DeltaTime){}
     virtual void OnShutdown() {}
 
 private:
     void Init();
     void PostInit();
-    void Update();
+    void Update(float DeltaTime);
     void Render();
     void Shutdown();
 
@@ -44,5 +44,6 @@ private:
     float PositionX = 0.0f;
     float PositionY = 0.0f;
     float Rotation = 0.0f;
+    bool bShouldDestroy = false;
 };
 

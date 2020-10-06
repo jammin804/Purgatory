@@ -13,10 +13,6 @@ public:
     void SetText(string NewText) { Text = NewText; }
 
 protected:
-    virtual void OnInit() override;
-
-    virtual void OnUpdate() override;
-
     virtual void OnRender() override;
     
 private:

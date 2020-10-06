@@ -11,7 +11,7 @@ class Background : public GameObject
 {
 protected:
     virtual void OnInit() override;
-    virtual void OnUpdate() override;
+    virtual void OnUpdate(float DeltaTime) override;
     virtual void OnShutdown() override;
 
 public:

@@ -26,12 +26,12 @@ void GameObject::PostInit()
     OnPostInit();
 }
 
-void GameObject::Update()
+void GameObject::Update(float DeltaTime)
 {
-    OnUpdate();
+    OnUpdate(DeltaTime);
     for (GameComponent* Component : GameComponents)
     {
-        Component->Update();
+        Component->Update(DeltaTime);
     }
 }
 

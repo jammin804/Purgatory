@@ -33,12 +33,7 @@ void InputComponent::OnKeyReleased(int Keycode)
     Keys[Keycode] &= KEY_RELEASED;
 }
 
-void InputComponent::OnInit()
-{
-    
-}
-
-void InputComponent::OnUpdate()
+void InputComponent::OnUpdate(float DeltaTime)
 {
     for (int i = 0; i < ALLEGRO_KEY_MAX; i++)
         Keys[i] &= KEY_SEEN;

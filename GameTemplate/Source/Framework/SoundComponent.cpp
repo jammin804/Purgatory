@@ -4,16 +4,6 @@
 SoundComponent::SoundComponent(class GameObject* Owner)
     : GameComponent(Owner){}
 
-void SoundComponent::OnInit()
-{
-    
-}
-
-void SoundComponent::OnUpdate()
-{
-
-}
-
 void SoundComponent::OnShutdown()
 {
     if (AudioSample)

@@ -7,7 +7,7 @@ void UIText::OnInit()
     TextComp = new TextComponent(this);
 }
 
-void UIText::OnUpdate()
+void UIText::OnUpdate(float DeltaTime)
 {
 
 }

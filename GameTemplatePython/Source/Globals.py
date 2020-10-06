@@ -1,5 +1,5 @@
 # Importing Other Files
-import Game.PongGame
+import Game.AsteroidsGame
 import pygame
 import os
 import sys
@@ -22,7 +22,7 @@ ScreenSize = [1280,720]
 TargetFPS = 120
 
 # The game we are making is the asteroids game
-MyGameFramework = Game.PongGame.PongGame(ScreenSize, TargetFPS)
+MyGameFramework = Game.AsteroidsGame.Asteroids(ScreenSize, TargetFPS)
 
 # Font we use for all TextComponents
 DefaultFont = None

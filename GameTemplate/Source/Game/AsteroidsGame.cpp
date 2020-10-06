@@ -1,7 +1,6 @@
 #include "AsteroidsGame.h"
 
 #include "Background.h"
-#include "Enemy.h"
 #include "Player.h"
 #include "UIText.h"
 #include <sstream>
@@ -10,7 +9,6 @@ void AsteroidsGame::OnInit()
 {
     BG = new Background();
     Player1 = new Player();
-    Enemy1 = new Enemy();
     PlayerScore = new UIText();
 }
 
@@ -31,12 +29,6 @@ void AsteroidsGame::OnPostInit()
         Player1->SetPosition(638.0f, 360.0f);
     }
 
-    if (Enemy1)
-    {
-        Enemy1->SetAvatarImage("Art/Enemy.png");
-        Enemy1->SetPosition(900.0f, 360.0f);
-    }
-
     if (PlayerScore)
     {
         PlayerScore->SetText("Player1: ");
@@ -44,7 +36,7 @@ void AsteroidsGame::OnPostInit()
     }
 }
 
-void AsteroidsGame::OnUpdate()
+void AsteroidsGame::OnUpdate(float DeltaTime)
 {
     
 }

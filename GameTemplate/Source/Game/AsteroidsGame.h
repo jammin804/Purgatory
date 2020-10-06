@@ -11,12 +11,11 @@ class AsteroidsGame : public GameFramework
 protected:
     virtual void OnInit() override;
     virtual void OnPostInit() override;
-    virtual void OnUpdate() override;
+    virtual void OnUpdate(float DeltaTime) override;
 
 private:
     class UIText* PlayerScore;
     class Player* Player1;
-    class Enemy* Enemy1;
     class Background* BG;
     int CurrentScore = 0;
 };

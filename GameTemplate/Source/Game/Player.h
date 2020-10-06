@@ -12,7 +12,7 @@ class Player : public GameObject
 {
 protected:
     virtual void OnInit() override;
-    virtual void OnUpdate() override;
+    virtual void OnUpdate(float DeltaTime) override;
     virtual void OnShutdown() override;
 
 public:
@@ -25,7 +25,7 @@ private:
     InputComponent* InputComp = nullptr;
     SoundComponent* ThrusterSoundComponent = nullptr;
 
-    float PlayerMovementSpeed = 10.0f;
-    float RotationSpeed = 0.2f;
+    float PlayerMovementSpeed = 200.0f;
+    float RotationSpeed = 2.0f;
 };
 
