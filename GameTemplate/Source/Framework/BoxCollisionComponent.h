@@ -9,14 +9,14 @@ class BoxCollisionComponent : public GameComponent
 public:
     BoxCollisionComponent(class GameObject* Owner);
 
-    bool DoesCollide(BoxCollisionComponent* OtherCollisionComponent);
+    bool DoesCollide(const BoxCollisionComponent* OtherCollisionComponent) const;
 
 protected:
     virtual void OnRender() override;
 
 private:
-    float BoxWidth = 0.0f;
-    float BoxHeight = 0.0f;
+    float BoxWidth = 50.0f;
+    float BoxHeight = 50.0f;
 
     bool bDrawDebug = true;
 };

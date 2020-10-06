@@ -12,12 +12,11 @@ class Explosion : public GameObject
 {
 protected:
     virtual void OnInit() override;
+    virtual void OnPostInit() override;
     virtual void OnUpdate(float DeltaTime) override;
     virtual void OnShutdown() override;
 
 public:
-    void SetExplosionImage(string ImagePath);
-    void SetExplosionSound(string SoundPath);
     void SetExplosionScale(float Scale) { ExplosionScale = Scale; }
 private:
     ImageComponent* ExplosionImage = nullptr;

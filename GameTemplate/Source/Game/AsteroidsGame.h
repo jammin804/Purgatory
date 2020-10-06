@@ -14,8 +14,12 @@ protected:
     virtual void OnUpdate(float DeltaTime) override;
 
 private:
-    class UIText* PlayerScore;
-    class Player* Player1;
-    class Background* BG;
+    void CreateExplosion(float PositionX, float PositionY, float ExplosionScale = 1.0f);
+
+    class Player* Player1 = nullptr;
+    class Background* BG = nullptr;
+    class RockManager* RockMgr = nullptr;
+    class GameFlow* GFlow = nullptr;
     int CurrentScore = 0;
+    vector<class Explosion*> Explosions;
 };

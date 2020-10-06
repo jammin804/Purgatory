@@ -11,6 +11,13 @@ void Explosion::OnInit()
     ExplosionSound->SetVolume(0.3f);
 }
 
+void Explosion::OnPostInit()
+{
+    ExplosionImage->LoadImage("Art/Explosion.png");
+    ExplosionSound->LoadSample("Audio/Explosion.wav");
+    ExplosionSound->Play();
+}
+
 void Explosion::OnUpdate(float DeltaTime)
 {
     ExplosionTimer += DeltaTime;
@@ -28,20 +35,4 @@ void Explosion::OnShutdown()
 
     delete ExplosionSound;
     ExplosionSound = nullptr;
-}
-
-void Explosion::SetExplosionImage(string ImagePath)
-{
-    if (ExplosionImage)
-    {
-        ExplosionImage->LoadImage(ImagePath);
-    }
-}
-
-void Explosion::SetExplosionSound(string SoundPath)
-{
-    if (ExplosionSound)
-    {
-        ExplosionSound->LoadSample(SoundPath);
-    }
 }

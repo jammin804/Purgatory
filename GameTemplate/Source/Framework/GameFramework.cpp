@@ -11,6 +11,8 @@
 GameFramework* GameFramework::Instance = nullptr;
 
 ALLEGRO_FONT* Globals::DefaultFont;
+const int Globals::WindowSizeX = 1280;
+const int Globals::WindowSizeY = 720;
 
 //////////////////////////////////////////////////////////////////////////
 GameFramework::GameFramework()
@@ -57,7 +59,7 @@ bool GameFramework::InitInternal()
     al_set_new_display_option(ALLEGRO_SAMPLES, 8, ALLEGRO_SUGGEST);
     al_set_new_bitmap_flags(ALLEGRO_MIN_LINEAR | ALLEGRO_MAG_LINEAR);
 
-    Display = al_create_display(WindowSizeX, WindowSizeY);
+    Display = al_create_display(Globals::WindowSizeX, Globals::WindowSizeY);
     if (!Display)
     {
         printf("couldn't initialize display\n");
@@ -94,7 +96,7 @@ bool GameFramework::InitInternal()
         return false;
     }
 
-    GameObjects.reserve(32);
+    GameObjects.reserve(512);
     InputComponents.reserve(4);
 
     OnInit();
@@ -102,10 +104,14 @@ bool GameFramework::InitInternal()
     for (GameObject* GO : GameObjects)
     {
         GO->Init();
-        GO->PostInit();
     }
 
     OnPostInit();
+
+    for (GameObject* GO : GameObjects)
+    {
+        GO->PostInit();
+    }
 
     al_register_event_source(EventQueue, al_get_keyboard_event_source());
     al_register_event_source(EventQueue, al_get_display_event_source(Display));
@@ -120,6 +126,10 @@ void GameFramework::RegisterGameObject(GameObject* NewGameObject)
 {
     if (Instance && NewGameObject)
     {
+        if (Instance->GameObjects.size() == 512)
+        {
+            assert(0);
+        }
         Instance->GameObjects.push_back(NewGameObject);
     }
 }
@@ -150,16 +160,42 @@ bool GameFramework::UpdateInternal()
         {
             float DeltaTime = al_get_time() - TimeOfLastUpdate;
             TimeOfLastUpdate = al_get_time();
+
+            for (GameObject* GO : GameObjects)
+            {
+                if (!GO->bInitialised)
+                {
+                    GO->Init();
+                }
+            }
+
+            for (GameObject* GO : GameObjects)
+            {
+                if (!GO->bInitialised)
+                {
+                    GO->PostInit();
+                }
+            }
+
             OnUpdate(DeltaTime);
+
             for (auto GOIter = GameObjects.begin(); GOIter != GameObjects.end(); ++GOIter)
             {
+                static bool bDeletedSomething = false;
+                bDeletedSomething = false;
                 if ((*GOIter)->bShouldDestroy)
                 {
                     (*GOIter)->Shutdown();
-                    GOIter = GameObjects.erase(GOIter);
+                    (*GOIter)->bIsDestroyed = true;
+                    GameObjects.erase(GOIter--);
+                    bool bDeletedSomething = true;
                     continue;
                 }
-                (*GOIter)->Update(DeltaTime);
+
+                if ((*GOIter)->IsEnabled())
+                {
+                    (*GOIter)->Update(DeltaTime);
+                }
             }
         
             redraw = true;
@@ -188,7 +224,10 @@ bool GameFramework::UpdateInternal()
         al_clear_to_color(al_map_rgb(0, 0, 0));
         for (GameObject* GO : GameObjects)
         {
-            GO->Render();
+            if (GO->IsEnabled())
+            {
+                GO->Render();
+            }
         }
         al_flip_display();
 

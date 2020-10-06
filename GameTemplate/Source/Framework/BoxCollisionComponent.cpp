@@ -9,12 +9,20 @@ BoxCollisionComponent::BoxCollisionComponent(GameObject* Owner)
 
 }
 
-bool BoxCollisionComponent::DoesCollide(BoxCollisionComponent* OtherCollisionComponent)
+bool BoxCollisionComponent::DoesCollide(const BoxCollisionComponent* OtherCollisionComponent) const
 {
     if (!OtherCollisionComponent)
     {
         return false;
     }
+
+    enum Property
+    {
+        Left = 0,
+        Top,
+        Width,
+        Height
+    };
 
     float Box1[4];
     {
@@ -24,8 +32,8 @@ bool BoxCollisionComponent::DoesCollide(BoxCollisionComponent* OtherCollisionCom
         float HalfBoxHeight = BoxHeight * 0.5f;
         float BoxLocal[] = { CenterX - HalfBoxWidth,
         CenterY - HalfBoxHeight,
-        CenterX + HalfBoxWidth,
-        CenterY + HalfBoxHeight };
+        BoxWidth,
+        BoxHeight };
         for (int i = 0; i < 4; ++i)
         {
             Box1[i] = BoxLocal[i];
@@ -39,23 +47,30 @@ bool BoxCollisionComponent::DoesCollide(BoxCollisionComponent* OtherCollisionCom
         float HalfBoxHeight = BoxHeight * 0.5f;
         float BoxLocal[] = { CenterX - HalfBoxWidth,
         CenterY - HalfBoxHeight,
-        CenterX + HalfBoxWidth,
-        CenterY + HalfBoxHeight };
+        BoxWidth,
+        BoxHeight};
         for (int i = 0; i < 4; ++i)
         {
             Box2[i] = BoxLocal[i];
         }
     }
 
-    if (Box1[0] < Box2[0] + Box2[2] &&
-        Box1[0] + Box1[2] > Box2[0] &&
-        Box1[1] < Box2[1] + Box2[3] &&
-        Box1[1] + Box1[3] > Box2[1]) 
+    /*
+    if (1.position.left < 2.position.left + 2.position.width &&
+      1.position.left + 1.position.width > 2.position.left &&
+      1.position.top < 2.position.top + 2.position.height &&
+      1.position.height + 1.position.top > 2.position.top)
+    */
+
+    if ((Box1[Left] < Box2[Left] + Box2[Width]) &&
+        (Box1[Left] + Box1[Width] > Box2[Left]) &&
+        (Box1[Top] < Box2[Top] + Box2[Height]) &&
+        (Box1[Height] + Box1[Top] > Box2[Top])) 
     {
         return true;
     }
 
-    return true;
+    return false;
 }
 
 void BoxCollisionComponent::OnRender()

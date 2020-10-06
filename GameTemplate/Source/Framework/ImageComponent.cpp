@@ -47,3 +47,8 @@ void ImageComponent::SetVisible(bool bIsNowVisible)
     bIsVisible = bIsNowVisible;
 }
 
+bool ImageComponent::IsVisible() const
+{
+    return bIsVisible;
+}
+

@@ -24,7 +24,10 @@ public:
     float GetRotation() const { return Rotation; }
 
     void RequestDestroy() { bShouldDestroy = true; }
-protected:   
+    void SetEnabled(bool bEnabled) { bIsEnabled = bEnabled; }
+    bool IsEnabled() const { return bIsEnabled; }
+    bool IsDestroyed() const { return bIsDestroyed; }
+protected:
     virtual void OnInit(){}
     virtual void OnPostInit(){}
     virtual void OnUpdate(float DeltaTime){}
@@ -45,5 +48,8 @@ private:
     float PositionY = 0.0f;
     float Rotation = 0.0f;
     bool bShouldDestroy = false;
+    bool bIsEnabled = true;
+    bool bIsDestroyed = false;
+    bool bInitialised = false;
 };
 

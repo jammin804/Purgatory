@@ -23,6 +23,7 @@ void GameObject::Init()
 
 void GameObject::PostInit()
 {
+    bInitialised = true;
     OnPostInit();
 }
 

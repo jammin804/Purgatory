@@ -12,7 +12,8 @@ public:
     void LoadImage(string ImagePath);
 
     void SetVisible(bool bIsNowVisible);
-protected:    
+    bool IsVisible() const;
+protected:
     virtual void OnShutdown() override;
 
     virtual void OnRender() override;

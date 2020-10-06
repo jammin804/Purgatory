@@ -46,10 +46,6 @@ private:
     bool UpdateInternal();
     void ShutdownInternal();
 
-protected:
-    float WindowSizeX = 1280;
-    float WindowSizeY = 720;
-
 private:
 
     vector<GameObject*> GameObjects;
