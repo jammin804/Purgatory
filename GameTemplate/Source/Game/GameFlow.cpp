@@ -4,18 +4,18 @@
 
 void GameFlow::OnInit()
 {
-    Input = new InputComponent(this);
-    GameUI = new UIText();
+    Input = GameComponent::CreateInstance<InputComponent>(this);
+    GameUI = GameObject::CreateInstance<UIText>();
 }
 
 void GameFlow::OnPostInit()
 {
     if (GameUI)
     {
-        //GameUI->SetWelcomeToTheGame();
+        GameUI->SetWelcomeToTheGame();
     }
 
-    for (GameObject* Object : ObjectsToDisableAtStart)
+    for (GameObject* Object : ObjectsToDisableOutsideGame)
     {
         Object->SetEnabled(false);
     }
@@ -35,13 +35,16 @@ void GameFlow::OnUpdate(float DeltaTime)
             if (bReturnPressed && Input->IsKeyReleased(ALLEGRO_KEY_ENTER))
             {
                 CurrentState = EState::InGame;
-                for (GameObject* Object : ObjectsToDisableAtStart)
+                for (GameObject* Object : ObjectsToDisableOutsideGame)
                 {
                     Object->SetEnabled(true);
                 }
                 if (GameUI)
                 {
-                    //GameUI->SetInGame();
+                    GameUI->SetInGame();
+                    GameUI->UpdateTimeRemaining((int)TimeRemaining / 60, (int)TimeRemaining % 60);
+                    GameUI->UpdateLivesLeft(2);
+                    GameUI->UpdateScore(0);
                 }
             }
         }
@@ -50,14 +53,18 @@ void GameFlow::OnUpdate(float DeltaTime)
         TimeRemaining -= DeltaTime;
         if (GameUI)
         {
-            //GameUI->UpdateTimeRemaining((int)TimeRemaining / 60, (int)TimeRemaining% 60);
+            GameUI->UpdateTimeRemaining((int)TimeRemaining / 60, (int)TimeRemaining% 60);
         }
         if (TimeRemaining <= 0.0f)
         {
             CurrentState = EState::Ending;
+            for (GameObject* Object : ObjectsToDisableOutsideGame)
+            {
+                Object->SetEnabled(false);
+            }
             if (GameUI)
             {
-                //GameUI->SetYouSurvived(CurrentScore);
+                GameUI->SetYouSurvived(CurrentScore);
             }
         }
         break;
@@ -79,19 +86,18 @@ void GameFlow::OnUpdate(float DeltaTime)
 
 void GameFlow::OnShutdown()
 {
-    delete GameUI;
-    GameUI = nullptr;
-
-    delete Input;
-    Input = nullptr;
 }
 
 void GameFlow::SetPlayerIsDead()
 {
     CurrentState = EState::Ending;
+    for (GameObject* Object : ObjectsToDisableOutsideGame)
+    {
+        Object->SetEnabled(false);
+    }
     if (GameUI)
     {
-        //GameUI->SetGameOver(CurrentScore);
+        GameUI->SetGameOver(CurrentScore);
     }
 }
 
@@ -99,7 +105,7 @@ void GameFlow::UpdateLivesLeft(int NewLivesLeft)
 {
     if (GameUI)
     {
-        //GameUI->UpdateLivesLeft(NewLivesLeft);
+        GameUI->UpdateLivesLeft(NewLivesLeft);
     }
 }
 
@@ -108,11 +114,11 @@ void GameFlow::AddScore(int ScoreToAdd)
     CurrentScore += ScoreToAdd;
     if (GameUI)
     {
-        //GameUI->UpdateScore(CurrentScore);
+        GameUI->UpdateScore(CurrentScore);
     }
 }
 
 void GameFlow::AddObjectToDisableAtStart(GameObject* ObjectToDisable)
 {
-    ObjectsToDisableAtStart.push_back(ObjectToDisable);
+    ObjectsToDisableOutsideGame.push_back(ObjectToDisable);
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include "GameFramework.h"
 
 using namespace std;
 
@@ -11,8 +12,8 @@ class GameObject
     friend class GameComponent;
 
 public:
-    GameObject();
-    virtual ~GameObject() {}
+    template<class T>
+    static T* CreateInstance();
 
     void SetPosX(float NewPosX) { PositionX = NewPosX; }
     void SetPosY(float NewPosY) { PositionY = NewPosY; }
@@ -24,16 +25,20 @@ public:
     float GetRotation() const { return Rotation; }
 
     void RequestDestroy() { bShouldDestroy = true; }
-    void SetEnabled(bool bEnabled) { bIsEnabled = bEnabled; }
+    virtual void SetEnabled(bool bEnabled) { bIsEnabled = bEnabled; }
     bool IsEnabled() const { return bIsEnabled; }
     bool IsDestroyed() const { return bIsDestroyed; }
 protected:
+    GameObject();
+    virtual ~GameObject() {}
+
     virtual void OnInit(){}
     virtual void OnPostInit(){}
     virtual void OnUpdate(float DeltaTime){}
     virtual void OnShutdown() {}
 
 private:
+
     void Init();
     void PostInit();
     void Update(float DeltaTime);
@@ -41,6 +46,7 @@ private:
     void Shutdown();
 
     void RegisterComponent(GameComponent* Component);
+    void DestroyComponent(GameComponent* Component);
 
     vector<GameComponent*> GameComponents;
 
@@ -52,4 +58,10 @@ private:
     bool bIsDestroyed = false;
     bool bInitialised = false;
 };
+
+template<class T>
+T* GameObject::CreateInstance()
+{
+    return GameFramework::template CreateObject<T>();
+}
 

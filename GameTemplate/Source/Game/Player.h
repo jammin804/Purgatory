@@ -15,7 +15,6 @@ class Player : public GameObject
 protected:
     virtual void OnInit() override;
     virtual void OnUpdate(float DeltaTime) override;
-    virtual void OnShutdown() override;
 
 public:
     void SetAvatarImage(string ImagePath);

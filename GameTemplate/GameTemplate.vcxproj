@@ -25,6 +25,7 @@
     <ClCompile Include="Source\Framework\GameObject.cpp" />
     <ClCompile Include="Source\Framework\ImageComponent.cpp" />
     <ClCompile Include="Source\Framework\InputComponent.cpp" />
+    <ClCompile Include="Source\Framework\MemoryManager.cpp" />
     <ClCompile Include="Source\Framework\SoundComponent.cpp" />
     <ClCompile Include="Source\Framework\TextComponent.cpp" />
     <ClCompile Include="Source\Game\AsteroidsGame.cpp" />
@@ -49,6 +50,7 @@
     <ClInclude Include="Source\Framework\Globals.h" />
     <ClInclude Include="Source\Framework\ImageComponent.h" />
     <ClInclude Include="Source\Framework\InputComponent.h" />
+    <ClInclude Include="Source\Framework\MemoryManager.h" />
     <ClInclude Include="Source\Framework\SoundComponent.h" />
     <ClInclude Include="Source\Framework\TextComponent.h" />
     <ClInclude Include="Source\Game\AsteroidsGame.h" />

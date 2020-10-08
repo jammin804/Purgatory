@@ -13,14 +13,10 @@
 
 void AsteroidsGame::OnInit()
 {
-    {
-        BG = new Background();
-    }
-    {
-        Player1 = new Player();
-    }
-    RockMgr = new RockManager();
-    GFlow = new GameFlow();
+    GFlow = GameObject::CreateInstance<GameFlow>();
+    BG = GameObject::CreateInstance<Background>();
+    Player1 = GameObject::CreateInstance<Player>();
+    RockMgr = GameObject::CreateInstance<RockManager>();
 }
 
 void AsteroidsGame::OnPostInit()
@@ -49,29 +45,17 @@ void AsteroidsGame::OnPostInit()
 
 void AsteroidsGame::CreateExplosion(float PositionX, float PositionY, float ExplosionScale /*= 1.0f*/)
 {
-    Explosion* NewExplosion = new Explosion();
+    Explosion* NewExplosion = GameObject::CreateInstance<Explosion>();
     NewExplosion->SetPosition(PositionX, PositionY);
     NewExplosion->SetExplosionScale(ExplosionScale);
-    Explosions.push_back(NewExplosion);
 }
 
 void AsteroidsGame::OnUpdate(float DeltaTime)
 {   
     if (GFlow->ShouldEndGame())
-    {
+    {        
+        SetGameOver();
         return;
-    }
-
-    for (auto ExplosionIter = Explosions.begin(); ExplosionIter != Explosions.end();)
-    {
-        Explosion* CurrentExplosion = (*ExplosionIter);
-        if (CurrentExplosion->IsDestroyed())
-        {
-            ExplosionIter = Explosions.erase(ExplosionIter);
-            delete CurrentExplosion;
-            continue;
-        }
-        ++ExplosionIter;
     }
 
     for (Rock* CurrentRock : RockMgr->GetRocks())

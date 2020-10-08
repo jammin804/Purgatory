@@ -15,12 +15,15 @@ void RockManager::OnUpdate(float DeltaTime)
         if (RockToUpdate.NeedsSplit())
         {
             RockToUpdate.Split();
-            Rock* NewRock = CreateRock(RockToUpdate.GetSplitsLeft());
-            NewRock->SetPosition(RockToUpdate.GetPositionX(), RockToUpdate.GetPositionY());
-            NewRock->SetMovementSpeed(RockToUpdate.GetMovementSpeed());
-            float MoveDirectionX = RockToUpdate.GetMovementDirectionX();
-            float MoveDirectionY = RockToUpdate.GetMovementDirectionY();
-            NewRock->SetMovementDirection(-MoveDirectionX, -MoveDirectionY);
+            if (RockToUpdate.GetSplitsLeft() >= 0)
+            {
+                Rock* NewRock = CreateRock(RockToUpdate.GetSplitsLeft());
+                NewRock->SetPosition(RockToUpdate.GetPositionX(), RockToUpdate.GetPositionY());
+                NewRock->SetMovementSpeed(RockToUpdate.GetMovementSpeed());
+                float MoveDirectionX = RockToUpdate.GetMovementDirectionX();
+                float MoveDirectionY = RockToUpdate.GetMovementDirectionY();
+                NewRock->SetMovementDirection(-MoveDirectionX, -MoveDirectionY);
+            }
         }
         
         if (RockToUpdate.IsDestroyed())
@@ -43,10 +46,20 @@ void RockManager::OnUpdate(float DeltaTime)
 
 Rock* RockManager::CreateRock(int SplitsLeft /*= 2*/)
 {
-    Rock* NewRock = new Rock();
+    Rock* NewRock = GameObject::CreateInstance<Rock>();
     NewRock->SetSplitsLeft(SplitsLeft);
     Rocks.push_back(NewRock);
     return NewRock;
+}
+
+void RockManager::SetEnabled(bool bEnabled)
+{
+    __super::SetEnabled(bEnabled);
+    for (auto RockIter = Rocks.begin(); RockIter != Rocks.end(); ++RockIter)
+    {
+        Rock& RockToUpdate = *(*RockIter);
+        RockToUpdate.SetEnabled(false);
+    }
 }
 
 void RockManager::SetRandomPosition(Rock& RockToPosition)

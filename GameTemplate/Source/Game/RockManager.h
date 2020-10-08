@@ -16,6 +16,7 @@ class RockManager : public GameObject
     public:
         Rock* CreateRock(int SplitsLeft = 2);
         vector<Rock*>& GetRocks() { return Rocks; }
+        virtual void SetEnabled(bool bEnabled) override;
     private:
         void SetRandomPosition(Rock& RockToPosition);
 private:

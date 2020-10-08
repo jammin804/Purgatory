@@ -5,21 +5,12 @@
 
 void Background::OnInit()
 {
-    BackgroundImage = new ImageComponent(this);
-    BackgroundMusic = new SoundComponent(this);
+    BackgroundImage = GameComponent::CreateInstance<ImageComponent>(this);
+    BackgroundMusic = GameComponent::CreateInstance<SoundComponent>(this);
 }
 
 void Background::OnUpdate(float DeltaTime)
 {
-}
-
-void Background::OnShutdown()
-{
-    delete BackgroundImage;
-    BackgroundImage = nullptr;
-
-    delete BackgroundMusic;
-    BackgroundMusic = nullptr;
 }
 
 void Background::SetImage(string ImagePath)

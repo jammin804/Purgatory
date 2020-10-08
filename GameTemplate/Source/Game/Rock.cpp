@@ -4,8 +4,8 @@
 
 void Rock::OnInit()
 {
-    RockImage = new ImageComponent(this);
-    Collision = new BoxCollisionComponent(this);
+    RockImage = GameComponent::CreateInstance<ImageComponent>(this);
+    Collision = GameComponent::CreateInstance<BoxCollisionComponent>(this);
 }
 
 void Rock::OnPostInit()
@@ -13,11 +13,11 @@ void Rock::OnPostInit()
     if (RockImage)
     {
         RockImage->LoadImage("Art/Rock.png");
-        //RockImage->SetScale(SplitsLeft + 1 * 0.33f);
+        RockImage->SetScale((SplitsLeft + 1) * 0.33f);
     }
     if (Collision)
     {
-        //Collision->SetScale(SplitsLeft + 1 * 0.33f);
+        Collision->SetScale((SplitsLeft + 1) * 0.33f);
     }
 }
 
@@ -39,21 +39,20 @@ void Rock::Split()
 {
     bNeedsSplit = false;
 
-    if (SplitsLeft == 0)
+    if (SplitsLeft-- == 0)
     {
         RequestDestroy();
         return;
     }
 
-    SplitsLeft--;
     MovementSpeed *= 1.2;
     if (RockImage)
     {
-        //RockImage->SetScale(SplitsLeft + 1 * 0.33f);
+        RockImage->SetScale((SplitsLeft + 1) * 0.33f);
     }
     if (Collision)
     {
-        //Collision->SetScale(SplitsLeft + 1 * 0.33f);
+        Collision->SetScale((SplitsLeft + 1) * 0.33f);
     }
     float CurrentMovementDirectionX = MovementDirectionX;
     MovementDirectionX = MovementDirectionY;

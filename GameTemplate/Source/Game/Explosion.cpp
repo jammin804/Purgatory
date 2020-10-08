@@ -6,14 +6,15 @@
 
 void Explosion::OnInit()
 {
-    ExplosionImage = new ImageComponent(this);
-    ExplosionSound = new SoundComponent(this);
+    ExplosionImage = GameComponent::CreateInstance<ImageComponent>(this);
+    ExplosionSound = GameComponent::CreateInstance<SoundComponent>(this);
     ExplosionSound->SetVolume(0.3f);
 }
 
 void Explosion::OnPostInit()
 {
     ExplosionImage->LoadImage("Art/Explosion.png");
+    ExplosionImage->SetScale(ExplosionScale);
     ExplosionSound->LoadSample("Audio/Explosion.wav");
     ExplosionSound->Play();
 }
@@ -30,9 +31,4 @@ void Explosion::OnUpdate(float DeltaTime)
 
 void Explosion::OnShutdown()
 {
-    delete ExplosionImage;
-    ExplosionImage = nullptr;
-
-    delete ExplosionSound;
-    ExplosionSound = nullptr;
 }

@@ -28,7 +28,7 @@ class GameFlow : public GameObject
         void AddObjectToDisableAtStart(GameObject* ObjectToDisable);
         bool ShouldEndGame() const { return bShouldEndGame; }
     private:
-        vector<GameObject*> ObjectsToDisableAtStart;
+        vector<GameObject*> ObjectsToDisableOutsideGame;
         int CurrentScore = 0;
         EState CurrentState = EState::Starting;
         class InputComponent* Input = nullptr;

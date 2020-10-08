@@ -5,9 +5,9 @@
 
 void Laser::OnInit()
 {
-    LaserImage = new ImageComponent(this);
-    Collision = new BoxCollisionComponent(this);
-    LaserSound = new SoundComponent(this);
+    LaserImage = GameComponent::CreateInstance<ImageComponent>(this);
+    Collision = GameComponent::CreateInstance<BoxCollisionComponent>(this);
+    LaserSound = GameComponent::CreateInstance<SoundComponent>(this);
 }
 
 void Laser::OnPostInit()
@@ -15,6 +15,11 @@ void Laser::OnPostInit()
     if (LaserImage)
     {
         LaserImage->LoadImage("Art/Laser.png");
+    }
+
+    if (Collision)
+    {
+        Collision->SetCollisionSize(10.0f, 20.0f);
     }
     
     if (LaserSound)

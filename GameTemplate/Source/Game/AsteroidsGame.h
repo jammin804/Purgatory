@@ -21,5 +21,4 @@ private:
     class RockManager* RockMgr = nullptr;
     class GameFlow* GFlow = nullptr;
     int CurrentScore = 0;
-    vector<class Explosion*> Explosions;
 };

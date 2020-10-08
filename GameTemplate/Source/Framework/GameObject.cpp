@@ -5,11 +5,18 @@
 GameObject::GameObject()
 {
     GameFramework::RegisterGameObject(this);
+    GameComponents.reserve(8);
 }
 
 void GameObject::RegisterComponent(GameComponent* Component)
 {
     GameComponents.push_back(Component);
+}
+
+void GameObject::DestroyComponent(GameComponent* Component)
+{
+    void* ComponentPointer = static_cast<void*>(Component);
+    GameFramework::DestroyObject(ComponentPointer, sizeof(*Component));
 }
 
 void GameObject::Init()
@@ -49,6 +56,8 @@ void GameObject::Shutdown()
     for (GameComponent* Component : GameComponents)
     {
         Component->Shutdown();
+        DestroyComponent(Component);
     }
+    GameComponents.clear();
     OnShutdown();
 }

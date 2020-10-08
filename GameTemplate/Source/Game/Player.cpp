@@ -8,14 +8,14 @@
 
 void Player::OnInit()
 {
-    PlayerAvatarThrustersImageComponent = new ImageComponent(this);
+    PlayerAvatarThrustersImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
     PlayerAvatarThrustersImageComponent->SetVisible(false);
-    PlayerAvatarImageComponent = new ImageComponent(this);
-    InputComp = new InputComponent(this);
-    ThrusterSoundComponent = new SoundComponent(this);
+    PlayerAvatarImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
+    InputComp = GameComponent::CreateInstance<InputComponent>(this);
+    ThrusterSoundComponent = GameComponent::CreateInstance<SoundComponent>(this);
     ThrusterSoundComponent->SetLooped(true);
     ThrusterSoundComponent->SetVolume(0.3f);
-    Collision = new BoxCollisionComponent(this);
+    Collision = GameComponent::CreateInstance<BoxCollisionComponent>(this);
 
     Lasers.reserve(200);
     //Collision->SetScale(0.5f);
@@ -109,21 +109,6 @@ void Player::OnUpdate(float DeltaTime)
     }
 }
 
-void Player::OnShutdown()
-{
-    delete PlayerAvatarThrustersImageComponent;
-    PlayerAvatarThrustersImageComponent = nullptr;
-
-    delete PlayerAvatarImageComponent;
-    PlayerAvatarImageComponent = nullptr;
-
-    delete InputComp;
-    InputComp = nullptr;
-
-    delete ThrusterSoundComponent;
-    ThrusterSoundComponent = nullptr;
-}
-
 void Player::SetAvatarImage(string ImagePath)
 {
     if (PlayerAvatarImageComponent)
@@ -179,7 +164,7 @@ bool Player::HandleDeath()
 
 void Player::CreateLaser()
 {
-    Laser* NewLaser = new Laser();
+    Laser* NewLaser = GameObject::CreateInstance<Laser>();
     float DirectionY = cos(GetRotation());
     float DirectionX = sin(GetRotation());
     NewLaser->SetPosition(GetPositionX() + (DirectionX * 30.0f),  GetPositionY() - (DirectionY * 30.0f));

@@ -24,7 +24,7 @@ void ImageComponent::OnRender()
     if (ImageBitmap && bIsVisible)
     {
         const GameObject* Owner = GetOwner();
-        al_draw_rotated_bitmap(ImageBitmap, ImageWidth * 0.5f, ImageHeight * 0.5f, Owner->GetPositionX() + GetOffsetX(), Owner->GetPositionY() + GetOffsetY(), Owner->GetRotation(), 0);
+        al_draw_scaled_rotated_bitmap(ImageBitmap, ImageWidth * 0.5f, ImageHeight * 0.5f, Owner->GetPositionX() + GetOffsetX(), Owner->GetPositionY() + GetOffsetY(), Scale, Scale, Owner->GetRotation(), 0);
     }
 }
 

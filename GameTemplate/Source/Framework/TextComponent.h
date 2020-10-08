@@ -12,10 +12,14 @@ public:
 
     void SetText(string NewText) { Text = NewText; }
 
+    void SetVisible(bool bIsNowVisible);
+    bool IsVisible() const;
+
 protected:
     virtual void OnRender() override;
     
 private:
     string Text;
+    bool bIsVisible;
 };
 

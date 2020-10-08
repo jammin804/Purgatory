@@ -3,6 +3,8 @@
 #include <vector>
 #include "Globals.h"
 #include <allegro5/allegro_font.h>
+#include "MemoryManager.h"
+#include <new>
 
 using namespace std;
 
@@ -37,10 +39,19 @@ public:
 
     virtual void OnShutdown(){}
 
+    void SetGameOver() { bIsGameOver = true;}
 
 private:
     static void RegisterGameObject(GameObject* NewGameObject);
     static void RegisterInputComponent(InputComponent* NewInputComponent);
+
+    template<typename T, class C>
+    static T* CreateObjectOneArg(C* OneArgument);
+
+    template<typename T>
+    static T* CreateObject();
+
+    static void DestroyObject(void*& Object, size_t SizeOfObject);
 
     bool InitInternal();
     bool UpdateInternal();
@@ -57,7 +68,11 @@ private:
     struct ALLEGRO_EVENT_QUEUE* EventQueue;
     struct ALLEGRO_DISPLAY* Display;
 
+    MemoryManager MemManager;
+
     double TimeOfLastUpdate = 0.0;
+
+    bool bIsGameOver = false;
 };
 
 template<typename T>
@@ -81,3 +96,28 @@ bool GameFramework::Init()
 
     return BaseInitResult;
 }
+
+template<typename T>
+T* GameFramework::CreateObject()
+{
+    if (Instance)
+    {
+        void* MemBlock = Instance->MemManager.Allocate(sizeof(T));
+        memset(MemBlock, 0, sizeof(T));
+        return new (MemBlock) T;
+    }
+    return nullptr;
+}
+
+template<typename T, class C>
+T* GameFramework::CreateObjectOneArg(C* OneArgument)
+{
+    if (Instance)
+    {
+        void* MemBlock = Instance->MemManager.Allocate(sizeof(T));
+        memset(MemBlock, 0, sizeof(T));
+        return new (MemBlock) T(OneArgument);
+    }
+    return nullptr;
+}
+

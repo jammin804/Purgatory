@@ -30,10 +30,10 @@ bool BoxCollisionComponent::DoesCollide(const BoxCollisionComponent* OtherCollis
         float CenterY = GetOwner()->GetPositionY() + GetOffsetY();
         float HalfBoxWidth = BoxWidth * 0.5f;
         float HalfBoxHeight = BoxHeight * 0.5f;
-        float BoxLocal[] = { CenterX - HalfBoxWidth,
-        CenterY - HalfBoxHeight,
-        BoxWidth,
-        BoxHeight };
+        float BoxLocal[] = { CenterX - (HalfBoxWidth * Scale),
+        CenterY - (HalfBoxHeight * Scale),
+        BoxWidth * Scale,
+        BoxHeight * Scale};
         for (int i = 0; i < 4; ++i)
         {
             Box1[i] = BoxLocal[i];
@@ -45,10 +45,10 @@ bool BoxCollisionComponent::DoesCollide(const BoxCollisionComponent* OtherCollis
         float CenterY = OtherCollisionComponent->GetOwner()->GetPositionY() + GetOffsetY();
         float HalfBoxWidth = BoxWidth * 0.5f;
         float HalfBoxHeight = BoxHeight * 0.5f;
-        float BoxLocal[] = { CenterX - HalfBoxWidth,
-        CenterY - HalfBoxHeight,
-        BoxWidth,
-        BoxHeight};
+        float BoxLocal[] = { CenterX - (HalfBoxWidth * Scale),
+        CenterY - (HalfBoxHeight * Scale),
+        BoxWidth * Scale,
+        BoxHeight * Scale };
         for (int i = 0; i < 4; ++i)
         {
             Box2[i] = BoxLocal[i];
@@ -83,10 +83,10 @@ void BoxCollisionComponent::OnRender()
         float HalfBoxWidth = BoxWidth * 0.5f;
         float HalfBoxHeight = BoxHeight * 0.5f;
         al_draw_filled_rectangle(
-        CenterX - HalfBoxWidth, 
-        CenterY - HalfBoxHeight, 
-        CenterX + HalfBoxWidth, 
-        CenterY + HalfBoxHeight, 
+        CenterX - (HalfBoxWidth * Scale), 
+        CenterY - (HalfBoxHeight * Scale),
+        CenterX + (HalfBoxWidth * Scale),
+        CenterY + (HalfBoxHeight * Scale),
         al_map_rgba_f(0.5f, 0, 0.0f, 0.8f));
     }
 }

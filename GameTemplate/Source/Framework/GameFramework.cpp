@@ -27,6 +27,18 @@ GameFramework::~GameFramework()
     al_destroy_event_queue(EventQueue);
 }
 
+void GameFramework::DestroyObject(void*& Object, size_t SizeOfObject)
+{
+    if (Instance)
+    {
+        if (Object)
+        {
+            Instance->MemManager.Free(Object, SizeOfObject);
+            Object = nullptr;
+        }
+    }
+}
+
 bool GameFramework::InitInternal()
 {
     if (!al_init())
@@ -101,16 +113,24 @@ bool GameFramework::InitInternal()
 
     OnInit();
 
-    for (GameObject* GO : GameObjects)
+    for (int i = 0; i < GameObjects.size(); ++i)
     {
-        GO->Init();
+        GameObject* GO = GameObjects[i];
+        if (!GO->bInitialised)
+        {
+            GO->Init();
+        }
     }
 
     OnPostInit();
 
-    for (GameObject* GO : GameObjects)
+    for (int i = 0; i < GameObjects.size(); ++i)
     {
-        GO->PostInit();
+        GameObject* GO = GameObjects[i];
+        if (!GO->bInitialised)
+        {
+            GO->PostInit();
+        }
     }
 
     al_register_event_source(EventQueue, al_get_keyboard_event_source());
@@ -158,19 +178,26 @@ bool GameFramework::UpdateInternal()
     {
     case ALLEGRO_EVENT_TIMER:   
         {
+            if (bIsGameOver)
+            {
+                return false;
+            }
+
             float DeltaTime = al_get_time() - TimeOfLastUpdate;
             TimeOfLastUpdate = al_get_time();
 
-            for (GameObject* GO : GameObjects)
+            for (int i = 0; i < GameObjects.size(); ++i)
             {
+                GameObject* GO = GameObjects[i];
                 if (!GO->bInitialised)
                 {
                     GO->Init();
                 }
             }
 
-            for (GameObject* GO : GameObjects)
+            for (int i = 0; i < GameObjects.size(); ++i)
             {
+                GameObject* GO = GameObjects[i];
                 if (!GO->bInitialised)
                 {
                     GO->PostInit();
@@ -183,12 +210,15 @@ bool GameFramework::UpdateInternal()
             {
                 static bool bDeletedSomething = false;
                 bDeletedSomething = false;
-                if ((*GOIter)->bShouldDestroy)
+                GameObject* GO = (*GOIter);
+                if (GO->bShouldDestroy)
                 {
-                    (*GOIter)->Shutdown();
-                    (*GOIter)->bIsDestroyed = true;
+                    GO->Shutdown();
+                    GO->bIsDestroyed = true;
+                    void* GOMem = static_cast<void*>(GO);
+                    DestroyObject(GOMem, sizeof(*GO));
+
                     GameObjects.erase(GOIter--);
-                    bool bDeletedSomething = true;
                     continue;
                 }
 
