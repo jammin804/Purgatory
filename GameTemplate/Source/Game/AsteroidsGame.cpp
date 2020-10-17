@@ -24,7 +24,7 @@ void AsteroidsGame::OnPostInit()
     if (BG)
     {
         BG->SetImage("Art/Background.png");
-        //BG->SetMusic("Audio/Music.wav");
+        BG->SetMusic("Audio/Music.wav");
         BG->SetPosition(638.0f, 360.0f);
     }
 

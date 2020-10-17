@@ -56,7 +56,7 @@ void Rock::Split()
     }
     float CurrentMovementDirectionX = MovementDirectionX;
     MovementDirectionX = MovementDirectionY;
-    MovementDirectionX = CurrentMovementDirectionX;
+    MovementDirectionY = CurrentMovementDirectionX;
 }
 
 void Rock::RequestSplit()
