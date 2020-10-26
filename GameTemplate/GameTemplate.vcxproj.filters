@@ -152,5 +152,8 @@
     <ClInclude Include="Source\Framework\MemoryManager.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
+    <ClInclude Include="Powerup.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

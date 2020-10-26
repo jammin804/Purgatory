@@ -43,6 +43,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Powerup.h" />
     <ClInclude Include="Source\Framework\BoxCollisionComponent.h" />
     <ClInclude Include="Source\Framework\GameComponent.h" />
     <ClInclude Include="Source\Framework\GameFramework.h" />
