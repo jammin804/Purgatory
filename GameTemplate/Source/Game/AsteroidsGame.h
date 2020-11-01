@@ -4,7 +4,10 @@
 
 using namespace std;
 
-class GameObject;
+class Player;
+class Background;
+class RockManager;
+class GameFlow;
 
 class AsteroidsGame : public GameFramework
 {
@@ -16,9 +19,10 @@ protected:
 private:
     void CreateExplosion(float PositionX, float PositionY, float ExplosionScale = 1.0f);
 
-    class Player* Player1 = nullptr;
-    class Background* BG = nullptr;
-    class RockManager* RockMgr = nullptr;
-    class GameFlow* GFlow = nullptr;
+    Player* Player1 = nullptr;
+	Player* Player2 = nullptr;
+    Background* BG = nullptr;
+    RockManager* RockMgr = nullptr;
+    GameFlow* GFlow = nullptr;
     int CurrentScore = 0;
 };

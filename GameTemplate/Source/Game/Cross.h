@@ -4,7 +4,7 @@
 
 class BoxCollisionComponent;
 
-class Laser : public GameObject
+class Cross : public GameObject
 {
     public:
         const BoxCollisionComponent* GetCollision() const { return Collision; }
@@ -15,8 +15,11 @@ class Laser : public GameObject
     virtual void OnUpdate(float DeltaTime) override;
 
     private:
-        float LaserSpeed = 500.0f;
-        class ImageComponent* LaserImage = nullptr;
+		float CrossRotationSpeed = 1.0f;
+		float CrossSpeed = 500.0f;
+		float CrossMovementDirectionX = 0.0f;
+		float CrossMovementDirectionY = 0.0f;
+        class ImageComponent* CrossImage = nullptr;
         BoxCollisionComponent* Collision = nullptr;
         class SoundComponent* LaserSound = nullptr;
         float LifeTimer = 0.0f;

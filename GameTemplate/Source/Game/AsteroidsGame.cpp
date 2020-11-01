@@ -4,7 +4,7 @@
 #include "Explosion.h"
 #include "Framework/BoxCollisionComponent.h"
 #include "GameFlow.h"
-#include "Laser.h"
+#include "Cross.h"
 #include "Player.h"
 #include "Rock.h"
 #include "RockManager.h"
@@ -81,7 +81,7 @@ void AsteroidsGame::OnUpdate(float DeltaTime)
             }
         }
 
-        for (Laser* CurrentLaser : Player1->GetLasers())
+        for (Cross* CurrentLaser : Player1->GetLasers())
         {
             if (CurrentRock->GetCollision()->DoesCollide(CurrentLaser->GetCollision()))
             {

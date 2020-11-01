@@ -18,6 +18,6 @@ public:
     void SetMusic(string MusicPath);
 private:
     ImageComponent* BackgroundImage = nullptr;
-    SoundComponent* BackgroundMusic = nullptr;
+	SoundComponent* BackgroundMusic = nullptr;
 };
 

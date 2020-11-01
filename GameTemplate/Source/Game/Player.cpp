@@ -4,7 +4,7 @@
 #include "Framework/InputComponent.h"
 #include "Framework/SoundComponent.h"
 #include "Framework/BoxCollisionComponent.h"
-#include "Laser.h"
+#include "Cross.h"
 
 void Player::OnInit()
 {
@@ -164,7 +164,7 @@ bool Player::HandleDeath()
 
 void Player::CreateLaser()
 {
-    Laser* NewLaser = GameObject::CreateInstance<Laser>();
+    Cross* NewLaser = GameObject::CreateInstance<Cross>();
     float DirectionY = cos(GetRotation());
     float DirectionX = sin(GetRotation());
     NewLaser->SetPosition(GetPositionX() + (DirectionX * 30.0f),  GetPositionY() - (DirectionY * 30.0f));

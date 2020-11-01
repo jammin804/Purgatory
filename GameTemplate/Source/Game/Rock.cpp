@@ -12,7 +12,8 @@ void Rock::OnPostInit()
 {
     if (RockImage)
     {
-        RockImage->LoadImage("Art/Rock.png");
+		//load power up image
+        RockImage->LoadImage("Art/Rock.png");//
         RockImage->SetScale((SplitsLeft + 1) * 0.33f);
     }
     if (Collision)
@@ -23,11 +24,12 @@ void Rock::OnPostInit()
 
 void Rock::OnUpdate(float DeltaTime)
 {
-    SetRotation(GetRotation() + RotationSpeed * DeltaTime);
+    //steal for powerup movement
+	SetRotation(GetRotation() + RotationSpeed * DeltaTime);
     
     SetPosition(GetPositionX() + (MovementDirectionX * MovementSpeed * DeltaTime),
         GetPositionY() + (MovementDirectionY * MovementSpeed * DeltaTime));
-
+	//
     LifeTimer += DeltaTime;
     if (LifeTimer > MaxLifeTime)
     {

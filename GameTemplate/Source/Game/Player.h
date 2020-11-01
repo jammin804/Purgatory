@@ -8,7 +8,7 @@ class BoxCollisionComponent;
 class ImageComponent;
 class InputComponent;
 class SoundComponent;
-class Laser;
+class Cross;
 
 class Player : public GameObject
 {
@@ -22,7 +22,7 @@ public:
     void SetThrustersSound(string SoundPath);
     bool HandleDeath();
     void CreateLaser();
-    vector<Laser*>& GetLasers(){ return Lasers; }
+    vector<Cross*>& GetLasers(){ return Lasers; }
     const BoxCollisionComponent* GetCollision() const { return Collision; }
     int GetLivesLeft() const { return LivesLeft; }
 private:
@@ -35,7 +35,7 @@ private:
     float PlayerMovementSpeed = 200.0f;
     float RotationSpeed = 2.0f;
     bool bCanMakeLaser = true;
-    vector<Laser*> Lasers;
+    vector<Cross*> Lasers;
     int LivesLeft = 2;
     bool bInvulnerable = false;
     bool bRespawning = false;
