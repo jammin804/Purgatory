@@ -17,19 +17,19 @@ void Player::OnInit()
     ThrusterSoundComponent->SetVolume(0.3f);
     Collision = GameComponent::CreateInstance<BoxCollisionComponent>(this);
 
-    Lasers.reserve(200);
+    Cross.reserve(200);
     //Collision->SetScale(0.5f);
 }
 
 void Player::OnUpdate(float DeltaTime)
 {
-    if (Lasers.size() > 0)
+    if (Cross.size() > 0)
     {
-        for (auto Iter = Lasers.begin(); Iter != Lasers.end();)
+        for (auto Iter = Cross.begin(); Iter != Cross.end();)
         {
             if ((*Iter)->IsDestroyed())
             {
-                Iter = Lasers.erase(Iter);
+                Iter = Cross.erase(Iter);
                 continue;
             }
             ++Iter;
@@ -117,6 +117,14 @@ void Player::SetAvatarImage(string ImagePath)
     }
 }
 
+void Player::SetAvatarImage(string ImagePath)
+{
+    if (PlayerAvatarImageComponent)
+    {
+        PlayerAvatarImageComponent->LoadImage(ImagePath);
+    }
+}
+
 void Player::SetThrustersImage(string ImagePath)
 {
     if (PlayerAvatarThrustersImageComponent)
@@ -146,10 +154,10 @@ bool Player::HandleDeath()
         PlayerAvatarImageComponent->SetVisible(false);
     }
 
-    if (LivesLeft > 0)
+    if (HealthLeft > 0)
     {
         bExploding = true;
-        LivesLeft--;
+        HealthLeft--;
         bInvulnerable = true;
         ExplodeTimer = 0.0f;
         RespawnTimer = 0.0f;
@@ -169,7 +177,7 @@ void Player::CreateLaser()
     float DirectionX = sin(GetRotation());
     NewLaser->SetPosition(GetPositionX() + (DirectionX * 30.0f),  GetPositionY() - (DirectionY * 30.0f));
     NewLaser->SetRotation(GetRotation());
-    Lasers.push_back(NewLaser);
+    Cross.push_back(NewLaser);
 }
 
 bool Player::IsInvulnerable() const

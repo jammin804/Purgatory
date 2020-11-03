@@ -4,6 +4,7 @@
 #include "Explosion.h"
 #include "Framework/BoxCollisionComponent.h"
 #include "GameFlow.h"
+#include "GUI.h" //error "cannot open source file 'GUI.h"
 #include "Cross.h"
 #include "Player.h"
 #include "Rock.h"
@@ -15,6 +16,7 @@ void AsteroidsGame::OnInit()
 {
     GFlow = GameObject::CreateInstance<GameFlow>();
     BG = GameObject::CreateInstance<Background>();
+	UI = GameObject::CreateInstance<GUI>();
     Player1 = GameObject::CreateInstance<Player>();
     RockMgr = GameObject::CreateInstance<RockManager>();
 }
@@ -27,6 +29,8 @@ void AsteroidsGame::OnPostInit()
         BG->SetMusic("Audio/Music.wav");
         BG->SetPosition(638.0f, 360.0f);
     }
+
+	if (UI)
 
     if (Player1)
     {

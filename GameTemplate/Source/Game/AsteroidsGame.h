@@ -8,6 +8,7 @@ class Player;
 class Background;
 class RockManager;
 class GameFlow;
+class GUI;
 
 class AsteroidsGame : public GameFramework
 {
@@ -24,5 +25,6 @@ private:
     Background* BG = nullptr;
     RockManager* RockMgr = nullptr;
     GameFlow* GFlow = nullptr;
+	GUI* UI = nullptr;
     int CurrentScore = 0;
 };

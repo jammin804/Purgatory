@@ -22,9 +22,9 @@ public:
     void SetThrustersSound(string SoundPath);
     bool HandleDeath();
     void CreateLaser();
-    vector<Cross*>& GetLasers(){ return Lasers; }
+    vector<Cross*>& GetLasers(){ return Cross; }
     const BoxCollisionComponent* GetCollision() const { return Collision; }
-    int GetLivesLeft() const { return LivesLeft; }
+    int GetLivesLeft() const { return HealthLeft; }
 private:
     ImageComponent* PlayerAvatarImageComponent = nullptr;
     ImageComponent* PlayerAvatarThrustersImageComponent = nullptr;
@@ -35,8 +35,8 @@ private:
     float PlayerMovementSpeed = 200.0f;
     float RotationSpeed = 2.0f;
     bool bCanMakeLaser = true;
-    vector<Cross*> Lasers;
-    int LivesLeft = 2;
+    vector<Cross*> Cross;
+    int HealthLeft = 5;
     bool bInvulnerable = false;
     bool bRespawning = false;
     bool bExploding = false;
@@ -45,6 +45,6 @@ private:
     const float ExplodingTime = 3.0f;
     const float RespawningTime = 3.0f;
 public:
-    bool IsInvulnerable() const;
+    bool IsInvulnerable() const; //why is this in another public statment?
 };
 
