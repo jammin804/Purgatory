@@ -20,14 +20,22 @@ public:
     void SetPosition(float NewPosX, float NewPosY) { SetPosX(NewPosX); SetPosY(NewPosY); }
     void SetRotation(float NewRotation) { Rotation = NewRotation; }
 
-    float GetPositionX() const { return PositionX; }
-    float GetPositionY() const { return PositionY; }
-    float GetRotation() const { return Rotation; }
+    float GetPositionX() const;
+    float GetPositionY() const;
+    float GetRotation() const;
+
+    float GetLocalPositionX() const { return PositionX; }
+    float GetLocalPositionY() const { return PositionY; }
+    float GetLocalRotation() const { return Rotation; }
 
     void RequestDestroy() { bShouldDestroy = true; }
     virtual void SetEnabled(bool bEnabled) { bIsEnabled = bEnabled; }
     bool IsEnabled() const { return bIsEnabled; }
     bool IsDestroyed() const { return bIsDestroyed; }
+
+    void SetParent(const GameObject* ParentComponent){ Parent = ParentComponent; }
+    const GameObject* GetParent() const { return Parent; }
+
 protected:
     GameObject();
     virtual ~GameObject() {}
@@ -47,6 +55,8 @@ private:
 
     void RegisterComponent(GameComponent* Component);
     void DestroyComponent(GameComponent* Component);
+
+    const GameObject* Parent = nullptr;
 
     vector<GameComponent*> GameComponents;
 

@@ -61,3 +61,33 @@ void GameObject::Shutdown()
     GameComponents.clear();
     OnShutdown();
 }
+
+float GameObject::GetPositionX() const
+{
+    float FinalPositionX = GetLocalPositionX();
+    if (const GameObject* MyParent = GetParent())
+    {
+        FinalPositionX += MyParent->GetPositionX();
+    }
+    return FinalPositionX;
+}
+
+float GameObject::GetPositionY() const
+{
+    float FinalPositionY = GetLocalPositionY();
+    if (const GameObject* MyParent = GetParent())
+    {
+        FinalPositionY += MyParent->GetPositionY();
+    }
+    return FinalPositionY;
+}
+
+float GameObject::GetRotation() const
+{
+    float FinalRotation = GetLocalRotation();
+    if (const GameObject* MyParent = GetParent())
+    {
+        FinalRotation += MyParent->GetRotation();
+    }
+    return FinalRotation;
+}
