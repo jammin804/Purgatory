@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GUI.cpp" />
     <ClCompile Include="Source\Framework\BoxCollisionComponent.cpp" />
     <ClCompile Include="Source\Framework\GameComponent.cpp" />
     <ClCompile Include="Source\Framework\GameFramework.cpp" />
@@ -43,6 +44,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GUI.h" />
     <ClInclude Include="Powerup.h" />
     <ClInclude Include="Source\Framework\BoxCollisionComponent.h" />
     <ClInclude Include="Source\Framework\GameComponent.h" />

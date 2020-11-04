@@ -13,9 +13,9 @@ void Explosion::OnInit()
 
 void Explosion::OnPostInit()
 {
-    ExplosionImage->LoadImage("Art/Explosion.png");
+    ExplosionImage->LoadImage("Art/Bloodsplats.png");
     ExplosionImage->SetScale(ExplosionScale);
-    ExplosionSound->LoadSample("Audio/Explosion.wav");
+    ExplosionSound->LoadSample("Audio/Hit.wav");
     ExplosionSound->Play();
 }
 

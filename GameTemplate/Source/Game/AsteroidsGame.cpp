@@ -4,7 +4,7 @@
 #include "Explosion.h"
 #include "Framework/BoxCollisionComponent.h"
 #include "GameFlow.h"
-#include "GUI.h" //error "cannot open source file 'GUI.h"
+#include "../GUI.h" //error "cannot open source file 'GUI.h"
 #include "Cross.h"
 #include "Player.h"
 #include "Rock.h"
@@ -31,6 +31,11 @@ void AsteroidsGame::OnPostInit()
     }
 
 	if (UI)
+	{
+		UI->SetBorderImage("Art/healthbar_border.png");
+		UI->SetLifeImage("Art/healthbar.png");
+		UI->SetPosition(0.0f, 0.0f);
+	}
 
     if (Player1)
     {
@@ -85,15 +90,15 @@ void AsteroidsGame::OnUpdate(float DeltaTime)
             }
         }
 
-        for (Cross* CurrentLaser : Player1->GetLasers())
+        for (Cross* CurrentCross : Player1->GetCross())
         {
-            if (CurrentRock->GetCollision()->DoesCollide(CurrentLaser->GetCollision()))
+            if (CurrentRock->GetCollision()->DoesCollide(CurrentCross->GetCollision()))
             {
                 GFlow->AddScore(5 * (CurrentRock->GetSplitsLeft() + 1));
                 CreateExplosion(CurrentRock->GetPositionX(), CurrentRock->GetPositionY(), 
                     (CurrentRock->GetSplitsLeft() + 1) * 0.33f);
                 CurrentRock->RequestSplit();
-                CurrentLaser->RequestDestroy();
+                CurrentCross->RequestDestroy();
             }
         }
     }

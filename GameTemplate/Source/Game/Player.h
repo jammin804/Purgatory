@@ -21,8 +21,8 @@ public:
     void SetThrustersImage(string ImagePath);
     void SetThrustersSound(string SoundPath);
     bool HandleDeath();
-    void CreateLaser();
-    vector<Cross*>& GetLasers(){ return Cross; }
+    void CreateCross();
+    vector<Cross*>& GetCross(){ return Cross; }
     const BoxCollisionComponent* GetCollision() const { return Collision; }
     int GetLivesLeft() const { return HealthLeft; }
 private:
@@ -45,6 +45,6 @@ private:
     const float ExplodingTime = 3.0f;
     const float RespawningTime = 3.0f;
 public:
-    bool IsInvulnerable() const; //why is this in another public statment?
+    bool IsInvulnerable() const; //why is this in another public statement?
 };
 

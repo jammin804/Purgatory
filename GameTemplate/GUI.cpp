@@ -9,11 +9,16 @@ void GUI::OnInit()
 	LifeGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
 }
 
+void GUI::OnPostInit()
+{
+
+}
+
 void GUI::OnUpdate(float DeltaTime)
 {
 }
 
-void GUI::SetBorderGUI(string ImagePath)
+void GUI::SetBorderImage(string ImagePath)
 {
 	if (BorderGUIImageComponent)
 	{
@@ -21,7 +26,7 @@ void GUI::SetBorderGUI(string ImagePath)
 	}
 }
 
-void GUI::SetLifeGUI(string ImagePath)
+void GUI::SetLifeImage(string ImagePath)
 {
 	if (LifeGUIImageComponent)
 	{

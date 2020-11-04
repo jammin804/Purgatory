@@ -89,7 +89,7 @@ void Player::OnUpdate(float DeltaTime)
     {
         if (bCanMakeLaser)
         {
-            CreateLaser(); 
+            CreateCross(); 
             bCanMakeLaser = false;
         }
     }
@@ -170,14 +170,14 @@ bool Player::HandleDeath()
     }
 }
 
-void Player::CreateLaser()
+void Player::CreateCross()
 {
-    Cross* NewLaser = GameObject::CreateInstance<Cross>();
+	Cross* NewCross = GameObject::CreateInstance<Cross>(); //Strange Error
     float DirectionY = cos(GetRotation());
     float DirectionX = sin(GetRotation());
-    NewLaser->SetPosition(GetPositionX() + (DirectionX * 30.0f),  GetPositionY() - (DirectionY * 30.0f));
-    NewLaser->SetRotation(GetRotation());
-    Cross.push_back(NewLaser);
+    NewCross->SetPosition(GetPositionX() + (DirectionX * 30.0f),  GetPositionY() - (DirectionY * 30.0f));
+    NewCross->SetRotation(GetRotation());
+    Cross.push_back(NewCross);
 }
 
 bool Player::IsInvulnerable() const
