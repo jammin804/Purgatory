@@ -1,15 +1,15 @@
 #include "AsteroidsGame.h"
 
-#include "Background.h"
-#include "Explosion.h"
+#include "Game/Background.h"
+#include "Game/Explosion.h"
 #include "Framework/BoxCollisionComponent.h"
-#include "GameFlow.h"
-#include "../GUI.h" //error "cannot open source file 'GUI.h"
-#include "Cross.h"
-#include "Player.h"
-#include "Rock.h"
-#include "RockManager.h"
-#include "UIText.h"
+#include "Game/GameFlow.h"
+#include "Game/GUI.h" 
+#include "Game/Cross.h"
+#include "Game/Player.h"
+#include "Game/Rock.h"
+#include "Game/RockManager.h"
+#include "Game/UIText.h"
 #include <sstream>
 
 void AsteroidsGame::OnInit()
@@ -32,9 +32,9 @@ void AsteroidsGame::OnPostInit()
 
 	if (UI)
 	{
-		UI->SetBorderImage("Art/healthbar_border.png");
 		UI->SetLifeImage("Art/healthbar.png");
-		UI->SetPosition(0.0f, 0.0f);
+		UI->SetBorderImage("Art/healthbar_border.png");
+		UI->SetPosition(150.0f, 100.0f);
 	}
 
     if (Player1)

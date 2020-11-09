@@ -22,7 +22,7 @@ public:
     void SetThrustersSound(string SoundPath);
     bool HandleDeath();
     void CreateCross();
-    vector<Cross*>& GetCross(){ return Cross; }
+    vector<Cross*>& GetCross(){ return Crosses; }
     const BoxCollisionComponent* GetCollision() const { return Collision; }
     int GetLivesLeft() const { return HealthLeft; }
 private:
@@ -35,7 +35,7 @@ private:
     float PlayerMovementSpeed = 200.0f;
     float RotationSpeed = 2.0f;
     bool bCanMakeLaser = true;
-    vector<Cross*> Cross;
+    vector<Cross*> Crosses;
     int HealthLeft = 5;
     bool bInvulnerable = false;
     bool bRespawning = false;

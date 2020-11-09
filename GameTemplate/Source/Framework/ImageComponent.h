@@ -13,8 +13,11 @@ public:
 
     void SetVisible(bool bIsNowVisible);
     bool IsVisible() const;
-
-    void SetScale(float NewScale) { Scale = NewScale; }
+	
+	void SetScaleFromLeft(bool NewScaleFromLeft) { ScaleFromLeft = NewScaleFromLeft; }
+	void SetScale(float NewScale) { ScaleX = NewScale; ScaleY = NewScale; }
+	void SetScaleX(float NewScaleX) { ScaleX = NewScaleX; }
+	void SetScaleY(float NewScaleY) { ScaleY = NewScaleY; }
 protected:
     virtual void OnShutdown() override;
 
@@ -24,8 +27,9 @@ private:
     struct ALLEGRO_BITMAP* ImageBitmap;
     int ImageWidth = 0;
     int ImageHeight = 0;
-    float Scale = 1.0f;
-
+	float ScaleX = 1.0f;
+	float ScaleY = 1.0f;
+	bool ScaleFromLeft = false;
     bool bIsVisible = true;
 };
 

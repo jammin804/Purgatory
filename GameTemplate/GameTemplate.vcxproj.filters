@@ -90,7 +90,7 @@
     <ClCompile Include="Source\Game\Cross.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="GUI.cpp">
+    <ClCompile Include="Source\Game\GUI.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
   </ItemGroup>
@@ -152,13 +152,13 @@
     <ClInclude Include="Source\Framework\MemoryManager.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
-    <ClInclude Include="Powerup.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Game\Cross.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="GUI.h">
+    <ClInclude Include="Source\Game\GUI.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Powerup.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
   </ItemGroup>

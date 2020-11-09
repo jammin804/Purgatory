@@ -3,6 +3,8 @@
 #include "Framework/BoxCollisionComponent.h"
 #include "Framework/SoundComponent.h"
 
+
+
 void Cross::OnInit()
 {
     CrossImage = GameComponent::CreateInstance<ImageComponent>(this);
@@ -32,17 +34,22 @@ void Cross::OnPostInit()
 
 void Cross::OnUpdate(float DeltaTime)
 {
-    float DirectionX = sin(GetRotation()) * CrossSpeed * DeltaTime;
-    float DirectionY = cos(GetRotation()) * CrossSpeed * DeltaTime;
+    float DirectionX = CrossMovementDirectionX * CrossSpeed * DeltaTime;
+    float DirectionY = CrossMovementDirectionY * CrossSpeed * DeltaTime;
     SetPosition(GetPositionX() + DirectionX, GetPositionY() - DirectionY);
 
-	/*SetRotation(GetRotation() + CrossRotationSpeed * DeltaTime); // Issues trying to get the cross to both rotate and move across the screen.
+	SetRotation(GetRotation() + CrossRotationSpeed * DeltaTime); // Issues trying to get the cross to both rotate and move across the screen.
 
-	SetPosition(GetPositionX() + (CrossMovementDirectionX * CrossSpeed * DeltaTime),
-		GetPositionY() + (CrossMovementDirectionY * CrossSpeed * DeltaTime));
-    LifeTimer += DeltaTime;*/
+
+    LifeTimer += DeltaTime;
     if (LifeTimer > MaxLifeTime)
     {
         RequestDestroy();
     }
+}
+
+void Cross::SetInitialDirection(float x, float y)
+{
+	CrossMovementDirectionX = x;
+	CrossMovementDirectionY = y;
 }

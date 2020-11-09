@@ -17,19 +17,19 @@ void Player::OnInit()
     ThrusterSoundComponent->SetVolume(0.3f);
     Collision = GameComponent::CreateInstance<BoxCollisionComponent>(this);
 
-    Cross.reserve(200);
+    Crosses.reserve(200);
     //Collision->SetScale(0.5f);
 }
 
 void Player::OnUpdate(float DeltaTime)
 {
-    if (Cross.size() > 0)
+    if (Crosses.size() > 0)
     {
-        for (auto Iter = Cross.begin(); Iter != Cross.end();)
+        for (auto Iter = Crosses.begin(); Iter != Crosses.end();)
         {
             if ((*Iter)->IsDestroyed())
             {
-                Iter = Cross.erase(Iter);
+                Iter = Crosses.erase(Iter);
                 continue;
             }
             ++Iter;
@@ -117,13 +117,6 @@ void Player::SetAvatarImage(string ImagePath)
     }
 }
 
-void Player::SetAvatarImage(string ImagePath)
-{
-    if (PlayerAvatarImageComponent)
-    {
-        PlayerAvatarImageComponent->LoadImage(ImagePath);
-    }
-}
 
 void Player::SetThrustersImage(string ImagePath)
 {
@@ -172,12 +165,12 @@ bool Player::HandleDeath()
 
 void Player::CreateCross()
 {
-	Cross* NewCross = GameObject::CreateInstance<Cross>(); //Strange Error
+	Cross* NewCross = GameObject::CreateInstance<Cross>();
     float DirectionY = cos(GetRotation());
     float DirectionX = sin(GetRotation());
     NewCross->SetPosition(GetPositionX() + (DirectionX * 30.0f),  GetPositionY() - (DirectionY * 30.0f));
-    NewCross->SetRotation(GetRotation());
-    Cross.push_back(NewCross);
+	NewCross->SetInitialDirection(DirectionX, DirectionY);
+    Crosses.push_back(NewCross);
 }
 
 bool Player::IsInvulnerable() const

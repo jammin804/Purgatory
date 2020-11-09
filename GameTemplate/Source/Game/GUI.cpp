@@ -5,13 +5,17 @@
 
 void GUI::OnInit()
 {
-	BorderGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
 	LifeGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
+	BorderGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
 }
 
 void GUI::OnPostInit()
 {
-
+	LifeGUIImageComponent->SetScaleFromLeft(true);
+	LifeGUIImageComponent->SetScaleX(2.0f);
+	LifeGUIImageComponent->SetScaleY(10.0f);
+	BorderGUIImageComponent->SetScaleFromLeft(true);
+	BorderGUIImageComponent->SetScale(10.0f);
 }
 
 void GUI::OnUpdate(float DeltaTime)
