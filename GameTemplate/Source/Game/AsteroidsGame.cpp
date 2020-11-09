@@ -17,6 +17,7 @@ void AsteroidsGame::OnInit()
     GFlow = GameObject::CreateInstance<GameFlow>();
     BG = GameObject::CreateInstance<Background>();
 	UI = GameObject::CreateInstance<GUI>();
+	FUI = GameObject::CreateInstance<GUI>();
     Player1 = GameObject::CreateInstance<Player>();
     RockMgr = GameObject::CreateInstance<RockManager>();
 }
@@ -35,6 +36,13 @@ void AsteroidsGame::OnPostInit()
 		UI->SetLifeImage("Art/healthbar.png");
 		UI->SetBorderImage("Art/healthbar_border.png");
 		UI->SetPosition(30.0f, 48.0f);
+	}
+
+	if (FUI)
+	{
+		FUI->SetFearImage("Art/fear.png");
+		FUI->SetFearBorderImage("Art/healthbar_border.png");
+		FUI->SetPosition(30.0f, 85.0f);
 	}
 
     if (Player1)

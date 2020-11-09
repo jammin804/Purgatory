@@ -23,8 +23,12 @@ protected:
 public:
 	void SetBorderImage(string ImagePath);
 	void SetLifeImage(string ImagePath);
+	void SetFearImage(string ImagePath);
+	void SetFearBorderImage(string ImagePath);
 
 private:
 	ImageComponent* BorderGUIImageComponent = nullptr;
 	ImageComponent* LifeGUIImageComponent = nullptr;
+	ImageComponent* FearGUIImageComponent = nullptr;
+	ImageComponent* FearBorderGUIImageComponent = nullptr;
 };

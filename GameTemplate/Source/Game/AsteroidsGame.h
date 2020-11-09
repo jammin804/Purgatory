@@ -26,5 +26,6 @@ private:
     RockManager* RockMgr = nullptr;
     GameFlow* GFlow = nullptr;
 	GUI* UI = nullptr;
+	GUI* FUI = nullptr;
     int CurrentScore = 0;
 };
