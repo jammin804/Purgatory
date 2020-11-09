@@ -25,7 +25,7 @@ void AsteroidsGame::OnPostInit()
 {
     if (BG)
     {
-        BG->SetImage("Art/Background.png");
+        BG->SetImage("Art/Background_N.png");
         BG->SetMusic("Audio/Music.wav");
         BG->SetPosition(638.0f, 360.0f);
     }
@@ -34,7 +34,7 @@ void AsteroidsGame::OnPostInit()
 	{
 		UI->SetLifeImage("Art/healthbar.png");
 		UI->SetBorderImage("Art/healthbar_border.png");
-		UI->SetPosition(150.0f, 100.0f);
+		UI->SetPosition(30.0f, 48.0f);
 	}
 
     if (Player1)
