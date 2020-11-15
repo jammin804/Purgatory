@@ -47,8 +47,8 @@ void AsteroidsGame::OnPostInit()
 
     if (Player1)
     {
-        Player1->SetAvatarImage("Art/Ship.png");
-        Player1->SetThrustersImage("Art/Thrusters.png");
+        Player1->SetAvatarImage("Art/Player_P.png");
+        //Player1->SetThrustersImage("Art/Thrusters.png");
         Player1->SetThrustersSound("Audio/Thruster.wav");
         Player1->SetPosition(638.0f, 360.0f);
     }

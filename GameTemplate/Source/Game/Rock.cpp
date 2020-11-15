@@ -13,7 +13,7 @@ void Rock::OnPostInit()
     if (RockImage)
     {
 		//load power up image
-        RockImage->LoadImage("Art/Rock.png");//
+        RockImage->LoadImage("Art/Enemy_D.png");//
         RockImage->SetScale((SplitsLeft + 1) * 0.33f);
     }
     if (Collision)
