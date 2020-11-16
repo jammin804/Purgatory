@@ -57,6 +57,8 @@ void AsteroidsGame::OnPostInit()
     {
         GFlow->AddObjectToDisableAtStart(Player1);
         GFlow->AddObjectToDisableAtStart(RockMgr);
+		GFlow->AddObjectToDisableAtStart(UI);
+		GFlow->AddObjectToDisableAtStart(FUI);
     }
 }
 
