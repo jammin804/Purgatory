@@ -25,6 +25,7 @@ public:
     vector<Cross*>& GetCross(){ return Crosses; }
     const BoxCollisionComponent* GetCollision() const { return Collision; }
     int GetLivesLeft() const { return HealthLeft; }
+	int GetMaxLivesLeft() const { return MAX_LIFE; }
 private:
     ImageComponent* PlayerAvatarImageComponent = nullptr;
     ImageComponent* PlayerAvatarThrustersImageComponent = nullptr;
@@ -36,7 +37,8 @@ private:
     float RotationSpeed = 2.0f;
     bool bCanMakeLaser = true;
     vector<Cross*> Crosses;
-    int HealthLeft = 5;
+	const int MAX_LIFE = 5;
+    int HealthLeft = MAX_LIFE;
     bool bInvulnerable = false;
     bool bRespawning = false;
     bool bExploding = false;

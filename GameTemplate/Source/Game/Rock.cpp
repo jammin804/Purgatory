@@ -29,7 +29,7 @@ void Rock::OnUpdate(float DeltaTime)
     
     SetPosition(GetPositionX() + (MovementDirectionX * MovementSpeed * DeltaTime),
         GetPositionY() + (MovementDirectionY * MovementSpeed * DeltaTime));
-	//
+	// Setting timers to switch direction. A bool in order to switch directions
     LifeTimer += DeltaTime;
     if (LifeTimer > MaxLifeTime)
     {

@@ -7,11 +7,13 @@ If the player gets hit, scale the life rectangle with by 1/player health
 */
 
 #include "Framework/GameObject.h"
+#include "Player.h"
 
 
 using namespace std;
 
 class ImageComponent;
+class Player; 
 
 class GUI : public GameObject
 {
@@ -25,10 +27,15 @@ public:
 	void SetLifeImage(string ImagePath);
 	void SetFearImage(string ImagePath);
 	void SetFearBorderImage(string ImagePath);
-
+	void SetPlayer(const Player* NewPlayer) { player = NewPlayer; }
+	
+private:
+	void SetLifePercentage(float PercentageLife);
 private:
 	ImageComponent* BorderGUIImageComponent = nullptr;
 	ImageComponent* LifeGUIImageComponent = nullptr;
 	ImageComponent* FearGUIImageComponent = nullptr;
 	ImageComponent* FearBorderGUIImageComponent = nullptr;
+	const Player* player = nullptr;
+	const float MAX_LIFESCALE = 2.0f;
 };

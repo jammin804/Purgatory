@@ -14,19 +14,30 @@ void GUI::OnInit()
 void GUI::OnPostInit()
 {
 	LifeGUIImageComponent->SetScaleFromLeft(true);
-	LifeGUIImageComponent->SetScaleX(2.0f);
-	LifeGUIImageComponent->SetScaleY(2.0f);
+	LifeGUIImageComponent->SetScaleX(MAX_LIFESCALE);
+	LifeGUIImageComponent->SetScaleY(MAX_LIFESCALE);
 	BorderGUIImageComponent->SetScaleFromLeft(true);
-	BorderGUIImageComponent->SetScale(2.0f);
+	BorderGUIImageComponent->SetScale(MAX_LIFESCALE);
 	FearGUIImageComponent->SetScaleFromLeft(true);
-	FearGUIImageComponent->SetScaleX(2.0f);
-	FearGUIImageComponent->SetScaleY(2.0f);
+	FearGUIImageComponent->SetOffsetY(30.0f);
+	FearGUIImageComponent->SetScaleX(MAX_LIFESCALE);
+	FearGUIImageComponent->SetScaleY(MAX_LIFESCALE);
 	FearBorderGUIImageComponent->SetScaleFromLeft(true);
-	FearBorderGUIImageComponent->SetScale(2.0f);
+	FearBorderGUIImageComponent->SetScale(MAX_LIFESCALE);
+	FearBorderGUIImageComponent->SetOffsetY(30.0f);
 }
 
 void GUI::OnUpdate(float DeltaTime)
 {
+	if (player)
+	{
+		SetLifePercentage(player->GetLivesLeft()/static_cast <float>(player->GetMaxLivesLeft()));
+	}
+}
+
+void GUI::SetLifePercentage(float PercentageLife)
+{
+	LifeGUIImageComponent->SetScaleX(MAX_LIFESCALE * PercentageLife);
 }
 
 void GUI::SetBorderImage(string ImagePath)

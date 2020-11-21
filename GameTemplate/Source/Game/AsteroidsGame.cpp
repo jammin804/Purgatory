@@ -17,7 +17,6 @@ void AsteroidsGame::OnInit()
     GFlow = GameObject::CreateInstance<GameFlow>();
     BG = GameObject::CreateInstance<Background>();
 	UI = GameObject::CreateInstance<GUI>();
-	FUI = GameObject::CreateInstance<GUI>();
     Player1 = GameObject::CreateInstance<Player>();
     RockMgr = GameObject::CreateInstance<RockManager>();
 }
@@ -30,20 +29,6 @@ void AsteroidsGame::OnPostInit()
         BG->SetMusic("Audio/Music.wav");
         BG->SetPosition(638.0f, 360.0f);
     }
-
-	if (UI)
-	{
-		UI->SetLifeImage("Art/healthbar.png");
-		UI->SetBorderImage("Art/healthbar_border.png");
-		UI->SetPosition(30.0f, 48.0f);
-	}
-
-	if (FUI)
-	{
-		FUI->SetFearImage("Art/fear.png");
-		FUI->SetFearBorderImage("Art/healthbar_border.png");
-		FUI->SetPosition(30.0f, 85.0f);
-	}
 
     if (Player1)
     {
@@ -58,8 +43,17 @@ void AsteroidsGame::OnPostInit()
         GFlow->AddObjectToDisableAtStart(Player1);
         GFlow->AddObjectToDisableAtStart(RockMgr);
 		GFlow->AddObjectToDisableAtStart(UI);
-		GFlow->AddObjectToDisableAtStart(FUI);
     }
+
+	if (UI)
+	{
+		UI->SetLifeImage("Art/healthbar.png");
+		UI->SetBorderImage("Art/healthbar_border.png");
+		UI->SetPosition(30.0f, 48.0f);
+		UI->SetFearImage("Art/fear.png");
+		UI->SetFearBorderImage("Art/healthbar_border.png");
+		UI->SetPlayer(Player1);
+	}
 }
 
 void AsteroidsGame::CreateExplosion(float PositionX, float PositionY, float ExplosionScale /*= 1.0f*/)
@@ -88,7 +82,7 @@ void AsteroidsGame::OnUpdate(float DeltaTime)
         {
             if (Player1->GetCollision()->DoesCollide(CurrentRock->GetCollision()))
             {
-                CreateExplosion(Player1->GetPositionX(), Player1->GetPositionY());
+                //CreateExplosion(Player1->GetPositionX(), Player1->GetPositionY());
                 if (Player1->HandleDeath())
                 {
                     GFlow->SetPlayerIsDead();

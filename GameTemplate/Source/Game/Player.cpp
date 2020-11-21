@@ -142,10 +142,10 @@ bool Player::HandleDeath()
         ThrusterSoundComponent->Stop();
     }
 
-    if (PlayerAvatarImageComponent)
+    /*if (PlayerAvatarImageComponent)
     {
         PlayerAvatarImageComponent->SetVisible(false);
-    }
+    }*/
 
     if (HealthLeft > 0)
     {
