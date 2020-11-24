@@ -14,7 +14,7 @@ class RockManager : public GameObject
         virtual void OnUpdate(float DeltaTime) override;
 
     public:
-        Rock* CreateRock(int SplitsLeft = 2);
+        Rock* CreateRock(const int MAX_ENEMY_HEALTH = 2); //Changed Splits Left to Max Enemy Health
         vector<Rock*>& GetRocks() { return Rocks; }
         virtual void SetEnabled(bool bEnabled) override;
     private:

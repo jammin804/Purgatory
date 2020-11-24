@@ -15,7 +15,11 @@ public:
     void SetSplitsLeft(int NewSplitsLeft) { SplitsLeft = NewSplitsLeft; }
     int GetSplitsLeft() const { return SplitsLeft; }
 
-    void Split();
+	//handling Enemy Health
+	int GetEnemyLivesLeft() const { return EnemyHealthLeft; }
+	int GetEnemyMaxLivesLeft() const { return ENEMY_MAX_LIFE; }
+
+    //void Split();
     bool NeedsSplit() const { return bNeedsSplit; }
 
     void SetMovementSpeed(float NewMovementSpeed) { MovementSpeed = NewMovementSpeed; }
@@ -30,6 +34,7 @@ private:
     float RotationSpeed = 1.0f;
     class ImageComponent* RockImage = nullptr;
     BoxCollisionComponent* Collision = nullptr;
+	class ImageComponent* EnemyHealth = nullptr;
     float LifeTimer = 0.0f;
     float MaxLifeTime = 30.0f;
 	float MoveTimer = 0.0f; // when timer runs out switch
@@ -40,6 +45,8 @@ private:
     float MovementDirectionX = 0.0f;
     float MovementDirectionY = 0.0f;
 	bool bNeedsSwitch = false; // bool for switching
+	/*int GetCurrentEnemyHealth() const { return CurrentEnemyHealth; } //Adding variables to track health to apply similar code as player GUI
+	int GetMaxEnemyHealth() const { return MAX_ENEMY_HEALTH; }*/
 public:
     void RequestSplit();
 };

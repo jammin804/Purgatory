@@ -6,6 +6,7 @@ void Rock::OnInit()
 {
     RockImage = GameComponent::CreateInstance<ImageComponent>(this);
     Collision = GameComponent::CreateInstance<BoxCollisionComponent>(this);
+	EnemyHealth = GameComponent::CreateInstance<ImageComponent>(this);
 }
 
 void Rock::OnPostInit()
@@ -20,6 +21,10 @@ void Rock::OnPostInit()
     {
         Collision->SetScale((SplitsLeft + 1) * 0.33f);
     }
+	/*if (EnemyHealth)
+	{
+		EnemyHealth->LoadImage()
+	}*/
 }
 
 void Rock::OnUpdate(float DeltaTime)
@@ -69,7 +74,7 @@ void Rock::OnUpdate(float DeltaTime)
     }
 }
 
-void Rock::Split()
+/*void Rock::Split() //Prevents split
 {
     bNeedsSplit = false;
 
@@ -91,7 +96,7 @@ void Rock::Split()
     float CurrentMovementDirectionX = MovementDirectionX;
     MovementDirectionX = MovementDirectionY;
     MovementDirectionY = CurrentMovementDirectionX;
-}
+}*/
 
 void Rock::Switch()
 {

@@ -12,7 +12,7 @@ void RockManager::OnUpdate(float DeltaTime)
     for (auto RockIter = Rocks.begin(); RockIter != Rocks.end();)
     {
         Rock& RockToUpdate = *(*RockIter);
-        if (RockToUpdate.NeedsSplit())
+        /*if (RockToUpdate.NeedsSplit()) // Removing split functionality 
         {
             RockToUpdate.Split();
             if (RockToUpdate.GetSplitsLeft() >= 0)
@@ -24,7 +24,7 @@ void RockManager::OnUpdate(float DeltaTime)
                 float MoveDirectionY = RockToUpdate.GetMovementDirectionY();
                 NewRock->SetMovementDirection(-MoveDirectionX, -MoveDirectionY);
             }
-        }
+        }*/
         
         if (RockToUpdate.IsDestroyed())
         {
