@@ -12,7 +12,7 @@ void RockManager::OnUpdate(float DeltaTime)
     for (auto RockIter = Rocks.begin(); RockIter != Rocks.end();)
     {
         Rock& RockToUpdate = *(*RockIter);
-        /*if (RockToUpdate.NeedsSplit()) // Removing split functionality 
+        if (RockToUpdate.NeedsSplit()) // Removing split functionality 
         {
             RockToUpdate.Split();
             if (RockToUpdate.GetSplitsLeft() >= 0)
@@ -24,7 +24,18 @@ void RockManager::OnUpdate(float DeltaTime)
                 float MoveDirectionY = RockToUpdate.GetMovementDirectionY();
                 NewRock->SetMovementDirection(-MoveDirectionX, -MoveDirectionY);
             }
-        }*/
+        }
+
+		/*if (RockToUpdate.GetEnemyMaxLivesLeft() >= 0) // My code
+		{
+			//Spawning
+			Rock* NewRock = CreateRock(RockToUpdate.GetEnemyMaxLivesLeft());
+			NewRock->SetPosition(RockToUpdate.GetPositionX(), RockToUpdate.GetPositionY());
+			NewRock->SetMovementSpeed(RockToUpdate.GetMovementSpeed());
+			float MoveDirectionX = RockToUpdate.GetMovementDirectionX();
+			float MoveDirectionY = RockToUpdate.GetMovementDirectionY();
+			NewRock->SetMovementDirection(-MoveDirectionX, -MoveDirectionY);
+		}*/
         
         if (RockToUpdate.IsDestroyed())
         {

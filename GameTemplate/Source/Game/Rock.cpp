@@ -74,7 +74,7 @@ void Rock::OnUpdate(float DeltaTime)
     }
 }
 
-/*void Rock::Split() //Prevents split
+void Rock::Split() //Prevents split
 {
     bNeedsSplit = false;
 
@@ -96,7 +96,7 @@ void Rock::OnUpdate(float DeltaTime)
     float CurrentMovementDirectionX = MovementDirectionX;
     MovementDirectionX = MovementDirectionY;
     MovementDirectionY = CurrentMovementDirectionX;
-}*/
+}
 
 void Rock::Switch()
 {

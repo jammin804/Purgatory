@@ -64,26 +64,37 @@ void Player::OnUpdate(float DeltaTime)
     {
         // Move the player forward in the direction he's facing
         {
-            float DirectionY = cos(GetRotation()) * PlayerMovementSpeed * DeltaTime;
-            float DirectionX = sin(GetRotation()) * PlayerMovementSpeed * DeltaTime;
+			float DirectionY = PlayerMovementSpeed * DeltaTime;//cos(GetRotation()) * PlayerMovementSpeed * DeltaTime;
+            //float DirectionX = sin(GetRotation()) * PlayerMovementSpeed * DeltaTime;
 
-            SetPosition(GetPositionX() + DirectionX, GetPositionY() - DirectionY);
+            SetPosition(GetPositionX(), GetPositionY() - DirectionY);
+
+			SetRotation(0);
         }
 
-        if (!bRespawning && !ThrusterSoundComponent->IsPlaying())
+        /*if (!bRespawning && !ThrusterSoundComponent->IsPlaying())
         {
             PlayerAvatarThrustersImageComponent->SetVisible(true);
             ThrusterSoundComponent->Play();
-        }
+        }*/ //Removing Thruster sound
     }
-    else
+	if (InputComp->IsKeyPressed(ALLEGRO_KEY_DOWN) || InputComp->IsKeyPressed(ALLEGRO_KEY_S))
+	{
+		float DirectionY = PlayerMovementSpeed * DeltaTime;//cos(GetRotation()) * PlayerMovementSpeed * DeltaTime;
+			//float DirectionX = sin(GetRotation()) * PlayerMovementSpeed * DeltaTime;
+
+		SetPosition(GetPositionX(), GetPositionY() +  DirectionY);
+
+		SetRotation(16);
+	}
+    /*else
     {
         if (ThrusterSoundComponent->IsPlaying())
         {
             PlayerAvatarThrustersImageComponent->SetVisible(false);
             ThrusterSoundComponent->Stop();
         }
-    }
+    }*/
 
     if (!bRespawning && InputComp->IsKeyPressed(ALLEGRO_KEY_SPACE))
     {
@@ -101,11 +112,19 @@ void Player::OnUpdate(float DeltaTime)
     
     if (InputComp->IsKeyPressed(ALLEGRO_KEY_LEFT) || InputComp->IsKeyPressed(ALLEGRO_KEY_A))
     {
-        SetRotation(GetRotation() - RotationSpeed * DeltaTime);
+		float DirectionX = PlayerMovementSpeed * DeltaTime;
+
+		SetPosition(GetPositionX() - DirectionX, GetPositionY());
+
+		SetRotation(11);
     }
     else if (InputComp->IsKeyPressed(ALLEGRO_KEY_RIGHT) || InputComp->IsKeyPressed(ALLEGRO_KEY_D))
     {
-        SetRotation(GetRotation() + RotationSpeed * DeltaTime);
+		float DirectionX = PlayerMovementSpeed * DeltaTime;
+
+		SetPosition(GetPositionX() + DirectionX, GetPositionY());
+
+		SetRotation(-11);
     }
 }
 
