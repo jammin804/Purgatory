@@ -12,6 +12,7 @@ class GameFlow : public GameObject
     {
         Starting = 0,
         InGame,
+		Pause, //Added Pause to EState
         Ending
     };
 
@@ -20,6 +21,7 @@ class GameFlow : public GameObject
         virtual void OnPostInit() override;
         virtual void OnUpdate(float DeltaTime) override;
         virtual void OnShutdown() override;
+		//virtual void OnPause() override; //Trying to add the Pause function, but i keep getting an error.
 
     public:
         void SetPlayerIsDead();
@@ -36,5 +38,7 @@ class GameFlow : public GameObject
         class UIText* GameUI = nullptr;
         bool bReturnPressed = false;
         bool bShouldEndGame = false;
+		bool bShouldPauseGame = false; /* adding bool or pausing and resuming game */
+		bool bShouldResumeGame = false;
 };
 

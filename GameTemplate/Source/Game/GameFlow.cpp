@@ -68,6 +68,20 @@ void GameFlow::OnUpdate(float DeltaTime)
             }
         }
         break;
+	case EState::Pause:
+		if (Input)
+		{
+			if (Input->IsKeyPressed(ALLEGRO_KEY_ESCAPE))
+			{
+				bShouldPauseGame = true;
+			}
+			if (bShouldPauseGame && Input->IsKeyPressed(ALLEGRO_KEY_ESCAPE))
+			{
+				bShouldResumeGame = true;
+			}
+		}
+		break;
+
     case EState::Ending:
         if (Input)
         {
@@ -87,6 +101,16 @@ void GameFlow::OnUpdate(float DeltaTime)
 void GameFlow::OnShutdown()
 {
 }
+
+/*void GameFlow::OnPause()
+{
+	CurrentState = EState::Pause;
+	for (GameObject* Object : ObjectsToDisableOutsideGame)
+	{
+		Object->SetEnabled(false);
+	}
+
+}*/
 
 void GameFlow::SetPlayerIsDead()
 {
