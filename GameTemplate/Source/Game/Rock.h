@@ -41,8 +41,8 @@ private:
 	float MaxMoveTime = 30.0f;
     bool bNeedsSplit = false;
     int SplitsLeft = 2;
-	int ENEMY_MAX_LIFE = 2;
-	int EnemyHealthLeft = ENEMY_MAX_LIFE;
+	float ENEMY_MAX_LIFE = 2.0f;
+	float EnemyHealthLeft = ENEMY_MAX_LIFE;
     float MovementSpeed = 100.0f;
     float MovementDirectionX = 0.0f;
     float MovementDirectionY = 0.0f;

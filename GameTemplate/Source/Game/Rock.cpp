@@ -14,6 +14,11 @@ void Rock::OnPostInit()
     if (RockImage)
     {
 		//load power up image
+		EnemyHealth->SetScaleFromLeft(true);
+		EnemyHealth->LoadImage("Art/fear.png");
+		EnemyHealth->SetOffsetY(-50.0f);
+		EnemyHealth->SetScaleX(ENEMY_MAX_LIFE);
+
         RockImage->LoadImage("Art/Enemy_D.png");//
         RockImage->SetScale((SplitsLeft + 1) * 0.33f);
     }
@@ -51,7 +56,7 @@ void Rock::OnUpdate(float DeltaTime)
 		}
 	}*/
 
-	if (bNeedsSwitch)
+	if (bNeedsSwitch) //Switching dirrectiosn
 	{
 		SetPosition(GetPositionX(), GetPositionY() + (MovementDirectionY * MovementSpeed * DeltaTime));
 	}
@@ -105,5 +110,5 @@ void Rock::Switch()
 
 void Rock::RequestSplit()
 {
-    bNeedsSplit = true;
+    bNeedsSplit = false;
 }
