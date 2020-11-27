@@ -17,6 +17,7 @@ void Rock::OnPostInit()
 		EnemyHealth->SetScaleFromLeft(true);
 		EnemyHealth->LoadImage("Art/fear.png");
 		EnemyHealth->SetOffsetY(-50.0f);
+		EnemyHealth->SetOffsetX(-60.0f);
 		EnemyHealth->SetScaleX(ENEMY_MAX_LIFE);
 
         RockImage->LoadImage("Art/Enemy_D.png");//

@@ -19,6 +19,7 @@ class RockManager : public GameObject
         virtual void SetEnabled(bool bEnabled) override;
     private:
         void SetRandomPosition(Rock& RockToPosition);
+		void SetEnemyLifePercentage(float EnemyPercentageLife);
 private:
         vector<Rock*> Rocks;
         float TimeSinceSpawn = 0.0f;

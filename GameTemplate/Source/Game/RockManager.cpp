@@ -23,8 +23,11 @@ void RockManager::OnUpdate(float DeltaTime)
                 float MoveDirectionX = RockToUpdate.GetMovementDirectionX();
                 float MoveDirectionY = RockToUpdate.GetMovementDirectionY();
                 NewRock->SetMovementDirection(-MoveDirectionX, -MoveDirectionY);
-            }
+            } 
         }
+
+		//SetLifePercentage(player->GetLivesLeft() / static_cast <float>(player->GetMaxLivesLeft()));
+		SetEnemyLifePercentage(RockToUpdate.GetEnemyLivesLeft() / static_cast <float>(RockToUpdate.GetEnemyMaxLivesLeft())); //Currently working on the enemy health code using the player health code
 
 		/*if (RockToUpdate.GetEnemyMaxLivesLeft() >= 0) // My code
 		{
@@ -122,4 +125,9 @@ void RockManager::SetRandomPosition(Rock& RockToPosition)
     RockToPosition.SetMovementSpeed(150.0f);
     RockToPosition.SetPosition(StartPosX, StartPosY);
     RockToPosition.SetMovementDirection(StartDirX, StartDirY);
+}
+
+void RockManager::SetEnemyLifePercentage(float EnemyPercentageLife)
+{
+
 }
