@@ -72,7 +72,7 @@ void RockManager::SetEnabled(bool bEnabled)
     for (auto RockIter = Rocks.begin(); RockIter != Rocks.end(); ++RockIter)
     {
         Rock& RockToUpdate = *(*RockIter);
-        RockToUpdate.SetEnabled(false);
+        RockToUpdate.SetEnabled(bEnabled);
     }
 }
 

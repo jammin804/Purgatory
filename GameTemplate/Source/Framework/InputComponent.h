@@ -13,6 +13,7 @@ public:
 
     bool IsKeyPressed(int KeyCode) const;
     bool IsKeyReleased(int KeyCode) const;
+	bool IsKeyJustPressed(int KeyCode) const;
 
 protected:
     virtual void OnUpdate(float DeltaTime) override;

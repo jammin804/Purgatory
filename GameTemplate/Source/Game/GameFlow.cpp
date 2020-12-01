@@ -67,17 +67,21 @@ void GameFlow::OnUpdate(float DeltaTime)
                 GameUI->SetYouSurvived(CurrentScore);
             }
         }
-        break;
-	case EState::Pause:
 		if (Input)
 		{
 			if (Input->IsKeyPressed(ALLEGRO_KEY_ESCAPE))
 			{
-				bShouldPauseGame = true;
+				SetPaused(true);
 			}
-			if (bShouldPauseGame && Input->IsKeyPressed(ALLEGRO_KEY_ESCAPE))
+		}
+        break;
+	case EState::Pause:
+		if (Input)
+		{
+			
+			if (Input->IsKeyPressed(ALLEGRO_KEY_ESCAPE))
 			{
-				bShouldResumeGame = true;
+				SetPaused(false);
 			}
 		}
 		break;
@@ -102,15 +106,28 @@ void GameFlow::OnShutdown()
 {
 }
 
-/*void GameFlow::OnPause()
+void GameFlow::SetPaused(bool bIsPaused)
 {
-	CurrentState = EState::Pause;
-	for (GameObject* Object : ObjectsToDisableOutsideGame)
+	if (bIsPaused)
 	{
-		Object->SetEnabled(false);
+		CurrentState = EState::Pause;
+		for (GameObject* Object : ObjectsToDisableOutsideGame)
+		{
+			Object->SetEnabled(false);
+		}
+
+	}
+	else 
+	{
+		CurrentState = EState::InGame;
+		for (GameObject* Object : ObjectsToDisableOutsideGame)
+		{
+			Object->SetEnabled(true);
+		}
+
 	}
 
-}*/
+}
 
 void GameFlow::SetPlayerIsDead()
 {

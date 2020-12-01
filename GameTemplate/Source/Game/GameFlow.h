@@ -21,7 +21,7 @@ class GameFlow : public GameObject
         virtual void OnPostInit() override;
         virtual void OnUpdate(float DeltaTime) override;
         virtual void OnShutdown() override;
-		//virtual void OnPause() override; //Trying to add the Pause function, but i keep getting an error.
+		void SetPaused(bool bIsPaused); //Trying to add the Pause function, but i keep getting an error.
 
     public:
         void SetPlayerIsDead();

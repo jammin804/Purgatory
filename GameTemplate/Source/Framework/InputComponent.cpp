@@ -23,6 +23,11 @@ bool InputComponent::IsKeyReleased(int KeyCode) const
     return Keys[KeyCode] & KEY_RELEASED;
 }
 
+bool InputComponent::IsKeyJustPressed(int KeyCode) const
+{
+	return Keys[KeyCode] & (KEY_PRESSED & KEY_SEEN);
+}
+
 void InputComponent::OnKeyPressed(int Keycode)
 {
     Keys[Keycode] = KEY_SEEN | KEY_RELEASED;

@@ -59,73 +59,41 @@ void Player::OnUpdate(float DeltaTime)
         }
     }
     
-
-    if (InputComp->IsKeyPressed(ALLEGRO_KEY_UP) || InputComp->IsKeyPressed(ALLEGRO_KEY_W))
-    {
-        // Move the player forward in the direction he's facing
-        {
-			float DirectionY = PlayerMovementSpeed * DeltaTime;//cos(GetRotation()) * PlayerMovementSpeed * DeltaTime;
-            //float DirectionX = sin(GetRotation()) * PlayerMovementSpeed * DeltaTime;
-
-            SetPosition(GetPositionX(), GetPositionY() - DirectionY);
-
-			SetRotation(0);
-        }
-
-        /*if (!bRespawning && !ThrusterSoundComponent->IsPlaying())
-        {
-            PlayerAvatarThrustersImageComponent->SetVisible(true);
-            ThrusterSoundComponent->Play();
-        }*/ //Removing Thruster sound
-    }
+	float DirectionX = 0.0f;
+	float DirectionY = 0.0f;
+	if (InputComp->IsKeyPressed(ALLEGRO_KEY_UP) || InputComp->IsKeyPressed(ALLEGRO_KEY_W))
+	{
+		DirectionY -= PlayerMovementSpeed * DeltaTime;
+	}
 	if (InputComp->IsKeyPressed(ALLEGRO_KEY_DOWN) || InputComp->IsKeyPressed(ALLEGRO_KEY_S))
 	{
-		float DirectionY = PlayerMovementSpeed * DeltaTime;//cos(GetRotation()) * PlayerMovementSpeed * DeltaTime;
-			//float DirectionX = sin(GetRotation()) * PlayerMovementSpeed * DeltaTime;
-
-		SetPosition(GetPositionX(), GetPositionY() +  DirectionY);
-
-		SetRotation(16);
+		DirectionY += PlayerMovementSpeed * DeltaTime;
 	}
-    /*else
-    {
-        if (ThrusterSoundComponent->IsPlaying())
-        {
-            PlayerAvatarThrustersImageComponent->SetVisible(false);
-            ThrusterSoundComponent->Stop();
-        }
-    }*/
-
-    if (!bRespawning && InputComp->IsKeyPressed(ALLEGRO_KEY_SPACE))
-    {
-        if (bCanMakeLaser)
-        {
-            CreateCross(); 
-            bCanMakeLaser = false;
-        }
-    }
-    
-    if (InputComp->IsKeyReleased(ALLEGRO_KEY_SPACE))
-    {
-        bCanMakeLaser = true;
-    }
-    
     if (InputComp->IsKeyPressed(ALLEGRO_KEY_LEFT) || InputComp->IsKeyPressed(ALLEGRO_KEY_A))
     {
-		float DirectionX = PlayerMovementSpeed * DeltaTime;
-
-		SetPosition(GetPositionX() - DirectionX, GetPositionY());
-
-		SetRotation(11);
+		DirectionX -= PlayerMovementSpeed * DeltaTime;
     }
-    else if (InputComp->IsKeyPressed(ALLEGRO_KEY_RIGHT) || InputComp->IsKeyPressed(ALLEGRO_KEY_D))
+    if (InputComp->IsKeyPressed(ALLEGRO_KEY_RIGHT) || InputComp->IsKeyPressed(ALLEGRO_KEY_D))
     {
-		float DirectionX = PlayerMovementSpeed * DeltaTime;
-
-		SetPosition(GetPositionX() + DirectionX, GetPositionY());
-
-		SetRotation(-11);
+		DirectionX += PlayerMovementSpeed * DeltaTime;
     }
+	SetPosition(GetPositionX() + DirectionX, GetPositionY() + DirectionY);
+	//Update Sprite
+
+
+	if (!bRespawning && InputComp->IsKeyPressed(ALLEGRO_KEY_SPACE))
+	{
+		if (bCanMakeLaser)
+		{
+			CreateCross();
+			bCanMakeLaser = false;
+		}
+	}
+
+	if (InputComp->IsKeyReleased(ALLEGRO_KEY_SPACE))
+	{
+		bCanMakeLaser = true;
+	}
 }
 
 void Player::SetAvatarImage(string ImagePath)

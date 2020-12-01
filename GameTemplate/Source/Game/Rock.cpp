@@ -27,50 +27,29 @@ void Rock::OnPostInit()
     {
         Collision->SetScale((SplitsLeft + 1) * 0.33f);
     }
-	/*if (EnemyHealth)
-	{
-		EnemyHealth->LoadImage()
-	}*/
+
 }
 
 void Rock::OnUpdate(float DeltaTime)
 {
-	bNeedsSwitch = true;
-	MoveTimer += DeltaTime;
-	if (MoveTimer > MaxMoveTime)
-	{
-		Switch();
-	}
-
-    //steal for power up movement
-	//SetRotation(GetRotation() + RotationSpeed * DeltaTime); Removing rotation
     
-    /*SetPosition(GetPositionX() + (MovementDirectionX * MovementSpeed * DeltaTime),
-        GetPositionY() + (MovementDirectionY * MovementSpeed * DeltaTime));*/
 
-	/*for (int i=0; i<2; i++) //tried to make a test to see if i can make a mini timer
-	{
-		if (i == 2) 
-		{
-			bNeedsSwitch = false;
-			i = 0;
-		}
-	}*/
 
-	if (bNeedsSwitch) //Switching dirrectiosn
+	if (bNeedsSwitch) //Switching directiosn
 	{
 		SetPosition(GetPositionX(), GetPositionY() + (MovementDirectionY * MovementSpeed * DeltaTime));
 	}
 	else 
 	{
-		SetPosition(650.0f, 100.0f);
+		SetPosition(GetPositionX() + (MovementDirectionX * MovementSpeed * DeltaTime), GetPositionY());
 	}
 
-	/*if (MoveTimer > 30.0f)
+	MoveTimer += DeltaTime;
+	if (MoveTimer > MaxMoveTime)
 	{
-		bNeedsSwitch = false;
+		bNeedsSwitch = !bNeedsSwitch;
 		MoveTimer = 0.0f;
-	}*/
+	}
 
 	// Setting timers to switch direction. A bool in order to switch directions
     LifeTimer += DeltaTime;

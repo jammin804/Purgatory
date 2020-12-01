@@ -38,7 +38,7 @@ private:
     float LifeTimer = 0.0f;
     float MaxLifeTime = 30.0f;
 	float MoveTimer = 0.0f; // when timer runs out switch
-	float MaxMoveTime = 30.0f;
+	float MaxMoveTime = 2.0f;
     bool bNeedsSplit = false;
     int SplitsLeft = 2;
 	float ENEMY_MAX_LIFE = 2.0f;
