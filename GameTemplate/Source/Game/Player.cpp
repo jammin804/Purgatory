@@ -79,6 +79,14 @@ void Player::OnUpdate(float DeltaTime)
     }
 	SetPosition(GetPositionX() + DirectionX, GetPositionY() + DirectionY);
 	//Update Sprite
+	/*if (DirectionY > 0)
+	{
+		ImagePath = "Art/Player_P_Back.png";
+	}
+	if (DirectionY > 0)
+	{
+		PlayerAvatarImageComponent->LoadImage("Art/Player_P.png");
+	}*/
 
 
 	if (!bRespawning && InputComp->IsKeyPressed(ALLEGRO_KEY_SPACE))
