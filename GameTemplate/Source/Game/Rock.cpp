@@ -19,6 +19,7 @@ void Rock::OnPostInit()
 		EnemyHealth->SetOffsetY(-50.0f);
 		EnemyHealth->SetOffsetX(-60.0f);
 		EnemyHealth->SetScaleX(ENEMY_MAX_LIFE);
+		EnemyHealth->SetScaleY(ENEMY_MAX_LIFE);
 
         RockImage->LoadImage("Art/Enemy_D.png");//
         RockImage->SetScale((SplitsLeft + 1) * 0.33f);
@@ -32,10 +33,13 @@ void Rock::OnPostInit()
 
 void Rock::OnUpdate(float DeltaTime)
 {
-    
+	if (NewRock) 
+	{
+		SetEnemyLifePercentage(NewRock->GetEnemyLivesLeft()/ static_cast <float>(NewRock->GetEnemyMaxLivesLeft()));
+	}
 
 
-	if (bNeedsSwitch) //Switching directiosn
+	if (bNeedsSwitch) //Switching directions
 	{
 		SetPosition(GetPositionX(), GetPositionY() + (MovementDirectionY * MovementSpeed * DeltaTime));
 	}
@@ -58,6 +62,12 @@ void Rock::OnUpdate(float DeltaTime)
         RequestDestroy();
     }
 }
+
+void Rock::SetEnemyLifePercentage(float EnemyPercentageLife)
+{
+	EnemyHealth->SetScaleX(ENEMY_MAX_LIFE * EnemyPercentageLife);
+}
+
 
 void Rock::Split() //Prevents split
 {

@@ -27,7 +27,7 @@ void RockManager::OnUpdate(float DeltaTime)
         }
 
 		//SetLifePercentage(player->GetLivesLeft() / static_cast <float>(player->GetMaxLivesLeft()));
-		SetEnemyLifePercentage(RockToUpdate.GetEnemyLivesLeft() / static_cast <float>(RockToUpdate.GetEnemyMaxLivesLeft())); //Currently working on the enemy health code using the player health code
+		//SetEnemyLifePercentage(RockToUpdate.GetEnemyLivesLeft() / static_cast <float>(RockToUpdate.GetEnemyMaxLivesLeft())); //Currently working on the enemy health code using the player health code
 
 		/*if (RockToUpdate.GetEnemyMaxLivesLeft() >= 0) // My code
 		{

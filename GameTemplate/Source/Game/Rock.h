@@ -47,8 +47,9 @@ private:
     float MovementDirectionX = 0.0f;
     float MovementDirectionY = 0.0f;
 	bool bNeedsSwitch = false; // bool for switching
-	/*int GetCurrentEnemyHealth() const { return CurrentEnemyHealth; } //Adding variables to track health to apply similar code as player GUI
-	int GetMaxEnemyHealth() const { return MAX_ENEMY_HEALTH; }*/
+	Rock* NewRock = nullptr;
 public:
     void RequestSplit();
+private:
+	void SetEnemyLifePercentage(float EnemyPercentageLife);
 };
