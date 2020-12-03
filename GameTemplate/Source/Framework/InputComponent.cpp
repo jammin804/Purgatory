@@ -3,8 +3,7 @@
 #include "GameFramework.h"
 
 #define KEY_SEEN     1
-#define KEY_RELEASED 2
-#define KEY_PRESSED  3
+#define KEY_PRESSED  2
 
 InputComponent::InputComponent(class GameObject* Owner)
     : GameComponent(Owner)
@@ -15,26 +14,42 @@ InputComponent::InputComponent(class GameObject* Owner)
 
 bool InputComponent::IsKeyPressed(int KeyCode) const
 {
-    return Keys[KeyCode] & KEY_PRESSED;
+    int result = Keys[KeyCode] & KEY_PRESSED;
+    return result != 0;
 }
 
 bool InputComponent::IsKeyReleased(int KeyCode) const
 {
-    return Keys[KeyCode] & KEY_RELEASED;
+    int result = Keys[KeyCode] & KEY_PRESSED;
+    return result == 0;
 }
 
-void InputComponent::OnKeyPressed(int Keycode)
+bool InputComponent::IsKeyJustPressed(int KeyCode) const
 {
-    Keys[Keycode] = KEY_SEEN | KEY_RELEASED;
+    return IsKeyPressed(KeyCode) && Keys[KeyCode] & KEY_SEEN;
 }
 
-void InputComponent::OnKeyReleased(int Keycode)
+bool InputComponent::IsKeyJustReleased(int KeyCode) const
 {
-    Keys[Keycode] &= KEY_RELEASED;
+    return IsKeyReleased(KeyCode) && Keys[KeyCode] & KEY_SEEN;
+}
+
+void InputComponent::OnKeyPressed(int KeyCode)
+{
+    Keys[KeyCode] |= KEY_PRESSED;
+    Keys[KeyCode] |= KEY_SEEN;
+}
+
+void InputComponent::OnKeyReleased(int KeyCode)
+{
+    Keys[KeyCode] &= ~KEY_PRESSED;
+    Keys[KeyCode] |= KEY_SEEN;
 }
 
 void InputComponent::OnUpdate(float DeltaTime)
 {
     for (int i = 0; i < ALLEGRO_KEY_MAX; i++)
-        Keys[i] &= KEY_SEEN;
+    {
+        Keys[i] &= ~KEY_SEEN;
+    }        
 }
