@@ -86,6 +86,18 @@ void UIText::SetGameOver(int FinalScore)
     MiddleTextLine3->SetText("Press Enter To Quit");
 }
 
+void UIText::SetGamePaused()
+{
+	TopLeftText->SetVisible(false);
+	TopRightText->SetVisible(false);
+	TopCenterText->SetVisible(false);
+	MiddleTextLine1->SetVisible(false);
+	MiddleTextLine2->SetVisible(false);
+	MiddleTextLine3->SetVisible(true);
+	
+	MiddleTextLine3->SetText("Paused");
+}
+
 void UIText::SetYouSurvived(int FinalScore)
 {
     TopLeftText->SetVisible(false);

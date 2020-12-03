@@ -115,6 +115,10 @@ void GameFlow::SetPaused(bool bIsPaused)
 		{
 			Object->SetEnabled(false);
 		}
+		if (GameUI)
+		{
+			GameUI->SetGamePaused();
+		}
 
 	}
 	else 
@@ -123,6 +127,10 @@ void GameFlow::SetPaused(bool bIsPaused)
 		for (GameObject* Object : ObjectsToDisableOutsideGame)
 		{
 			Object->SetEnabled(true);
+		}
+		if (GameUI)
+		{
+			GameUI->SetInGame();
 		}
 
 	}
@@ -134,7 +142,7 @@ void GameFlow::SetPlayerIsDead()
     CurrentState = EState::Ending;
     for (GameObject* Object : ObjectsToDisableOutsideGame)
     {
-        //Object->SetEnabled(false);
+        Object->SetEnabled(false);
     }
     if (GameUI)
     {

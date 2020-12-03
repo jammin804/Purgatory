@@ -17,6 +17,7 @@ public:
     void SetWelcomeToTheGame();
     void SetInGame();
     void SetGameOver(int FinalScore);
+	void SetGamePaused();
     void SetYouSurvived(int FinalScore);
     void UpdateScore(int NewScore);
     void UpdateLivesLeft(int NewLivesLeft);
