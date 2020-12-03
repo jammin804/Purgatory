@@ -79,21 +79,32 @@ void Player::OnUpdate(float DeltaTime)
     }
 	SetPosition(GetPositionX() + DirectionX, GetPositionY() + DirectionY);
 	//Update Sprite
-	/*if (DirectionY > 0)
+	
+	if (DirectionY < 0)
 	{
-		ImagePath = "Art/Player_P_Back.png";
+		PlayerAvatarImageComponent->LoadImage("Art/Player_P_Back.png");
 	}
 	if (DirectionY > 0)
 	{
 		PlayerAvatarImageComponent->LoadImage("Art/Player_P.png");
-	}*/
+	}
+	if (DirectionX > 0)
+	{
+		PlayerAvatarImageComponent->LoadImage("Art/Player_P_Side.png");
+		PlayerAvatarImageComponent->SetScaleX(-1.0f);
+	}
+	if (DirectionX < 0)
+	{
+		PlayerAvatarImageComponent->LoadImage("Art/Player_P_Side.png");
+		PlayerAvatarImageComponent->SetScaleX(1.0f);
+	}
 
 
 	if (!bRespawning && InputComp->IsKeyPressed(ALLEGRO_KEY_SPACE))
 	{
 		if (bCanMakeLaser)
 		{
-			CreateCross();
+			CreateCross(DirectionX, DirectionY);
 			bCanMakeLaser = false;
 		}
 	}
@@ -158,13 +169,15 @@ bool Player::HandleDeath()
     }
 }
 
-void Player::CreateCross()
+void Player::CreateCross(float DirX, float DirY)
 {
 	Cross* NewCross = GameObject::CreateInstance<Cross>();
-    float DirectionY = cos(GetRotation());
-    float DirectionX = sin(GetRotation());
-    NewCross->SetPosition(GetPositionX() + (DirectionX * 30.0f),  GetPositionY() - (DirectionY * 30.0f));
-	NewCross->SetInitialDirection(DirectionX, DirectionY);
+
+	//float DirectionY = 0.0f;//cos(GetRotation());
+	//float DirectionX = 1.0f;//sin(GetRotation());
+    NewCross->SetPosition(GetPositionX() + (DirX * 30.0f),  GetPositionY() + (-DirY * 30.0f));
+	//NewCross->SetPosition(GetPositionX(), GetPositionY());
+	NewCross->SetInitialDirection(DirX, DirY);
     Crosses.push_back(NewCross);
 }
 

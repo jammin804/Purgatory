@@ -21,7 +21,7 @@ public:
     void SetThrustersImage(string ImagePath);
     void SetThrustersSound(string SoundPath);
     bool HandleDeath();
-    void CreateCross();
+    void CreateCross(float DirX, float DirY);
     vector<Cross*>& GetCross(){ return Crosses; }
     const BoxCollisionComponent* GetCollision() const { return Collision; }
     int GetLivesLeft() const { return HealthLeft; }

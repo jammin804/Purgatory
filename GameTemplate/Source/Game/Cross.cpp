@@ -37,9 +37,7 @@ void Cross::OnUpdate(float DeltaTime)
     float DirectionX = CrossMovementDirectionX * CrossSpeed * DeltaTime;
     float DirectionY = CrossMovementDirectionY * CrossSpeed * DeltaTime;
     SetPosition(GetPositionX() + DirectionX, GetPositionY() - DirectionY);
-
-	SetRotation(GetRotation() + CrossRotationSpeed * DeltaTime); // Issues trying to get the cross to both rotate and move across the screen.
-
+	SetRotation(GetRotation() + CrossRotationSpeed * DeltaTime);
 
     LifeTimer += DeltaTime;
     if (LifeTimer > MaxLifeTime)
