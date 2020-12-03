@@ -134,7 +134,7 @@ void GameFlow::SetPlayerIsDead()
     CurrentState = EState::Ending;
     for (GameObject* Object : ObjectsToDisableOutsideGame)
     {
-        Object->SetEnabled(false);
+        //Object->SetEnabled(false);
     }
     if (GameUI)
     {

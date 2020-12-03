@@ -42,18 +42,19 @@ void Player::OnUpdate(float DeltaTime)
          if (ExplodeTimer > ExplodingTime)
          {
              bExploding = false;
-             bRespawning = true;
+             //bRespawning = true;
+			 bInvulnerable = true;
          }
          return;
     }
 
-    if (bRespawning)
+    if (bInvulnerable)//bRespawning)
     {
         PlayerAvatarImageComponent->SetVisible(!PlayerAvatarImageComponent->IsVisible());
         RespawnTimer += DeltaTime;
         if (RespawnTimer > RespawningTime)
         {
-            bRespawning = false;
+            //bRespawning = false;
             bInvulnerable = false;
             PlayerAvatarImageComponent->SetVisible(true);
         }
@@ -100,7 +101,7 @@ void Player::OnUpdate(float DeltaTime)
 	}
 
 
-	if (!bRespawning && InputComp->IsKeyPressed(ALLEGRO_KEY_SPACE))
+	if (!bInvulnerable && InputComp->IsKeyPressed(ALLEGRO_KEY_SPACE))
 	{
 		if (bCanMakeLaser)
 		{

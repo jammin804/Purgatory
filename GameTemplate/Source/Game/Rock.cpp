@@ -19,7 +19,6 @@ void Rock::OnPostInit()
 		EnemyHealth->SetOffsetY(-50.0f);
 		EnemyHealth->SetOffsetX(-60.0f);
 		EnemyHealth->SetScaleX(ENEMY_MAX_LIFE);
-		EnemyHealth->SetScaleY(ENEMY_MAX_LIFE);
 
         RockImage->LoadImage("Art/Enemy_D.png");//
         RockImage->SetScale((SplitsLeft + 1) * 0.33f);
