@@ -69,7 +69,7 @@ void GameFlow::OnUpdate(float DeltaTime)
         }
 		if (Input)
 		{
-			if (Input->IsKeyPressed(ALLEGRO_KEY_ESCAPE))
+			if (Input->IsKeyJustPressed(ALLEGRO_KEY_ESCAPE))
 			{
 				SetPaused(true);
 			}
@@ -79,7 +79,7 @@ void GameFlow::OnUpdate(float DeltaTime)
 		if (Input)
 		{
 			
-			if (Input->IsKeyPressed(ALLEGRO_KEY_ESCAPE))
+			if (Input->IsKeyJustPressed(ALLEGRO_KEY_ESCAPE))
 			{
 				SetPaused(false);
 			}
