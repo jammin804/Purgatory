@@ -12,33 +12,7 @@ void RockManager::OnUpdate(float DeltaTime)
     for (auto RockIter = Rocks.begin(); RockIter != Rocks.end();)
     {
         Rock& RockToUpdate = *(*RockIter);
-        if (RockToUpdate.NeedsSplit()) // Removing split functionality 
-        {
-            RockToUpdate.Split();
-            if (RockToUpdate.GetSplitsLeft() >= 0)
-            {
-                Rock* NewRock = CreateRock(RockToUpdate.GetSplitsLeft());
-                NewRock->SetPosition(RockToUpdate.GetPositionX(), RockToUpdate.GetPositionY());
-                NewRock->SetMovementSpeed(RockToUpdate.GetMovementSpeed());
-                float MoveDirectionX = RockToUpdate.GetMovementDirectionX();
-                float MoveDirectionY = RockToUpdate.GetMovementDirectionY();
-                NewRock->SetMovementDirection(-MoveDirectionX, -MoveDirectionY);
-            } 
-        }
-
-		//SetLifePercentage(player->GetLivesLeft() / static_cast <float>(player->GetMaxLivesLeft()));
-		//SetEnemyLifePercentage(RockToUpdate.GetEnemyLivesLeft() / static_cast <float>(RockToUpdate.GetEnemyMaxLivesLeft())); //Currently working on the enemy health code using the player health code
-
-		/*if (RockToUpdate.GetEnemyMaxLivesLeft() >= 0) // My code
-		{
-			//Spawning
-			Rock* NewRock = CreateRock(RockToUpdate.GetEnemyMaxLivesLeft());
-			NewRock->SetPosition(RockToUpdate.GetPositionX(), RockToUpdate.GetPositionY());
-			NewRock->SetMovementSpeed(RockToUpdate.GetMovementSpeed());
-			float MoveDirectionX = RockToUpdate.GetMovementDirectionX();
-			float MoveDirectionY = RockToUpdate.GetMovementDirectionY();
-			NewRock->SetMovementDirection(-MoveDirectionX, -MoveDirectionY);
-		}*/
+       
         
         if (RockToUpdate.IsDestroyed())
         {
@@ -61,7 +35,6 @@ void RockManager::OnUpdate(float DeltaTime)
 Rock* RockManager::CreateRock(int SplitsLeft /*= 2*/)
 {
     Rock* NewRock = GameObject::CreateInstance<Rock>();
-    NewRock->SetSplitsLeft(SplitsLeft);
     Rocks.push_back(NewRock);
     return NewRock;
 }
@@ -125,9 +98,4 @@ void RockManager::SetRandomPosition(Rock& RockToPosition)
     RockToPosition.SetMovementSpeed(150.0f);
     RockToPosition.SetPosition(StartPosX, StartPosY);
     RockToPosition.SetMovementDirection(StartDirX, StartDirY);
-}
-
-void RockManager::SetEnemyLifePercentage(float EnemyPercentageLife)
-{
-
 }

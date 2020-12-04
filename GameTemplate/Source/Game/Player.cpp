@@ -36,25 +36,12 @@ void Player::OnUpdate(float DeltaTime)
         }
     }
 
-    if (bExploding)
-    {
-         ExplodeTimer += DeltaTime;
-         if (ExplodeTimer > ExplodingTime)
-         {
-             bExploding = false;
-             //bRespawning = true;
-			 bInvulnerable = true;
-         }
-         return;
-    }
-
-    if (bInvulnerable)//bRespawning)
+    if (bInvulnerable)
     {
         PlayerAvatarImageComponent->SetVisible(!PlayerAvatarImageComponent->IsVisible());
         RespawnTimer += DeltaTime;
         if (RespawnTimer > RespawningTime)
         {
-            //bRespawning = false;
             bInvulnerable = false;
             PlayerAvatarImageComponent->SetVisible(true);
         }
@@ -65,36 +52,46 @@ void Player::OnUpdate(float DeltaTime)
 	if (InputComp->IsKeyPressed(ALLEGRO_KEY_UP) || InputComp->IsKeyPressed(ALLEGRO_KEY_W))
 	{
 		DirectionY -= PlayerMovementSpeed * DeltaTime;
+		LookingDirectionY = 1;
+		LookingDirectionX = 0;
 	}
 	if (InputComp->IsKeyPressed(ALLEGRO_KEY_DOWN) || InputComp->IsKeyPressed(ALLEGRO_KEY_S))
 	{
 		DirectionY += PlayerMovementSpeed * DeltaTime;
+		LookingDirectionY = -1;
+		LookingDirectionX = 0;
 	}
     if (InputComp->IsKeyPressed(ALLEGRO_KEY_LEFT) || InputComp->IsKeyPressed(ALLEGRO_KEY_A))
     {
 		DirectionX -= PlayerMovementSpeed * DeltaTime;
+		LookingDirectionX = -1;
+		LookingDirectionY = 0;
     }
     if (InputComp->IsKeyPressed(ALLEGRO_KEY_RIGHT) || InputComp->IsKeyPressed(ALLEGRO_KEY_D))
     {
 		DirectionX += PlayerMovementSpeed * DeltaTime;
+		LookingDirectionX = 1;
+		LookingDirectionY = 0;
     }
+
+	/*Is just key pressed for looking direction - code below*/
 	SetPosition(GetPositionX() + DirectionX, GetPositionY() + DirectionY);
 	//Update Sprite
 	
-	if (DirectionY < 0)
+	if (LookingDirectionY > 0)
 	{
 		PlayerAvatarImageComponent->LoadImage("Art/Player_P_Back.png");
 	}
-	if (DirectionY > 0)
+	if (LookingDirectionY < 0)
 	{
 		PlayerAvatarImageComponent->LoadImage("Art/Player_P.png");
 	}
-	if (DirectionX > 0)
+	if (LookingDirectionX > 0)
 	{
 		PlayerAvatarImageComponent->LoadImage("Art/Player_P_Side.png");
 		PlayerAvatarImageComponent->SetScaleX(-1.0f);
 	}
-	if (DirectionX < 0)
+	if (LookingDirectionX < 0)
 	{
 		PlayerAvatarImageComponent->LoadImage("Art/Player_P_Side.png");
 		PlayerAvatarImageComponent->SetScaleX(1.0f);
@@ -105,7 +102,7 @@ void Player::OnUpdate(float DeltaTime)
 	{
 		if (bCanMakeLaser)
 		{
-			CreateCross(DirectionX, DirectionY);
+			CreateCross(LookingDirectionX, LookingDirectionY);
 			bCanMakeLaser = false;
 		}
 	}
@@ -156,10 +153,8 @@ bool Player::HandleDeath()
 
     if (HealthLeft > 0)
     {
-        bExploding = true;
         HealthLeft--;
         bInvulnerable = true;
-        ExplodeTimer = 0.0f;
         RespawnTimer = 0.0f;
         return false;
     }

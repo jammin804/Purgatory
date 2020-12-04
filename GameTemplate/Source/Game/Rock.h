@@ -12,16 +12,11 @@ protected:
     virtual void OnUpdate(float DeltaTime) override;
 
 public:
-    void SetSplitsLeft(int NewSplitsLeft) { SplitsLeft = NewSplitsLeft; }
-    int GetSplitsLeft() const { return SplitsLeft; }
 
 	//handling Enemy Health
 	int GetEnemyLivesLeft() const { return EnemyHealthLeft; }
 	int GetEnemyMaxLivesLeft() const { return ENEMY_MAX_LIFE; }
-
-    void Split();
-    bool NeedsSplit() const { return bNeedsSplit; }
-
+	void EnemyHit();
     void SetMovementSpeed(float NewMovementSpeed) { MovementSpeed = NewMovementSpeed; }
     float GetMovementSpeed() const { return MovementSpeed; }
     void SetMovementDirection(float DirX, float DirY) { MovementDirectionX = DirX; MovementDirectionY = DirY; }
@@ -39,17 +34,12 @@ private:
     float MaxLifeTime = 30.0f;
 	float MoveTimer = 0.0f; // when timer runs out switch
 	float MaxMoveTime = 2.0f;
-    bool bNeedsSplit = false;
-    int SplitsLeft = 2;
 	float ENEMY_MAX_LIFE = 2.0f;
 	float EnemyHealthLeft = ENEMY_MAX_LIFE;
     float MovementSpeed = 100.0f;
     float MovementDirectionX = 0.0f;
     float MovementDirectionY = 0.0f;
 	bool bNeedsSwitch = false; // bool for switching
-	Rock* NewRock = nullptr;
-public:
-    void RequestSplit();
 private:
 	void SetEnemyLifePercentage(float EnemyPercentageLife);
 };

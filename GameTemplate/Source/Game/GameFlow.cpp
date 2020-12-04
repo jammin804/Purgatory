@@ -95,7 +95,7 @@ void GameFlow::OnUpdate(float DeltaTime)
             }
             if (bReturnPressed && Input->IsKeyReleased(ALLEGRO_KEY_ENTER))
             {
-                bShouldEndGame = true;
+				//Call reset on all game objects and change state to InGAme state
             }
         }
         break;

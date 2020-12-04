@@ -65,11 +65,11 @@ void AsteroidsGame::CreateExplosion(float PositionX, float PositionY, float Expl
 
 void AsteroidsGame::OnUpdate(float DeltaTime)
 {   
-    if (GFlow->ShouldEndGame())
+    /*if (GFlow->ShouldEndGame()) Replacing with the reset functionality 
     {        
         SetGameOver();
         return;
-    }
+    }*/
 
     for (Rock* CurrentRock : RockMgr->GetRocks())
     {
@@ -98,10 +98,9 @@ void AsteroidsGame::OnUpdate(float DeltaTime)
         {
             if (CurrentRock->GetCollision()->DoesCollide(CurrentCross->GetCollision()))
             {
-                GFlow->AddScore(5 * (CurrentRock->GetSplitsLeft() + 1));
-                CreateExplosion(CurrentRock->GetPositionX(), CurrentRock->GetPositionY(), 
-                    (CurrentRock->GetSplitsLeft() + 1) * 0.33f);
-                CurrentRock->RequestSplit();
+         
+                CreateExplosion(CurrentRock->GetPositionX(), CurrentRock->GetPositionY());
+                CurrentRock->EnemyHit();
                 CurrentCross->RequestDestroy();
             }
         }

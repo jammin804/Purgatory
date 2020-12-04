@@ -40,12 +40,12 @@ private:
 	const int MAX_LIFE = 5;
     int HealthLeft = MAX_LIFE;
     bool bInvulnerable = false;
-    bool bRespawning = false;
-    bool bExploding = false;
-    float ExplodeTimer = 0.0f;
+	bool bRespawning = false;
     float RespawnTimer = 0.0f;
-    const float ExplodingTime = 3.0f;
     const float RespawningTime = 3.0f;
+
+	int LookingDirectionX = 0;
+	int LookingDirectionY = -1;
 public:
     bool IsInvulnerable() const; //why is this in another public statement?
 };
