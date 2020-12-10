@@ -40,6 +40,11 @@ void GUI::SetLifePercentage(float PercentageLife)
 	LifeGUIImageComponent->SetScaleX(MAX_LIFESCALE * PercentageLife);
 }
 
+void GUI::SetFearPercentage(float FearPercentageLife)
+{
+	//Reduce fear based on the in-game time
+}
+
 void GUI::SetBorderImage(string ImagePath)
 {
 	if (BorderGUIImageComponent)

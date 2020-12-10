@@ -14,6 +14,7 @@ using namespace std;
 
 class ImageComponent;
 class Player; 
+class GameFlow;
 
 class GUI : public GameObject
 {
@@ -31,6 +32,7 @@ public:
 	
 private:
 	void SetLifePercentage(float PercentageLife);
+	void SetFearPercentage(float FearPercentageLife);
 private:
 	ImageComponent* BorderGUIImageComponent = nullptr;
 	ImageComponent* LifeGUIImageComponent = nullptr;

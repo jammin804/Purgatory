@@ -23,7 +23,7 @@ private:
     SoundComponent* ExplosionSound = nullptr;
 
     float ExplosionScale = 1.0f;
-    float ExplosionLifetime = 2.0f;
+    float ExplosionLifetime = 0.2f;
     float ExplosionTimer = 0.0f;
 };
 

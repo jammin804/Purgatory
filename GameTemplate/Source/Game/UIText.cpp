@@ -123,7 +123,7 @@ void UIText::UpdateScore(int NewScore)
 
 void UIText::UpdateLivesLeft(int NewLivesLeft)
 {
-    char LivesLeft[50];
+    //char LivesLeft[50];
     /*sprintf_s(LivesLeft, "Lives Left: %d", NewLivesLeft);
     TopLeftText->SetText(LivesLeft);*/
 }

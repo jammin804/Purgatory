@@ -21,6 +21,7 @@ class GameFlow : public GameObject
         virtual void OnPostInit() override;
         virtual void OnUpdate(float DeltaTime) override;
         virtual void OnShutdown() override;
+		virtual void Restart(bool bShouldResetGame);
 		void SetPaused(bool bIsPaused);
 
     public:
@@ -29,6 +30,7 @@ class GameFlow : public GameObject
         void AddScore(int ScoreToAdd);
         void AddObjectToDisableAtStart(GameObject* ObjectToDisable);
         bool ShouldEndGame() const { return bShouldEndGame; }
+		bool ShouldResetGame() const { return bShouldResetGame; }
     private:
         vector<GameObject*> ObjectsToDisableOutsideGame;
         int CurrentScore = 0;
@@ -40,5 +42,7 @@ class GameFlow : public GameObject
         bool bShouldEndGame = false;
 		bool bShouldPauseGame = false; /* adding bool or pausing and resuming game */
 		bool bShouldResumeGame = false;
+		bool bShouldResetGame = false;
+		class Player* Player1 = nullptr;
 };
 

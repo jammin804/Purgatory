@@ -30,7 +30,7 @@ public:
 
     void RequestDestroy() { bShouldDestroy = true; }
     virtual void SetEnabled(bool bEnabled) { bIsEnabled = bEnabled; }
-	virtual void Reset() {};
+	virtual void Restart() {};
     bool IsEnabled() const { return bIsEnabled; }
     bool IsDestroyed() const { return bIsDestroyed; }
 

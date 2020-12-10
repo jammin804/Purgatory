@@ -1,11 +1,13 @@
 #include "GameFlow.h"
 #include "Framework/InputComponent.h"
 #include "UIText.h"
+#include "Player.h"
 
 void GameFlow::OnInit()
 {
     Input = GameComponent::CreateInstance<InputComponent>(this);
     GameUI = GameObject::CreateInstance<UIText>();
+	Player1 = GameObject::CreateInstance<Player>();
 }
 
 void GameFlow::OnPostInit()
@@ -73,6 +75,10 @@ void GameFlow::OnUpdate(float DeltaTime)
 			{
 				SetPaused(true);
 			}
+			if (Input->IsKeyJustReleased(ALLEGRO_KEY_R))
+			{
+				Restart(true);
+			}
 		}
         break;
 	case EState::Pause:
@@ -85,7 +91,6 @@ void GameFlow::OnUpdate(float DeltaTime)
 			}
 		}
 		break;
-
     case EState::Ending:
         if (Input)
         {
@@ -104,6 +109,12 @@ void GameFlow::OnUpdate(float DeltaTime)
 
 void GameFlow::OnShutdown()
 {
+}
+
+void GameFlow::Restart(bool bShouldResetGame)
+{
+	CurrentState = EState::Starting;
+	Player1->SetPosition(638.0f, 360.0f);
 }
 
 void GameFlow::SetPaused(bool bIsPaused)
