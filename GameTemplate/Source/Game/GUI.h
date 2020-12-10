@@ -29,6 +29,7 @@ public:
 	void SetFearImage(string ImagePath);
 	void SetFearBorderImage(string ImagePath);
 	void SetPlayer(const Player* NewPlayer) { player = NewPlayer; }
+	void SetCoinImage(string ImagePath);
 	
 private:
 	void SetLifePercentage(float PercentageLife);
@@ -38,6 +39,7 @@ private:
 	ImageComponent* LifeGUIImageComponent = nullptr;
 	ImageComponent* FearGUIImageComponent = nullptr;
 	ImageComponent* FearBorderGUIImageComponent = nullptr;
+	ImageComponent* CoinGUIImageComponent = nullptr;
 	const Player* player = nullptr;
 	const float MAX_LIFESCALE = 2.0f;
 };

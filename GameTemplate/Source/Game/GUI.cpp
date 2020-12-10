@@ -9,6 +9,7 @@ void GUI::OnInit()
 	BorderGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
 	FearGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
 	FearBorderGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
+	CoinGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
 }
 
 void GUI::OnPostInit()
@@ -25,6 +26,9 @@ void GUI::OnPostInit()
 	FearBorderGUIImageComponent->SetScaleFromLeft(true);
 	FearBorderGUIImageComponent->SetScale(MAX_LIFESCALE);
 	FearBorderGUIImageComponent->SetOffsetY(30.0f);
+	CoinGUIImageComponent->SetScaleFromLeft(true);
+	CoinGUIImageComponent->SetOffsetY(60.0f);
+	CoinGUIImageComponent->SetScale(2.0f);
 }
 
 void GUI::OnUpdate(float DeltaTime)
@@ -75,4 +79,13 @@ void GUI::SetFearBorderImage(string ImagePath)
 	{
 		FearBorderGUIImageComponent->LoadImage(ImagePath);
 	}
+}
+
+void GUI::SetCoinImage(string ImagePath)
+{
+	if (CoinGUIImageComponent)
+	{
+		CoinGUIImageComponent->LoadImage(ImagePath);
+	}
+
 }
