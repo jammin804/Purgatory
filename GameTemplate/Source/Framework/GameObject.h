@@ -37,6 +37,9 @@ public:
     void SetParent(const GameObject* ParentComponent){ Parent = ParentComponent; }
     const GameObject* GetParent() const { return Parent; }
 
+    void SetRenderDepth(int NewRenderDepth) { RenderDepth = NewRenderDepth; }
+    int GetRenderDepth() const { return RenderDepth; }
+
 protected:
     GameObject();
     virtual ~GameObject() {}
@@ -68,6 +71,7 @@ private:
     bool bIsEnabled = true;
     bool bIsDestroyed = false;
     bool bInitialised = false;
+    int RenderDepth = 0; // Higher values will be rendered(drawn) on top of GameObjects with smaller values
 };
 
 template<class T>
