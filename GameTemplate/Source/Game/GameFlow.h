@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Framework/GameObject.h"
+#include "Player.h"
 #include <vector>
 
 using namespace std;
@@ -43,6 +44,6 @@ class GameFlow : public GameObject
 		bool bShouldPauseGame = false; /* adding bool or pausing and resuming game */
 		bool bShouldResumeGame = false;
 		bool bShouldResetGame = false;
-		class Player* Player1 = nullptr;
+		//class Player* player = nullptr;
 };
 

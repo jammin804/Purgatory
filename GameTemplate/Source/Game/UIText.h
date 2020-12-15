@@ -22,6 +22,7 @@ public:
     void UpdateScore(int NewScore);
     void UpdateLivesLeft(int NewLivesLeft);
     void UpdateTimeRemaining(int NewTimeMins, int NewTimeSeconds);
+	void GetTimeRemaining(int RemainingTime);
 private:
     TextComponent* TopLeftText = nullptr;
     TextComponent* TopCenterText = nullptr;

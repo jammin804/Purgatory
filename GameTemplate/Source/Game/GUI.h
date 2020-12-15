@@ -15,6 +15,7 @@ using namespace std;
 class ImageComponent;
 class Player; 
 class GameFlow;
+class UIText;
 
 class GUI : public GameObject
 {
@@ -41,5 +42,6 @@ private:
 	ImageComponent* FearBorderGUIImageComponent = nullptr;
 	ImageComponent* CoinGUIImageComponent = nullptr;
 	const Player* player = nullptr;
+	const UIText* uitext = nullptr;
 	const float MAX_LIFESCALE = 2.0f;
 };

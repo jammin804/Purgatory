@@ -7,7 +7,6 @@ void GameFlow::OnInit()
 {
     Input = GameComponent::CreateInstance<InputComponent>(this);
     GameUI = GameObject::CreateInstance<UIText>();
-	Player1 = GameObject::CreateInstance<Player>();
 }
 
 void GameFlow::OnPostInit()
@@ -114,7 +113,14 @@ void GameFlow::OnShutdown()
 void GameFlow::Restart(bool bShouldResetGame)
 {
 	CurrentState = EState::Starting;
-	Player1->SetPosition(638.0f, 360.0f);
+
+	/*if (Player1)
+	{
+		Player1->SetPosition(638.0f, 360.0f);
+		//Set Player health to 0 for test
+		//Player1->GetLivesLeft(0.0f);
+		//Have to move one variable from one class to another class
+	}*/
 }
 
 void GameFlow::SetPaused(bool bIsPaused)
