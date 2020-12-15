@@ -7,6 +7,7 @@
 #include <allegro5/allegro_acodec.h>
 #include "GameObject.h"
 #include "InputComponent.h"
+#include <algorithm>
 
 GameFramework* GameFramework::Instance = nullptr;
 
@@ -252,13 +253,32 @@ bool GameFramework::UpdateInternal()
     if (redraw && al_is_event_queue_empty(EventQueue))
     {
         al_clear_to_color(al_map_rgb(0, 0, 0));
+
+        vector<GameObject*> GameObjectsToRender;
+        GameObjectsToRender.reserve(32);
+
         for (GameObject* GO : GameObjects)
         {
             if (GO->IsEnabled())
             {
-                GO->Render();
+                GameObjectsToRender.push_back(GO);
+                
             }
         }
+
+        std::sort(GameObjectsToRender.begin(), GameObjectsToRender.end(), [](GameObject* a, GameObject* b){
+            if (a && b)
+            {
+                return a->GetRenderDepth() < b->GetRenderDepth();
+            }
+            return false;
+        });
+
+        for (GameObject* GO : GameObjectsToRender)
+        {
+            GO->Render();
+        }
+
         al_flip_display();
 
         redraw = false;
