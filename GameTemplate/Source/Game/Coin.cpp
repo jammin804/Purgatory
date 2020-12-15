@@ -1,5 +1,6 @@
 #include "Coin.h"
-
+#include "Framework/ImageComponent.h"
+#include "Framework/BoxCollisionComponent.h"
 
 
 void Coin::OnInit()
@@ -13,7 +14,7 @@ void Coin::OnPostInit()
 {
 	if (CoinImage)
 	{
-		CoinImage->LoadImage("Art/Coins.png")
+		CoinImage->LoadImage("Art/Coins.png");
 	}
 }
 

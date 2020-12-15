@@ -9,6 +9,7 @@ class Background;
 class RockManager;
 class GameFlow;
 class GUI;
+class CoinManger;
 
 class AsteroidsGame : public GameFramework
 {

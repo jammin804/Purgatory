@@ -30,6 +30,8 @@
     <ClCompile Include="Source\Framework\TextComponent.cpp" />
     <ClCompile Include="Source\Game\AsteroidsGame.cpp" />
     <ClCompile Include="Source\Game\Background.cpp" />
+    <ClCompile Include="Source\Game\Coin.cpp" />
+    <ClCompile Include="Source\Game\CoinManager.cpp" />
     <ClCompile Include="Source\Game\Explosion.cpp" />
     <ClCompile Include="Source\Game\GameFlow.cpp" />
     <ClCompile Include="Source\Game\Cross.cpp" />
@@ -56,6 +58,8 @@
     <ClInclude Include="Source\Framework\TextComponent.h" />
     <ClInclude Include="Source\Game\AsteroidsGame.h" />
     <ClInclude Include="Source\Game\Background.h" />
+    <ClInclude Include="Source\Game\Coin.h" />
+    <ClInclude Include="Source\Game\CoinManager.h" />
     <ClInclude Include="Source\Game\Explosion.h" />
     <ClInclude Include="Source\Game\GameFlow.h" />
     <ClInclude Include="Source\Game\Cross.h" />
