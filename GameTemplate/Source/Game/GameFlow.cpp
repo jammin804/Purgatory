@@ -2,21 +2,22 @@
 #include "Framework/InputComponent.h"
 #include "UIText.h"
 #include "Player.h"
+#include "GUI.h"
 
 void GameFlow::OnInit()
 {
     Input = GameComponent::CreateInstance<InputComponent>(this);
-    GameUI = GameObject::CreateInstance<UIText>();
+    GameUIText = GameObject::CreateInstance<UIText>();
 }
 
 void GameFlow::OnPostInit()
 {
-    if (GameUI)
+    if (GameUIText)
     {
-        GameUI->SetWelcomeToTheGame();
+		GameUIText->SetWelcomeToTheGame();
     }
 
-    for (GameObject* Object : ObjectsToDisableOutsideGame)
+    for (GameObject* Object : GameFlowGameObjects)
     {
         Object->SetEnabled(false);
     }
@@ -36,36 +37,40 @@ void GameFlow::OnUpdate(float DeltaTime)
             if (bReturnPressed && Input->IsKeyReleased(ALLEGRO_KEY_ENTER))
             {
                 CurrentState = EState::InGame;
-                for (GameObject* Object : ObjectsToDisableOutsideGame)
+                for (GameObject* Object : GameFlowGameObjects)
                 {
                     Object->SetEnabled(true);
                 }
-                if (GameUI)
+                if (GameUIText)
                 {
-                    GameUI->SetInGame();
-                    GameUI->UpdateTimeRemaining((int)TimeRemaining / 60, (int)TimeRemaining % 60);
-                    GameUI->UpdateLivesLeft(2);
-                    GameUI->UpdateScore(0);
+                    GameUIText->SetInGame();
+                    GameUIText->UpdateTimeRemaining((int)TimeRemaining / 60, (int)TimeRemaining % 60);
+                    GameUIText->UpdateLivesLeft(2);
+                    GameUIText->UpdateScore(0);
                 }
             }
         }
         break;
     case EState::InGame:
         TimeRemaining -= DeltaTime;
-        if (GameUI)
+        if (GameUIText)
         {
-            GameUI->UpdateTimeRemaining((int)TimeRemaining / 60, (int)TimeRemaining% 60);
+            GameUIText->UpdateTimeRemaining((int)TimeRemaining / 60, (int)TimeRemaining% 60);
         }
+		if (GameUI)
+		{
+			GameUI->SetFearPercentage(TimeRemaining / MAX_TIME);
+		}
         if (TimeRemaining <= 0.0f)
         {
             CurrentState = EState::Ending;
-            for (GameObject* Object : ObjectsToDisableOutsideGame)
+            for (GameObject* Object : GameFlowGameObjects)
             {
                 Object->SetEnabled(false);
             }
-            if (GameUI)
+            if (GameUIText)
             {
-                GameUI->SetYouSurvived(CurrentScore);
+                GameUIText->SetYouSurvived(CurrentScore);
             }
         }
 		if (Input)
@@ -113,14 +118,10 @@ void GameFlow::OnShutdown()
 void GameFlow::Restart(bool bShouldResetGame)
 {
 	CurrentState = EState::Starting;
-
-	/*if (Player1)
+	for (GameObject* Object : GameFlowGameObjects)
 	{
-		Player1->SetPosition(638.0f, 360.0f);
-		//Set Player health to 0 for test
-		//Player1->GetLivesLeft(0.0f);
-		//Have to move one variable from one class to another class
-	}*/
+		Object->OnRestart();
+	}
 }
 
 void GameFlow::SetPaused(bool bIsPaused)
@@ -128,26 +129,26 @@ void GameFlow::SetPaused(bool bIsPaused)
 	if (bIsPaused)
 	{
 		CurrentState = EState::Pause;
-		for (GameObject* Object : ObjectsToDisableOutsideGame)
+		for (GameObject* Object : GameFlowGameObjects)
 		{
 			Object->SetEnabled(false);
 		}
-		if (GameUI)
+		if (GameUIText)
 		{
-			GameUI->SetGamePaused();
+			GameUIText->SetGamePaused();
 		}
 
 	}
 	else 
 	{
 		CurrentState = EState::InGame;
-		for (GameObject* Object : ObjectsToDisableOutsideGame)
+		for (GameObject* Object : GameFlowGameObjects)
 		{
 			Object->SetEnabled(true);
 		}
-		if (GameUI)
+		if (GameUIText)
 		{
-			GameUI->SetInGame();
+			GameUIText->SetInGame();
 		}
 
 	}
@@ -157,34 +158,34 @@ void GameFlow::SetPaused(bool bIsPaused)
 void GameFlow::SetPlayerIsDead()
 {
     CurrentState = EState::Ending;
-    for (GameObject* Object : ObjectsToDisableOutsideGame)
+    for (GameObject* Object : GameFlowGameObjects)
     {
         Object->SetEnabled(false);
     }
-    if (GameUI)
+    if (GameUIText)
     {
-        GameUI->SetGameOver(CurrentScore);
+        GameUIText->SetGameOver(CurrentScore);
     }
 }
 
 void GameFlow::UpdateLivesLeft(int NewLivesLeft)
 {
-    if (GameUI)
+    if (GameUIText)
     {
-        GameUI->UpdateLivesLeft(NewLivesLeft);
+        GameUIText->UpdateLivesLeft(NewLivesLeft);
     }
 }
 
 void GameFlow::AddScore(int ScoreToAdd)
 {
     CurrentScore += ScoreToAdd;
-    if (GameUI)
+    if (GameUIText)
     {
-        GameUI->UpdateScore(CurrentScore);
+        GameUIText->UpdateScore(CurrentScore);
     }
 }
 
 void GameFlow::AddObjectToDisableAtStart(GameObject* ObjectToDisable)
 {
-    ObjectsToDisableOutsideGame.push_back(ObjectToDisable);
+    GameFlowGameObjects.push_back(ObjectToDisable);
 }

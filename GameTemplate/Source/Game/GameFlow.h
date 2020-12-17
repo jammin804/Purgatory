@@ -4,6 +4,8 @@
 #include "Player.h"
 #include <vector>
 
+class GUI;
+
 using namespace std;
 
 
@@ -24,7 +26,6 @@ class GameFlow : public GameObject
         virtual void OnShutdown() override;
 		virtual void Restart(bool bShouldResetGame);
 		void SetPaused(bool bIsPaused);
-
     public:
         void SetPlayerIsDead();
         void UpdateLivesLeft(int NewLivesLeft);
@@ -32,13 +33,16 @@ class GameFlow : public GameObject
         void AddObjectToDisableAtStart(GameObject* ObjectToDisable);
         bool ShouldEndGame() const { return bShouldEndGame; }
 		bool ShouldResetGame() const { return bShouldResetGame; }
+		void SetGUI(GUI* GameUIRef) { GameUI = GameUIRef; }
     private:
-        vector<GameObject*> ObjectsToDisableOutsideGame;
+        vector<GameObject*> GameFlowGameObjects;
         int CurrentScore = 0;
         EState CurrentState = EState::Starting;
         class InputComponent* Input = nullptr;
-        float TimeRemaining = 120.0f;
-        class UIText* GameUI = nullptr;
+		const float MAX_TIME = 120.0f;
+        float TimeRemaining = MAX_TIME;
+        class UIText* GameUIText = nullptr;
+        GUI* GameUI = nullptr;
         bool bReturnPressed = false;
         bool bShouldEndGame = false;
 		bool bShouldPauseGame = false; /* adding bool or pausing and resuming game */

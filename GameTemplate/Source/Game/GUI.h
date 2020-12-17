@@ -31,10 +31,11 @@ public:
 	void SetFearBorderImage(string ImagePath);
 	void SetPlayer(const Player* NewPlayer) { player = NewPlayer; }
 	void SetCoinImage(string ImagePath);
+	void SetFearPercentage(float FearPercentageLife);
+	//void UpdateFearRemaining(int NewTimeMins, int NewTimeSeconds);
 	
 private:
 	void SetLifePercentage(float PercentageLife);
-	void SetFearPercentage(float FearPercentageLife);
 private:
 	ImageComponent* BorderGUIImageComponent = nullptr;
 	ImageComponent* LifeGUIImageComponent = nullptr;

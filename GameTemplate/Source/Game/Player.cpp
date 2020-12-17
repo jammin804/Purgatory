@@ -113,6 +113,13 @@ void Player::OnUpdate(float DeltaTime)
 	}
 }
 
+void Player::OnRestart()
+{
+	SetPosition(638.0f, 360.0f);
+	SetLivesLeft(MAX_LIFE);
+
+}
+
 void Player::SetAvatarImage(string ImagePath)
 {
     if (PlayerAvatarImageComponent)

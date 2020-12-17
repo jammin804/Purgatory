@@ -35,11 +35,13 @@ void GUI::OnUpdate(float DeltaTime)
 {
 	if (player)
 	{
+
 		SetLifePercentage(player->GetLivesLeft()/static_cast <float>(player->GetMaxLivesLeft()));
-		//SetFearPercentage();
+		
 	}
 	if (uitext) 
 	{
+
 		//SetFearPercentage(uitext->)
 	}
 }
@@ -52,6 +54,7 @@ void GUI::SetLifePercentage(float PercentageLife)
 void GUI::SetFearPercentage(float FearPercentageLife)
 {
 	//Reduce fear based on the in-game time
+	FearGUIImageComponent->SetScaleX(MAX_LIFESCALE * FearPercentageLife);
 }
 
 void GUI::SetBorderImage(string ImagePath)
@@ -94,3 +97,8 @@ void GUI::SetCoinImage(string ImagePath)
 	}
 
 }
+
+/*void GUI::UpdateFearRemaining(int NewTimeMins, int NewTimeSeconds)
+{
+	FearGUIImageComponent->SetScaleX(FearRemaining * PercentageLife);
+}*/

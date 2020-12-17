@@ -14,7 +14,6 @@ protected:
 public:
     const BoxCollisionComponent* GetCollision() const { return Collision; }
 private:
-    float RotationSpeed = 1.0f;
     class ImageComponent* CoinImage = nullptr;
     BoxCollisionComponent* Collision = nullptr;
 };

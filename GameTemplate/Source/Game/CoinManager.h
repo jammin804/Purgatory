@@ -7,7 +7,7 @@ class Coin;
 
 using namespace std;
 
-class RockManager : public GameObject
+class CoinManager : public GameObject
 {
     protected:
         virtual void OnInit() override;

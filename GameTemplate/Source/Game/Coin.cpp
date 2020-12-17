@@ -16,6 +16,9 @@ void Coin::OnPostInit()
 	{
 		CoinImage->LoadImage("Art/Coins.png");
 	}
+	float StartPosX = rand() % Globals::WindowSizeX;
+	float StartPosY = rand() % Globals::WindowSizeY;
+	SetPosition(StartPosX, StartPosY);
 }
 
 void Coin::OnUpdate(float DeltaTime)

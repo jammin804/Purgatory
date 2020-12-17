@@ -11,6 +11,7 @@
 #include "Game/RockManager.h"
 #include "Game/UIText.h"
 #include <sstream>
+#include "Game/Coin.h"
 
 void AsteroidsGame::OnInit()
 {
@@ -19,6 +20,7 @@ void AsteroidsGame::OnInit()
 	UI = GameObject::CreateInstance<GUI>();
     Player1 = GameObject::CreateInstance<Player>();
     RockMgr = GameObject::CreateInstance<RockManager>();
+	Coin* TempCoin = GameObject::CreateInstance<Coin>();
 }
 
 void AsteroidsGame::OnPostInit()
@@ -36,6 +38,7 @@ void AsteroidsGame::OnPostInit()
         //Player1->SetThrustersImage("Art/Thrusters.png");
         Player1->SetThrustersSound("Audio/Thruster.wav");
         Player1->SetPosition(638.0f, 360.0f);
+		Player1->SetRenderDepth(10);
     }
 
     if (GFlow)
@@ -43,6 +46,8 @@ void AsteroidsGame::OnPostInit()
         GFlow->AddObjectToDisableAtStart(Player1);
         GFlow->AddObjectToDisableAtStart(RockMgr);
 		GFlow->AddObjectToDisableAtStart(UI);
+		GFlow->SetRenderDepth(50);
+		GFlow->SetGUI(UI);
     }
 
 	if (UI)
@@ -54,6 +59,7 @@ void AsteroidsGame::OnPostInit()
 		UI->SetFearBorderImage("Art/healthbar_border.png");
 		UI->SetCoinImage("Art/Coins.png");
 		UI->SetPlayer(Player1);
+		UI->SetRenderDepth(100);
 	}
 }
 

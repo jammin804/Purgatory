@@ -40,6 +40,7 @@ public:
     void SetRenderDepth(int NewRenderDepth) { RenderDepth = NewRenderDepth; }
     int GetRenderDepth() const { return RenderDepth; }
 
+	virtual void OnRestart() {}
 protected:
     GameObject();
     virtual ~GameObject() {}
@@ -48,6 +49,7 @@ protected:
     virtual void OnPostInit(){}
     virtual void OnUpdate(float DeltaTime){}
     virtual void OnShutdown() {}
+	
 
 private:
 
