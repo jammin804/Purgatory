@@ -117,7 +117,7 @@ void Player::OnRestart()
 {
 	SetPosition(638.0f, 360.0f);
 	SetLivesLeft(MAX_LIFE);
-	SetFearLeft(MAX_LIFE);
+	//SetFearLeft(MAX_FEAR); //Need to call Max Fear to Gameflow
 }
 
 void Player::SetAvatarImage(string ImagePath)

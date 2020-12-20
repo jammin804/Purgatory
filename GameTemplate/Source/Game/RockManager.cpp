@@ -35,7 +35,10 @@ void RockManager::OnUpdate(float DeltaTime)
 void RockManager::OnRestart()
 {
 	//Reset the Rockmanager Rock vector
+	Rocks.clear();
+	
 	//Set the Position for the rocks to start
+
 	//Reset SpawnTimer?
 }
 

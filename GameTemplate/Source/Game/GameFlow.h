@@ -5,6 +5,7 @@
 #include <vector>
 
 class GUI;
+//sclass Player;
 
 using namespace std;
 
@@ -18,6 +19,7 @@ class GameFlow : public GameObject
 		Pause, //Added Pause to EState
         Ending
     };
+
 
     protected:
         virtual void OnInit() override;
@@ -41,6 +43,7 @@ class GameFlow : public GameObject
         class InputComponent* Input = nullptr;
 		const float MAX_TIME = 120.0f;
         float TimeRemaining = MAX_TIME;
+		int FearTimer;
         class UIText* GameUIText = nullptr;
         GUI* GameUI = nullptr;
         bool bReturnPressed = false;
@@ -48,6 +51,6 @@ class GameFlow : public GameObject
 		bool bShouldPauseGame = false; /* adding bool or pausing and resuming game */
 		bool bShouldResumeGame = false;
 		bool bShouldResetGame = false;
-		//class Player* player = nullptr;
+		//Player* player = nullptr;
 };
 

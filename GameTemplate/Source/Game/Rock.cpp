@@ -43,12 +43,18 @@ void Rock::OnUpdate(float DeltaTime)
 		MoveTimer = 0.0f;
 	}
 
-	// Setting timers to switch direction. A bool in order to switch directions
     LifeTimer += DeltaTime;
     if (LifeTimer > MaxLifeTime)
     {
         RequestDestroy();
     }
+}
+
+void Rock::OnRestart()
+{
+	//destroy Current Rocks
+	SetEnabled(false);
+	//RequestDestroy();
 }
 
 void Rock::SetEnemyLifePercentage(float EnemyPercentageLife)
