@@ -39,11 +39,6 @@ void GUI::OnUpdate(float DeltaTime)
 		SetLifePercentage(player->GetLivesLeft()/static_cast <float>(player->GetMaxLivesLeft()));
 		
 	}
-	if (uitext) 
-	{
-
-		//SetFearPercentage(uitext->)
-	}
 }
 
 void GUI::SetLifePercentage(float PercentageLife)

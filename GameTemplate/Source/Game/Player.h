@@ -32,6 +32,7 @@ public:
 	bool IsInvulnerable() const;
 private:
 	void SetLivesLeft(int NewLivesLeft) { HealthLeft = NewLivesLeft; }
+	void SetFearLeft(int NewFearLeft) { FearLeft = NewFearLeft;  }
 
     ImageComponent* PlayerAvatarImageComponent = nullptr;
     ImageComponent* PlayerAvatarThrustersImageComponent = nullptr;

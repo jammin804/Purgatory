@@ -32,6 +32,13 @@ void RockManager::OnUpdate(float DeltaTime)
     }
 }
 
+void RockManager::OnRestart()
+{
+	//Reset the Rockmanager Rock vector
+	//Set the Position for the rocks to start
+	//Reset SpawnTimer?
+}
+
 Rock* RockManager::CreateRock(int SplitsLeft /*= 2*/)
 {
     Rock* NewRock = GameObject::CreateInstance<Rock>();
