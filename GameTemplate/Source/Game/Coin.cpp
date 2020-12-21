@@ -24,4 +24,21 @@ void Coin::OnPostInit()
 void Coin::OnUpdate(float DeltaTime)
 {
 
+	CoinLifeTimer += DeltaTime;
+	if (CoinLifeTimer > MAX_COIN_LIFE_TIMER)
+	{
+		RequestDestroy();
+	}
 }
+
+void Coin::CoinCollision()
+{
+	EnemyHealthLeft -= 0.4f;
+	if (EnemyHealthLeft < 0.0f)
+	{
+		RequestDestroy();
+		return;
+	}
+	SetEnemyLifePercentage(GetEnemyLivesLeft() / static_cast <float>(GetEnemyMaxLivesLeft()));
+}
+
