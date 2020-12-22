@@ -1,17 +1,18 @@
 #include "GameFramework.h"
 
-#include <allegro5/allegro5.h>
-#include <allegro5/allegro_primitives.h>
-#include <allegro5/allegro_image.h>
-#include <allegro5/allegro_audio.h>
-#include <allegro5/allegro_acodec.h>
 #include "GameObject.h"
 #include "InputComponent.h"
 #include <algorithm>
+#include <allegro5/allegro_acodec.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_image.h>
+#include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro5.h>
+#include <../packages/Allegro.5.2.6/build/native/include/allegro5/allegro_ttf.h>
 
 GameFramework* GameFramework::Instance = nullptr;
 
-ALLEGRO_FONT* Globals::DefaultFont;
 const int Globals::WindowSizeX = 1280;
 const int Globals::WindowSizeY = 720;
 
@@ -103,11 +104,25 @@ bool GameFramework::InitInternal()
         return false;
     }
 
+    if (!al_init_font_addon())
+    {
+        printf("couldn't initialize font addon\n");
+        return false;
+    }
+
+    if (!al_init_ttf_addon())
+    {
+        printf("couldn't initialize ttf addon\n");
+        return false;
+    }
+
     if (!al_reserve_samples(16))
     {
         printf("couldn't reserve audio samples\n");
         return false;
     }
+
+    FntManager.Init();
 
     GameObjects.reserve(512);
     InputComponents.reserve(4);
@@ -289,6 +304,8 @@ bool GameFramework::UpdateInternal()
 
 void GameFramework::ShutdownInternal()
 {
+    FntManager.Shutdown();
+
     for (GameObject* GO : GameObjects)
     {
         GO->Shutdown();
@@ -297,8 +314,6 @@ void GameFramework::ShutdownInternal()
 
 void GameFramework::Shutdown()
 {
-    al_destroy_font(Globals::DefaultFont);
-
     delete Instance;
     Instance = nullptr;
 }
