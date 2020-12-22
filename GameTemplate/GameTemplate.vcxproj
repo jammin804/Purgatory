@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Framework\BoxCollisionComponent.cpp" />
+    <ClCompile Include="Source\Framework\FontManager.cpp" />
     <ClCompile Include="Source\Framework\GameComponent.cpp" />
     <ClCompile Include="Source\Framework\GameFramework.cpp" />
     <ClCompile Include="Source\Framework\GameObject.cpp" />
@@ -47,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Framework\BoxCollisionComponent.h" />
+    <ClInclude Include="Source\Framework\FontManager.h" />
     <ClInclude Include="Source\Framework\GameComponent.h" />
     <ClInclude Include="Source\Framework\GameFramework.h" />
     <ClInclude Include="Source\Framework\GameObject.h" />
@@ -128,6 +130,7 @@
     <Allegro_AddonAudio>true</Allegro_AddonAudio>
     <Allegro_AddonAcodec>true</Allegro_AddonAcodec>
     <Allegro_AddonPrimitives>true</Allegro_AddonPrimitives>
+    <Allegro_AddonTTF>true</Allegro_AddonTTF>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Allegro_LibraryType>DynamicDebug</Allegro_LibraryType>
@@ -136,6 +139,7 @@
     <Allegro_AddonAudio>true</Allegro_AddonAudio>
     <Allegro_AddonAcodec>true</Allegro_AddonAcodec>
     <Allegro_AddonPrimitives>true</Allegro_AddonPrimitives>
+    <Allegro_AddonTTF>true</Allegro_AddonTTF>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
