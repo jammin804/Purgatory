@@ -20,7 +20,7 @@ void AsteroidsGame::OnInit()
 	UI = GameObject::CreateInstance<GUI>();
     Player1 = GameObject::CreateInstance<Player>();
     RockMgr = GameObject::CreateInstance<RockManager>();
-	Coin* TempCoin = GameObject::CreateInstance<Coin>();
+	TempCoin = GameObject::CreateInstance<Coin>();
 }
 
 void AsteroidsGame::OnPostInit()
@@ -112,4 +112,15 @@ void AsteroidsGame::OnUpdate(float DeltaTime)
             }
         }
     }
+	
+	if (!Player1->IsInvulnerable() && Player1->IsEnabled()) //For loop?
+	{
+		if (Player1->GetCollision()->DoesCollide(TempCoin->GetCollision()))
+		{
+			TempCoin->CoinCollision();
+			TempCoin->RequestDestroy();
+			UI->SetCoinImage("Art/Coins.png");
+			//AddScore
+		}
+	}
 }

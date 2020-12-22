@@ -33,12 +33,11 @@ void Coin::OnUpdate(float DeltaTime)
 
 void Coin::CoinCollision()
 {
-	EnemyHealthLeft -= 0.4f;
-	if (EnemyHealthLeft < 0.0f)
+	CoinHealthLeft -= 1;
+	if (CoinHealthLeft < 0)
 	{
 		RequestDestroy();
 		return;
 	}
-	SetEnemyLifePercentage(GetEnemyLivesLeft() / static_cast <float>(GetEnemyMaxLivesLeft()));
 }
 

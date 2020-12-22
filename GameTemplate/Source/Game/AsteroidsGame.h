@@ -10,6 +10,7 @@ class RockManager;
 class GameFlow;
 class GUI;
 class CoinManger;
+class Coin;
 
 class AsteroidsGame : public GameFramework
 {
@@ -23,6 +24,7 @@ private:
 
     Player* Player1 = nullptr;
 	Player* Player2 = nullptr;
+	Coin* TempCoin = nullptr;
     Background* BG = nullptr;
     RockManager* RockMgr = nullptr;
     GameFlow* GFlow = nullptr;
