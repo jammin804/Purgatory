@@ -11,7 +11,7 @@ public:
     TextComponent(class GameObject* Owner);
 
     void SetText(string NewText) { Text = NewText; }
-
+    void SetFont(string FontPath, int FontSize);
     void SetVisible(bool bIsNowVisible);
     bool IsVisible() const;
 
@@ -21,5 +21,6 @@ protected:
 private:
     string Text;
     bool bIsVisible;
+    ALLEGRO_FONT* Font;
 };
 

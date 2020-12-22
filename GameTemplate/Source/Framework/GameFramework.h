@@ -2,8 +2,8 @@
 
 #include <vector>
 #include "Globals.h"
-#include <allegro5/allegro_font.h>
 #include "MemoryManager.h"
+#include "FontManager.h"
 #include <new>
 
 using namespace std;
@@ -16,6 +16,7 @@ class GameFramework
     friend class GameObject;
     friend class GameComponent;
     friend class InputComponent;
+    friend class TextComponent;
 
 protected:
     GameFramework();
@@ -69,6 +70,7 @@ private:
     struct ALLEGRO_DISPLAY* Display;
 
     MemoryManager MemManager;
+    FontManager FntManager;
 
     double TimeOfLastUpdate = 0.0;
 
@@ -86,13 +88,6 @@ bool GameFramework::Init()
     Instance = new T();
     
     bool BaseInitResult = Instance->InitInternal();
-
-    Globals::DefaultFont = al_create_builtin_font();
-    if (!Globals::DefaultFont)
-    {
-        printf("couldn't initialize font\n");
-        return false;
-    }
 
     return BaseInitResult;
 }
