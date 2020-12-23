@@ -20,7 +20,7 @@ protected:
     
 private:
     string Text;
-    bool bIsVisible;
-    ALLEGRO_FONT* Font;
+    bool bIsVisible = true;
+    ALLEGRO_FONT* Font = nullptr;
 };
 

@@ -2,6 +2,7 @@
 
 #include "Framework/ImageComponent.h"
 #include "Framework/InputComponent.h"
+#include "Framework/TextComponent.h"
 
 void GUI::OnInit()
 {
@@ -10,6 +11,7 @@ void GUI::OnInit()
 	FearGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
 	FearBorderGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
 	CoinGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
+	CoinGUITextComponent = GameComponent::CreateInstance<TextComponent>(this);
 }
 
 void GUI::OnPostInit()
@@ -29,6 +31,9 @@ void GUI::OnPostInit()
 	CoinGUIImageComponent->SetScaleFromLeft(true);
 	CoinGUIImageComponent->SetOffsetY(60.0f);
 	CoinGUIImageComponent->SetScale(2.0f);
+	CoinGUITextComponent->SetOffsetY(60.0f);
+	CoinGUITextComponent->SetOffsetX(50.0f);
+
 }
 
 void GUI::OnUpdate(float DeltaTime)
@@ -37,7 +42,9 @@ void GUI::OnUpdate(float DeltaTime)
 	{
 
 		SetLifePercentage(player->GetLivesLeft()/static_cast <float>(player->GetMaxLivesLeft()));
-		
+		char CoinsCollected[10];
+		sprintf_s(CoinsCollected, "X %d", player->GetNumberOfCoins());
+		CoinGUITextComponent->SetText(CoinsCollected);
 	}
 }
 

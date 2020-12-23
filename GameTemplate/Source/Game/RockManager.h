@@ -23,5 +23,6 @@ class RockManager : public GameObject
 private:
         vector<Rock*> Rocks;
         float TimeSinceSpawn = 0.0f;
-        float SpawnTimer = 3.0f;
+		const float INIT_SPAWN_TIMER = 3.0f;
+        float SpawnTimer = INIT_SPAWN_TIMER;
 };

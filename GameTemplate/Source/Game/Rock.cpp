@@ -73,8 +73,8 @@ void Rock::EnemyHit()
 	EnemyHealthLeft -= 0.4f;
 	if (EnemyHealthLeft < 0.0f)
 	{
-		RequestDestroy();
+ 		RequestDestroy();
 		return;
 	}
-	SetEnemyLifePercentage(GetEnemyLivesLeft() / static_cast <float>(GetEnemyMaxLivesLeft()));
+	SetEnemyLifePercentage(GetEnemyLivesLeft() / GetEnemyMaxLivesLeft());
 }

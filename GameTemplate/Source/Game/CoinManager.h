@@ -13,9 +13,12 @@ class CoinManager : public GameObject
         virtual void OnInit() override;
         virtual void OnUpdate(float DeltaTime) override;
 
-    public:
-        Coin* CreateCoin(); //Changed Splits Left to Max Enemy Health
-        vector<Coin*>& GetCoins() { return Coins; }
+		virtual void OnRestart() override;
+		virtual void SetEnabled(bool bEnabled) override;
+public:
+        Coin* CreateCoin(float posX, float posY); //Changed Splits Left to Max Enemy Health
+
+		vector<Coin*>& GetCoins() { return Coins; }
 private:
         vector<Coin*> Coins;
 };

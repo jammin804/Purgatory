@@ -33,11 +33,6 @@ void Coin::OnUpdate(float DeltaTime)
 
 void Coin::CoinCollision()
 {
-	CoinHealthLeft -= 1;
-	if (CoinHealthLeft < 0)
-	{
-		RequestDestroy();
-		return;
-	}
+	RequestDestroy();
 }
 

@@ -13,6 +13,7 @@ If the player gets hit, scale the life rectangle with by 1/player health
 using namespace std;
 
 class ImageComponent;
+class TextComponent;
 class Player; 
 class GameFlow;
 class UIText;
@@ -42,6 +43,7 @@ private:
 	ImageComponent* FearGUIImageComponent = nullptr;
 	ImageComponent* FearBorderGUIImageComponent = nullptr;
 	ImageComponent* CoinGUIImageComponent = nullptr;
+	TextComponent* CoinGUITextComponent = nullptr;
 	const Player* player = nullptr;
 	const UIText* uitext = nullptr;
 	const float MAX_LIFESCALE = 2.0f;

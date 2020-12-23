@@ -12,6 +12,7 @@
 #include "Game/UIText.h"
 #include <sstream>
 #include "Game/Coin.h"
+#include "Game/CoinManager.h"
 
 void AsteroidsGame::OnInit()
 {
@@ -20,7 +21,7 @@ void AsteroidsGame::OnInit()
 	UI = GameObject::CreateInstance<GUI>();
     Player1 = GameObject::CreateInstance<Player>();
     RockMgr = GameObject::CreateInstance<RockManager>();
-	TempCoin = GameObject::CreateInstance<Coin>();
+	CoinMgr = GameObject::CreateInstance<CoinManager>();
 }
 
 void AsteroidsGame::OnPostInit()
@@ -78,49 +79,68 @@ void AsteroidsGame::OnUpdate(float DeltaTime)
         return;
     }*/
 
-    for (Rock* CurrentRock : RockMgr->GetRocks())
-    {
-        if (CurrentRock->IsDestroyed())
-        {
-            continue;
-        }
 
-        if (!Player1->IsInvulnerable() && Player1->IsEnabled())
-        {
-            if (Player1->GetCollision()->DoesCollide(CurrentRock->GetCollision()))
-            {
-                //CreateExplosion(Player1->GetPositionX(), Player1->GetPositionY());
-                if (Player1->HandleDeath())
-                {
-                    GFlow->SetPlayerIsDead();
-                }
-                else
-                {
-                    GFlow->UpdateLivesLeft(Player1->GetLivesLeft());
-                }
-            }
-        }
-
-        for (Cross* CurrentCross : Player1->GetCross())
-        {
-            if (CurrentRock->GetCollision()->DoesCollide(CurrentCross->GetCollision()))
-            {
-         
-                CreateExplosion(CurrentRock->GetPositionX(), CurrentRock->GetPositionY());
-                CurrentRock->EnemyHit();
-                CurrentCross->RequestDestroy();
-            }
-        }
-    }
-	
-	if (!Player1->IsInvulnerable() && Player1->IsEnabled()) //For loop?
+	if (RockMgr)
 	{
-		if (Player1->GetCollision()->DoesCollide(TempCoin->GetCollision()))
+		for (Rock* CurrentRock : RockMgr->GetRocks())
 		{
-			TempCoin->CoinCollision();
-			TempCoin->RequestDestroy();
-			UI->SetCoinImage("Art/Coins.png");
-			//AddScore
+			if (CurrentRock->IsDestroyed())
+			{
+				continue;
+			}
+
+			if (!Player1->IsInvulnerable() && Player1->IsEnabled())
+			{
+				if (Player1->GetCollision()->DoesCollide(CurrentRock->GetCollision()))
+				{
+					//CreateExplosion(Player1->GetPositionX(), Player1->GetPositionY());
+					if (Player1->HandleDeath())
+					{
+						GFlow->SetPlayerIsDead();
+					}
+					else
+					{
+						GFlow->UpdateLivesLeft(Player1->GetLivesLeft());
+					}
+				}
+			}
+
+			for (Cross* CurrentCross : Player1->GetCross())
+			{
+				if (CurrentRock->GetCollision()->DoesCollide(CurrentCross->GetCollision()))
+				{
+
+					CreateExplosion(CurrentRock->GetPositionX(), CurrentRock->GetPositionY());
+					CurrentRock->EnemyHit();
+					CurrentCross->RequestDestroy();
+
+					if (CurrentRock->GetEnemyLivesLeft() < 0.0f)
+					{
+						if (CoinMgr)
+						{
+							CoinMgr->CreateCoin(CurrentRock->GetPositionX(), CurrentRock->GetPositionY());
+						}
+					}
+				}
+			}
 		}
+	}
+	
+	if (CoinMgr)
+	{
+		for (Coin* CurrentCoin : CoinMgr->GetCoins()) 
+		{
+
+			if (!Player1->IsInvulnerable() && Player1->IsEnabled())
+			{
+				if (Player1->GetCollision()->DoesCollide(CurrentCoin->GetCollision()) && !CurrentCoin->IsDestroyed())
+				{
+					CurrentCoin->CoinCollision();
+					Player1->CollectCoin();
+				}
+			}
+
+		}
+
 	}
 }

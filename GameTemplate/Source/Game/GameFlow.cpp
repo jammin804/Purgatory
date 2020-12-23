@@ -19,7 +19,10 @@ void GameFlow::OnPostInit()
 
     for (GameObject* Object : GameFlowGameObjects)
     {
-        Object->SetEnabled(false);
+		if (Object)
+		{
+			Object->SetEnabled(false);
+		}
     }
 }
 
@@ -39,7 +42,12 @@ void GameFlow::OnUpdate(float DeltaTime)
                 CurrentState = EState::InGame;
                 for (GameObject* Object : GameFlowGameObjects)
                 {
-                    Object->SetEnabled(true);
+
+					if (Object)
+					{
+						Object->SetEnabled(true);
+					}
+
                 }
                 if (GameUIText)
                 {
@@ -59,6 +67,7 @@ void GameFlow::OnUpdate(float DeltaTime)
         }
 		if (GameUI)
 		{
+			//Can you reset in the gameflow?
 			GameUI->SetFearPercentage(TimeRemaining / MAX_TIME);
 		}
         if (TimeRemaining <= 0.0f)
@@ -66,7 +75,10 @@ void GameFlow::OnUpdate(float DeltaTime)
             CurrentState = EState::Ending;
             for (GameObject* Object : GameFlowGameObjects)
             {
-                Object->SetEnabled(false);
+				if (Object)
+				{
+					Object->SetEnabled(false);
+				}
             }
             if (GameUIText)
             {
@@ -122,6 +134,7 @@ void GameFlow::Restart(bool bShouldResetGame)
 	{
 		Object->OnRestart();
 	}
+	TimeRemaining = MAX_TIME;
 }
 
 void GameFlow::SetPaused(bool bIsPaused)

@@ -15,8 +15,8 @@ protected:
 public:
 
 	//handling Enemy Health
-	int GetEnemyLivesLeft() const { return EnemyHealthLeft; }
-	int GetEnemyMaxLivesLeft() const { return ENEMY_MAX_LIFE; }
+	float GetEnemyLivesLeft() const { return EnemyHealthLeft; }
+	float GetEnemyMaxLivesLeft() const { return ENEMY_MAX_LIFE; }
 	void EnemyHit();
     void SetMovementSpeed(float NewMovementSpeed) { MovementSpeed = NewMovementSpeed; }
     float GetMovementSpeed() const { return MovementSpeed; }

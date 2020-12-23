@@ -35,11 +35,14 @@ void RockManager::OnUpdate(float DeltaTime)
 void RockManager::OnRestart()
 {
 	//Reset the Rockmanager Rock vector
+	for (Rock* CurrentRock : Rocks)
+	{
+		CurrentRock->RequestDestroy();
+	}
 	Rocks.clear();
-	
-	//Set the Position for the rocks to start
 
 	//Reset SpawnTimer?
+	SpawnTimer = INIT_SPAWN_TIMER;
 }
 
 Rock* RockManager::CreateRock(int SplitsLeft /*= 2*/)

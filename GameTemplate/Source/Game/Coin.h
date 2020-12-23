@@ -19,7 +19,7 @@ private:
     class ImageComponent* CoinImage = nullptr;
     BoxCollisionComponent* Collision = nullptr;
 	float CoinLifeTimer = 0.0f;
-	float const MAX_COIN_LIFE_TIMER = 2.0f;
+	float const MAX_COIN_LIFE_TIMER = 300.0f;
 	int const MAX_COIN_HEALTH = 1;
 	int CoinHealthLeft = MAX_COIN_HEALTH;
 };

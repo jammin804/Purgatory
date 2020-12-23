@@ -30,6 +30,8 @@ public:
 	int GetFearLeft() const { return FearLeft; }
 	int GetMaxFearLeft() const { return MAX_FEAR; }
 	bool IsInvulnerable() const;
+	void CollectCoin() { NumberOfCoins++; }
+	int GetNumberOfCoins() const { return NumberOfCoins; }
 private:
 	void SetLivesLeft(int NewLivesLeft) { HealthLeft = NewLivesLeft; }
 	void SetFearLeft(int NewFearLeft) { FearLeft = NewFearLeft;  }
@@ -55,6 +57,8 @@ private:
 
 	int LookingDirectionX = 0;
 	int LookingDirectionY = -1;
+
+	int NumberOfCoins = 0;
 
 };
 

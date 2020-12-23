@@ -18,7 +18,6 @@ void Player::OnInit()
     Collision = GameComponent::CreateInstance<BoxCollisionComponent>(this);
 
     Crosses.reserve(200);
-    //Collision->SetScale(0.5f);
 }
 
 void Player::OnUpdate(float DeltaTime)
