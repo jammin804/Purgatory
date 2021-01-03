@@ -118,7 +118,11 @@ void AsteroidsGame::OnUpdate(float DeltaTime)
 					{
 						if (CoinMgr)
 						{
-							CoinMgr->CreateCoin(CurrentRock->GetPositionX(), CurrentRock->GetPositionY());
+							int NumberOfCoinsToSpawn = rand() % 4;
+							for (int i = 0; i < NumberOfCoinsToSpawn; i++)
+							{
+								CoinMgr->CreateCoin(CurrentRock->GetPositionX(), CurrentRock->GetPositionY());
+							}
 						}
 					}
 				}

@@ -39,6 +39,8 @@ Coin* CoinManager::CreateCoin(float posX, float posY)
 	Coins.push_back(NewCoin);
 	NewCoin->SetPosition(posX, posY);
 	return NewCoin;
+
+
 }
 
 void CoinManager::SetEnabled(bool bEnabled)
