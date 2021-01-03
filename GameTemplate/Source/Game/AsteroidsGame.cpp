@@ -13,6 +13,7 @@
 #include <sstream>
 #include "Game/Coin.h"
 #include "Game/CoinManager.h"
+#include "Game/Sfx.h"
 
 void AsteroidsGame::OnInit()
 {
@@ -69,6 +70,12 @@ void AsteroidsGame::CreateExplosion(float PositionX, float PositionY, float Expl
     Explosion* NewExplosion = GameObject::CreateInstance<Explosion>();
     NewExplosion->SetPosition(PositionX, PositionY);
     NewExplosion->SetExplosionScale(ExplosionScale);
+}
+
+void AsteroidsGame::CreateSfx()
+{
+	Sfx* NewSfx = GameObject::CreateInstance<Sfx>();
+
 }
 
 void AsteroidsGame::OnUpdate(float DeltaTime)
@@ -139,6 +146,7 @@ void AsteroidsGame::OnUpdate(float DeltaTime)
 			{
 				if (Player1->GetCollision()->DoesCollide(CurrentCoin->GetCollision()) && !CurrentCoin->IsDestroyed())
 				{
+					CreateSfx();
 					CurrentCoin->CoinCollision();
 					Player1->CollectCoin();
 				}

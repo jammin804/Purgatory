@@ -20,6 +20,7 @@ protected:
 
 private:
     void CreateExplosion(float PositionX, float PositionY, float ExplosionScale = 1.0f);
+	void CreateSfx();
 
     Player* Player1 = nullptr;
 	Player* Player2 = nullptr;

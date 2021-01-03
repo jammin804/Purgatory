@@ -40,6 +40,7 @@
     <ClCompile Include="Source\Game\Rock.cpp" />
     <ClCompile Include="Source\Game\Player.cpp" />
     <ClCompile Include="Source\Game\RockManager.cpp" />
+    <ClCompile Include="Source\Game\Sfx.cpp" />
     <ClCompile Include="Source\Game\UIText.cpp" />
     <ClCompile Include="Source\main.cpp" />
   </ItemGroup>
@@ -70,6 +71,7 @@
     <ClInclude Include="Source\Game\Rock.h" />
     <ClInclude Include="Source\Game\Player.h" />
     <ClInclude Include="Source\Game\RockManager.h" />
+    <ClInclude Include="Source\Game\Sfx.h" />
     <ClInclude Include="Source\Game\UIText.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -7,6 +7,8 @@ void Coin::OnInit()
 {
 	CoinImage = GameComponent::CreateInstance<ImageComponent>(this);
 	Collision = GameComponent::CreateInstance<BoxCollisionComponent>(this);
+	CoinSoundComponent = GameComponent::CreateInstance<SoundComponent>(this);
+	CoinSoundComponent->SetVolume(0.3f);
 
 }
 
@@ -33,5 +35,23 @@ void Coin::OnUpdate(float DeltaTime)
 void Coin::CoinCollision()
 {
 	RequestDestroy();
+}
+
+void Coin::SetCoinDropSound(string SoundPath)
+{
+	if (CoinSoundComponent)
+	{
+		CoinSoundComponent->LoadSample(SoundPath);
+	}
+
+}
+
+void Coin::SetCoinPickUpSound(string SoundPath)
+{
+	if (CoinSoundComponent)
+	{
+		CoinSoundComponent->LoadSample(SoundPath);
+	}
+
 }
 
