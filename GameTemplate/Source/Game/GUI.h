@@ -17,6 +17,7 @@ class TextComponent;
 class Player; 
 class GameFlow;
 class UIText;
+class FontManager;
 
 class GUI : public GameObject
 {
@@ -44,6 +45,7 @@ private:
 	ImageComponent* FearBorderGUIImageComponent = nullptr;
 	ImageComponent* CoinGUIImageComponent = nullptr;
 	TextComponent* CoinGUITextComponent = nullptr;
+	FontManager* CoinFont = nullptr;
 	const Player* player = nullptr;
 	const UIText* uitext = nullptr;
 	const float MAX_LIFESCALE = 2.0f;

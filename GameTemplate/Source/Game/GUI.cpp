@@ -12,6 +12,7 @@ void GUI::OnInit()
 	FearBorderGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
 	CoinGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
 	CoinGUITextComponent = GameComponent::CreateInstance<TextComponent>(this);
+	CoinFont = GameComponent::CreateInstance<FontManager>(this);
 }
 
 void GUI::OnPostInit()
