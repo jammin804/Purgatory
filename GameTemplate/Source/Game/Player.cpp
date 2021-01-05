@@ -12,12 +12,19 @@ void Player::OnInit()
     PlayerAvatarThrustersImageComponent->SetVisible(false);
     PlayerAvatarImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
     InputComp = GameComponent::CreateInstance<InputComponent>(this);
-    ThrusterSoundComponent = GameComponent::CreateInstance<SoundComponent>(this);
-    ThrusterSoundComponent->SetLooped(true);
-    ThrusterSoundComponent->SetVolume(0.3f);
+	CoinSoundComponentPickup = GameComponent::CreateInstance<SoundComponent>(this);
     Collision = GameComponent::CreateInstance<BoxCollisionComponent>(this);
 
     Crosses.reserve(200);
+}
+
+void Player::OnPostInit()
+{
+	if (CoinSoundComponentPickup)
+	{
+		CoinSoundComponentPickup->SetVolume(1.0f);
+		CoinSoundComponentPickup->LoadSample("Audio/Pickup.wav");
+	}
 }
 
 void Player::OnUpdate(float DeltaTime)
@@ -128,29 +135,9 @@ void Player::SetAvatarImage(string ImagePath)
 }
 
 
-void Player::SetThrustersImage(string ImagePath)
-{
-    if (PlayerAvatarThrustersImageComponent)
-    {
-        PlayerAvatarThrustersImageComponent->LoadImage(ImagePath);
-    }
-}
-
-void Player::SetThrustersSound(string SoundPath)
-{
-    if (ThrusterSoundComponent)
-    {
-        ThrusterSoundComponent->LoadSample(SoundPath);
-    }
-}
 
 bool Player::HandleDeath()
 {
-    if (ThrusterSoundComponent && ThrusterSoundComponent->IsPlaying())
-    {
-        PlayerAvatarThrustersImageComponent->SetVisible(false);
-        ThrusterSoundComponent->Stop();
-    }
 
     /*if (PlayerAvatarImageComponent)
     {
@@ -186,4 +173,14 @@ void Player::CreateCross(float DirX, float DirY)
 bool Player::IsInvulnerable() const
 {
     return bInvulnerable;
+}
+
+void Player::CollectCoin()
+{
+	NumberOfCoins++;
+
+	if (CoinSoundComponentPickup)
+	{
+		CoinSoundComponentPickup->Play();
+	}
 }

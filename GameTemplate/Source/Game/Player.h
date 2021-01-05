@@ -14,13 +14,12 @@ class Player : public GameObject
 {
 protected:
     virtual void OnInit() override;
+	virtual void OnPostInit() override;
     virtual void OnUpdate(float DeltaTime) override;
 	virtual void OnRestart() override;
 
 public:
     void SetAvatarImage(string ImagePath);
-    void SetThrustersImage(string ImagePath);
-    void SetThrustersSound(string SoundPath);
     bool HandleDeath();
     void CreateCross(float DirX, float DirY);
     vector<Cross*>& GetCross(){ return Crosses; }
@@ -30,7 +29,7 @@ public:
 	int GetFearLeft() const { return FearLeft; }
 	int GetMaxFearLeft() const { return MAX_FEAR; }
 	bool IsInvulnerable() const;
-	void CollectCoin() { NumberOfCoins++; }
+	void CollectCoin();
 	int GetNumberOfCoins() const { return NumberOfCoins; }
 private:
 	void SetLivesLeft(int NewLivesLeft) { HealthLeft = NewLivesLeft; }
@@ -39,7 +38,7 @@ private:
     ImageComponent* PlayerAvatarImageComponent = nullptr;
     ImageComponent* PlayerAvatarThrustersImageComponent = nullptr;
     InputComponent* InputComp = nullptr;
-    SoundComponent* ThrusterSoundComponent = nullptr;
+	SoundComponent* CoinSoundComponentPickup = nullptr;
     BoxCollisionComponent* Collision = nullptr;
 
     float PlayerMovementSpeed = 200.0f;

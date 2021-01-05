@@ -74,6 +74,9 @@
     <ClInclude Include="Source\Game\Sfx.h" />
     <ClInclude Include="Source\Game\UIText.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Font Include="Fonts\Boxy-Bold.ttf" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{3DB5F577-030C-4AB5-8B3B-21BCCB9CD44B}</ProjectGuid>

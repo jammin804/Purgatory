@@ -12,7 +12,7 @@ void GUI::OnInit()
 	FearBorderGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
 	CoinGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
 	CoinGUITextComponent = GameComponent::CreateInstance<TextComponent>(this);
-	CoinFont = GameComponent::CreateInstance<FontManager>(this);
+	//CoinFont = GameComponent::CreateInstance<FontManager>(this);
 }
 
 void GUI::OnPostInit()
@@ -34,6 +34,8 @@ void GUI::OnPostInit()
 	CoinGUIImageComponent->SetScale(2.0f);
 	CoinGUITextComponent->SetOffsetY(60.0f);
 	CoinGUITextComponent->SetOffsetX(50.0f);
+	CoinGUITextComponent->SetFont("Fonts/Boxy-Bold.ttf", 12);
+	//CoinFont->FindOrAddFont("Fonts/Boxy-Bold.tff", 12);
 
 }
 

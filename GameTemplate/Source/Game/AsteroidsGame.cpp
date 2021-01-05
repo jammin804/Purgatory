@@ -37,8 +37,6 @@ void AsteroidsGame::OnPostInit()
     if (Player1)
     {
         Player1->SetAvatarImage("Art/Player_P_Back.png");
-        //Player1->SetThrustersImage("Art/Thrusters.png");
-        Player1->SetThrustersSound("Audio/Thruster.wav");
         Player1->SetPosition(638.0f, 360.0f);
 		Player1->SetRenderDepth(10);
     }
@@ -70,12 +68,6 @@ void AsteroidsGame::CreateExplosion(float PositionX, float PositionY, float Expl
     Explosion* NewExplosion = GameObject::CreateInstance<Explosion>();
     NewExplosion->SetPosition(PositionX, PositionY);
     NewExplosion->SetExplosionScale(ExplosionScale);
-}
-
-void AsteroidsGame::CreateSfx()
-{
-	Sfx* NewSfx = GameObject::CreateInstance<Sfx>();
-
 }
 
 void AsteroidsGame::OnUpdate(float DeltaTime)
@@ -146,7 +138,6 @@ void AsteroidsGame::OnUpdate(float DeltaTime)
 			{
 				if (Player1->GetCollision()->DoesCollide(CurrentCoin->GetCollision()) && !CurrentCoin->IsDestroyed())
 				{
-					CreateSfx();
 					CurrentCoin->CoinCollision();
 					Player1->CollectCoin();
 				}
