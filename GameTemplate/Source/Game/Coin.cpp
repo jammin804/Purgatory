@@ -50,8 +50,8 @@ void Coin::OnUpdate(float DeltaTime)
 void Coin::UpdateMovement(float DeltaTime)
 {
 	SetPosition(GetPositionX() + (StartDirX * DeltaTime * HorizontalMovementSpeed), GetPositionY() + (StartDirY * DeltaTime * VerticalMovementSpeed));
-	HorizontalMovementSpeed *= 1.0f - DeltaTime;
-	VerticalMovementSpeed -= 1000.0f*DeltaTime;
+	HorizontalMovementSpeed *= 0.8f - DeltaTime;
+	VerticalMovementSpeed -= 2000.0f*DeltaTime;
 }
 
 void Coin::CoinCollision()

@@ -16,14 +16,19 @@ void UIText::OnInit()
 
 void UIText::OnPostInit()
 {
-    TopLeftText->SetOffset(100, 50);
-    float MiddleX = Globals::WindowSizeX * 0.5f;
-    float MiddleY = Globals::WindowSizeY * 0.5f;
-    TopCenterText->SetOffset(MiddleX, 50);
-    TopRightText->SetOffset(Globals::WindowSizeX - 100, 50);
-    MiddleTextLine1->SetOffset(MiddleX, MiddleY - 150);
-    MiddleTextLine2->SetOffset(MiddleX, MiddleY - 100);
-    MiddleTextLine3->SetOffset(MiddleX, MiddleY - 50);
+	TopLeftText->SetOffset(100, 50);
+	float MiddleX = Globals::WindowSizeX * 0.5f;
+	float MiddleY = Globals::WindowSizeY * 0.5f;
+	TopCenterText->SetOffset(MiddleX, 50);
+	TopRightText->SetOffset(Globals::WindowSizeX - 100, 50);
+	MiddleTextLine1->SetOffset(MiddleX, MiddleY - 150);
+	MiddleTextLine2->SetOffset(MiddleX, MiddleY - 100);
+	MiddleTextLine3->SetOffset(MiddleX, MiddleY - 50);
+	TopCenterText->SetFont("Fonts/Boxy-Bold.ttf", 12);
+	TopRightText->SetFont("Fonts/Boxy-Bold.ttf", 12);
+	MiddleTextLine1->SetFont("Fonts/Boxy-Bold.ttf", 12);
+	MiddleTextLine2->SetFont("Fonts/Boxy-Bold.ttf", 12);
+	MiddleTextLine3->SetFont("Fonts/Boxy-Bold.ttf", 12);
 }
 
 void UIText::OnShutdown()
