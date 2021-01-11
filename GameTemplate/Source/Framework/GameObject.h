@@ -15,18 +15,22 @@ public:
     template<class T>
     static T* CreateInstance();
 
+    void SetWorldPositionX(float NewPosX);
+    void SetWorldPositionY(float NewPosY);
+    void SetWorldPosition(float NewPosX, float NewPosY) { SetWorldPositionX(NewPosX); SetWorldPositionY(NewPosY); }
+
     void SetPosX(float NewPosX) { PositionX = NewPosX; }
     void SetPosY(float NewPosY) { PositionY = NewPosY; }
     void SetPosition(float NewPosX, float NewPosY) { SetPosX(NewPosX); SetPosY(NewPosY); }
     void SetRotation(float NewRotation) { Rotation = NewRotation; }
 
-    float GetPositionX() const;
-    float GetPositionY() const;
-    float GetRotation() const;
+    float GetWorldPositionX() const;
+    float GetWorldPositionY() const;
+    float GetWorldRotation() const;
 
-    float GetLocalPositionX() const { return PositionX; }
-    float GetLocalPositionY() const { return PositionY; }
-    float GetLocalRotation() const { return Rotation; }
+    float GetPositionX() const { return PositionX; }
+    float GetPositionY() const { return PositionY; }
+    float GetRotation() const { return Rotation; }
 
     void RequestDestroy() { bShouldDestroy = true; }
     virtual void SetEnabled(bool bEnabled) { bIsEnabled = bEnabled; }
