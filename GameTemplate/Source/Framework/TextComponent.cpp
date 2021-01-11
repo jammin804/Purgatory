@@ -14,8 +14,8 @@ void TextComponent::OnRender()
         const GameObject* Owner = GetOwner();
         al_draw_text(Font ? Font : Globals::DefaultFont, 
             al_map_rgb(255, 255, 255), 
-            Owner->GetPositionX() + GetOffsetX(), 
-            Owner->GetPositionY() + GetOffsetY(), 
+            Owner->GetWorldPositionX() + GetOffsetX(), 
+            Owner->GetWorldPositionY() + GetOffsetY(), 
             ALLEGRO_ALIGN_CENTRE,
             Text.c_str());
     }
