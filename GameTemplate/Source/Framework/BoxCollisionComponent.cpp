@@ -26,8 +26,8 @@ bool BoxCollisionComponent::DoesCollide(const BoxCollisionComponent* OtherCollis
 
     float Box1[4];
     {
-        float CenterX = GetOwner()->GetPositionX() + GetOffsetX();
-        float CenterY = GetOwner()->GetPositionY() + GetOffsetY();
+        float CenterX = GetOwner()->GetWorldPositionX() + GetOffsetX();
+        float CenterY = GetOwner()->GetWorldPositionY() + GetOffsetY();
         float HalfBoxWidth = BoxWidth * 0.5f;
         float HalfBoxHeight = BoxHeight * 0.5f;
         float BoxLocal[] = { CenterX - (HalfBoxWidth * Scale),
@@ -41,8 +41,8 @@ bool BoxCollisionComponent::DoesCollide(const BoxCollisionComponent* OtherCollis
     }
     float Box2[4];
     {
-        float CenterX = OtherCollisionComponent->GetOwner()->GetPositionX() + GetOffsetX();
-        float CenterY = OtherCollisionComponent->GetOwner()->GetPositionY() + GetOffsetY();
+        float CenterX = OtherCollisionComponent->GetOwner()->GetWorldPositionX() + GetOffsetX();
+        float CenterY = OtherCollisionComponent->GetOwner()->GetWorldPositionY() + GetOffsetY();
         float HalfBoxWidth = BoxWidth * 0.5f;
         float HalfBoxHeight = BoxHeight * 0.5f;
         float BoxLocal[] = { CenterX - (HalfBoxWidth * Scale),
@@ -78,8 +78,8 @@ void BoxCollisionComponent::OnRender()
     if (bDrawDebug)
     {
         const GameObject* Owner = GetOwner();
-        float CenterX = Owner->GetPositionX() + GetOffsetX();
-        float CenterY = Owner->GetPositionY() + GetOffsetY();
+        float CenterX = Owner->GetWorldPositionX() + GetOffsetX();
+        float CenterY = Owner->GetWorldPositionY() + GetOffsetY();
         float HalfBoxWidth = BoxWidth * 0.5f;
         float HalfBoxHeight = BoxHeight * 0.5f;
         al_draw_filled_rectangle(

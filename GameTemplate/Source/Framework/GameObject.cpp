@@ -62,32 +62,52 @@ void GameObject::Shutdown()
     OnShutdown();
 }
 
-float GameObject::GetPositionX() const
+void GameObject::SetWorldPositionX(float NewPosX)
 {
-    float FinalPositionX = GetLocalPositionX();
+    float ParentWorldPositionX = 0.0f;
     if (const GameObject* MyParent = GetParent())
     {
-        FinalPositionX += MyParent->GetPositionX();
+        ParentWorldPositionX = MyParent->GetWorldPositionX();
+    }
+    PositionX = NewPosX - ParentWorldPositionX;
+}
+
+void GameObject::SetWorldPositionY(float NewPosY)
+{
+    float ParentWorldPositionY = 0.0f;
+    if (const GameObject* MyParent = GetParent())
+    {
+        ParentWorldPositionY = MyParent->GetWorldPositionY();
+    }
+    PositionY = NewPosY - ParentWorldPositionY;
+}
+
+float GameObject::GetWorldPositionX() const
+{
+    float FinalPositionX = GetPositionX();
+    if (const GameObject* MyParent = GetParent())
+    {
+        FinalPositionX += MyParent->GetWorldPositionX();
     }
     return FinalPositionX;
 }
 
-float GameObject::GetPositionY() const
+float GameObject::GetWorldPositionY() const
 {
-    float FinalPositionY = GetLocalPositionY();
+    float FinalPositionY = GetPositionY();
     if (const GameObject* MyParent = GetParent())
     {
-        FinalPositionY += MyParent->GetPositionY();
+        FinalPositionY += MyParent->GetWorldPositionY();
     }
     return FinalPositionY;
 }
 
-float GameObject::GetRotation() const
+float GameObject::GetWorldRotation() const
 {
-    float FinalRotation = GetLocalRotation();
+    float FinalRotation = GetRotation();
     if (const GameObject* MyParent = GetParent())
     {
-        FinalRotation += MyParent->GetRotation();
+        FinalRotation += MyParent->GetWorldRotation();
     }
     return FinalRotation;
 }
