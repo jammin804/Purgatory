@@ -108,16 +108,40 @@ void Player::OnUpdate(float DeltaTime)
 	{
 		if (bCanMakeLaser)
 		{
-			int NumberOfCrossesToSpawn = 3;
-			int TimeSinceLastCross = 100;
-			for (int i = 0; i < NumberOfCrossesToSpawn; i++)
+			/*int NumberOfCrossesToSpawn = 3;
+			int TimeSinceLastCross = 100;*/
+			/*for (int i = 0; i < NumberOfCrossesToSpawn; i++) for 3 shot burst
 			{
 				 
 					CreateCross(LookingDirectionX, LookingDirectionY);
 					// Need to space the bullets out based on time
-			}
+			}*/
 
+			/*CreateCross(LookingDirectionX, LookingDirectionY -= 15);
+			CreateCross(LookingDirectionX, LookingDirectionY += 15);
+			CreateCross(LookingDirectionX, LookingDirectionY += 15); */
+			if (LookingDirectionY == 0) 
+			{
+
+				CreateCross(LookingDirectionX, LookingDirectionY + sin(30));
+				CreateCross(LookingDirectionX, LookingDirectionY);
+				CreateCross(LookingDirectionX, LookingDirectionY - sin(30));
+			}
+			else
+			{
+				//CreateCross(LookingDirectionX, LookingDirectionY * 0 + sin(30));
+				CreateCross(LookingDirectionX, LookingDirectionY);
+				//CreateCross(LookingDirectionX, LookingDirectionY * 0 - sin(30));
+			}
+			//CreateCross(LookingDirectionX, LookingDirectionY);
+
+			/* Shoots behind the player and in the front
+			CreateCross(LookingDirectionX, LookingDirectionY * 0 + sin(30));
+				CreateCross(LookingDirectionX, LookingDirectionY);
+				CreateCross(LookingDirectionX, LookingDirectionY * 0 - sin(30));*/
 			bCanMakeLaser = false;
+
+
 		}
 	}
 
