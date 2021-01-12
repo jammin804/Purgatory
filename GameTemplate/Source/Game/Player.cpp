@@ -108,7 +108,15 @@ void Player::OnUpdate(float DeltaTime)
 	{
 		if (bCanMakeLaser)
 		{
-			CreateCross(LookingDirectionX, LookingDirectionY);
+			int NumberOfCrossesToSpawn = 3;
+			int TimeSinceLastCross = 100;
+			for (int i = 0; i < NumberOfCrossesToSpawn; i++)
+			{
+				 
+					CreateCross(LookingDirectionX, LookingDirectionY);
+					// Need to space the bullets out based on time
+			}
+
 			bCanMakeLaser = false;
 		}
 	}
@@ -160,12 +168,11 @@ bool Player::HandleDeath()
 
 void Player::CreateCross(float DirX, float DirY)
 {
+
 	Cross* NewCross = GameObject::CreateInstance<Cross>();
 
-	//float DirectionY = 0.0f;//cos(GetRotation());
-	//float DirectionX = 1.0f;//sin(GetRotation());
     NewCross->SetPosition(GetPositionX() + (DirX * 30.0f),  GetPositionY() + (-DirY * 30.0f));
-	//NewCross->SetPosition(GetPositionX(), GetPositionY());
+
 	NewCross->SetInitialDirection(DirX, DirY);
     Crosses.push_back(NewCross);
 }
