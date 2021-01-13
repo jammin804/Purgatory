@@ -5,6 +5,7 @@
 #include "Framework/SoundComponent.h"
 #include "Framework/BoxCollisionComponent.h"
 #include "Cross.h"
+#include "Background.h"
 
 void Player::OnInit()
 {
@@ -81,7 +82,11 @@ void Player::OnUpdate(float DeltaTime)
     }
 
 	/*Is just key pressed for looking direction - code below*/
-	SetPosition(GetPositionX() + DirectionX, GetPositionY() + DirectionY);
+	
+	if (BG)
+	{
+		BG->SetPosition(BG->GetPositionX() - DirectionX, BG->GetPositionY() - DirectionY);
+	}
 	//Update Sprite
 	
 	if (LookingDirectionY > 0)
@@ -120,19 +125,8 @@ void Player::OnUpdate(float DeltaTime)
 			/*CreateCross(LookingDirectionX, LookingDirectionY -= 15);
 			CreateCross(LookingDirectionX, LookingDirectionY += 15);
 			CreateCross(LookingDirectionX, LookingDirectionY += 15); */
-			if (LookingDirectionY == 0) 
-			{
-
-				CreateCross(LookingDirectionX, LookingDirectionY + sin(30));
-				CreateCross(LookingDirectionX, LookingDirectionY);
-				CreateCross(LookingDirectionX, LookingDirectionY - sin(30));
-			}
-			else
-			{
-				//CreateCross(LookingDirectionX, LookingDirectionY * 0 + sin(30));
-				CreateCross(LookingDirectionX, LookingDirectionY);
-				//CreateCross(LookingDirectionX, LookingDirectionY * 0 - sin(30));
-			}
+			//ShootSpread();
+			ShootOrbital();
 			//CreateCross(LookingDirectionX, LookingDirectionY);
 
 			/* Shoots behind the player and in the front
@@ -149,6 +143,35 @@ void Player::OnUpdate(float DeltaTime)
 	{
 		bCanMakeLaser = true;
 	}
+}
+
+void Player::ShootSpread()
+{
+	if (LookingDirectionY == 0)
+	{
+		CreateCross(LookingDirectionX, LookingDirectionY + sin(SpreadAmount));
+		CreateCross(LookingDirectionX, LookingDirectionY);
+		CreateCross(LookingDirectionX, LookingDirectionY - sin(SpreadAmount));
+	}
+	else
+	{
+		CreateCross(LookingDirectionX + sin(SpreadAmount), LookingDirectionY);
+		CreateCross(LookingDirectionX, LookingDirectionY);
+		CreateCross(LookingDirectionX - sin(SpreadAmount), LookingDirectionY);
+	}
+}
+
+void Player::ShootOrbital()
+{
+	Cross* NewCross = GameObject::CreateInstance<Cross>();
+
+	NewCross->SetParent(this);
+
+	NewCross->SetWorldPosition(GetWorldPositionX() + (LookingDirectionX * 30.0f), GetWorldPositionY() + (-LookingDirectionY * 30.0f));
+
+	NewCross->SetOrbital(true);
+
+	Crosses.push_back(NewCross);
 }
 
 void Player::OnRestart()
@@ -194,8 +217,12 @@ void Player::CreateCross(float DirX, float DirY)
 {
 
 	Cross* NewCross = GameObject::CreateInstance<Cross>();
+	if (BG)
+	{
+		NewCross->SetParent(BG);
+	}
 
-    NewCross->SetPosition(GetPositionX() + (DirX * 30.0f),  GetPositionY() + (-DirY * 30.0f));
+    NewCross->SetWorldPosition(GetWorldPositionX() + (DirX * 30.0f),  GetWorldPositionY() + (-DirY * 30.0f));
 
 	NewCross->SetInitialDirection(DirX, DirY);
     Crosses.push_back(NewCross);

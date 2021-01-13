@@ -8,7 +8,8 @@ class Cross : public GameObject
 {
     public:
         const BoxCollisionComponent* GetCollision() const { return Collision; }
-		void SetInitialDirection(float x, float y);;
+		void SetInitialDirection(float x, float y);
+		void SetOrbital(bool Orbital) { hasOrbital = true; }
     protected:
     virtual void OnInit() override;
     virtual void OnPostInit() override;
@@ -24,4 +25,6 @@ class Cross : public GameObject
         class SoundComponent* LaserSound = nullptr;
         float LifeTimer = 0.0f;
         float MaxLifeTime = 5.0f;
+		bool hasOrbital = false;
+		float OrbitalAngle = 0.0f;
 };

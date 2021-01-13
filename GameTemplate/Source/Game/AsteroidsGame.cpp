@@ -31,7 +31,6 @@ void AsteroidsGame::OnPostInit()
     {
         BG->SetImage("Art/Background_N.png");
         BG->SetMusic("Audio/Music.wav");
-        BG->SetPosition(638.0f, 360.0f);
     }
 
     if (Player1)
@@ -39,6 +38,10 @@ void AsteroidsGame::OnPostInit()
         Player1->SetAvatarImage("Art/Player_P_Back.png");
         Player1->SetPosition(638.0f, 360.0f);
 		Player1->SetRenderDepth(10);
+		if (BG) 
+		{
+			Player1->SetBackground(BG);
+		}
     }
 
     if (GFlow)
@@ -61,12 +64,32 @@ void AsteroidsGame::OnPostInit()
 		UI->SetPlayer(Player1);
 		UI->SetRenderDepth(100);
 	}
+
+	if (RockMgr)
+	{
+		if (BG)
+		{
+			RockMgr->SetParent(BG);
+		}
+	}
+
+	if (CoinMgr)
+	{
+		if (BG)
+		{
+			CoinMgr->SetParent(BG);
+		}
+	}
 }
 
 void AsteroidsGame::CreateExplosion(float PositionX, float PositionY, float ExplosionScale /*= 1.0f*/)
 {
     Explosion* NewExplosion = GameObject::CreateInstance<Explosion>();
-    NewExplosion->SetPosition(PositionX, PositionY);
+	if (BG)
+	{
+		NewExplosion->SetParent(BG);
+	}
+    NewExplosion->SetWorldPosition(PositionX, PositionY);
     NewExplosion->SetExplosionScale(ExplosionScale);
 }
 
@@ -109,7 +132,7 @@ void AsteroidsGame::OnUpdate(float DeltaTime)
 				if (CurrentRock->GetCollision()->DoesCollide(CurrentCross->GetCollision()))
 				{
 
-					CreateExplosion(CurrentRock->GetPositionX(), CurrentRock->GetPositionY());
+					CreateExplosion(CurrentRock->GetWorldPositionX(), CurrentRock->GetWorldPositionY());
 					CurrentRock->EnemyHit();
 					CurrentCross->RequestDestroy();
 
@@ -120,7 +143,7 @@ void AsteroidsGame::OnUpdate(float DeltaTime)
 							int NumberOfCoinsToSpawn = rand() % 4;
 							for (int i = 0; i < NumberOfCoinsToSpawn; i++)
 							{
-								CoinMgr->CreateCoin(CurrentRock->GetPositionX(), CurrentRock->GetPositionY());
+								CoinMgr->CreateCoin(CurrentRock->GetWorldPositionX(), CurrentRock->GetWorldPositionY());
 							}
 						}
 					}

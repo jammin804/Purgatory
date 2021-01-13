@@ -34,24 +34,30 @@ void Cross::OnPostInit()
 
 void Cross::OnUpdate(float DeltaTime)
 {
-    float DirectionX = CrossMovementDirectionX * CrossSpeed * DeltaTime;
-    float DirectionY = CrossMovementDirectionY * CrossSpeed * DeltaTime;
-    SetPosition(GetPositionX() + DirectionX, GetPositionY() - DirectionY);
+	if (!hasOrbital)
+	{
+		float DirectionX = CrossMovementDirectionX * CrossSpeed * DeltaTime;
+		float DirectionY = CrossMovementDirectionY * CrossSpeed * DeltaTime;
+		SetPosition(GetPositionX() + DirectionX, GetPositionY() - DirectionY);
+	}
+	else
+	{
+		// Moving Bullet in a circle formation
+		float PosX = 0.0f;
+		float PosY = 0.0f;
+		float OriginX = GetParent()->GetWorldPositionX();
+		float OriginY = GetParent()->GetWorldPositionY();
+		float Radius = 100.0f;
+		float PI = 3.14;
+
+		PosX = OriginX + cos(OrbitalAngle)*Radius;
+		PosY = OriginY + sin(OrbitalAngle)*Radius;
+		const float SpinSpeed = 10.0f;
+		OrbitalAngle += SpinSpeed * DeltaTime;
+		SetWorldPosition(PosX, PosY);
+	}
 	SetRotation(GetRotation() + CrossRotationSpeed * DeltaTime);
 
-	// Moving Bullet in a circle formation
-	/*float PosX = 0.0f;
-	float PosY = 0.0f;
-	float OriginX = GetPositionX();
-	float OriginY = GetPositionY();
-	float Radius = 10.0f;
-	int Angle = 0;
-	float PI = 3.14;
-
-	PosX = OriginX + cos(Angle)*Radius;
-	PosY = OriginY + sin(Angle)*Radius;
-
-	Angle += 2 * PI / 180;*/
 
     LifeTimer += DeltaTime;
     if (LifeTimer > MaxLifeTime)

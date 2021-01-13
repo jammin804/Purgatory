@@ -48,6 +48,7 @@ void RockManager::OnRestart()
 Rock* RockManager::CreateRock(int SplitsLeft /*= 2*/)
 {
     Rock* NewRock = GameObject::CreateInstance<Rock>();
+	NewRock->SetParent(GetParent());
     Rocks.push_back(NewRock);
     return NewRock;
 }

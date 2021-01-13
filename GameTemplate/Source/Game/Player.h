@@ -9,6 +9,7 @@ class ImageComponent;
 class InputComponent;
 class SoundComponent;
 class Cross;
+class Background;
 
 class Player : public GameObject
 {
@@ -16,6 +17,9 @@ protected:
     virtual void OnInit() override;
 	virtual void OnPostInit() override;
     virtual void OnUpdate(float DeltaTime) override;
+
+
+
 	virtual void OnRestart() override;
 
 public:
@@ -31,15 +35,18 @@ public:
 	bool IsInvulnerable() const;
 	void CollectCoin();
 	int GetNumberOfCoins() const { return NumberOfCoins; }
+	void SetBackground(Background* NewBG) { BG = NewBG; }
 private:
 	void SetLivesLeft(int NewLivesLeft) { HealthLeft = NewLivesLeft; }
 	void SetFearLeft(int NewFearLeft) { FearLeft = NewFearLeft;  }
-
-    ImageComponent* PlayerAvatarImageComponent = nullptr;
+	void ShootSpread();
+	void ShootOrbital();
+	ImageComponent* PlayerAvatarImageComponent = nullptr;
     ImageComponent* PlayerAvatarThrustersImageComponent = nullptr;
     InputComponent* InputComp = nullptr;
 	SoundComponent* CoinSoundComponentPickup = nullptr;
     BoxCollisionComponent* Collision = nullptr;
+	Background* BG = nullptr;
 
     float PlayerMovementSpeed = 200.0f;
     float RotationSpeed = 2.0f;
@@ -53,7 +60,7 @@ private:
 	bool bRespawning = false;
     float RespawnTimer = 0.0f;
     const float RespawningTime = 3.0f;
-
+	float SpreadAmount = 30.0f;
 	int LookingDirectionX = 0;
 	int LookingDirectionY = -1;
 

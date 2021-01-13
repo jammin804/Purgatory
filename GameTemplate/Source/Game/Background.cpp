@@ -9,6 +9,14 @@ void Background::OnInit()
     BackgroundMusic = GameComponent::CreateInstance<SoundComponent>(this);
 }
 
+void Background::OnPostInit()
+{
+	if (BackgroundImage)
+	{
+		BackgroundImage->SetOffset(638.0f, 360.0f);
+	}
+}
+
 void Background::OnUpdate(float DeltaTime)
 {
 }

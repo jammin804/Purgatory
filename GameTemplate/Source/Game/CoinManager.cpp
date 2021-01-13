@@ -36,8 +36,9 @@ void CoinManager::OnRestart()
 Coin* CoinManager::CreateCoin(float posX, float posY)
 {
 	Coin* NewCoin = GameObject::CreateInstance<Coin>();
+	NewCoin->SetParent(GetParent());
 	Coins.push_back(NewCoin);
-	NewCoin->SetPosition(posX, posY);
+	NewCoin->SetWorldPosition(posX, posY);
 	return NewCoin;
 
 
