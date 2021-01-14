@@ -22,6 +22,11 @@ void Rock::OnPostInit()
 
         RockImage->LoadImage("Art/Enemy_D.png");
     }
+
+	if (Collision)
+	{
+		Collision->SetCollisionSize(150.0f, 150.0f);
+	}
 }
 
 void Rock::OnUpdate(float DeltaTime)
