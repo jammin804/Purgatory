@@ -2,6 +2,8 @@
 
 #include "Framework/GameObject.h"
 
+
+
 using namespace std;
 
 class BoxCollisionComponent;
@@ -41,6 +43,7 @@ private:
 	void SetFearLeft(int NewFearLeft) { FearLeft = NewFearLeft;  }
 	void ShootSpread();
 	void ShootOrbital();
+	void ShootBase();
 	ImageComponent* PlayerAvatarImageComponent = nullptr;
     ImageComponent* PlayerAvatarThrustersImageComponent = nullptr;
     InputComponent* InputComp = nullptr;
@@ -48,7 +51,8 @@ private:
     BoxCollisionComponent* Collision = nullptr;
 	Background* BG = nullptr;
 
-    float PlayerMovementSpeed = 200.0f;
+    float PlayerVerticalMovementSpeed = 200.0f;
+	float PlayerHorizontalMovementSpeed = 200.0f;
     float RotationSpeed = 2.0f;
     bool bCanMakeLaser = true;
     vector<Cross*> Crosses;

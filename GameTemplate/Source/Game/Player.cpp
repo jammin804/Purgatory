@@ -30,56 +30,96 @@ void Player::OnPostInit()
 
 void Player::OnUpdate(float DeltaTime)
 {
-    if (Crosses.size() > 0)
-    {
-        for (auto Iter = Crosses.begin(); Iter != Crosses.end();)
-        {
-            if ((*Iter)->IsDestroyed())
-            {
-                Iter = Crosses.erase(Iter);
-                continue;
-            }
-            ++Iter;
-        }
-    }
+	if (Crosses.size() > 0)
+	{
+		for (auto Iter = Crosses.begin(); Iter != Crosses.end();)
+		{
+			if ((*Iter)->IsDestroyed())
+			{
+				Iter = Crosses.erase(Iter);
+				continue;
+			}
+			++Iter;
+		}
+	}
 
-    if (bInvulnerable)
-    {
-        PlayerAvatarImageComponent->SetVisible(!PlayerAvatarImageComponent->IsVisible());
-        RespawnTimer += DeltaTime;
-        if (RespawnTimer > RespawningTime)
-        {
-            bInvulnerable = false;
-            PlayerAvatarImageComponent->SetVisible(true);
-        }
-    }
-    
+	if (bInvulnerable)
+	{
+		PlayerAvatarImageComponent->SetVisible(!PlayerAvatarImageComponent->IsVisible());
+		RespawnTimer += DeltaTime;
+		if (RespawnTimer > RespawningTime)
+		{
+			bInvulnerable = false;
+			PlayerAvatarImageComponent->SetVisible(true);
+		}
+	}
+
 	float DirectionX = 0.0f;
 	float DirectionY = 0.0f;
-	if (InputComp->IsKeyPressed(ALLEGRO_KEY_UP) || InputComp->IsKeyPressed(ALLEGRO_KEY_W))
+	float PosX = BG->GetPositionX();
+	float PosY = BG->GetPositionY();
+	if (PosY >= 680.0f)
 	{
-		DirectionY -= PlayerMovementSpeed * DeltaTime;
-		LookingDirectionY = 1;
-		LookingDirectionX = 0;
+		DirectionY = 0.0f;
+		
 	}
-	if (InputComp->IsKeyPressed(ALLEGRO_KEY_DOWN) || InputComp->IsKeyPressed(ALLEGRO_KEY_S))
+	else 
 	{
-		DirectionY += PlayerMovementSpeed * DeltaTime;
-		LookingDirectionY = -1;
-		LookingDirectionX = 0;
+		if (InputComp->IsKeyPressed(ALLEGRO_KEY_UP) || InputComp->IsKeyPressed(ALLEGRO_KEY_W))
+		{
+			DirectionY -= PlayerVerticalMovementSpeed * DeltaTime;
+			LookingDirectionY = 1;
+			LookingDirectionX = 0;
+		}
 	}
-    if (InputComp->IsKeyPressed(ALLEGRO_KEY_LEFT) || InputComp->IsKeyPressed(ALLEGRO_KEY_A))
-    {
-		DirectionX -= PlayerMovementSpeed * DeltaTime;
-		LookingDirectionX = -1;
-		LookingDirectionY = 0;
-    }
-    if (InputComp->IsKeyPressed(ALLEGRO_KEY_RIGHT) || InputComp->IsKeyPressed(ALLEGRO_KEY_D))
-    {
-		DirectionX += PlayerMovementSpeed * DeltaTime;
-		LookingDirectionX = 1;
-		LookingDirectionY = 0;
-    }
+	
+	if (PosY <= -680.0f)//Getting Stuck in wall
+	{
+		DirectionY = 0.0f;
+
+	}
+	else
+	{
+		if (InputComp->IsKeyPressed(ALLEGRO_KEY_DOWN) || InputComp->IsKeyPressed(ALLEGRO_KEY_S))
+		{
+			DirectionY += PlayerVerticalMovementSpeed * DeltaTime;
+			LookingDirectionY = -1;
+			LookingDirectionX = 0;
+		}
+
+	}
+	if (PosX >= 1280.0f)
+	{
+		DirectionX = 0;
+	}
+	else
+	{
+		
+		if (InputComp->IsKeyPressed(ALLEGRO_KEY_LEFT) || InputComp->IsKeyPressed(ALLEGRO_KEY_A))
+		{
+			DirectionX -= PlayerHorizontalMovementSpeed * DeltaTime;
+			LookingDirectionX = -1;
+			LookingDirectionY = 0;
+		}
+	}
+
+	if (PosX <= -1280.0f) //Getting Stuck in wall
+	{
+		DirectionX = 0;
+	}
+	else
+	{
+		if (InputComp->IsKeyPressed(ALLEGRO_KEY_RIGHT) || InputComp->IsKeyPressed(ALLEGRO_KEY_D))
+		{
+			DirectionX += PlayerHorizontalMovementSpeed * DeltaTime;
+			LookingDirectionX = 1;
+			LookingDirectionY = 0;
+		}
+
+	}
+
+
+    
 
 	/*Is just key pressed for looking direction - code below*/
 	
@@ -113,26 +153,10 @@ void Player::OnUpdate(float DeltaTime)
 	{
 		if (bCanMakeLaser)
 		{
-			/*int NumberOfCrossesToSpawn = 3;
-			int TimeSinceLastCross = 100;*/
-			/*for (int i = 0; i < NumberOfCrossesToSpawn; i++) for 3 shot burst
-			{
-				 
-					CreateCross(LookingDirectionX, LookingDirectionY);
-					// Need to space the bullets out based on time
-			}*/
-
-			/*CreateCross(LookingDirectionX, LookingDirectionY -= 15);
-			CreateCross(LookingDirectionX, LookingDirectionY += 15);
-			CreateCross(LookingDirectionX, LookingDirectionY += 15); */
 			//ShootSpread();
-			ShootOrbital();
-			//CreateCross(LookingDirectionX, LookingDirectionY);
+			//ShootOrbital();
+			ShootBase();
 
-			/* Shoots behind the player and in the front
-			CreateCross(LookingDirectionX, LookingDirectionY * 0 + sin(30));
-				CreateCross(LookingDirectionX, LookingDirectionY);
-				CreateCross(LookingDirectionX, LookingDirectionY * 0 - sin(30));*/
 			bCanMakeLaser = false;
 
 
@@ -172,6 +196,11 @@ void Player::ShootOrbital()
 	NewCross->SetOrbital(true);
 
 	Crosses.push_back(NewCross);
+}
+
+void Player::ShootBase()
+{
+	CreateCross(LookingDirectionX, LookingDirectionY);
 }
 
 void Player::OnRestart()
