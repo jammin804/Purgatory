@@ -19,8 +19,19 @@ void Rock::OnPostInit()
 		EnemyHealth->SetOffsetY(-50.0f);
 		EnemyHealth->SetOffsetX(-60.0f);
 		EnemyHealth->SetScaleX(ENEMY_MAX_LIFE);
-
-        RockImage->LoadImage("Art/Enemy_D.png");
+		if (ENEMY_MAX_LIFE > 2.0f)
+		{
+			RockImage->LoadImage("Art/Enemy_D.png");
+			if (ENEMY_MAX_LIFE > 3.0f);
+			{
+				RockImage->SetScale(2);
+			}
+		}
+		else
+		{
+			RockImage->LoadImage("Art/Enemy_Bat.png");
+		}
+        
     }
 
 	if (Collision)

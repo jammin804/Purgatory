@@ -35,7 +35,7 @@ private:
     float MaxLifeTime = 30.0f;
 	float MoveTimer = 0.0f; // when timer runs out switch
 	float MaxMoveTime = 2.0f;
-	float ENEMY_MAX_LIFE = 2.0f;
+	float ENEMY_MAX_LIFE = (float) ((rand() % 4) + 2);
 	float EnemyHealthLeft = ENEMY_MAX_LIFE;
     float MovementSpeed = 100.0f;
     float MovementDirectionX = 0.0f;
