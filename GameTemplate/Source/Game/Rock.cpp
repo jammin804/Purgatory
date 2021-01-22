@@ -6,33 +6,71 @@ void Rock::OnInit()
 {
     RockImage = GameComponent::CreateInstance<ImageComponent>(this);
     Collision = GameComponent::CreateInstance<BoxCollisionComponent>(this);
+	EnemyHealthLayer = GameComponent::CreateInstance<ImageComponent>(this);
 	EnemyHealth = GameComponent::CreateInstance<ImageComponent>(this);
 }
 
 void Rock::OnPostInit()
 {
+	float HealthBarOffsetX = -50.0f;
+	float HealthBarOffsetY = -60.0f;
+	std::string EnemyImagePath = "";
+	float EnemyScale = 1.0f;
+
+	switch (EnemyType)
+	{
+	case EEnemyType::Demon:
+	default:
+	{
+		EnemyImagePath = "Art/Enemy_D.png";
+		EnemyScale = ENEMY_MAX_LIFE *0.5f;
+		HealthBarOffsetY = ENEMY_MAX_LIFE * -30.0f;
+		break;
+	}
+
+	case EEnemyType::Bat:
+	{
+		EnemyImagePath = "Art/Enemy_Bat.png";
+		EnemyLifeBarScale = 0.5f;
+		HealthBarOffsetX = -10.0f;
+		HealthBarOffsetY = -15.0f;
+		EnemyScale = 1.0f;
+		break;
+	}
+
+	case EEnemyType::Golem:
+	{
+		EnemyImagePath = "Art/Enemy_D.png";
+		break;
+	}
+	}
+
     if (RockImage)
     {
-		//load power up image
+		RockImage->LoadImage(EnemyImagePath);
+		RockImage->SetScale(EnemyScale);
+    }
+
+	if (EnemyHealthLayer)
+	{
+		EnemyHealthLayer->SetScaleFromLeft(true);
+		EnemyHealthLayer->LoadImage("Art/healthbar_layer.png");
+
+		EnemyHealthLayer->SetOffsetY(HealthBarOffsetX);
+		EnemyHealthLayer->SetOffsetX(HealthBarOffsetY);
+		EnemyHealthLayer->SetScaleX(EnemyLifeBarScale);
+	}
+
+	if (EnemyHealth) 
+	{
+
 		EnemyHealth->SetScaleFromLeft(true);
 		EnemyHealth->LoadImage("Art/fear.png");
-		EnemyHealth->SetOffsetY(-50.0f);
-		EnemyHealth->SetOffsetX(-60.0f);
-		EnemyHealth->SetScaleX(ENEMY_MAX_LIFE);
-		if (ENEMY_MAX_LIFE > 2.0f)
-		{
-			RockImage->LoadImage("Art/Enemy_D.png");
-			if (ENEMY_MAX_LIFE > 3.0f);
-			{
-				RockImage->SetScale(2);
-			}
-		}
-		else
-		{
-			RockImage->LoadImage("Art/Enemy_Bat.png");
-		}
-        
-    }
+
+		EnemyHealth->SetOffsetY(HealthBarOffsetX);
+		EnemyHealth->SetOffsetX(HealthBarOffsetY);
+		EnemyHealth->SetScaleX(EnemyLifeBarScale);
+	}
 
 	if (Collision)
 	{
@@ -58,12 +96,6 @@ void Rock::OnUpdate(float DeltaTime)
 		bNeedsSwitch = !bNeedsSwitch;
 		MoveTimer = 0.0f;
 	}
-
-    LifeTimer += DeltaTime;
-    if (LifeTimer > MaxLifeTime)
-    {
-        RequestDestroy();
-    }
 }
 
 void Rock::OnRestart()
@@ -75,13 +107,18 @@ void Rock::OnRestart()
 
 void Rock::SetEnemyLifePercentage(float EnemyPercentageLife)
 {
-	EnemyHealth->SetScaleX(ENEMY_MAX_LIFE * EnemyPercentageLife);
+	EnemyHealth->SetScaleX(EnemyLifeBarScale * EnemyPercentageLife);
 }
 
 
 void Rock::Switch()
 {
 	bNeedsSwitch = true;
+}
+
+void Rock::SetEnemyType(EEnemyType type)
+{
+	EnemyType = type;
 }
 
 void Rock::EnemyHit()

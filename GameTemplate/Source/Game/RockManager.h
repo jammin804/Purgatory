@@ -11,6 +11,7 @@ class RockManager : public GameObject
 {
     protected:
         virtual void OnInit() override;
+		virtual void OnPostInit() override;
         virtual void OnUpdate(float DeltaTime) override;
 		virtual void OnRestart() override;
 
@@ -22,7 +23,5 @@ class RockManager : public GameObject
         void SetRandomPosition(Rock& RockToPosition);
 private:
         vector<Rock*> Rocks;
-        float TimeSinceSpawn = 0.0f;
-		const float INIT_SPAWN_TIMER = 3.0f;
-        float SpawnTimer = INIT_SPAWN_TIMER;
+		int NumberOfEnemiesToSpawn = 20;
 };

@@ -58,10 +58,9 @@ void Player::OnUpdate(float DeltaTime)
 	float DirectionY = 0.0f;
 	float PosX = BG->GetPositionX();
 	float PosY = BG->GetPositionY();
-	if (PosY >= 680.0f)
+	if (PosY >= BG->GetBackgroundHeight()*0.5f)
 	{
 		DirectionY = 0.0f;
-		
 	}
 	else 
 	{
@@ -73,7 +72,7 @@ void Player::OnUpdate(float DeltaTime)
 		}
 	}
 	
-	if (PosY <= -680.0f)//Getting Stuck in wall
+	if (PosY <= -BG->GetBackgroundHeight()*0.5f)//Getting Stuck in wall
 	{
 		DirectionY = 0.0f;
 
@@ -88,7 +87,7 @@ void Player::OnUpdate(float DeltaTime)
 		}
 
 	}
-	if (PosX >= 1280.0f)
+	if (PosX >= BG->GetBackgroundWidth()*0.5f)
 	{
 		DirectionX = 0;
 	}
@@ -103,7 +102,7 @@ void Player::OnUpdate(float DeltaTime)
 		}
 	}
 
-	if (PosX <= -1280.0f) //Getting Stuck in wall
+	if (PosX <= -BG->GetBackgroundWidth()*0.5f) //Getting Stuck in wall
 	{
 		DirectionX = 0;
 	}
@@ -125,6 +124,8 @@ void Player::OnUpdate(float DeltaTime)
 	
 	if (BG)
 	{
+		// Check the positions that i want to sent the background to are inside the bounds of the world
+		// If they're not, don't set the position of the background
 		BG->SetPosition(BG->GetPositionX() - DirectionX, BG->GetPositionY() - DirectionY);
 	}
 	//Update Sprite

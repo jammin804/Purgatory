@@ -77,6 +77,7 @@ private:
     bool bIsEnabled = true;
     bool bIsDestroyed = false;
     bool bInitialised = false;
+	bool bFullyInitialised = false;
     int RenderDepth = 0; // Higher values will be rendered(drawn) on top of GameObjects with smaller values
 };
 

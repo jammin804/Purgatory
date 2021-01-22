@@ -143,7 +143,7 @@ bool GameFramework::InitInternal()
     for (int i = 0; i < GameObjects.size(); ++i)
     {
         GameObject* GO = GameObjects[i];
-        if (!GO->bInitialised)
+        if (!GO->bFullyInitialised)
         {
             GO->PostInit();
         }
@@ -214,7 +214,7 @@ bool GameFramework::UpdateInternal()
             for (int i = 0; i < GameObjects.size(); ++i)
             {
                 GameObject* GO = GameObjects[i];
-                if (!GO->bInitialised)
+                if (!GO->bFullyInitialised)
                 {
                     GO->PostInit();
                 }

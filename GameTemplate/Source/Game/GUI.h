@@ -28,7 +28,9 @@ protected:
 
 public:
 	void SetBorderImage(string ImagePath);
+	void SetLayerImage(string ImagePath);
 	void SetLifeImage(string ImagePath);
+	void SetFearLayerImage(string ImagePath);
 	void SetFearImage(string ImagePath);
 	void SetFearBorderImage(string ImagePath);
 	void SetPlayer(const Player* NewPlayer) { player = NewPlayer; }
@@ -40,7 +42,9 @@ private:
 	void SetLifePercentage(float PercentageLife);
 private:
 	ImageComponent* BorderGUIImageComponent = nullptr;
+	ImageComponent* LayerGUIImageComponent = nullptr;
 	ImageComponent* LifeGUIImageComponent = nullptr;
+	ImageComponent* FearLayerGUIImageComponent = nullptr;
 	ImageComponent* FearGUIImageComponent = nullptr;
 	ImageComponent* FearBorderGUIImageComponent = nullptr;
 	ImageComponent* CoinGUIImageComponent = nullptr;

@@ -6,8 +6,11 @@
 
 void GUI::OnInit()
 {
+	LayerGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
 	LifeGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
 	BorderGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
+
+	FearLayerGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
 	FearGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
 	FearBorderGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
 	CoinGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
@@ -17,11 +20,17 @@ void GUI::OnInit()
 
 void GUI::OnPostInit()
 {
+	LayerGUIImageComponent->SetScaleFromLeft(true);
+	LayerGUIImageComponent->SetScale(MAX_LIFESCALE);
 	LifeGUIImageComponent->SetScaleFromLeft(true);
 	LifeGUIImageComponent->SetScaleX(MAX_LIFESCALE);
 	LifeGUIImageComponent->SetScaleY(MAX_LIFESCALE);
 	BorderGUIImageComponent->SetScaleFromLeft(true);
 	BorderGUIImageComponent->SetScale(MAX_LIFESCALE);
+
+	FearLayerGUIImageComponent->SetScaleFromLeft(true);
+	FearLayerGUIImageComponent->SetScale(MAX_LIFESCALE);
+	FearLayerGUIImageComponent->SetOffsetY(30.0f);
 	FearGUIImageComponent->SetScaleFromLeft(true);
 	FearGUIImageComponent->SetOffsetY(30.0f);
 	FearGUIImageComponent->SetScaleX(MAX_LIFESCALE);
@@ -70,12 +79,29 @@ void GUI::SetBorderImage(string ImagePath)
 	}
 }
 
+void GUI::SetLayerImage(string ImagePath)
+{
+	if (LayerGUIImageComponent)
+	{
+		LayerGUIImageComponent->LoadImage(ImagePath);
+	}
+}
+
 void GUI::SetLifeImage(string ImagePath)
 {
 	if (LifeGUIImageComponent)
 	{
 		LifeGUIImageComponent->LoadImage(ImagePath);
 	}
+}
+
+void GUI::SetFearLayerImage(string ImagePath)
+{
+	if (FearLayerGUIImageComponent)
+	{
+		FearLayerGUIImageComponent->LoadImage(ImagePath);
+	}
+
 }
 
 void GUI::SetFearImage(string ImagePath)

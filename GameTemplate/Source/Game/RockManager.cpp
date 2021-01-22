@@ -1,10 +1,20 @@
 #include "RockManager.h"
 #include "Rock.h"
 #include "Framework/Globals.h"
+#include "Background.h"
 
 void RockManager::OnInit()
 {
-        Rocks.reserve(100);
+	Rocks.reserve(NumberOfEnemiesToSpawn);
+}
+
+void RockManager::OnPostInit()
+{
+	for (int i = 0; i < NumberOfEnemiesToSpawn; ++i)
+	{
+		Rock* NewRock = CreateRock();
+		SetRandomPosition(*NewRock);
+	}
 }
 
 void RockManager::OnUpdate(float DeltaTime)
@@ -22,14 +32,6 @@ void RockManager::OnUpdate(float DeltaTime)
         ++RockIter;
     }
 
-    TimeSinceSpawn += DeltaTime;
-    if (TimeSinceSpawn > SpawnTimer)
-    {
-        SpawnTimer *= 0.979f;
-        TimeSinceSpawn = 0.0f;
-        Rock* NewRock = CreateRock();
-        SetRandomPosition(*NewRock);
-    }
 }
 
 void RockManager::OnRestart()
@@ -40,15 +42,14 @@ void RockManager::OnRestart()
 		CurrentRock->RequestDestroy();
 	}
 	Rocks.clear();
-
-	//Reset SpawnTimer?
-	SpawnTimer = INIT_SPAWN_TIMER;
 }
 
 Rock* RockManager::CreateRock(int SplitsLeft /*= 2*/)
 {
     Rock* NewRock = GameObject::CreateInstance<Rock>();
+	int RockTypeRandomizer = rand() % static_cast <int> (EEnemyType::COUNT);
 	NewRock->SetParent(GetParent());
+	NewRock->SetEnemyType(static_cast <EEnemyType> (RockTypeRandomizer));
     Rocks.push_back(NewRock);
     return NewRock;
 }
@@ -65,6 +66,11 @@ void RockManager::SetEnabled(bool bEnabled)
 
 void RockManager::SetRandomPosition(Rock& RockToPosition)
 {
+	const Background* BG = static_cast <const Background*> (GetParent());
+	if (!BG)
+	{
+		return;
+	}
     int OffscreenStart = rand() % 4;
 
     float StartPosX, StartPosY;
@@ -73,7 +79,7 @@ void RockManager::SetRandomPosition(Rock& RockToPosition)
     {
     case 0:
     {
-        StartPosX = -100.0f;
+        StartPosX = -BG->GetBackgroundWidth()*0.5f;
         StartPosY = rand() % Globals::WindowSizeY;
         float DirectionY = 1.0f - (StartPosY / (Globals::WindowSizeY * 0.5f));
         StartDirX = 0.6f;
@@ -84,7 +90,7 @@ void RockManager::SetRandomPosition(Rock& RockToPosition)
     case 1:
     {
         StartPosX = rand() % Globals::WindowSizeX;
-        StartPosY = -100.0f;
+        StartPosY = -BG->GetBackgroundHeight()*0.5f;
         float DirectionX = 1.0f - (StartPosX / (Globals::WindowSizeX * 0.5f));
         StartDirX = DirectionX * 0.4f;
         StartDirY = 0.4f;
@@ -92,7 +98,7 @@ void RockManager::SetRandomPosition(Rock& RockToPosition)
     break;
     case 2:
     {
-        StartPosX = Globals::WindowSizeX + 100.0f;
+        StartPosX = Globals::WindowSizeX + BG->GetBackgroundWidth()*0.5f;
         StartPosY = rand() % Globals::WindowSizeY;
         float DirectionY = 1.0f - (StartPosY / (Globals::WindowSizeY * 0.5f));
         StartDirX = -0.6f;
@@ -102,7 +108,7 @@ void RockManager::SetRandomPosition(Rock& RockToPosition)
     case 3:
     {
         StartPosX = rand() % Globals::WindowSizeX;
-        StartPosY = Globals::WindowSizeY + 100.0f;
+        StartPosY = Globals::WindowSizeY + BG->GetBackgroundHeight()*0.5f;
         float DirectionX = 1.0f - (StartPosX / (Globals::WindowSizeX * 0.5f));
         StartDirX = DirectionX * 0.4f;
         StartDirY = -0.4f;

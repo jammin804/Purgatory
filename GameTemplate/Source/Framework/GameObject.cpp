@@ -26,12 +26,17 @@ void GameObject::Init()
     {
         Component->Init();
     }
+	bInitialised = true;
 }
 
 void GameObject::PostInit()
 {
-    bInitialised = true;
-    OnPostInit();
+	if (bInitialised) 
+	{
+		bFullyInitialised = true;
+		OnPostInit();
+	}
+
 }
 
 void GameObject::Update(float DeltaTime)
