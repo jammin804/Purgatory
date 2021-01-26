@@ -16,6 +16,8 @@ void Rock::OnPostInit()
 	float HealthBarOffsetY = -60.0f;
 	std::string EnemyImagePath = "";
 	float EnemyScale = 1.0f;
+	float CollisionScaleX = 150.0f;
+	float CollisionScaleY = 150.0f;
 
 	switch (EnemyType)
 	{
@@ -23,8 +25,10 @@ void Rock::OnPostInit()
 	default:
 	{
 		EnemyImagePath = "Art/Enemy_D.png";
-		EnemyScale = ENEMY_MAX_LIFE *0.5f;
+		//EnemyScale = ENEMY_MAX_LIFE *0.5f;
 		HealthBarOffsetY = ENEMY_MAX_LIFE * -30.0f;
+		CollisionScaleX = 150.0f;
+		CollisionScaleY = 150.0f;
 		break;
 	}
 
@@ -35,12 +39,16 @@ void Rock::OnPostInit()
 		HealthBarOffsetX = -10.0f;
 		HealthBarOffsetY = -15.0f;
 		EnemyScale = 1.0f;
+		CollisionScaleX = 40.0f;
+		CollisionScaleY = 40.0f;
 		break;
 	}
 
 	case EEnemyType::Golem:
 	{
-		EnemyImagePath = "Art/Enemy_D.png";
+		EnemyImagePath = "Art/Enemy_Golem.png";
+		CollisionScaleX = 150.0f * 2;
+		CollisionScaleY = 150.0f * 2;
 		break;
 	}
 	}
@@ -74,7 +82,8 @@ void Rock::OnPostInit()
 
 	if (Collision)
 	{
-		Collision->SetCollisionSize(150.0f, 150.0f);
+		
+		Collision->SetCollisionSize(CollisionScaleX, CollisionScaleY);
 	}
 }
 

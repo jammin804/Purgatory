@@ -10,6 +10,8 @@ void RockManager::OnInit()
 
 void RockManager::OnPostInit()
 {
+	
+	
 	for (int i = 0; i < NumberOfEnemiesToSpawn; ++i)
 	{
 		Rock* NewRock = CreateRock();
@@ -67,11 +69,28 @@ void RockManager::SetEnabled(bool bEnabled)
 void RockManager::SetRandomPosition(Rock& RockToPosition)
 {
 	const Background* BG = static_cast <const Background*> (GetParent());
+
 	if (!BG)
 	{
 		return;
 	}
-    int OffscreenStart = rand() % 4;
+	if (NumberOfEnemiesInASpace <= 5)
+	{
+		OffscreenStart = 3;
+	}
+	if (NumberOfEnemiesInASpace > 5 && NumberOfEnemiesInASpace <= 10)
+	{
+		OffscreenStart = 1;
+	} 
+	if (NumberOfEnemiesInASpace > 10 && NumberOfEnemiesInASpace <= 15)
+	{
+		OffscreenStart = 2;
+	}
+	else
+	{
+		OffscreenStart = 0;
+	}
+    //int OffscreenStart = rand() % 4;
 
     float StartPosX, StartPosY;
     float StartDirX, StartDirY;
@@ -118,4 +137,6 @@ void RockManager::SetRandomPosition(Rock& RockToPosition)
     RockToPosition.SetMovementSpeed(150.0f);
     RockToPosition.SetPosition(StartPosX, StartPosY);
     RockToPosition.SetMovementDirection(StartDirX, StartDirY);
+
+	NumberOfEnemiesInASpace++;
 }

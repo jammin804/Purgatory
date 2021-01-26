@@ -24,4 +24,6 @@ class RockManager : public GameObject
 private:
         vector<Rock*> Rocks;
 		int NumberOfEnemiesToSpawn = 20;
+		int NumberOfEnemiesInASpace = 1;
+		int OffscreenStart = 0;
 };

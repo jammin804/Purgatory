@@ -6,6 +6,7 @@
 void Background::OnInit()
 {
     BackgroundImage = GameComponent::CreateInstance<ImageComponent>(this);
+	WallVImage = GameComponent::CreateInstance<ImageComponent>(this);
     BackgroundMusic = GameComponent::CreateInstance<SoundComponent>(this);
 }
 
@@ -27,6 +28,15 @@ void Background::SetImage(string ImagePath)
     {
         BackgroundImage->LoadImage(ImagePath);
     }
+}
+
+void Background::SetWallVImage(string ImagePath)
+{
+	if (WallVImage)
+	{
+		WallVImage->LoadImage(ImagePath);
+	}
+
 }
 
 void Background::SetMusic(string MusicPath)
