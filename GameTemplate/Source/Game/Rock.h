@@ -81,6 +81,7 @@ private:
 	void UpdateIdleState(float Deltatime);
 	void ExitIdleState();
 	void EnterPatrolState();
+	//void EnterPatrolState(EEnemyDir CurrentEnemyDir);
 	void UpdatePatrolState(float Deltatime);
 	void ExitPatrolState();
 	void EnterChaseState();

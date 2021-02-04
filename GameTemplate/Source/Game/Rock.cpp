@@ -167,6 +167,7 @@ void Rock::EnterIdleState()
 	//Initializing information
 	MovementSpeed = 0.0f;
 	IdleTimer = MaxIdleTime;
+
 }
 
 void Rock::UpdateIdleState(float Deltatime)
@@ -204,24 +205,48 @@ void Rock::ExitIdleState()
 
 void Rock::EnterPatrolState()
 {
-	MoveTimer = 0.0f;
-	MovementSpeed = 100.0f;
+	/*MoveTimer = 0.0f;
+	MovementSpeed = 100.0f;*/
+
+	/*if (CurrentEnemyDir == Right)
+	{
+		EnemyDirection = Down;
+	}
+	if (CurrentEnemyDir == Down)
+	{
+		EnemyDirection = Left;
+	}
+	else
+	{
+		EnemyDirection = Up;
+	}*/
 
 }
 
 void Rock::UpdatePatrolState(float Deltatime)
 {
-	//MoveTimer += Deltatime;
 	if (ENEMY_MAX_LIFE < ENEMY_MAX_LIFE*0.25)
 	{
 		ChangeState(EState::Flee);
 	}
 
-	switch (EnemyDirection)
+	/*switch (EnemyDirection)
 	{
+	case Right:
 	default:
+		SetPosition(GetPositionX() + (MovementDirectionX * MovementSpeed * Deltatime), GetPositionY());
 		break;
-	}
+	case Down:
+		SetPosition(GetPositionX(), GetPositionY() + (MovementDirectionY * MovementSpeed * Deltatime));
+		break;
+	case Left:
+		SetPosition(GetPositionX() - (MovementDirectionX * MovementSpeed * Deltatime), GetPositionY());
+		break;
+	case Up:
+		SetPosition(GetPositionX(), GetPositionY() - (MovementDirectionY * MovementSpeed * Deltatime));
+		break;
+
+	}*/
 
 	if (bNeedsSwitch) //Switching directions
 	{
@@ -233,6 +258,7 @@ void Rock::UpdatePatrolState(float Deltatime)
 	}
 
 	MoveTimer += Deltatime;
+	//CurrentEnemyDir = EnemyDirection;
 	if (MoveTimer > MaxMoveTime)
 	{
 		ChangeState(EState::Idle);
