@@ -36,7 +36,7 @@ public:
     virtual void SetEnabled(bool bEnabled) { bIsEnabled = bEnabled; }
 	virtual void Restart() {};
     bool IsEnabled() const { return bIsEnabled; }
-    bool IsDestroyed() const { return bIsDestroyed; }
+    bool IsDestroyed() const { return bShouldDestroy; }
 
     void SetParent(const GameObject* ParentComponent){ Parent = ParentComponent; }
     const GameObject* GetParent() const { return Parent; }

@@ -43,12 +43,12 @@ bool BoxCollisionComponent::DoesCollide(const BoxCollisionComponent* OtherCollis
     {
         float CenterX = OtherCollisionComponent->GetOwner()->GetWorldPositionX() + GetOffsetX();
         float CenterY = OtherCollisionComponent->GetOwner()->GetWorldPositionY() + GetOffsetY();
-        float HalfBoxWidth = BoxWidth * 0.5f;
-        float HalfBoxHeight = BoxHeight * 0.5f;
-        float BoxLocal[] = { CenterX - (HalfBoxWidth * Scale),
-        CenterY - (HalfBoxHeight * Scale),
-        BoxWidth * Scale,
-        BoxHeight * Scale };
+        float HalfBoxWidth = OtherCollisionComponent->BoxWidth * 0.5f;
+        float HalfBoxHeight = OtherCollisionComponent->BoxHeight * 0.5f;
+        float BoxLocal[] = { CenterX - (HalfBoxWidth * OtherCollisionComponent->Scale),
+        CenterY - (HalfBoxHeight * OtherCollisionComponent->Scale),
+        OtherCollisionComponent->BoxWidth * OtherCollisionComponent->Scale,
+        OtherCollisionComponent->BoxHeight * OtherCollisionComponent->Scale };
         for (int i = 0; i < 4; ++i)
         {
             Box2[i] = BoxLocal[i];

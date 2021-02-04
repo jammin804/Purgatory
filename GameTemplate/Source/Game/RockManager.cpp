@@ -98,8 +98,8 @@ void RockManager::SetRandomPosition(Rock& RockToPosition)
     {
     case 0:
     {
-        StartPosX = -BG->GetBackgroundWidth()*0.5f;
-        StartPosY = rand() % Globals::WindowSizeY;
+        StartPosX = -rand() % static_cast <int> (BG->GetBackgroundWidth()*0.5f);
+		StartPosY = rand() % BG->GetBackgroundHeight();
         float DirectionY = 1.0f - (StartPosY / (Globals::WindowSizeY * 0.5f));
         StartDirX = 0.6f;
         StartDirY = DirectionY * 0.25f;
@@ -108,8 +108,8 @@ void RockManager::SetRandomPosition(Rock& RockToPosition)
     break;
     case 1:
     {
-        StartPosX = rand() % Globals::WindowSizeX;
-        StartPosY = -BG->GetBackgroundHeight()*0.5f;
+		StartPosX = rand() % BG->GetBackgroundWidth();
+        StartPosY = -rand() % static_cast <int> (BG->GetBackgroundHeight()*0.5f);
         float DirectionX = 1.0f - (StartPosX / (Globals::WindowSizeX * 0.5f));
         StartDirX = DirectionX * 0.4f;
         StartDirY = 0.4f;
@@ -117,8 +117,8 @@ void RockManager::SetRandomPosition(Rock& RockToPosition)
     break;
     case 2:
     {
-        StartPosX = Globals::WindowSizeX + BG->GetBackgroundWidth()*0.5f;
-        StartPosY = rand() % Globals::WindowSizeY;
+        StartPosX = Globals::WindowSizeX + rand() % static_cast <int> (BG->GetBackgroundWidth()*0.5f);;
+        StartPosY = rand() % BG->GetBackgroundHeight();
         float DirectionY = 1.0f - (StartPosY / (Globals::WindowSizeY * 0.5f));
         StartDirX = -0.6f;
         StartDirY = DirectionY * 0.25f;
@@ -126,8 +126,8 @@ void RockManager::SetRandomPosition(Rock& RockToPosition)
     break;
     case 3:
     {
-        StartPosX = rand() % Globals::WindowSizeX;
-        StartPosY = Globals::WindowSizeY + BG->GetBackgroundHeight()*0.5f;
+        StartPosX = rand() % BG->GetBackgroundWidth();
+        StartPosY = Globals::WindowSizeY + rand() % static_cast <int> (BG->GetBackgroundHeight()*0.5f);
         float DirectionX = 1.0f - (StartPosX / (Globals::WindowSizeX * 0.5f));
         StartDirX = DirectionX * 0.4f;
         StartDirY = -0.4f;

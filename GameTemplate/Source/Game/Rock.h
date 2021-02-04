@@ -1,14 +1,23 @@
 #pragma once
 
 #include "Framework/GameObject.h"
+#include "Player.h"
 
 class BoxCollisionComponent;
+class Player;
 enum class EEnemyType : int
 {
 	Demon = 0,
 	Bat,
 	Golem,
 	COUNT
+};
+enum EEnemyDir : int
+{
+	Right = 0,
+	Down,
+	Left,
+	Up
 };
 class Rock : public GameObject
 {
@@ -31,9 +40,19 @@ public:
     float GetMovementDirectionY() const { return MovementDirectionY; }
 	void Switch(); // Function to switch when function is called
 	bool SwitchDirection() const { return bNeedsSwitch; } // 
+	void SetEnemyDirection(EEnemyDir direction);
     const BoxCollisionComponent* GetCollision() const { return Collision; }
 	void SetEnemyType(EEnemyType type);
+	//Player* Player1 = nullptr;
 private:
+	enum class EState : int
+	{
+		Idle = 0,
+		Patrol,
+		Chase,
+		Flee,
+		COUNT
+	};
     float RotationSpeed = 1.0f;
     class ImageComponent* RockImage = nullptr;
     BoxCollisionComponent* Collision = nullptr;
@@ -42,7 +61,7 @@ private:
     float LifeTimer = 0.0f;
     float MaxLifeTime = 30.0f;
 	float MoveTimer = 0.0f; // when timer runs out switch
-	float MaxMoveTime = 2.0f;
+	float MaxMoveTime = 3.0f;
 	float ENEMY_MAX_LIFE = (float) ((rand() % 4) + 2);
 	float EnemyLifeBarScale = 2.0f;
 	float EnemyHealthLeft = ENEMY_MAX_LIFE;
@@ -51,6 +70,23 @@ private:
     float MovementDirectionY = 0.0f;
 	bool bNeedsSwitch = false; // bool for switching
 	EEnemyType EnemyType = EEnemyType::Demon;
+	EEnemyDir EnemyDirection = EEnemyDir::Right;
+	EState CurrentState = EState::Idle;
+	float MaxIdleTime = 5.0f;
+	float IdleTimer = MaxIdleTime;
 private:
 	void SetEnemyLifePercentage(float EnemyPercentageLife);
+	void ChangeState(EState NewState);
+	void EnterIdleState();
+	void UpdateIdleState(float Deltatime);
+	void ExitIdleState();
+	void EnterPatrolState();
+	void UpdatePatrolState(float Deltatime);
+	void ExitPatrolState();
+	void EnterChaseState();
+	void UpdateChaseState();
+	void ExitChaseState();
+	void EnterFleeState();
+	void UpdateFleeState();
+	void ExitFleeState();
 };
