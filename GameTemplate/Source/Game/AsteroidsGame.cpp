@@ -76,6 +76,10 @@ void AsteroidsGame::OnPostInit()
 		{
 			RockMgr->SetParent(BG);
 		}
+		if (Player1)
+		{
+			RockMgr->SetPlayer(Player1);
+		}
 	}
 
 	if (CoinMgr)

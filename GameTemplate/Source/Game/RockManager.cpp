@@ -51,6 +51,7 @@ Rock* RockManager::CreateRock(int SplitsLeft /*= 2*/)
     Rock* NewRock = GameObject::CreateInstance<Rock>();
 	int RockTypeRandomizer = rand() % static_cast <int> (EEnemyType::COUNT);
 	NewRock->SetParent(GetParent());
+	NewRock->SetPlayer(Player1);
 	NewRock->SetEnemyType(static_cast <EEnemyType> (RockTypeRandomizer));
     Rocks.push_back(NewRock);
     return NewRock;

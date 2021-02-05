@@ -17,7 +17,8 @@ enum EEnemyDir : int
 	Right = 0,
 	Down,
 	Left,
-	Up
+	Up,
+	COUNT
 };
 class Rock : public GameObject
 {
@@ -28,8 +29,6 @@ protected:
 	virtual void OnRestart() override;
 
 public:
-
-
 	float GetEnemyLivesLeft() const { return EnemyHealthLeft; }
 	float GetEnemyMaxLivesLeft() const { return ENEMY_MAX_LIFE; }
 	void EnemyHit();
@@ -43,7 +42,7 @@ public:
 	void SetEnemyDirection(EEnemyDir direction);
     const BoxCollisionComponent* GetCollision() const { return Collision; }
 	void SetEnemyType(EEnemyType type);
-	//Player* Player1 = nullptr;
+	void SetPlayer(const Player* NewPlayer) { Player1 = NewPlayer; }
 private:
 	enum class EState : int
 	{
@@ -73,19 +72,26 @@ private:
 	EEnemyDir EnemyDirection = EEnemyDir::Right;
 	EState CurrentState = EState::Idle;
 	float MaxIdleTime = 5.0f;
-	float IdleTimer = MaxIdleTime;
+	float TimeInState = MaxIdleTime;
+	const Player* Player1 = nullptr;
 private:
 	void SetEnemyLifePercentage(float EnemyPercentageLife);
 	void ChangeState(EState NewState);
 	void EnterIdleState();
 	void UpdateIdleState(float Deltatime);
+
+	bool CheckForChase();
+
+	bool CheckForLostPlayer();
+	bool CheckForFear();
+
 	void ExitIdleState();
 	void EnterPatrolState();
 	//void EnterPatrolState(EEnemyDir CurrentEnemyDir);
 	void UpdatePatrolState(float Deltatime);
 	void ExitPatrolState();
 	void EnterChaseState();
-	void UpdateChaseState();
+	void UpdateChaseState(float Deltatime);
 	void ExitChaseState();
 	void EnterFleeState();
 	void UpdateFleeState();

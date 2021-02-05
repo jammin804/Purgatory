@@ -87,6 +87,8 @@ void Rock::OnPostInit()
 		
 		Collision->SetCollisionSize(CollisionScaleX, CollisionScaleY);
 	}
+
+	EnterIdleState();
 }
 
 void Rock::OnUpdate(float DeltaTime)
@@ -101,7 +103,7 @@ void Rock::OnUpdate(float DeltaTime)
 		UpdatePatrolState(DeltaTime);
 		break;
 	case EState::Chase:
-		UpdateChaseState();
+		UpdateChaseState(DeltaTime);
 		break;
 	case EState::Flee:
 		UpdateFleeState();
@@ -109,7 +111,7 @@ void Rock::OnUpdate(float DeltaTime)
 
 	}
 
-	
+	TimeInState += DeltaTime;
 }
 
 void Rock::OnRestart()
@@ -160,107 +162,120 @@ void Rock::ChangeState(EState NewState)
 	}
 
 	CurrentState = NewState;
+	TimeInState = 0.0f;
 }
 
 void Rock::EnterIdleState()
 {
 	//Initializing information
-	MovementSpeed = 0.0f;
-	IdleTimer = MaxIdleTime;
+	
 
 }
 
 void Rock::UpdateIdleState(float Deltatime)
 {
+	if (CheckForFear())
+	{
+		return;
+	}
+
+	if (CheckForChase())
+	{
+		return;
+	}
+
+	if(TimeInState >= MaxIdleTime)
+	{
+		ChangeState(EState::Patrol);
+	}
+
+}
+
+bool Rock::CheckForChase()
+{
+	float DirectionToPlayerX = Player1->GetWorldPositionX() - GetWorldPositionX();
+	float DirectionToPlayerY = Player1->GetWorldPositionY() - GetWorldPositionY();
+	float DirectionSize = sqrt(pow(DirectionToPlayerX, 2) + pow(DirectionToPlayerY, 2));
+
+	if (DirectionSize < 200.0f)
+	{
+		ChangeState(EState::Chase);
+		return true;
+	}
+	return false;
+}
+
+bool Rock::CheckForLostPlayer()
+{
+	float DirectionToPlayerX = Player1->GetWorldPositionX() - GetWorldPositionX();
+	float DirectionToPlayerY = Player1->GetWorldPositionY() - GetWorldPositionY();
+	float DirectionSize = sqrt(pow(DirectionToPlayerX, 2) + pow(DirectionToPlayerY, 2));
+
+	if (DirectionSize > 300.0f)
+	{
+		ChangeState(EState::Idle);
+		return true;
+	}
+	return false;
+}
+
+bool Rock::CheckForFear()
+{
 	//If enemy health is lower than 25% run away from players location
 	if (ENEMY_MAX_LIFE < ENEMY_MAX_LIFE*0.25)
 	{
 		ChangeState(EState::Flee);
+		return true;
 	}
-	// Is player close?
-	/*if (Player1->GetWorldPositionX() > GetWorldPositionX() + 100.0f)
-	{
-		ChangeState(EState::Chase);
-	}*/
-	else
-	{
-		
-		IdleTimer -= Deltatime;
-		if (IdleTimer <= 0)
-		{
-			ChangeState(EState::Patrol);
-		}
-
-	}
-
-
-
+	return false;
 }
 
 void Rock::ExitIdleState()
 {
-	//Cleaning up
-	IdleTimer = 0.0f;
+
 }
 
 void Rock::EnterPatrolState()
 {
-	/*MoveTimer = 0.0f;
-	MovementSpeed = 100.0f;*/
-
-	/*if (CurrentEnemyDir == Right)
-	{
-		EnemyDirection = Down;
-	}
-	if (CurrentEnemyDir == Down)
-	{
-		EnemyDirection = Left;
-	}
-	else
-	{
-		EnemyDirection = Up;
-	}*/
+	
 
 }
 
 void Rock::UpdatePatrolState(float Deltatime)
 {
-	if (ENEMY_MAX_LIFE < ENEMY_MAX_LIFE*0.25)
+	if (CheckForFear())
 	{
-		ChangeState(EState::Flee);
+		return;
 	}
 
-	/*switch (EnemyDirection)
+	if (CheckForChase())
+	{
+		return;
+	}
+
+
+	switch (EnemyDirection)
 	{
 	case Right:
 	default:
-		SetPosition(GetPositionX() + (MovementDirectionX * MovementSpeed * Deltatime), GetPositionY());
+		SetPosition(GetPositionX() + (1.0f * MovementSpeed * Deltatime), GetPositionY());
 		break;
 	case Down:
-		SetPosition(GetPositionX(), GetPositionY() + (MovementDirectionY * MovementSpeed * Deltatime));
+		SetPosition(GetPositionX(), GetPositionY() + (1.0f * MovementSpeed * Deltatime));
 		break;
 	case Left:
-		SetPosition(GetPositionX() - (MovementDirectionX * MovementSpeed * Deltatime), GetPositionY());
+		SetPosition(GetPositionX() - (1.0f * MovementSpeed * Deltatime), GetPositionY());
 		break;
 	case Up:
-		SetPosition(GetPositionX(), GetPositionY() - (MovementDirectionY * MovementSpeed * Deltatime));
+		SetPosition(GetPositionX(), GetPositionY() - (1.0f * MovementSpeed * Deltatime));
 		break;
 
-	}*/
-
-	if (bNeedsSwitch) //Switching directions
-	{
-		SetPosition(GetPositionX(), GetPositionY() + (MovementDirectionY * MovementSpeed * Deltatime));
-	}
-	else
-	{
-		SetPosition(GetPositionX() + (MovementDirectionX * MovementSpeed * Deltatime), GetPositionY());
 	}
 
-	MoveTimer += Deltatime;
-	//CurrentEnemyDir = EnemyDirection;
-	if (MoveTimer > MaxMoveTime)
+
+	if (TimeInState > MaxMoveTime)
 	{
+		EnemyDirection = static_cast <EEnemyDir>((EnemyDirection + 1) % EEnemyDir::COUNT);
 		ChangeState(EState::Idle);
 	}
 }
@@ -276,12 +291,30 @@ void Rock::EnterChaseState()
 
 }
 
-void Rock::UpdateChaseState()
+void Rock::UpdateChaseState(float Deltatime)
 {
-	if (ENEMY_MAX_LIFE < ENEMY_MAX_LIFE*0.25)
+	if (CheckForFear())
 	{
-		ChangeState(EState::Flee);
+		return;
 	}
+
+	if (CheckForLostPlayer())
+	{
+		return;
+	}
+
+	float ChaseDirectionX = Player1->GetWorldPositionX() - GetWorldPositionX();
+	float ChaseDirectionY = Player1->GetWorldPositionY() - GetWorldPositionY();
+	float ChaseDirectionSize = sqrt(pow(ChaseDirectionX, 2) + pow(ChaseDirectionY, 2));
+	
+	if (ChaseDirectionSize != 0.0f)
+	{
+		ChaseDirectionX /= ChaseDirectionSize;
+		ChaseDirectionY /= ChaseDirectionSize;
+
+		SetPosition(GetPositionX() + (ChaseDirectionX *MovementSpeed*0.5f * Deltatime), GetPositionY() + (ChaseDirectionY * MovementSpeed*0.5f * Deltatime));
+	}
+	
 }
 
 void Rock::ExitChaseState()
