@@ -67,7 +67,7 @@ void Rock::OnPostInit()
 	if (EnemyHealthLayer)
 	{
 		EnemyHealthLayer->SetScaleFromLeft(true);
-		EnemyHealthLayer->LoadImage("Art/healthbar_layer.png");
+		EnemyHealthLayer->LoadImage("Art/enemyhealthbar_layer.png");
 
 		EnemyHealthLayer->SetOffsetY(HealthBarOffsetX);
 		EnemyHealthLayer->SetOffsetX(HealthBarOffsetY);
@@ -78,7 +78,7 @@ void Rock::OnPostInit()
 	{
 
 		EnemyHealth->SetScaleFromLeft(true);
-		EnemyHealth->LoadImage("Art/fear.png");
+		EnemyHealth->LoadImage("Art/enemyhealthbar.png");
 
 		EnemyHealth->SetOffsetY(HealthBarOffsetX);
 		EnemyHealth->SetOffsetX(HealthBarOffsetY);
