@@ -28,7 +28,8 @@ void Rock::OnPostInit()
 	{
 		EnemyImagePath = "Art/Enemy_D.png";
 		//EnemyScale = ENEMY_MAX_LIFE *0.5f;
-		HealthBarOffsetY = ENEMY_MAX_LIFE * -30.0f;
+		HealthBarOffsetX = -100.0f;
+		HealthBarOffsetY = -60.0f;
 		CollisionScaleX = 150.0f;
 		CollisionScaleY = 150.0f;
 		break;
@@ -38,7 +39,7 @@ void Rock::OnPostInit()
 	{
 		EnemyImagePath = "Art/Enemy_Bat.png";
 		EnemyLifeBarScale = 0.5f;
-		HealthBarOffsetX = -10.0f;
+		HealthBarOffsetX = -30.0f;
 		HealthBarOffsetY = -15.0f;
 		EnemyScale = 1.0f;
 		CollisionScaleX = 40.0f;
@@ -51,6 +52,8 @@ void Rock::OnPostInit()
 		EnemyImagePath = "Art/Enemy_Golem.png";
 		CollisionScaleX = 150.0f * 2;
 		CollisionScaleY = 150.0f * 2;
+		HealthBarOffsetX = -160.0f;
+		HealthBarOffsetY = -70.0f;
 		break;
 	}
 	}
