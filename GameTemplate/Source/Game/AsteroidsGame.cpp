@@ -29,7 +29,7 @@ void AsteroidsGame::OnPostInit()
 {
     if (BG)
     {
-        BG->SetImage("Art/background_base.png");
+        BG->SetImage("Art/background_with_tiles.png");
         BG->SetMusic("Audio/Music.wav");
 		//BG->SetWallVImage("Art/backgroundWall_V.png");
     }

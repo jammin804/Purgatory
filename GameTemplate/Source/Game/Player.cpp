@@ -58,9 +58,16 @@ void Player::OnUpdate(float DeltaTime)
 	float DirectionY = 0.0f;
 	float PosX = BG->GetPositionX();
 	float PosY = BG->GetPositionY();
+
+	//Add a while loop to check to see if the player + 32 px is near the edge of the world.		
+
 	if (PosY >= BG->GetBackgroundHeight()*0.5f)
 	{
-		DirectionY = 0.0f;
+		while (PosY + 1 != BG->GetBackgroundHeight()*0.5f)
+		{
+			DirectionY--;
+		}
+
 	}
 	else 
 	{
@@ -102,7 +109,7 @@ void Player::OnUpdate(float DeltaTime)
 		}
 	}
 
-	if (PosX <= -BG->GetBackgroundWidth()*0.5f) //Getting Stuck in wall
+	if (PosX <= -BG->GetBackgroundWidth()) //Getting Stuck in wall
 	{
 		DirectionX = 0;
 	}

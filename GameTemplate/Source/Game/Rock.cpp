@@ -171,8 +171,18 @@ void Rock::ChangeState(EState NewState)
 void Rock::EnterIdleState()
 {
 	//Initializing information
-	
-
+	/*if (EEnemyType == Demon)
+	{
+		EnemyImagePath = "Art / Enemy_D.png";
+	}
+	else if (EEnemyType == Bat)
+	{
+		EnemyImagePath = "Art/Enemy_Bat.png";
+	}
+	else
+	{
+		EnemyImagePath = "Art/Enemy_Golem.png";
+	}*/
 }
 
 void Rock::UpdateIdleState(float Deltatime)
@@ -240,7 +250,18 @@ void Rock::ExitIdleState()
 
 void Rock::EnterPatrolState()
 {
-	
+	/*if (EEnemyType == Demon)
+	{
+		EnemyImagePath = "Art / Enemy_D.png";
+	}
+	else if (EEnemyType == Bat)
+	{
+		EnemyImagePath = "Art/Enemy_Bat.png";
+	}
+	else
+	{
+		EnemyImagePath = "Art/Enemy_Golem.png";
+	}*/
 
 }
 
@@ -291,6 +312,18 @@ void Rock::ExitPatrolState()
 
 void Rock::EnterChaseState()
 {
+	/*if (EEnemyType == Demon)
+	{
+		EnemyImagePath = "Art/Enemy_D.png";
+	}
+	else if (EEnemyType == Bat)
+	{
+		EnemyImagePath = "Art/Enemy_Bat_Chase.png";
+	}
+	else
+	{
+		EnemyImagePath = "Art/Enemy_Golem_Chase.png";
+	}*/
 
 }
 
@@ -327,6 +360,18 @@ void Rock::ExitChaseState()
 
 void Rock::EnterFleeState()
 {
+	/*if (EEnemyType == Demon)
+	{
+		EnemyImagePath = "Art/Enemy_D.png";
+	}
+	else if (EEnemyType == Bat)
+	{
+		EnemyImagePath = "Art/Enemy_Bat_Flee.png";
+	}
+	else
+	{
+		EnemyImagePath = "Art/Enemy_Golem_Flee.png";
+	}*/
 	
 }
 
