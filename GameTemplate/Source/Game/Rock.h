@@ -53,7 +53,7 @@ private:
 		COUNT
 	};
     float RotationSpeed = 1.0f;
-    class ImageComponent* RockImage = nullptr;
+    class ImageComponent* EnemyImage = nullptr;
     BoxCollisionComponent* Collision = nullptr;
 	class ImageComponent* EnemyHealthLayer = nullptr;
 	class ImageComponent* EnemyHealth = nullptr;

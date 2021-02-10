@@ -60,69 +60,47 @@ void Player::OnUpdate(float DeltaTime)
 	float PosY = BG->GetPositionY();
 
 	//Add a while loop to check to see if the player + 32 px is near the edge of the world.		
-
-	if (PosY >= BG->GetBackgroundHeight()*0.5f)
+	if (InputComp->IsKeyPressed(ALLEGRO_KEY_UP) || InputComp->IsKeyPressed(ALLEGRO_KEY_W))
 	{
-		while (PosY + 1 != BG->GetBackgroundHeight()*0.5f)
-		{
-			DirectionY--;
-		}
-
-	}
-	else 
-	{
-		if (InputComp->IsKeyPressed(ALLEGRO_KEY_UP) || InputComp->IsKeyPressed(ALLEGRO_KEY_W))
-		{
-			DirectionY -= PlayerVerticalMovementSpeed * DeltaTime;
-			LookingDirectionY = 1;
-			LookingDirectionX = 0;
-		}
-	}
-	
-	if (PosY <= -BG->GetBackgroundHeight()*0.5f)//Getting Stuck in wall
-	{
-		DirectionY = 0.0f;
-
-	}
-	else
-	{
-		if (InputComp->IsKeyPressed(ALLEGRO_KEY_DOWN) || InputComp->IsKeyPressed(ALLEGRO_KEY_S))
-		{
-			DirectionY += PlayerVerticalMovementSpeed * DeltaTime;
-			LookingDirectionY = -1;
-			LookingDirectionX = 0;
-		}
-
-	}
-	if (PosX >= BG->GetBackgroundWidth()*0.5f)
-	{
-		DirectionX = 0;
-	}
-	else
-	{
-		
-		if (InputComp->IsKeyPressed(ALLEGRO_KEY_LEFT) || InputComp->IsKeyPressed(ALLEGRO_KEY_A))
-		{
-			DirectionX -= PlayerHorizontalMovementSpeed * DeltaTime;
-			LookingDirectionX = -1;
-			LookingDirectionY = 0;
-		}
+		DirectionY -= PlayerVerticalMovementSpeed * DeltaTime;
+		LookingDirectionY = 1;
+		LookingDirectionX = 0;
 	}
 
-	if (PosX <= -BG->GetBackgroundWidth()) //Getting Stuck in wall
+	if (InputComp->IsKeyPressed(ALLEGRO_KEY_DOWN) || InputComp->IsKeyPressed(ALLEGRO_KEY_S))
 	{
-		DirectionX = 0;
+		DirectionY += PlayerVerticalMovementSpeed * DeltaTime;
+		LookingDirectionY = -1;
+		LookingDirectionX = 0;
 	}
-	else
-	{
-		if (InputComp->IsKeyPressed(ALLEGRO_KEY_RIGHT) || InputComp->IsKeyPressed(ALLEGRO_KEY_D))
-		{
-			DirectionX += PlayerHorizontalMovementSpeed * DeltaTime;
-			LookingDirectionX = 1;
-			LookingDirectionY = 0;
-		}
 
+	if (InputComp->IsKeyPressed(ALLEGRO_KEY_LEFT) || InputComp->IsKeyPressed(ALLEGRO_KEY_A))
+	{
+		DirectionX -= PlayerHorizontalMovementSpeed * DeltaTime;
+		LookingDirectionX = -1;
+		LookingDirectionY = 0;
 	}
+
+	if (InputComp->IsKeyPressed(ALLEGRO_KEY_RIGHT) || InputComp->IsKeyPressed(ALLEGRO_KEY_D))
+	{
+		DirectionX += PlayerHorizontalMovementSpeed * DeltaTime;
+		LookingDirectionX = 1;
+		LookingDirectionY = 0;
+	}
+	float DesiredPostionX = PosX - DirectionX;
+	float DesiredPostionY = PosY - DirectionY;
+
+	if (DesiredPostionY > BG->GetBackgroundHeight()*0.5f ||
+		DesiredPostionY < -BG->GetBackgroundHeight()*0.5f)
+	{
+		DesiredPostionY = PosY;
+	}
+	if (DesiredPostionX > BG->GetBackgroundWidth()*0.5f ||
+		DesiredPostionX < -BG->GetBackgroundWidth()*0.5f)
+	{
+		DesiredPostionX = PosX;
+	}
+
 
 
     
@@ -131,9 +109,7 @@ void Player::OnUpdate(float DeltaTime)
 	
 	if (BG)
 	{
-		// Check the positions that i want to sent the background to are inside the bounds of the world
-		// If they're not, don't set the position of the background
-		BG->SetPosition(BG->GetPositionX() - DirectionX, BG->GetPositionY() - DirectionY);
+		BG->SetPosition(DesiredPostionX, DesiredPostionY);
 	}
 	//Update Sprite
 	

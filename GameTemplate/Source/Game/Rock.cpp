@@ -5,7 +5,7 @@
 
 void Rock::OnInit()
 {
-    RockImage = GameComponent::CreateInstance<ImageComponent>(this);
+    EnemyImage = GameComponent::CreateInstance<ImageComponent>(this);
     Collision = GameComponent::CreateInstance<BoxCollisionComponent>(this);
 	EnemyHealthLayer = GameComponent::CreateInstance<ImageComponent>(this);
 	EnemyHealth = GameComponent::CreateInstance<ImageComponent>(this);
@@ -58,10 +58,10 @@ void Rock::OnPostInit()
 	}
 	}
 
-    if (RockImage)
+    if (EnemyImage)
     {
-		RockImage->LoadImage(EnemyImagePath);
-		RockImage->SetScale(EnemyScale);
+		EnemyImage->LoadImage(EnemyImagePath);
+		EnemyImage->SetScale(EnemyScale);
     }
 
 	if (EnemyHealthLayer)
@@ -168,21 +168,38 @@ void Rock::ChangeState(EState NewState)
 	TimeInState = 0.0f;
 }
 
+float RandomRange(float min, float max) 
+{
+	float Accuracy = 1000.0f;
+	float Range = (max - min) * Accuracy;
+
+	int RandomNum = rand() % static_cast <int> (Range);
+
+	return (RandomNum / Accuracy) + min;
+}
+
 void Rock::EnterIdleState()
 {
-	//Initializing information
-	/*if (EEnemyType == Demon)
+	//Initializing information - change to switch
+	std::string EnemyImagePath = "";
+	if (EnemyType == EEnemyType::Demon)
 	{
-		EnemyImagePath = "Art / Enemy_D.png";
+		EnemyImagePath = "Art/Enemy_D.png";
+		MaxIdleTime = RandomRange(3.0f, 5.0f);
 	}
-	else if (EEnemyType == Bat)
+	else if (EnemyType == EEnemyType::Bat)
 	{
 		EnemyImagePath = "Art/Enemy_Bat.png";
+		MaxIdleTime = RandomRange(1.0f, 3.0f);
 	}
 	else
 	{
 		EnemyImagePath = "Art/Enemy_Golem.png";
-	}*/
+		MaxIdleTime = RandomRange(5.0f, 7.0f);
+	}
+
+	EnemyImage->LoadImage(EnemyImagePath);
+
 }
 
 void Rock::UpdateIdleState(float Deltatime)
@@ -235,7 +252,7 @@ bool Rock::CheckForLostPlayer()
 bool Rock::CheckForFear()
 {
 	//If enemy health is lower than 25% run away from players location
-	if (ENEMY_MAX_LIFE < ENEMY_MAX_LIFE*0.25)
+	if (EnemyHealthLeft < ENEMY_MAX_LIFE*0.25)
 	{
 		ChangeState(EState::Flee);
 		return true;
@@ -250,23 +267,30 @@ void Rock::ExitIdleState()
 
 void Rock::EnterPatrolState()
 {
-	/*if (EEnemyType == Demon)
+	std::string EnemyImagePath = "";
+	if (EnemyType == EEnemyType::Demon)
 	{
-		EnemyImagePath = "Art / Enemy_D.png";
+		EnemyImagePath = "Art/Enemy_D.png";
+		MaxMoveTime = RandomRange(3.0f, 5.0f);
 	}
-	else if (EEnemyType == Bat)
+	else if (EnemyType == EEnemyType::Bat)
 	{
 		EnemyImagePath = "Art/Enemy_Bat.png";
+		MaxMoveTime = RandomRange(5.0f, 7.0f);
 	}
 	else
 	{
 		EnemyImagePath = "Art/Enemy_Golem.png";
-	}*/
+		MaxMoveTime = RandomRange(1.0f, 3.0f);
+	}
+
+	EnemyImage->LoadImage(EnemyImagePath);
 
 }
 
 void Rock::UpdatePatrolState(float Deltatime)
 {
+
 	if (CheckForFear())
 	{
 		return;
@@ -312,18 +336,21 @@ void Rock::ExitPatrolState()
 
 void Rock::EnterChaseState()
 {
-	/*if (EEnemyType == Demon)
+	std::string EnemyImagePath = "";
+	if (EnemyType == EEnemyType::Demon)
 	{
-		EnemyImagePath = "Art/Enemy_D.png";
+		EnemyImagePath = "Art/Enemy_D_Chase.png";
 	}
-	else if (EEnemyType == Bat)
+	else if (EnemyType == EEnemyType::Bat)
 	{
 		EnemyImagePath = "Art/Enemy_Bat_Chase.png";
 	}
 	else
 	{
 		EnemyImagePath = "Art/Enemy_Golem_Chase.png";
-	}*/
+	}
+
+	EnemyImage->LoadImage(EnemyImagePath);
 
 }
 
@@ -360,19 +387,21 @@ void Rock::ExitChaseState()
 
 void Rock::EnterFleeState()
 {
-	/*if (EEnemyType == Demon)
+	std::string EnemyImagePath = "";
+	if (EnemyType == EEnemyType::Demon)
 	{
 		EnemyImagePath = "Art/Enemy_D.png";
 	}
-	else if (EEnemyType == Bat)
+	else if (EnemyType == EEnemyType::Bat)
 	{
 		EnemyImagePath = "Art/Enemy_Bat_Flee.png";
 	}
 	else
 	{
 		EnemyImagePath = "Art/Enemy_Golem_Flee.png";
-	}*/
-	
+	}
+
+	EnemyImage->LoadImage(EnemyImagePath);
 }
 
 void Rock::UpdateFleeState()
