@@ -94,6 +94,6 @@ private:
 	void UpdateChaseState(float Deltatime);
 	void ExitChaseState();
 	void EnterFleeState();
-	void UpdateFleeState();
+	void UpdateFleeState(float DeltaTime);
 	void ExitFleeState();
 };

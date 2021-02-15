@@ -109,7 +109,7 @@ void Rock::OnUpdate(float DeltaTime)
 		UpdateChaseState(DeltaTime);
 		break;
 	case EState::Flee:
-		UpdateFleeState();
+		UpdateFleeState(DeltaTime);
 		break;
 
 	}
@@ -390,7 +390,7 @@ void Rock::EnterFleeState()
 	std::string EnemyImagePath = "";
 	if (EnemyType == EEnemyType::Demon)
 	{
-		EnemyImagePath = "Art/Enemy_D.png";
+		EnemyImagePath = "Art/Enemy_D_Flee.png";
 	}
 	else if (EnemyType == EEnemyType::Bat)
 	{
@@ -404,9 +404,26 @@ void Rock::EnterFleeState()
 	EnemyImage->LoadImage(EnemyImagePath);
 }
 
-void Rock::UpdateFleeState()
+void Rock::UpdateFleeState(float DeltaTime)
 {
+	
 
+	if (CheckForLostPlayer())
+	{
+		return;
+	}
+
+	float FleeDirectionX = Player1->GetWorldPositionX() + GetWorldPositionX();
+	float FleeDirectionY = Player1->GetWorldPositionY() + GetWorldPositionY();
+	float FleeDirectionSize = sqrt(pow(FleeDirectionX, 2) - pow(FleeDirectionY, 2));
+
+	if (FleeDirectionSize != 0.0f)
+	{
+		FleeDirectionX /=FleeDirectionSize;
+		FleeDirectionY /= FleeDirectionSize;
+
+		SetPosition(GetPositionX() - (FleeDirectionX *MovementSpeed*1.5f * DeltaTime), GetPositionY() - (FleeDirectionY * MovementSpeed*1.5f * DeltaTime));
+	}
 }
 
 void Rock::ExitFleeState()
