@@ -186,16 +186,22 @@ void Rock::EnterIdleState()
 	{
 		EnemyImagePath = "Art/Enemy_D.png";
 		MaxIdleTime = RandomRange(3.0f, 5.0f);
+		MaxDetectionRadius = RandomRange(300.0f, 500.0f);
+
 	}
 	else if (EnemyType == EEnemyType::Bat)
 	{
 		EnemyImagePath = "Art/Enemy_Bat.png";
 		MaxIdleTime = RandomRange(1.0f, 3.0f);
+		MaxDetectionRadius = RandomRange(400.0f, 600.0f);
+
 	}
 	else
 	{
 		EnemyImagePath = "Art/Enemy_Golem.png";
 		MaxIdleTime = RandomRange(5.0f, 7.0f);
+		MaxDetectionRadius = RandomRange(200.0f, 400.0f);
+
 	}
 
 	EnemyImage->LoadImage(EnemyImagePath);
@@ -227,7 +233,7 @@ bool Rock::CheckForChase()
 	float DirectionToPlayerY = Player1->GetWorldPositionY() - GetWorldPositionY();
 	float DirectionSize = sqrt(pow(DirectionToPlayerX, 2) + pow(DirectionToPlayerY, 2));
 
-	if (DirectionSize < 200.0f)
+	if (DirectionSize <= MaxDetectionRadius) // Added new rand range to detection but its just blinks at a
 	{
 		ChangeState(EState::Chase);
 		return true;
@@ -422,7 +428,7 @@ void Rock::UpdateFleeState(float DeltaTime)
 		FleeDirectionX /=FleeDirectionSize;
 		FleeDirectionY /= FleeDirectionSize;
 
-		SetPosition(GetPositionX() - (FleeDirectionX *MovementSpeed*1.5f * DeltaTime), GetPositionY() - (FleeDirectionY * MovementSpeed*1.5f * DeltaTime));
+		SetPosition(GetPositionX() - (FleeDirectionX *MovementSpeed*0.5f * DeltaTime), GetPositionY() - (FleeDirectionY * MovementSpeed*0.5f * DeltaTime));
 	}
 }
 

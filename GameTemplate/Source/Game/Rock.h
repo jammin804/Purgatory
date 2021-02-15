@@ -73,6 +73,7 @@ private:
 	EState CurrentState = EState::Idle;
 	float MaxIdleTime = 5.0f;
 	float TimeInState = MaxIdleTime;
+	float MaxDetectionRadius = 0.0f;
 	const Player* Player1 = nullptr;
 private:
 	void SetEnemyLifePercentage(float EnemyPercentageLife);
@@ -87,7 +88,6 @@ private:
 
 	void ExitIdleState();
 	void EnterPatrolState();
-	//void EnterPatrolState(EEnemyDir CurrentEnemyDir);
 	void UpdatePatrolState(float Deltatime);
 	void ExitPatrolState();
 	void EnterChaseState();

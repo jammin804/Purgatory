@@ -14,6 +14,9 @@ void Coin::OnInit()
 
 void Coin::OnPostInit()
 {
+	float CollisionScaleX = 20.0f;
+	float CollisionScaleY = 20.0f;
+
 	if (CoinImage)
 	{
 		CoinImage->LoadImage("Art/Coins.png");
@@ -29,6 +32,12 @@ void Coin::OnPostInit()
 	}
 	StartPosY = GetPositionY();
 	UpdateMovement(0.2f);
+
+	if (Collision)
+	{
+
+		Collision->SetCollisionSize(CollisionScaleX, CollisionScaleY);
+	}
 }
 
 void Coin::OnUpdate(float DeltaTime)
