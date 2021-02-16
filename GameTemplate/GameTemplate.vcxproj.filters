@@ -81,6 +81,9 @@
     <ClCompile Include="Source\Game\GameFlow.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Game\Laser.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Game\RockManager.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
@@ -104,6 +107,9 @@
     </ClCompile>
     <ClCompile Include="Source\Game\Sfx.cpp">
       <Filter>Source Files</Filter>
+	</ClCompile>
+    <ClCompile Include="Source\Framework\BitmapManager.cpp">
+      <Filter>Source Files\Framework</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="Source\Game\Sfx.h">
       <Filter>Header Files</Filter>
+    </ClInclude>	
+    <ClInclude Include="Source\Framework\BitmapManager.h">
+      <Filter>Header Files\Framework</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

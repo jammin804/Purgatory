@@ -23,7 +23,7 @@ void TextComponent::OnRender()
 
 void TextComponent::SetFont(string FontPath, int FontSize)
 {
-    Font = GameFramework::Get().FntManager.FindOrAddFont(FontPath, FontSize);
+    Font = GameFramework::Get().GetFontManager().FindOrAddFont(FontPath, FontSize);
 }
 
 void TextComponent::SetVisible(bool bIsNowVisible)

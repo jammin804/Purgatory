@@ -24,9 +24,7 @@ protected:
     virtual void OnRender() override;
 
 private:
-    struct ALLEGRO_BITMAP* ImageBitmap;
-    int ImageWidth = 0;
-    int ImageHeight = 0;
+    const SBitmapCache* ImageBitmap;
 	float ScaleX = 1.0f;
 	float ScaleY = 1.0f;
 	bool ScaleFromLeft = false;

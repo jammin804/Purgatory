@@ -2,7 +2,6 @@
 
 #include "GameObject.h"
 #include <allegro5/bitmap_draw.h>
-#include <allegro5/bitmap_io.h>
 
 ImageComponent::ImageComponent(GameObject* Owner)
     : GameComponent(Owner)
@@ -14,7 +13,6 @@ void ImageComponent::OnShutdown()
 {
     if (ImageBitmap)
     {
-        al_destroy_bitmap(ImageBitmap);
         ImageBitmap = nullptr;
     }
 }
@@ -26,26 +24,21 @@ void ImageComponent::OnRender()
         const GameObject* Owner = GetOwner();
         if (ScaleFromLeft)
         {
-            al_draw_scaled_rotated_bitmap(ImageBitmap, ImageWidth * 0.0f, ImageHeight * 0.5f, Owner->GetWorldPositionX() + GetOffsetX(), Owner->GetWorldPositionY() + GetOffsetY(), ScaleX, ScaleY, Owner->GetWorldRotation(), 0);
+            al_draw_scaled_rotated_bitmap(ImageBitmap->ImageBitmap, ImageBitmap->ImageWidth * 0.0f, ImageBitmap->ImageHeight * 0.5f, Owner->GetWorldPositionX() + GetOffsetX(), Owner->GetWorldPositionY() + GetOffsetY(), ScaleX, ScaleY, Owner->GetWorldRotation(), 0);
         }
         else
         {
-            al_draw_scaled_rotated_bitmap(ImageBitmap, ImageWidth * 0.5f, ImageHeight * 0.5f, Owner->GetWorldPositionX() + GetOffsetX(), Owner->GetWorldPositionY() + GetOffsetY(), ScaleX, ScaleY, Owner->GetWorldRotation(), 0);
+            al_draw_scaled_rotated_bitmap(ImageBitmap->ImageBitmap, ImageBitmap->ImageWidth * 0.5f, ImageBitmap->ImageHeight * 0.5f, Owner->GetWorldPositionX() + GetOffsetX(), Owner->GetWorldPositionY() + GetOffsetY(), ScaleX, ScaleY, Owner->GetWorldRotation(), 0);
         }
     }
 }
 
 void ImageComponent::LoadImage(string ImagePath)
 {
-    ImageBitmap = al_load_bitmap(ImagePath.c_str());
+    ImageBitmap = GameFramework::Get().GetBitmapManager().FindOrAddBitmap(ImagePath);;
     if (!ImageBitmap)
     {
         printf("Couldn't load Image\n");
-    }
-    else
-    {
-        ImageWidth = al_get_bitmap_width(ImageBitmap);
-        ImageHeight = al_get_bitmap_height(ImageBitmap);
     }
 }
 
