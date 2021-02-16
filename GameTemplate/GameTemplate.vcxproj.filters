@@ -93,6 +93,9 @@
     <ClCompile Include="Source\Framework\FontManager.cpp">
       <Filter>Source Files\Framework</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Framework\BitmapManager.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -156,6 +159,9 @@
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
     <ClInclude Include="Source\Framework\FontManager.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Framework\BitmapManager.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
   </ItemGroup>

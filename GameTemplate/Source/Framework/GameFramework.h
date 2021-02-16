@@ -4,6 +4,7 @@
 #include "Globals.h"
 #include "MemoryManager.h"
 #include "FontManager.h"
+#include "BitmapManager.h"
 #include <new>
 
 using namespace std;
@@ -16,7 +17,6 @@ class GameFramework
     friend class GameObject;
     friend class GameComponent;
     friend class InputComponent;
-    friend class TextComponent;
 
 protected:
     GameFramework();
@@ -41,6 +41,9 @@ public:
     virtual void OnShutdown(){}
 
     void SetGameOver() { bIsGameOver = true;}
+
+    FontManager& GetFontManager() { return FntManager; }
+    BitmapManager& GetBitmapManager() { return BmpManager; }
 
 private:
     static void RegisterGameObject(GameObject* NewGameObject);
@@ -71,6 +74,7 @@ private:
 
     MemoryManager MemManager;
     FontManager FntManager;
+    BitmapManager BmpManager;
 
     double TimeOfLastUpdate = 0.0;
 

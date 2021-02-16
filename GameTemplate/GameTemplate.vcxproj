@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Framework\BitmapManager.cpp" />
     <ClCompile Include="Source\Framework\BoxCollisionComponent.cpp" />
     <ClCompile Include="Source\Framework\FontManager.cpp" />
     <ClCompile Include="Source\Framework\GameComponent.cpp" />
@@ -44,6 +45,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Framework\BitmapManager.h" />
     <ClInclude Include="Source\Framework\BoxCollisionComponent.h" />
     <ClInclude Include="Source\Framework\FontManager.h" />
     <ClInclude Include="Source\Framework\GameComponent.h" />
