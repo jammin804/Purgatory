@@ -289,8 +289,11 @@ void Rock::EnterPatrolState()
 		EnemyImagePath = "Art/Enemy_Golem.png";
 		MaxMoveTime = RandomRange(1.0f, 3.0f);
 	}
+	if (EnemyImage)
+	{
+		EnemyImage->LoadImage(EnemyImagePath);
+	}
 
-	EnemyImage->LoadImage(EnemyImagePath);
 
 }
 

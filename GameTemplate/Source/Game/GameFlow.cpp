@@ -3,11 +3,13 @@
 #include "UIText.h"
 #include "Player.h"
 #include "GUI.h"
+#include "Shop.h"
 
 void GameFlow::OnInit()
 {
     Input = GameComponent::CreateInstance<InputComponent>(this);
     GameUIText = GameObject::CreateInstance<UIText>();
+	GameShop = GameObject::CreateInstance<Shop>();
 }
 
 void GameFlow::OnPostInit()
@@ -16,6 +18,11 @@ void GameFlow::OnPostInit()
     {
 		GameUIText->SetWelcomeToTheGame();
     }
+
+	if (GameShop)
+	{
+		GameShop->SetEnabled(false);
+	}
 
     for (GameObject* Object : GameFlowGameObjects)
     {
@@ -72,7 +79,7 @@ void GameFlow::OnUpdate(float DeltaTime)
 		}
         if (TimeRemaining <= 0.0f)
         {
-            CurrentState = EState::Ending;
+            CurrentState = EState::Shopping;
             for (GameObject* Object : GameFlowGameObjects)
             {
 				if (Object)
@@ -80,10 +87,7 @@ void GameFlow::OnUpdate(float DeltaTime)
 					Object->SetEnabled(false);
 				}
             }
-            if (GameUIText)
-            {
-                GameUIText->SetYouSurvived(CurrentScore);
-            }
+			GameShop->SetEnabled(true);
         }
 		if (Input)
 		{
@@ -107,17 +111,35 @@ void GameFlow::OnUpdate(float DeltaTime)
 			}
 		}
 		break;
+	case EState::Shopping:
+		if (Input)
+		{
+			if (Input->IsKeyJustPressed(ALLEGRO_KEY_1))
+			{
+				if (player && player->GetNumberOfCoins() >= GameShop->GetShopItems()[0].ItemCost1)
+				{
+					player->UpgradeWeaponLevel();
+				}
+			}
+			if (Input->IsKeyJustPressed(ALLEGRO_KEY_2))
+			{
+			}
+			if (Input->IsKeyJustPressed(ALLEGRO_KEY_3))
+			{
+			}
+			if (Input->IsKeyJustPressed(ALLEGRO_KEY_ENTER))
+			{
+				Restart(true);
+			}
+		}
+		break;
     case EState::Ending:
         if (Input)
-        {
-            if (Input->IsKeyPressed(ALLEGRO_KEY_ENTER))
-            {
-                bReturnPressed = true;
-            }
-            if (bReturnPressed && Input->IsKeyReleased(ALLEGRO_KEY_ENTER))
-            {
-				//Call reset on all game objects and change state to InGAme state
-            }
+		{
+			if (Input->IsKeyJustPressed(ALLEGRO_KEY_ENTER))
+			{
+				Restart(true);
+			}
         }
         break;
     }
@@ -130,6 +152,7 @@ void GameFlow::OnShutdown()
 void GameFlow::Restart(bool bShouldResetGame)
 {
 	CurrentState = EState::Starting;
+	GameShop->SetEnabled(false);
 	for (GameObject* Object : GameFlowGameObjects)
 	{
 		Object->OnRestart();

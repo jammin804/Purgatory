@@ -139,7 +139,7 @@ void Player::OnUpdate(float DeltaTime)
 		{
 			
 			
-  			if (WeaponLevel == 0)
+ 			if (WeaponLevel == 0)
 			{
 				ShootBase();
 			} 

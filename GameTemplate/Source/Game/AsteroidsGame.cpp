@@ -52,6 +52,10 @@ void AsteroidsGame::OnPostInit()
 		GFlow->AddObjectToDisableAtStart(UI);
 		GFlow->SetRenderDepth(50);
 		GFlow->SetGUI(UI);
+		if (Player1)
+		{
+			GFlow->SetPlayer(Player1);
+		}
     }
 
 	if (UI)

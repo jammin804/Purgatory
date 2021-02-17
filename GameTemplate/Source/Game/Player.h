@@ -38,6 +38,9 @@ public:
 	void CollectCoin();
 	int GetNumberOfCoins() const { return NumberOfCoins; }
 	void SetBackground(Background* NewBG) { BG = NewBG; }
+	void UpgradeWeaponLevel() { WeaponLevel = WeaponLevel < 2 ? WeaponLevel+1 : WeaponLevel; }
+	void SpendCoins(int NumberOfCoinsToSpend) { NumberOfCoins -= NumberOfCoinsToSpend; }
+
 private:
 	void SetLivesLeft(int NewLivesLeft) { HealthLeft = NewLivesLeft; }
 	void SetFearLeft(int NewFearLeft) { FearLeft = NewFearLeft;  }
@@ -50,7 +53,7 @@ private:
 	SoundComponent* CoinSoundComponentPickup = nullptr;
     BoxCollisionComponent* Collision = nullptr;
 	Background* BG = nullptr;
-
+	int WeaponLevel = 0;
     float PlayerVerticalMovementSpeed = 200.0f;
 	float PlayerHorizontalMovementSpeed = 200.0f;
     float RotationSpeed = 2.0f;

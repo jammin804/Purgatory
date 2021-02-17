@@ -10,13 +10,7 @@ void RockManager::OnInit()
 
 void RockManager::OnPostInit()
 {
-	
-	
-	for (int i = 0; i < NumberOfEnemiesToSpawn; ++i)
-	{
-		Rock* NewRock = CreateRock();
-		SetRandomPosition(*NewRock);
-	}
+	OnRestart();
 }
 
 void RockManager::OnUpdate(float DeltaTime)
@@ -44,6 +38,12 @@ void RockManager::OnRestart()
 		CurrentRock->RequestDestroy();
 	}
 	Rocks.clear();
+
+	for (int i = 0; i < NumberOfEnemiesToSpawn; ++i)
+	{
+		Rock* NewRock = CreateRock();
+		SetRandomPosition(*NewRock);
+	}
 }
 
 Rock* RockManager::CreateRock(int SplitsLeft /*= 2*/)

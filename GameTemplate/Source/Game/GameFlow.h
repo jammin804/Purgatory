@@ -5,7 +5,8 @@
 #include <vector>
 
 class GUI;
-//sclass Player;
+class Shop;
+class Player;
 
 using namespace std;
 
@@ -16,7 +17,8 @@ class GameFlow : public GameObject
     {
         Starting = 0,
         InGame,
-		Pause, //Added Pause to EState
+		Pause,
+		Shopping,
         Ending
     };
 
@@ -36,21 +38,23 @@ class GameFlow : public GameObject
         bool ShouldEndGame() const { return bShouldEndGame; }
 		bool ShouldResetGame() const { return bShouldResetGame; }
 		void SetGUI(GUI* GameUIRef) { GameUI = GameUIRef; }
+		void SetPlayer(Player* NewPlayer) { player = NewPlayer; }
     private:
         vector<GameObject*> GameFlowGameObjects;
         int CurrentScore = 0;
         EState CurrentState = EState::Starting;
         class InputComponent* Input = nullptr;
-		const float MAX_TIME = 120.0f;
+		const float MAX_TIME = 30.0f;
         float TimeRemaining = MAX_TIME;
 		int FearTimer;
         class UIText* GameUIText = nullptr;
+		Shop* GameShop = nullptr;
         GUI* GameUI = nullptr;
+		Player* player = nullptr;
         bool bReturnPressed = false;
         bool bShouldEndGame = false;
-		bool bShouldPauseGame = false; /* adding bool or pausing and resuming game */
+		bool bShouldPauseGame = false;
 		bool bShouldResumeGame = false;
 		bool bShouldResetGame = false;
-		//Player* player = nullptr;
 };
 
