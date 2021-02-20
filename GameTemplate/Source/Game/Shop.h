@@ -16,6 +16,7 @@ struct ShopItem
 	int NumberBought = 0;
 };
 class TextComponent;
+class ImageComponent;
 
 class Shop : public GameObject
 {
@@ -31,12 +32,15 @@ private:
 	TextComponent* WeaponUpgradeText = nullptr;
 	TextComponent* WeaponUpgradeItemCostText = nullptr;
 	TextComponent* WeaponUpgradeUserPrompt = nullptr;
+	ImageComponent* WeaponUpgradeImage = nullptr;
 	TextComponent* SpeedUpgradeText = nullptr;
 	TextComponent* SpeedUpgradeItemCostText = nullptr;
 	TextComponent* SpeedUpgradeUserPrompt = nullptr;
+	ImageComponent* SpeedUpgradeImage = nullptr;
 	TextComponent* HealthUpgradeText = nullptr;
 	TextComponent* HealthUpgradeItemCostText = nullptr;
 	TextComponent* HealthUpgradeUserPrompt = nullptr;
+	ImageComponent* SpeedUpgradeImage = nullptr;
 	ShopItem ShopItems[3];
 
 };
