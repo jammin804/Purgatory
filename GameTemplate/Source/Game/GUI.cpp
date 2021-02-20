@@ -6,13 +6,17 @@
 
 void GUI::OnInit()
 {
+	LifeGUITextComponent = GameComponent::CreateInstance<TextComponent>(this);
 	LayerGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
 	LifeGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
 	BorderGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
+	
 
 	FearLayerGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
 	FearGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
 	FearBorderGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
+	FearGUITextComponent = GameComponent::CreateInstance<TextComponent>(this);
+
 	CoinGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
 	CoinGUITextComponent = GameComponent::CreateInstance<TextComponent>(this);
 	//CoinFont = GameComponent::CreateInstance<FontManager>(this);
@@ -20,6 +24,11 @@ void GUI::OnInit()
 
 void GUI::OnPostInit()
 {
+	LifeGUITextComponent->SetOffsetY(10.0f);
+	LifeGUITextComponent->SetOffsetX(50.0f);
+	LifeGUITextComponent->SetFont("Fonts/Boxy-Bold.ttf", FontSize);
+	LifeGUITextComponent->SetText("Health");
+
 	LayerGUIImageComponent->SetScaleFromLeft(true);
 	LayerGUIImageComponent->SetScale(MAX_LIFESCALE);
 	LifeGUIImageComponent->SetScaleFromLeft(true);
@@ -27,6 +36,8 @@ void GUI::OnPostInit()
 	LifeGUIImageComponent->SetScaleY(MAX_LIFESCALE);
 	BorderGUIImageComponent->SetScaleFromLeft(true);
 	BorderGUIImageComponent->SetScale(MAX_LIFESCALE);
+
+
 
 	FearLayerGUIImageComponent->SetScaleFromLeft(true);
 	FearLayerGUIImageComponent->SetScale(MAX_LIFESCALE);
@@ -38,13 +49,17 @@ void GUI::OnPostInit()
 	FearBorderGUIImageComponent->SetScaleFromLeft(true);
 	FearBorderGUIImageComponent->SetScale(MAX_LIFESCALE);
 	FearBorderGUIImageComponent->SetOffsetY(30.0f);
+	FearGUITextComponent->SetOffsetY(60.0f);
+	FearGUITextComponent->SetOffsetX(50.0f);
+	FearGUITextComponent->SetFont("Fonts/Boxy-Bold.ttf", FontSize);
+	FearGUITextComponent->SetText("Fear");
+
 	CoinGUIImageComponent->SetScaleFromLeft(true);
 	CoinGUIImageComponent->SetOffsetY(60.0f);
 	CoinGUIImageComponent->SetScale(2.0f);
 	CoinGUITextComponent->SetOffsetY(60.0f);
 	CoinGUITextComponent->SetOffsetX(50.0f);
-	CoinGUITextComponent->SetFont("Fonts/Boxy-Bold.ttf", 12);
-	//CoinFont->FindOrAddFont("Fonts/Boxy-Bold.tff", 12);
+	CoinGUITextComponent->SetFont("Fonts/Boxy-Bold.ttf", FontSize);
 
 }
 

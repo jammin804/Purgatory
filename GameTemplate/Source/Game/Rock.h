@@ -75,6 +75,8 @@ private:
 	float TimeInState = MaxIdleTime;
 	float MaxDetectionRadius = 0.0f;
 	const Player* Player1 = nullptr;
+	float CollisionScaleX = 150.0f;
+	float CollisionScaleY = 150.0f;
 private:
 	void SetEnemyLifePercentage(float EnemyPercentageLife);
 	void ChangeState(EState NewState);

@@ -28,6 +28,16 @@ public:
 	const ShopItem* GetShopItems() const { return ShopItems; }
 private:
     TextComponent* TitleText = nullptr;
+	TextComponent* WeaponUpgradeText = nullptr;
+	TextComponent* WeaponUpgradeItemCostText = nullptr;
+	TextComponent* WeaponUpgradeUserPrompt = nullptr;
+	TextComponent* SpeedUpgradeText = nullptr;
+	TextComponent* SpeedUpgradeItemCostText = nullptr;
+	TextComponent* SpeedUpgradeUserPrompt = nullptr;
+	TextComponent* HealthUpgradeText = nullptr;
+	TextComponent* HealthUpgradeItemCostText = nullptr;
+	TextComponent* HealthUpgradeUserPrompt = nullptr;
 	ShopItem ShopItems[3];
+
 };
 

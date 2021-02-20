@@ -44,13 +44,16 @@ private:
 	ImageComponent* BorderGUIImageComponent = nullptr;
 	ImageComponent* LayerGUIImageComponent = nullptr;
 	ImageComponent* LifeGUIImageComponent = nullptr;
+	TextComponent* LifeGUITextComponent = nullptr;
 	ImageComponent* FearLayerGUIImageComponent = nullptr;
 	ImageComponent* FearGUIImageComponent = nullptr;
 	ImageComponent* FearBorderGUIImageComponent = nullptr;
+	TextComponent* FearGUITextComponent = nullptr;
 	ImageComponent* CoinGUIImageComponent = nullptr;
 	TextComponent* CoinGUITextComponent = nullptr;
 	FontManager* CoinFont = nullptr;
 	const Player* player = nullptr;
 	const UIText* uitext = nullptr;
 	const float MAX_LIFESCALE = 2.0f;
+	const int FontSize = 18;
 };

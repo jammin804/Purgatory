@@ -18,8 +18,7 @@ void Rock::OnPostInit()
 	float HealthBarOffsetY = -60.0f;
 	std::string EnemyImagePath = "";
 	float EnemyScale = 1.0f;
-	float CollisionScaleX = 150.0f;
-	float CollisionScaleY = 150.0f;
+
 
 	switch (EnemyType)
 	{
@@ -400,14 +399,17 @@ void Rock::EnterFleeState()
 	if (EnemyType == EEnemyType::Demon)
 	{
 		EnemyImagePath = "Art/Enemy_D_Flee.png";
+
 	}
 	else if (EnemyType == EEnemyType::Bat)
 	{
 		EnemyImagePath = "Art/Enemy_Bat_Flee.png";
+
 	}
 	else
 	{
 		EnemyImagePath = "Art/Enemy_Golem_Flee.png";
+
 	}
 
 	EnemyImage->LoadImage(EnemyImagePath);

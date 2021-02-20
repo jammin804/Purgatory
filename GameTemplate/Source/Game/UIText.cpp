@@ -24,11 +24,11 @@ void UIText::OnPostInit()
 	MiddleTextLine1->SetOffset(MiddleX, MiddleY - 150);
 	MiddleTextLine2->SetOffset(MiddleX, MiddleY - 100);
 	MiddleTextLine3->SetOffset(MiddleX, MiddleY - 50);
-	TopCenterText->SetFont("Fonts/Boxy-Bold.ttf", 12);
-	TopRightText->SetFont("Fonts/Boxy-Bold.ttf", 12);
-	MiddleTextLine1->SetFont("Fonts/Boxy-Bold.ttf", 12);
-	MiddleTextLine2->SetFont("Fonts/Boxy-Bold.ttf", 12);
-	MiddleTextLine3->SetFont("Fonts/Boxy-Bold.ttf", 12);
+	TopCenterText->SetFont("Fonts/Boxy-Bold.ttf", FontSize);
+	TopRightText->SetFont("Fonts/Boxy-Bold.ttf", FontSize);
+	MiddleTextLine1->SetFont("Fonts/Boxy-Bold.ttf", FontSize);
+	MiddleTextLine2->SetFont("Fonts/Boxy-Bold.ttf", FontSize);
+	MiddleTextLine3->SetFont("Fonts/Boxy-Bold.ttf", FontSize);
 }
 
 void UIText::OnShutdown()
@@ -85,9 +85,9 @@ void UIText::SetGameOver(int FinalScore)
     MiddleTextLine3->SetVisible(true);
 
     MiddleTextLine1->SetText("GAME OVER");
-    char FinalScoreStr[50];
+   /* char FinalScoreStr[50];
     sprintf_s(FinalScoreStr, "Final Score: %d", FinalScore);
-    MiddleTextLine2->SetText(FinalScoreStr);
+    MiddleTextLine2->SetText(FinalScoreStr);*/
     MiddleTextLine3->SetText("Press Enter To Quit");
 }
 
@@ -112,18 +112,18 @@ void UIText::SetYouSurvived(int FinalScore)
     MiddleTextLine2->SetVisible(true);
     MiddleTextLine3->SetVisible(true);
 
-    MiddleTextLine1->SetText("Congratulations! You survived!");
-    char FinalScoreStr[50];
+    MiddleTextLine1->SetText("Congratulations! You survived the night!");
+   /* char FinalScoreStr[50];
     sprintf_s(FinalScoreStr, "Final Score: %d", FinalScore);
-    MiddleTextLine2->SetText(FinalScoreStr);
+    MiddleTextLine2->SetText(FinalScoreStr);*/
     MiddleTextLine3->SetText("Press Enter To Quit");
 }
 
 void UIText::UpdateScore(int NewScore)
 {
-    char Score[50];
+   /* char Score[50];
     sprintf_s(Score, "Score: %d", NewScore);
-    TopRightText->SetText(Score);
+    TopRightText->SetText(Score);*/
 }
 
 void UIText::UpdateLivesLeft(int NewLivesLeft)
@@ -136,13 +136,13 @@ void UIText::UpdateLivesLeft(int NewLivesLeft)
 void UIText::UpdateTimeRemaining(int NewTimeMins, int NewTimeSeconds)
 {
     char LivesLeft[50];
-    if (NewTimeMins > 0)
+   /* if (NewTimeMins > 0)
     {
         sprintf_s(LivesLeft, "Time Left: %d:%s%d", NewTimeMins, NewTimeSeconds < 10 ? "0" : "", NewTimeSeconds);
     }
     else
     {
         sprintf_s(LivesLeft, "Time Left: %ds", NewTimeSeconds);
-    }
+    }*/
     TopCenterText->SetText(LivesLeft);
 }
