@@ -1,5 +1,5 @@
 #include "Shop.h"
-
+#include "Framework/ImageComponent.h"
 #include "Framework/TextComponent.h"
 #include "Framework/Globals.h"
 #include <stdio.h>
@@ -7,15 +7,20 @@
 void Shop::OnInit()
 {
 	TitleText = GameComponent::CreateInstance<TextComponent>(this);
+	CoinText = GameComponent::CreateInstance<TextComponent>(this);
+
 	WeaponUpgradeText = GameComponent::CreateInstance<TextComponent>(this);
 	WeaponUpgradeItemCostText = GameComponent::CreateInstance<TextComponent>(this);
 	WeaponUpgradeUserPrompt = GameComponent::CreateInstance<TextComponent>(this);
+	WeaponUpgradeImage = GameComponent::CreateInstance<ImageComponent>(this);
 	SpeedUpgradeText = GameComponent::CreateInstance<TextComponent>(this);
 	SpeedUpgradeItemCostText = GameComponent::CreateInstance<TextComponent>(this);
 	SpeedUpgradeUserPrompt = GameComponent::CreateInstance<TextComponent>(this);
+	SpeedUpgradeImage = GameComponent::CreateInstance<ImageComponent>(this);
 	HealthUpgradeText = GameComponent::CreateInstance<TextComponent>(this);
 	HealthUpgradeItemCostText = GameComponent::CreateInstance<TextComponent>(this);
 	HealthUpgradeUserPrompt = GameComponent::CreateInstance<TextComponent>(this);
+	HealthUpgradeImage = GameComponent::CreateInstance<ImageComponent>(this);
 }
 
 void Shop::OnPostInit()
@@ -25,6 +30,14 @@ void Shop::OnPostInit()
 	TitleText->SetOffset(MiddleX, 50);
 	TitleText->SetFont("Fonts/Boxy-Bold.ttf", 20);
 	TitleText->SetText("Shop");
+
+	if (player) /*Not working*/
+	{
+		CoinText->SetOffset(MiddleX, 150);
+		CoinText->SetFont("Fonts/Boxy-Bold.ttf", 20);
+		CoinText->SetText("Coins: " + to_string(player->GetNumberOfCoins()));
+	}
+
 
 	//Weapon Upgrade
 	ShopItem& WeaponUpgrade = ShopItems[0];
@@ -41,6 +54,10 @@ void Shop::OnPostInit()
 	WeaponUpgradeUserPrompt->SetFont("Fonts/Boxy-Bold.ttf", 20);
 	WeaponUpgradeUserPrompt->SetText("Press 1 To Buy");
 
+	WeaponUpgradeImage->LoadImage("Art/PowerUpIcon-WeaponBurst.png");
+	WeaponUpgradeImage->SetScale(3.0f);
+	WeaponUpgradeImage->SetOffset(MiddleX * 0.3f, 400);
+
 	//Speed Upgrade
 	ShopItem& SpeedUpgrade = ShopItems[1];
 	SpeedUpgrade.ItemName = "Speed Upgrade";
@@ -56,6 +73,10 @@ void Shop::OnPostInit()
 	SpeedUpgradeUserPrompt->SetFont("Fonts/Boxy-Bold.ttf", 20);
 	SpeedUpgradeUserPrompt->SetText("Press 2 To Buy");
 
+	SpeedUpgradeImage->LoadImage("Art/PowerUpIcon-Speed1.png");
+	SpeedUpgradeImage->SetScale(3.0f);
+	SpeedUpgradeImage->SetOffset(MiddleX, 400);
+
 	//Health Upgrade
 	ShopItem& HealthUpgrade = ShopItems[2];
 	HealthUpgrade.ItemName = "Health Upgrade";
@@ -70,6 +91,10 @@ void Shop::OnPostInit()
 	HealthUpgradeUserPrompt->SetOffset(MiddleX * 1.75f, 500);
 	HealthUpgradeUserPrompt->SetFont("Fonts/Boxy-Bold.ttf", 20);
 	HealthUpgradeUserPrompt->SetText("Press 3 To Buy");
+
+	HealthUpgradeImage->LoadImage("Art/PowerUpIcon-Health1.png");
+	HealthUpgradeImage->SetScale(3.0f);
+	HealthUpgradeImage->SetOffset(MiddleX  * 1.75f, 400);
 
 }
 

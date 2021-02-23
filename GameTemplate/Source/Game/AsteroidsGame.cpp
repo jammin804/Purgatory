@@ -64,6 +64,7 @@ void AsteroidsGame::OnPostInit()
 		UI->SetLayerImage("Art/healthbar_layer.png");
 		UI->SetLifeImage("Art/healthbar.png");
 		UI->SetBorderImage("Art/healthbar_border.png");
+
 		UI->SetPosition(30.0f, 48.0f);
 		/*Player Fear*/
 		UI->SetFearLayerImage("Art/healthbar_layer.png");

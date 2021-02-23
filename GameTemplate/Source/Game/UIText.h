@@ -30,6 +30,9 @@ private:
     TextComponent* MiddleTextLine1 = nullptr;
     TextComponent* MiddleTextLine2 = nullptr;
     TextComponent* MiddleTextLine3 = nullptr;
+	TextComponent* MiddleTextLine4 = nullptr;
+	TextComponent* MiddleTextLine5 = nullptr;
+	TextComponent* MiddleTextLine6 = nullptr;
 	int FontSize = 18;
 };
 

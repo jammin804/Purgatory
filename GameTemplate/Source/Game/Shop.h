@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Framework/GameObject.h"
+#include "Player.h"
 
 using namespace std;
 struct ShopItem
@@ -17,6 +18,7 @@ struct ShopItem
 };
 class TextComponent;
 class ImageComponent;
+class Player;
 
 class Shop : public GameObject
 {
@@ -29,6 +31,7 @@ public:
 	const ShopItem* GetShopItems() const { return ShopItems; }
 private:
     TextComponent* TitleText = nullptr;
+	TextComponent* CoinText = nullptr;
 	TextComponent* WeaponUpgradeText = nullptr;
 	TextComponent* WeaponUpgradeItemCostText = nullptr;
 	TextComponent* WeaponUpgradeUserPrompt = nullptr;
@@ -40,8 +43,9 @@ private:
 	TextComponent* HealthUpgradeText = nullptr;
 	TextComponent* HealthUpgradeItemCostText = nullptr;
 	TextComponent* HealthUpgradeUserPrompt = nullptr;
-	ImageComponent* SpeedUpgradeImage = nullptr;
+	ImageComponent* HealthUpgradeImage = nullptr;
 	ShopItem ShopItems[3];
+	const Player* player = nullptr;
 
 };
 
