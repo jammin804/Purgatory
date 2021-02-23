@@ -413,6 +413,9 @@ void Rock::EnterFleeState()
 	}
 
 	EnemyImage->LoadImage(EnemyImagePath);
+
+	Collision->DoesCollide(false); // Not working yet
+	
 }
 
 void Rock::UpdateFleeState(float DeltaTime)

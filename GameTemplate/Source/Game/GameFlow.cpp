@@ -24,6 +24,7 @@ void GameFlow::OnPostInit()
 		GameShop->SetEnabled(false);
 	}
 
+
     for (GameObject* Object : GameFlowGameObjects)
     {
 		if (Object)
@@ -74,7 +75,7 @@ void GameFlow::OnUpdate(float DeltaTime)
         }
 		if (GameUI)
 		{
-			//Can you reset in the gameflow?
+			
 			GameUI->SetFearPercentage(TimeRemaining / MAX_TIME);
 		}
         if (TimeRemaining <= 0.0f)
@@ -94,10 +95,6 @@ void GameFlow::OnUpdate(float DeltaTime)
 			if (Input->IsKeyJustPressed(ALLEGRO_KEY_ESCAPE))
 			{
 				SetPaused(true);
-			}
-			if (Input->IsKeyJustReleased(ALLEGRO_KEY_R))
-			{
-				Restart(true);
 			}
 		}
         break;

@@ -5,6 +5,7 @@
 
 class Rock;
 class Player;
+class GameFlow;
 
 using namespace std;
 

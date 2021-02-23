@@ -10,7 +10,11 @@ void RockManager::OnInit()
 
 void RockManager::OnPostInit()
 {
-	OnRestart();
+	if (Player1)
+	{
+		OnRestart();
+	}
+
 }
 
 void RockManager::OnUpdate(float DeltaTime)

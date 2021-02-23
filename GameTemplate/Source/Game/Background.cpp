@@ -45,7 +45,7 @@ void Background::SetMusic(string MusicPath)
     {
         BackgroundMusic->LoadSample(MusicPath);
         BackgroundMusic->SetLooped(true);
-        //BackgroundMusic->Play();
-		BackgroundMusic->Stop(); //For testing
+        BackgroundMusic->Play();
+		//BackgroundMusic->Stop(); //For testing
     }
 }

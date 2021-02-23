@@ -30,7 +30,7 @@ void AsteroidsGame::OnPostInit()
     if (BG)
     {
         BG->SetImage("Art/background_with_tiles.png");
-        BG->SetMusic("Audio/Music.wav");
+        BG->SetMusic("Audio/Horror.mp3");
 		//BG->SetWallVImage("Art/backgroundWall_V.png");
     }
 
@@ -115,6 +115,7 @@ void AsteroidsGame::OnUpdate(float DeltaTime)
         return;
     }*/
 
+	
 
 	if (RockMgr)
 	{
@@ -165,6 +166,7 @@ void AsteroidsGame::OnUpdate(float DeltaTime)
 			}
 		}
 	}
+
 	
 	if (CoinMgr)
 	{
