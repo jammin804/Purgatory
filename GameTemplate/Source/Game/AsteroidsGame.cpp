@@ -146,8 +146,21 @@ void AsteroidsGame::OnUpdate(float DeltaTime)
 			{
 				if (CurrentRock->GetCollision()->DoesCollide(CurrentCross->GetCollision()))
 				{
+					float ExplosionScale = 1.0f;
+					/*if (CurrentRock->EnemyType::Demon)
+					{
+						ExplosionScale = 2.0f;
+					}
+					else if(CurrentRock->EnemyType::Bat)
+					{
+						ExplosionScale = 1.0f;
+					}
+					else 
+					{
+						ExplosionScale = 3.0f;
+					}*/
 
-					CreateExplosion(CurrentRock->GetWorldPositionX(), CurrentRock->GetWorldPositionY());
+					CreateExplosion(CurrentRock->GetWorldPositionX(), CurrentRock->GetWorldPositionY(), ExplosionScale);
 					CurrentRock->EnemyHit();
 					CurrentCross->RequestDestroy();
 

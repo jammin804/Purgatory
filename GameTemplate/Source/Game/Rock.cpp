@@ -14,6 +14,8 @@ void Rock::OnInit()
 
 void Rock::OnPostInit()
 {
+	IsEnabled();
+
 	float HealthBarOffsetX = -50.0f;
 	float HealthBarOffsetY = -60.0f;
 	std::string EnemyImagePath = "";

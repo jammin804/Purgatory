@@ -53,6 +53,7 @@ void RockManager::OnRestart()
 Rock* RockManager::CreateRock(int SplitsLeft /*= 2*/)
 {
     Rock* NewRock = GameObject::CreateInstance<Rock>();
+	NewRock->SetEnabled(false);
 	int RockTypeRandomizer = rand() % static_cast <int> (EEnemyType::COUNT);
 	NewRock->SetParent(GetParent());
 	NewRock->SetPlayer(Player1);

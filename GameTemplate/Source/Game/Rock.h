@@ -42,6 +42,7 @@ public:
 	void SetEnemyDirection(EEnemyDir direction);
     const BoxCollisionComponent* GetCollision() const { return Collision; }
 	void SetEnemyType(EEnemyType type);
+	//const EEnemyType* GetEnemyType() const { return type; } // Trying to access to the enemy types in AsteroidsGame.cpp to change explosion scale
 	void SetPlayer(const Player* NewPlayer) { Player1 = NewPlayer; }
 private:
 	enum class EState : int
