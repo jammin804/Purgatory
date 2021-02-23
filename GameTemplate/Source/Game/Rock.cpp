@@ -256,8 +256,12 @@ bool Rock::CheckForLostPlayer()
 
 bool Rock::CheckForFear()
 {
+	float DirectionToPlayerX = Player1->GetWorldPositionX() - GetWorldPositionX();
+	float DirectionToPlayerY = Player1->GetWorldPositionY() - GetWorldPositionY();
+	float DirectionSize = sqrt(pow(DirectionToPlayerX, 2) + pow(DirectionToPlayerY, 2));
+
 	//If enemy health is lower than 25% run away from players location
-	if (EnemyHealthLeft < ENEMY_MAX_LIFE*0.25)
+	if (EnemyHealthLeft < ENEMY_MAX_LIFE*0.25 && DirectionSize > 300.f)
 	{
 		ChangeState(EState::Flee);
 		return true;
