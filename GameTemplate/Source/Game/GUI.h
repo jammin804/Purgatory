@@ -45,10 +45,12 @@ private:
 	ImageComponent* LayerGUIImageComponent = nullptr;
 	ImageComponent* LifeGUIImageComponent = nullptr;
 	TextComponent* LifeGUITextComponent = nullptr;
+	TextComponent* AmountOfHealthText = nullptr;
 	ImageComponent* FearLayerGUIImageComponent = nullptr;
 	ImageComponent* FearGUIImageComponent = nullptr;
 	ImageComponent* FearBorderGUIImageComponent = nullptr;
 	TextComponent* FearGUITextComponent = nullptr;
+	TextComponent* AmountOfFearText = nullptr;
 	ImageComponent* CoinGUIImageComponent = nullptr;
 	TextComponent* CoinGUITextComponent = nullptr;
 	FontManager* CoinFont = nullptr;

@@ -29,6 +29,7 @@ protected:
 
 public:
 	const ShopItem* GetShopItems() const { return ShopItems; }
+	void UpgradeWeaponLevel();
 private:
     TextComponent* TitleText = nullptr;
 	TextComponent* CoinText = nullptr;

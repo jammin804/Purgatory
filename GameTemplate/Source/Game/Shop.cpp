@@ -2,6 +2,7 @@
 #include "Framework/ImageComponent.h"
 #include "Framework/TextComponent.h"
 #include "Framework/Globals.h"
+#include "Player.h"
 #include <stdio.h>
 
 void Shop::OnInit()
@@ -31,12 +32,11 @@ void Shop::OnPostInit()
 	TitleText->SetFont("Fonts/Boxy-Bold.ttf", 20);
 	TitleText->SetText("Shop");
 
-	if (player) /*Not working*/
-	{
-		CoinText->SetOffset(MiddleX, 150);
-		CoinText->SetFont("Fonts/Boxy-Bold.ttf", 20);
-		CoinText->SetText("Coins: " + to_string(player->GetNumberOfCoins()));
-	}
+	
+	CoinText->SetOffset(MiddleX, 150);
+	CoinText->SetFont("Fonts/Boxy-Bold.ttf", 20);
+	CoinText->SetText("Coins: 0"); // Need to pull in players money
+	
 
 
 	//Weapon Upgrade
@@ -102,4 +102,9 @@ void Shop::OnShutdown()
 {
     delete TitleText;
     TitleText = nullptr;
+}
+
+void Shop::UpgradeWeaponLevel()
+{
+	
 }
