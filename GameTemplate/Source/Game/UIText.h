@@ -33,6 +33,7 @@ private:
 	TextComponent* MiddleTextLine4 = nullptr;
 	TextComponent* MiddleTextLine5 = nullptr;
 	TextComponent* MiddleTextLine6 = nullptr;
+	TextComponent* MiddleTextLine7 = nullptr;
 	int FontSize = 18;
 };
 

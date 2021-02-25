@@ -126,6 +126,30 @@ void AsteroidsGame::OnUpdate(float DeltaTime)
 				continue;
 			}
 
+			for (Rock* OtherRock : RockMgr->GetRocks())
+			{
+				if (CurrentRock->IsDestroyed() || CurrentRock == OtherRock)
+				{
+					continue;
+				}
+
+				if (CurrentRock->GetCollision()->DoesCollide(OtherRock->GetCollision()))
+				{
+					float DirectionFromEnemyToEnemyX = CurrentRock->GetWorldPositionX() - OtherRock->GetWorldPositionX();
+					float DirectionFromEnemyToEnemyY = CurrentRock->GetWorldPositionY() - OtherRock->GetWorldPositionY();
+					float DirectionFromEnemyToEnemySize = sqrt(pow(DirectionFromEnemyToEnemyX, 2) + pow(DirectionFromEnemyToEnemyY, 2));
+
+					if (DirectionFromEnemyToEnemySize != 0.0f)
+					{
+						DirectionFromEnemyToEnemyX /= DirectionFromEnemyToEnemySize;
+						DirectionFromEnemyToEnemyY /= DirectionFromEnemyToEnemySize;
+
+						CurrentRock->SetPosition(CurrentRock->GetPositionX() + (DirectionFromEnemyToEnemyX * 2.0f), CurrentRock->GetPositionY() + (DirectionFromEnemyToEnemyY * 2.0f));
+					}
+
+				}
+			}
+
 			if (!Player1->IsInvulnerable() && Player1->IsEnabled())
 			{
 				if (Player1->GetCollision()->DoesCollide(CurrentRock->GetCollision()))

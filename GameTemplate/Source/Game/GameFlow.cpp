@@ -113,10 +113,18 @@ void GameFlow::OnUpdate(float DeltaTime)
 		{
 			if (Input->IsKeyJustPressed(ALLEGRO_KEY_1))
 			{
-				if (player && player->GetNumberOfCoins() >= GameShop->GetShopItems()[0].ItemCost1)
+				const ShopItem& WeaponUpgrade = GameShop->GetShopItems()[0];
+				if (WeaponUpgrade.NumberBought < 2)
 				{
-					player->UpgradeWeaponLevel();
+					int UpgradeCost = WeaponUpgrade.NumberBought == 0 ? WeaponUpgrade.ItemCost1 : WeaponUpgrade.ItemCost2;
+					if (player && player->GetNumberOfCoins() >= UpgradeCost)
+					{
+						player->SpendCoins(UpgradeCost);
+						player->UpgradeWeaponLevel();
+						//GameShop->UpgradeWeaponLevel(); // This will swtich out the image, description and cost. Also, increase Numberbrought
+					}
 				}
+
 			}
 			if (Input->IsKeyJustPressed(ALLEGRO_KEY_2))
 			{

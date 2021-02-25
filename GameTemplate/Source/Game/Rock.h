@@ -44,6 +44,8 @@ public:
 	void SetEnemyType(EEnemyType type);
 	//const EEnemyType* GetEnemyType() const { return type; } // Trying to access to the enemy types in AsteroidsGame.cpp to change explosion scale
 	void SetPlayer(const Player* NewPlayer) { Player1 = NewPlayer; }
+	void ChangeDirection();
+
 private:
 	enum class EState : int
 	{
@@ -99,4 +101,6 @@ private:
 	void EnterFleeState();
 	void UpdateFleeState(float DeltaTime);
 	void ExitFleeState();
+
+	void UpdateMovement(float DesiredX, float DesiredY);
 };

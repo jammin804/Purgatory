@@ -2,6 +2,7 @@
 #include "Framework/ImageComponent.h"
 #include "Framework/BoxCollisionComponent.h"
 #include "Game/Player.h"
+#include "Background.h"
 
 void Rock::OnInit()
 {
@@ -320,16 +321,16 @@ void Rock::UpdatePatrolState(float Deltatime)
 	{
 	case Right:
 	default:
-		SetPosition(GetPositionX() + (1.0f * MovementSpeed * Deltatime), GetPositionY());
+		UpdateMovement(GetPositionX() + (1.0f * MovementSpeed * Deltatime), GetPositionY());
 		break;
 	case Down:
-		SetPosition(GetPositionX(), GetPositionY() + (1.0f * MovementSpeed * Deltatime));
+		UpdateMovement(GetPositionX(), GetPositionY() + (1.0f * MovementSpeed * Deltatime));
 		break;
 	case Left:
-		SetPosition(GetPositionX() - (1.0f * MovementSpeed * Deltatime), GetPositionY());
+		UpdateMovement(GetPositionX() - (1.0f * MovementSpeed * Deltatime), GetPositionY());
 		break;
 	case Up:
-		SetPosition(GetPositionX(), GetPositionY() - (1.0f * MovementSpeed * Deltatime));
+		UpdateMovement(GetPositionX(), GetPositionY() - (1.0f * MovementSpeed * Deltatime));
 		break;
 
 	}
@@ -337,9 +338,15 @@ void Rock::UpdatePatrolState(float Deltatime)
 
 	if (TimeInState > MaxMoveTime)
 	{
-		EnemyDirection = static_cast <EEnemyDir>((EnemyDirection + 1) % EEnemyDir::COUNT);
+		ChangeDirection();
+
 		ChangeState(EState::Idle);
 	}
+}
+
+void Rock::ChangeDirection()
+{
+	EnemyDirection = static_cast <EEnemyDir>((EnemyDirection + 1) % EEnemyDir::COUNT);
 }
 
 void Rock::ExitPatrolState()
@@ -389,7 +396,7 @@ void Rock::UpdateChaseState(float Deltatime)
 		ChaseDirectionX /= ChaseDirectionSize;
 		ChaseDirectionY /= ChaseDirectionSize;
 
-		SetPosition(GetPositionX() + (ChaseDirectionX *MovementSpeed*0.5f * Deltatime), GetPositionY() + (ChaseDirectionY * MovementSpeed*0.5f * Deltatime));
+		UpdateMovement(GetPositionX() + (ChaseDirectionX *MovementSpeed*0.5f * Deltatime), GetPositionY() + (ChaseDirectionY * MovementSpeed*0.5f * Deltatime));
 	}
 	
 }
@@ -442,12 +449,26 @@ void Rock::UpdateFleeState(float DeltaTime)
 		FleeDirectionX /=FleeDirectionSize;
 		FleeDirectionY /= FleeDirectionSize;
 
-		SetPosition(GetPositionX() - (FleeDirectionX *MovementSpeed*0.5f * DeltaTime), GetPositionY() - (FleeDirectionY * MovementSpeed*0.5f * DeltaTime));
+		UpdateMovement(GetPositionX() - (FleeDirectionX *MovementSpeed*0.5f * DeltaTime), GetPositionY() - (FleeDirectionY * MovementSpeed*0.5f * DeltaTime));
 	}
 }
 
 void Rock::ExitFleeState()
 {
+
+}
+
+void Rock::UpdateMovement(float DesiredX, float DesiredY)
+{
+	if (const Background* BG = static_cast<const Background*>(GetParent()))
+	{
+		if (DesiredX > -BG->GetBackgroundWidth() * 0.5f && DesiredX < BG->GetBackgroundWidth()*0.5f &&
+			DesiredY > -BG->GetBackgroundHeight() * 0.5f && DesiredY < BG->GetBackgroundHeight()*0.5f)
+		{
+			SetPosition(DesiredX, DesiredY);
+		}
+
+	}
 
 }
 

@@ -21,10 +21,10 @@ public:
 	int GetBackgroundHeight() const { return BackgroundHeight; }
 	int GetBackgroundWidth() const { return BackgroundWidth; }
 private:
-    ImageComponent* BackgroundImage = nullptr;
+	ImageComponent* BackgroundImage[9] = { nullptr };
 	SoundComponent* BackgroundMusic = nullptr;
 	ImageComponent* WallVImage = nullptr;
-	int BackgroundHeight = 1440;
-	int BackgroundWidth = 2560;
+	int BackgroundHeight = 1440*3;
+	int BackgroundWidth = 2560*3;
 };
 

@@ -15,6 +15,7 @@ void UIText::OnInit()
 	MiddleTextLine4 = GameComponent::CreateInstance<TextComponent>(this);
 	MiddleTextLine5 = GameComponent::CreateInstance<TextComponent>(this);
 	MiddleTextLine6 = GameComponent::CreateInstance<TextComponent>(this);
+	MiddleTextLine7 = GameComponent::CreateInstance<TextComponent>(this);
 }
 
 void UIText::OnPostInit()
@@ -29,7 +30,8 @@ void UIText::OnPostInit()
 	MiddleTextLine3->SetOffset(MiddleX, MiddleY - 150);
 	MiddleTextLine4->SetOffset(MiddleX, MiddleY - 100);
 	MiddleTextLine5->SetOffset(MiddleX, MiddleY - 50);
-	MiddleTextLine6->SetOffset(MiddleX, MiddleY);
+	MiddleTextLine6->SetOffset(MiddleX, MiddleY + 50);
+	MiddleTextLine7->SetOffset(MiddleX, MiddleY + 100);
 	TopCenterText->SetFont("Fonts/Boxy-Bold.ttf", FontSize);
 	TopRightText->SetFont("Fonts/Boxy-Bold.ttf", FontSize);
 	MiddleTextLine1->SetFont("Fonts/Boxy-Bold.ttf", FontSize);
@@ -38,6 +40,7 @@ void UIText::OnPostInit()
 	MiddleTextLine4->SetFont("Fonts/Boxy-Bold.ttf", FontSize);
 	MiddleTextLine5->SetFont("Fonts/Boxy-Bold.ttf", FontSize);
 	MiddleTextLine6->SetFont("Fonts/Boxy-Bold.ttf", FontSize);
+	MiddleTextLine7->SetFont("Fonts/Boxy-Bold.ttf", FontSize);
 }
 
 void UIText::OnShutdown()
@@ -68,6 +71,9 @@ void UIText::OnShutdown()
 
 	delete MiddleTextLine6;
 	MiddleTextLine6 = nullptr;
+
+	delete MiddleTextLine7;
+	MiddleTextLine7 = nullptr;
 }
 
 void UIText::SetWelcomeToTheGame()
@@ -80,6 +86,7 @@ void UIText::SetWelcomeToTheGame()
     MiddleTextLine3->SetVisible(true);
 	MiddleTextLine4->SetVisible(true);
 	MiddleTextLine5->SetVisible(true);
+	MiddleTextLine6->SetVisible(true);
 	MiddleTextLine6->SetVisible(true);
 
     MiddleTextLine1->SetText("Welcome To Purgatory, fallen Priest! Since you have disgraced the eye of the Lord,");
