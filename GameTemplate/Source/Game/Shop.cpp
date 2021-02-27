@@ -35,7 +35,12 @@ void Shop::OnPostInit()
 	
 	CoinText->SetOffset(MiddleX, 150);
 	CoinText->SetFont("Fonts/Boxy-Bold.ttf", 20);
-	CoinText->SetText("Coins: 0"); // Need to pull in players money
+	//CoinText->SetText("Coins: 0"); // Need to pull in players money
+
+	/*	int CoinsCollected = player->col();
+		CoinText->SetText("Coins: 0" + to_string(CoinsCollected));*/
+	
+	
 	
 
 

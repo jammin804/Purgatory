@@ -230,3 +230,26 @@ void GameFlow::AddObjectToDisableAtStart(GameObject* ObjectToDisable)
 {
     GameFlowGameObjects.push_back(ObjectToDisable);
 }
+
+void GameFlow::SetAllDead()
+{
+	CurrentState = EState::Ending;
+	for (GameObject* Object : GameFlowGameObjects)
+	{
+		Object->SetEnabled(false);
+	}
+	if (GameUIText)
+	{
+		GameUIText->SetGameOver(CurrentScore);
+	}
+
+}
+
+void GameFlow::AddTime()
+{
+	if (TimeRemaining < MAX_TIME)
+	{
+		TimeRemaining = TimeRemaining + 5.0f;
+	}
+	
+}

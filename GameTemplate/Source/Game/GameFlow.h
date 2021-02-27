@@ -39,12 +39,15 @@ class GameFlow : public GameObject
 		bool ShouldResetGame() const { return bShouldResetGame; }
 		void SetGUI(GUI* GameUIRef) { GameUI = GameUIRef; }
 		void SetPlayer(Player* NewPlayer) { player = NewPlayer; }
+		EState GameState() {return CurrentState;}
+		void SetAllDead();
+		void AddTime();
     private:
         vector<GameObject*> GameFlowGameObjects;
         int CurrentScore = 0;
         EState CurrentState = EState::Starting;
         class InputComponent* Input = nullptr;
-		const float MAX_TIME = 10.0f;
+		const float MAX_TIME = 120.0f;
         float TimeRemaining = MAX_TIME;
 		int FearTimer;
         class UIText* GameUIText = nullptr;

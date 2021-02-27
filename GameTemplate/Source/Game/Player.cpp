@@ -90,8 +90,8 @@ void Player::OnUpdate(float DeltaTime)
 	float DesiredPostionX = PosX - DirectionX;
 	float DesiredPostionY = PosY - DirectionY;
 
-	if (DesiredPostionY > BG->GetBackgroundHeight()*0.5f ||
-		DesiredPostionY < -BG->GetBackgroundHeight()*0.5f)
+	if (DesiredPostionY > BG->GetBackgroundHeight()*0.49f ||
+		DesiredPostionY < -BG->GetBackgroundHeight()*0.49f)
 	{
 		DesiredPostionY = PosY;
 	}

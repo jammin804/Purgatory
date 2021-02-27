@@ -56,6 +56,12 @@ void AsteroidsGame::OnPostInit()
 		{
 			GFlow->SetPlayer(Player1);
 		}
+
+		
+		/*if (GFlow->GameState() != GameFlow::EState::InGame)
+		{
+			return;
+		}*/ //GameFlow::EState::InGame throwing error
     }
 
 	if (UI)
@@ -187,6 +193,7 @@ void AsteroidsGame::OnUpdate(float DeltaTime)
 					CreateExplosion(CurrentRock->GetWorldPositionX(), CurrentRock->GetWorldPositionY(), ExplosionScale);
 					CurrentRock->EnemyHit();
 					CurrentCross->RequestDestroy();
+					
 
 					if (CurrentRock->GetEnemyLivesLeft() < 0.0f)
 					{
@@ -197,6 +204,10 @@ void AsteroidsGame::OnUpdate(float DeltaTime)
 							{
 								CoinMgr->CreateCoin(CurrentRock->GetWorldPositionX(), CurrentRock->GetWorldPositionY());
 							}
+						}
+						if (GFlow)
+						{
+							GFlow->AddTime();
 						}
 					}
 				}
