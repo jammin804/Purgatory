@@ -158,7 +158,7 @@ void AsteroidsGame::OnUpdate(float DeltaTime)
 
 			if (!Player1->IsInvulnerable() && Player1->IsEnabled())
 			{
-				if (Player1->GetCollision()->DoesCollide(CurrentRock->GetCollision()))
+				if ((Player1->GetCollision()->DoesCollide(CurrentRock->GetCollision())) && (CurrentRock->GetState() != EState::Flee))
 				{
 					//CreateExplosion(Player1->GetPositionX(), Player1->GetPositionY());
 					if (Player1->HandleDeath())

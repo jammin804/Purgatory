@@ -20,6 +20,14 @@ enum EEnemyDir : int
 	Up,
 	COUNT
 };
+enum class EState : int
+{
+	Idle = 0,
+	Patrol,
+	Chase,
+	Flee,
+	COUNT
+};
 class Rock : public GameObject
 {
 protected:
@@ -45,17 +53,10 @@ public:
 	EEnemyType GetEnemyType() const; // Trying to access to the enemy types in AsteroidsGame.cpp to change explosion scale
 	void SetPlayer(const Player* NewPlayer) { Player1 = NewPlayer; }
 	void ChangeDirection();
-	void GetState();
+	EState GetState();
 
 private:
-	enum class EState : int
-	{
-		Idle = 0,
-		Patrol,
-		Chase,
-		Flee,
-		COUNT
-	};
+	
     float RotationSpeed = 1.0f;
     class ImageComponent* EnemyImage = nullptr;
     BoxCollisionComponent* Collision = nullptr;

@@ -47,7 +47,7 @@ class GameFlow : public GameObject
         int CurrentScore = 0;
         EState CurrentState = EState::Starting;
         class InputComponent* Input = nullptr;
-		const float MAX_TIME = 10.0f;
+		const float MAX_TIME = 120.0f;
         float TimeRemaining = MAX_TIME;
 		int FearTimer;
         class UIText* GameUIText = nullptr;

@@ -349,9 +349,9 @@ void Rock::ChangeDirection()
 	EnemyDirection = static_cast <EEnemyDir>((EnemyDirection + 1) % EEnemyDir::COUNT);
 }
 
-void Rock::GetState()
+EState Rock::GetState()
 {
-	
+	return CurrentState;
 }
 
 void Rock::ExitPatrolState()
