@@ -20,6 +20,6 @@ private:
     float BoxHeight = 50.0f;
     float Scale = 1.0f;
 
-    bool bDrawDebug = true;
+    bool bDrawDebug = false;
 };
 

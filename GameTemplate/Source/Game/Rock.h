@@ -45,6 +45,7 @@ public:
 	EEnemyType GetEnemyType() const; // Trying to access to the enemy types in AsteroidsGame.cpp to change explosion scale
 	void SetPlayer(const Player* NewPlayer) { Player1 = NewPlayer; }
 	void ChangeDirection();
+	void GetState();
 
 private:
 	enum class EState : int

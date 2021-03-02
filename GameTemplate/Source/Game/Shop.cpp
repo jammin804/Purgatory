@@ -28,17 +28,23 @@ void Shop::OnPostInit()
 {
 	float MiddleX = Globals::WindowSizeX * 0.5f;
 	float MiddleY = Globals::WindowSizeY * 0.5f;
+	//int CurrentNumberOfCoins = 0;
+	
+	
 	TitleText->SetOffset(MiddleX, 50);
 	TitleText->SetFont("Fonts/Boxy-Bold.ttf", 20);
 	TitleText->SetText("Shop");
 
-	if (player)
-	{
-		CoinText->SetOffset(MiddleX, 150);
-		CoinText->SetFont("Fonts/Boxy-Bold.ttf", 20);
-		CoinText->SetText("Coins: " + player->GetNumberOfCoins()); // Need to pull in players money
-	}
 	
+	CoinText->SetOffset(MiddleX, 150);
+	CoinText->SetFont("Fonts/Boxy-Bold.ttf", 20);
+	//CoinText->SetText("Coins: " + to_string(CurrentNumberOfCoins)); // Need to pull in players money
+	/*if (!player)
+	{
+		char CoinsCollected[10];
+		sprintf_s(CoinsCollected, "Coins: %d", player->GetNumberOfCoins());
+		CoinText->SetText(CoinsCollected);
+	}*/
 
 	/*	int CoinsCollected = player->col();
 		CoinText->SetText("Coins: 0" + to_string(CoinsCollected));*/
@@ -62,7 +68,11 @@ void Shop::OnPostInit()
 	WeaponUpgradeUserPrompt->SetText("Press 1 To Buy");
 	WeaponUpgradeImage->SetScale(3.0f);
 	WeaponUpgradeImage->SetOffset(MiddleX * 0.3f, 400);
-	UpgradeWeaponLevel(WeaponUpgrade);
+	WeaponUpgradeItemCostText->SetText("Cost: " + to_string(WeaponUpgrade.ItemCost1));
+	WeaponUpgradeImage->LoadImage("Art/PowerUpIcon-WeaponBurst.png");
+
+	
+	//UpgradeWeaponLevel(WeaponUpgrade);
 
 	//Speed Upgrade
 	ShopItem& SpeedUpgrade = ShopItems[1];
@@ -98,7 +108,7 @@ void Shop::OnPostInit()
 	HealthUpgradeUserPrompt->SetFont("Fonts/Boxy-Bold.ttf", 20);
 	HealthUpgradeUserPrompt->SetText("Press 3 To Buy");
 
-	
+	HealthUpgradeImage->LoadImage("Art/PowerUpIcon-Health1.png");
 	HealthUpgradeImage->SetScale(3.0f);
 	HealthUpgradeImage->SetOffset(MiddleX  * 1.75f, 400);
 
@@ -112,15 +122,19 @@ void Shop::OnShutdown()
 
 void Shop::UpgradeWeaponLevel(ShopItem& WeaponUpgrade)
 {
-	/*if (player->WeaponLevel == 0)
+	/*if (player)
 	{
-		WeaponUpgradeItemCostText->SetText("Cost: " + to_string(WeaponUpgrade.ItemCost1));
-		WeaponUpgradeImage->LoadImage("Art/PowerUpIcon-WeaponBurst.png");
-	}
-	if (player->WeaponLevel == 1)
-	{
-		WeaponUpgradeItemCostText->SetText("Cost: " + to_string(WeaponUpgrade.ItemCost2));
-		WeaponUpgradeImage->LoadImage("Art/PowerUpIcon-WeaponCirlce.png");
+		if (player->WeaponLevel == 0)
+		{
+			WeaponUpgradeItemCostText->SetText("Cost: " + to_string(WeaponUpgrade.ItemCost1));
+			WeaponUpgradeImage->LoadImage("Art/PowerUpIcon-WeaponBurst.png");
+		}
+		if (player->WeaponLevel == 1)
+		{
+			WeaponUpgradeItemCostText->SetText("Cost: " + to_string(WeaponUpgrade.ItemCost2));
+			WeaponUpgradeImage->LoadImage("Art/PowerUpIcon-WeaponCirlce.png");
+		}
 	}*/
-		
+	
+	
 }

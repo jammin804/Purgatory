@@ -84,10 +84,10 @@ void GUI::OnUpdate(float DeltaTime)
 		sprintf_s(CoinsCollected, "X %d", player->GetNumberOfCoins());
 		CoinGUITextComponent->SetText(CoinsCollected);
 
-		/*char HealthLeft[50];
-		sprintf_s(HealthLeft,"")*/
+		/*char HealthLeft[50]; Overlay 100/100 over health bar
+		sprintf_s(HealthLeft,"")
 		AmountOfHealthText->SetText(player->GetLivesLeft() + "/" + player->GetMaxLivesLeft());
-		AmountOfHealthText->SetOffset(500, 100);
+		AmountOfHealthText->SetOffset(500, 100);*/
 	}
 }
 

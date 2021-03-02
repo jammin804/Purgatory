@@ -188,21 +188,21 @@ void Rock::EnterIdleState()
 	{
 		EnemyImagePath = "Art/Enemy_D.png";
 		MaxIdleTime = RandomRange(3.0f, 5.0f);
-		MaxDetectionRadius = RandomRange(300.0f, 500.0f);
+		MaxDetectionRadius = 300.0f;
 
 	}
 	else if (EnemyType == EEnemyType::Bat)
 	{
 		EnemyImagePath = "Art/Enemy_Bat.png";
 		MaxIdleTime = RandomRange(1.0f, 3.0f);
-		MaxDetectionRadius = RandomRange(400.0f, 600.0f);
+		MaxDetectionRadius = 300.0f;
 
 	}
 	else
 	{
 		EnemyImagePath = "Art/Enemy_Golem.png";
 		MaxIdleTime = RandomRange(5.0f, 7.0f);
-		MaxDetectionRadius = RandomRange(200.0f, 400.0f);
+		MaxDetectionRadius = 300.0f;
 
 	}
 
@@ -249,7 +249,7 @@ bool Rock::CheckForLostPlayer()
 	float DirectionToPlayerY = Player1->GetWorldPositionY() - GetWorldPositionY();
 	float DirectionSize = sqrt(pow(DirectionToPlayerX, 2) + pow(DirectionToPlayerY, 2));
 
-	if (DirectionSize > 300.0f)
+	if (DirectionSize > 500.0f)
 	{
 		ChangeState(EState::Idle);
 		return true;
@@ -264,7 +264,7 @@ bool Rock::CheckForFear()
 	float DirectionSize = sqrt(pow(DirectionToPlayerX, 2) + pow(DirectionToPlayerY, 2));
 
 	//If enemy health is lower than 25% run away from players location
-	if (EnemyHealthLeft < ENEMY_MAX_LIFE*0.25 && DirectionSize > 300.f)
+	if ((EnemyHealthLeft < ENEMY_MAX_LIFE*0.25) && (DirectionSize < 300.0f))
 	{
 		ChangeState(EState::Flee);
 		return true;
@@ -349,6 +349,11 @@ void Rock::ChangeDirection()
 	EnemyDirection = static_cast <EEnemyDir>((EnemyDirection + 1) % EEnemyDir::COUNT);
 }
 
+void Rock::GetState()
+{
+	
+}
+
 void Rock::ExitPatrolState()
 {
 	bNeedsSwitch = !bNeedsSwitch;
@@ -396,7 +401,7 @@ void Rock::UpdateChaseState(float Deltatime)
 		ChaseDirectionX /= ChaseDirectionSize;
 		ChaseDirectionY /= ChaseDirectionSize;
 
-		UpdateMovement(GetPositionX() + (ChaseDirectionX *MovementSpeed*0.5f * Deltatime), GetPositionY() + (ChaseDirectionY * MovementSpeed*0.5f * Deltatime));
+		UpdateMovement(GetPositionX() + (ChaseDirectionX *MovementSpeed * Deltatime), GetPositionY() + (ChaseDirectionY * MovementSpeed * Deltatime));
 	}
 	
 }
