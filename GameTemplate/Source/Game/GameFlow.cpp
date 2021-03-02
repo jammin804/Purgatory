@@ -78,7 +78,7 @@ void GameFlow::OnUpdate(float DeltaTime)
 			
 			GameUI->SetFearPercentage(TimeRemaining / MAX_TIME);
 		}
-        if (TimeRemaining <= 0.0f)
+        if (TimeRemaining <= 0.0f )
         {
             CurrentState = EState::Shopping;
             for (GameObject* Object : GameFlowGameObjects)
@@ -87,6 +87,7 @@ void GameFlow::OnUpdate(float DeltaTime)
 				{
 					Object->SetEnabled(false);
 				}
+				
             }
 			GameShop->SetEnabled(true);
         }
@@ -128,9 +129,31 @@ void GameFlow::OnUpdate(float DeltaTime)
 			}
 			if (Input->IsKeyJustPressed(ALLEGRO_KEY_2))
 			{
+				const ShopItem& SpeedUpgrade = GameShop->GetShopItems()[1];
+				if (SpeedUpgrade.NumberBought < 2)
+				{
+					int UpgradeCost = SpeedUpgrade.NumberBought == 0 ? SpeedUpgrade.ItemCost1 : SpeedUpgrade.ItemCost2;
+					if (player && player->GetNumberOfCoins() >= UpgradeCost)
+					{
+						player->SpendCoins(UpgradeCost);
+						player->UpgradeSpeedLevel();
+						//GameShop->UpgradeSpeedLevel(); // This will swtich out the image, description and cost. Also, increase Numberbrought
+					}
+				}
 			}
 			if (Input->IsKeyJustPressed(ALLEGRO_KEY_3))
 			{
+				const ShopItem& HealthUpgrade = GameShop->GetShopItems()[2];
+				if (HealthUpgrade.NumberBought < 2)
+				{
+					int UpgradeCost = HealthUpgrade.NumberBought == 0 ? HealthUpgrade.ItemCost1 : HealthUpgrade.ItemCost2;
+					if (player && player->GetNumberOfCoins() >= UpgradeCost)
+					{
+						player->SpendCoins(UpgradeCost);
+						player->UpdgradeHealthLevel();
+						//GameShop->UpgradeSpeedLevel(); // This will swtich out the image, description and cost. Also, increase Numberbrought
+					}
+				}
 			}
 			if (Input->IsKeyJustPressed(ALLEGRO_KEY_ENTER))
 			{

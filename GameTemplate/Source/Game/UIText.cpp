@@ -16,6 +16,7 @@ void UIText::OnInit()
 	MiddleTextLine5 = GameComponent::CreateInstance<TextComponent>(this);
 	MiddleTextLine6 = GameComponent::CreateInstance<TextComponent>(this);
 	MiddleTextLine7 = GameComponent::CreateInstance<TextComponent>(this);
+	BottomCenterText = GameComponent::CreateInstance<TextComponent>(this);
 }
 
 void UIText::OnPostInit()
@@ -30,8 +31,9 @@ void UIText::OnPostInit()
 	MiddleTextLine3->SetOffset(MiddleX, MiddleY - 150);
 	MiddleTextLine4->SetOffset(MiddleX, MiddleY - 100);
 	MiddleTextLine5->SetOffset(MiddleX, MiddleY - 50);
-	MiddleTextLine6->SetOffset(MiddleX, MiddleY + 50);
+	MiddleTextLine6->SetOffset(MiddleX, 450);
 	MiddleTextLine7->SetOffset(MiddleX, MiddleY + 100);
+	BottomCenterText->SetOffset(MiddleX, 575);
 	TopCenterText->SetFont("Fonts/Boxy-Bold.ttf", FontSize);
 	TopRightText->SetFont("Fonts/Boxy-Bold.ttf", FontSize);
 	MiddleTextLine1->SetFont("Fonts/Boxy-Bold.ttf", FontSize);
@@ -41,6 +43,7 @@ void UIText::OnPostInit()
 	MiddleTextLine5->SetFont("Fonts/Boxy-Bold.ttf", FontSize);
 	MiddleTextLine6->SetFont("Fonts/Boxy-Bold.ttf", FontSize);
 	MiddleTextLine7->SetFont("Fonts/Boxy-Bold.ttf", FontSize);
+	BottomCenterText->SetFont("Fonts/Boxy-Bold.ttf", FontSize);
 }
 
 void UIText::OnShutdown()
@@ -74,6 +77,9 @@ void UIText::OnShutdown()
 
 	delete MiddleTextLine7;
 	MiddleTextLine7 = nullptr;
+
+	delete BottomCenterText;
+	BottomCenterText = nullptr;
 }
 
 void UIText::SetWelcomeToTheGame()
@@ -87,14 +93,16 @@ void UIText::SetWelcomeToTheGame()
 	MiddleTextLine4->SetVisible(true);
 	MiddleTextLine5->SetVisible(true);
 	MiddleTextLine6->SetVisible(true);
-	MiddleTextLine6->SetVisible(true);
+	MiddleTextLine7->SetVisible(true);
+	BottomCenterText->SetVisible(true);
 
     MiddleTextLine1->SetText("Welcome To Purgatory, fallen Priest! Since you have disgraced the eye of the Lord,");
 	MiddleTextLine2->SetText("I (Saint Peters) will give you a second chance to redeem yourself.");
 	MiddleTextLine3->SetText("Exorcise as many demons as you can! Your performance will be judge ");
 	MiddleTextLine4->SetText("to see if you can come into the kingdom of the Lord.");
-	MiddleTextLine5->SetText("Good Luck. Press Enter To Start");
-	MiddleTextLine6->SetText("Use the ""Arrow Keys"" to move and the ""Space"" button to fire lasers");
+	MiddleTextLine5->SetText("Good Luck.");
+	MiddleTextLine6->SetText("Press Enter To Start");
+	BottomCenterText->SetText("Use the ""Arrow Keys"" to move and the ""Space"" button to fire lasers");
 }
 
 void UIText::SetInGame()
@@ -108,6 +116,7 @@ void UIText::SetInGame()
 	MiddleTextLine4->SetVisible(false);
 	MiddleTextLine5->SetVisible(false);
 	MiddleTextLine6->SetVisible(false);
+	BottomCenterText->SetVisible(false);
 }
 
 void UIText::SetGameOver(int FinalScore)
@@ -163,9 +172,9 @@ void UIText::UpdateScore(int NewScore)
 
 void UIText::UpdateLivesLeft(int NewLivesLeft)
 {
-    //char LivesLeft[50];
-    /*sprintf_s(LivesLeft, "Lives Left: %d", NewLivesLeft);
-    TopLeftText->SetText(LivesLeft);*/
+   /* char LivesLeft[50];
+    sprintf_s(LivesLeft, "Lives Left: %d", NewLivesLeft);*/
+   // TopLeftText->SetText();
 }
 
 void UIText::UpdateTimeRemaining(int NewTimeMins, int NewTimeSeconds)

@@ -39,7 +39,12 @@ public:
 	int GetNumberOfCoins() const { return NumberOfCoins; }
 	void SetBackground(Background* NewBG) { BG = NewBG; }
 	void UpgradeWeaponLevel() { WeaponLevel = WeaponLevel < 2 ? WeaponLevel+1 : WeaponLevel; }
+	void UpgradeSpeedLevel() { SpeedLevel = SpeedLevel < 2 ? SpeedLevel + 1 : SpeedLevel; }
+	void UpdgradeHealthLevel() { HealthLevel = HealthLevel < 2 ? HealthLevel + 1 : HealthLevel; }
 	void SpendCoins(int NumberOfCoinsToSpend) { NumberOfCoins -= NumberOfCoinsToSpend; }
+	int WeaponLevel = 0;
+	int SpeedLevel = 0;
+	int HealthLevel = 0;
 
 private:
 	void SetLivesLeft(int NewLivesLeft) { HealthLeft = NewLivesLeft; }
@@ -53,13 +58,13 @@ private:
 	SoundComponent* CoinSoundComponentPickup = nullptr;
     BoxCollisionComponent* Collision = nullptr;
 	Background* BG = nullptr;
-	int WeaponLevel = 0;
+
     float PlayerVerticalMovementSpeed = 200.0f;
 	float PlayerHorizontalMovementSpeed = 200.0f;
     float RotationSpeed = 2.0f;
     bool bCanMakeLaser = true;
     vector<Cross*> Crosses;
-	const int MAX_LIFE = 5;
+	int MAX_LIFE = 5;
     int HealthLeft = MAX_LIFE;
 	const int MAX_FEAR = 120;
 	int FearLeft = MAX_FEAR;

@@ -52,8 +52,8 @@ void Rock::OnPostInit()
 	case EEnemyType::Golem:
 	{
 		EnemyImagePath = "Art/Enemy_Golem.png";
-		CollisionScaleX = 150.0f * 2;
-		CollisionScaleY = 150.0f * 2;
+		CollisionScaleX = 200.0f;
+		CollisionScaleY = 150.0f * 1.5;
 		HealthBarOffsetX = -160.0f;
 		HealthBarOffsetY = -70.0f;
 		break;
@@ -485,6 +485,11 @@ void Rock::SetEnemyDirection(EEnemyDir direction)
 void Rock::SetEnemyType(EEnemyType type)
 {
 	EnemyType = type;
+}
+
+EEnemyType Rock::GetEnemyType() const
+{
+	return EnemyType;
 }
 
 void Rock::EnemyHit()

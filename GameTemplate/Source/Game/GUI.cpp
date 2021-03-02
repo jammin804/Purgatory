@@ -83,6 +83,11 @@ void GUI::OnUpdate(float DeltaTime)
 		char CoinsCollected[10];
 		sprintf_s(CoinsCollected, "X %d", player->GetNumberOfCoins());
 		CoinGUITextComponent->SetText(CoinsCollected);
+
+		/*char HealthLeft[50];
+		sprintf_s(HealthLeft,"")*/
+		AmountOfHealthText->SetText(player->GetLivesLeft() + "/" + player->GetMaxLivesLeft());
+		AmountOfHealthText->SetOffset(500, 100);
 	}
 }
 

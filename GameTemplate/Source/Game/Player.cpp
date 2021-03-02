@@ -54,10 +54,41 @@ void Player::OnUpdate(float DeltaTime)
 		}
 	}
 
+	//Checks if health was upgraded
+	if (HealthLevel == 0)
+	{
+		MAX_LIFE = MAX_LIFE;
+	}
+	else if (HealthLevel == 1)
+	{
+		MAX_LIFE = MAX_LIFE + 5;
+	}
+	else
+	{
+		MAX_LIFE = MAX_LIFE + 10;
+	}
+
+
 	float DirectionX = 0.0f;
 	float DirectionY = 0.0f;
 	float PosX = BG->GetPositionX();
 	float PosY = BG->GetPositionY();
+
+	if (SpeedLevel == 0)
+	{
+		PlayerVerticalMovementSpeed = 200;
+		PlayerHorizontalMovementSpeed = 200;
+	}
+	else if (SpeedLevel == 1)
+	{
+		PlayerVerticalMovementSpeed = 200 * 1.5f;
+		PlayerHorizontalMovementSpeed = 200 * 1.5f;
+	}
+	else
+	{
+		PlayerVerticalMovementSpeed = 200 * 2.0f;
+		PlayerHorizontalMovementSpeed = 200 * 2.0f;
+	}
 
 	//Add a while loop to check to see if the player + 32 px is near the edge of the world.		
 	if (InputComp->IsKeyPressed(ALLEGRO_KEY_UP) || InputComp->IsKeyPressed(ALLEGRO_KEY_W))
@@ -204,6 +235,7 @@ void Player::OnRestart()
 	SetPosition(638.0f, 360.0f);
 	SetLivesLeft(MAX_LIFE);
 	//SetFearLeft(MAX_FEAR); //Need to call Max Fear to Gameflow
+	BG->SetPosition(0.0f, 0.0f);
 }
 
 void Player::SetAvatarImage(string ImagePath)

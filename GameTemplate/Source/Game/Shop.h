@@ -29,7 +29,8 @@ protected:
 
 public:
 	const ShopItem* GetShopItems() const { return ShopItems; }
-	void UpgradeWeaponLevel();
+	void UpgradeWeaponLevel(ShopItem& WeaponUpgrade);
+	void SetPlayer(const Player* NewPlayer) { player = NewPlayer; }
 private:
     TextComponent* TitleText = nullptr;
 	TextComponent* CoinText = nullptr;

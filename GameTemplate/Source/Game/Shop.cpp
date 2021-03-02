@@ -32,10 +32,13 @@ void Shop::OnPostInit()
 	TitleText->SetFont("Fonts/Boxy-Bold.ttf", 20);
 	TitleText->SetText("Shop");
 
+	if (player)
+	{
+		CoinText->SetOffset(MiddleX, 150);
+		CoinText->SetFont("Fonts/Boxy-Bold.ttf", 20);
+		CoinText->SetText("Coins: " + player->GetNumberOfCoins()); // Need to pull in players money
+	}
 	
-	CoinText->SetOffset(MiddleX, 150);
-	CoinText->SetFont("Fonts/Boxy-Bold.ttf", 20);
-	//CoinText->SetText("Coins: 0"); // Need to pull in players money
 
 	/*	int CoinsCollected = player->col();
 		CoinText->SetText("Coins: 0" + to_string(CoinsCollected));*/
@@ -54,14 +57,12 @@ void Shop::OnPostInit()
 	WeaponUpgradeText->SetText(WeaponUpgrade.ItemName);
 	WeaponUpgradeItemCostText->SetOffset(MiddleX * 0.3f, 250);
 	WeaponUpgradeItemCostText->SetFont("Fonts/Boxy-Bold.ttf", 20);
-	WeaponUpgradeItemCostText->SetText("Cost: " + to_string(WeaponUpgrade.ItemCost1));
 	WeaponUpgradeUserPrompt->SetOffset(MiddleX * 0.3f, 500);
 	WeaponUpgradeUserPrompt->SetFont("Fonts/Boxy-Bold.ttf", 20);
 	WeaponUpgradeUserPrompt->SetText("Press 1 To Buy");
-
-	WeaponUpgradeImage->LoadImage("Art/PowerUpIcon-WeaponBurst.png");
 	WeaponUpgradeImage->SetScale(3.0f);
 	WeaponUpgradeImage->SetOffset(MiddleX * 0.3f, 400);
+	UpgradeWeaponLevel(WeaponUpgrade);
 
 	//Speed Upgrade
 	ShopItem& SpeedUpgrade = ShopItems[1];
@@ -97,7 +98,7 @@ void Shop::OnPostInit()
 	HealthUpgradeUserPrompt->SetFont("Fonts/Boxy-Bold.ttf", 20);
 	HealthUpgradeUserPrompt->SetText("Press 3 To Buy");
 
-	HealthUpgradeImage->LoadImage("Art/PowerUpIcon-Health1.png");
+	
 	HealthUpgradeImage->SetScale(3.0f);
 	HealthUpgradeImage->SetOffset(MiddleX  * 1.75f, 400);
 
@@ -109,7 +110,17 @@ void Shop::OnShutdown()
     TitleText = nullptr;
 }
 
-void Shop::UpgradeWeaponLevel()
+void Shop::UpgradeWeaponLevel(ShopItem& WeaponUpgrade)
 {
-	
+	/*if (player->WeaponLevel == 0)
+	{
+		WeaponUpgradeItemCostText->SetText("Cost: " + to_string(WeaponUpgrade.ItemCost1));
+		WeaponUpgradeImage->LoadImage("Art/PowerUpIcon-WeaponBurst.png");
+	}
+	if (player->WeaponLevel == 1)
+	{
+		WeaponUpgradeItemCostText->SetText("Cost: " + to_string(WeaponUpgrade.ItemCost2));
+		WeaponUpgradeImage->LoadImage("Art/PowerUpIcon-WeaponCirlce.png");
+	}*/
+		
 }
