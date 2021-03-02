@@ -138,6 +138,11 @@ void AsteroidsGame::OnUpdate(float DeltaTime)
 				{
 					continue;
 				}
+				
+				/*if (GFlow->GameState != InGame) //Scoping issue
+				{
+					return;
+				}*/
 
 				if (CurrentRock->GetCollision()->DoesCollide(OtherRock->GetCollision()))
 				{
