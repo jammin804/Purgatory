@@ -15,8 +15,13 @@ void Explosion::OnPostInit()
 {
     ExplosionImage->LoadImage("Art/Bloodsplats.png");
     ExplosionImage->SetScale(ExplosionScale);
+	SetRenderDepth(5.0f);
     ExplosionSound->LoadSample("Audio/Hit.wav");
     ExplosionSound->Play();
+	SetRotation(rand() % 360);
+	int RandomOffSetX = 50 - rand() % 100;
+	int RandomOffSetY = 50 - rand() % 100;
+	SetPosition(GetPositionX() + RandomOffSetX, GetPositionY() + RandomOffSetY);
 }
 
 void Explosion::OnUpdate(float DeltaTime)

@@ -10,18 +10,19 @@ void GUI::OnInit()
 	LayerGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
 	LifeGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
 	BorderGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
-	AmountOfHealthText = GameComponent::CreateInstance<TextComponent>(this);
-	
 
 	FearLayerGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
 	FearGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
 	FearBorderGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
 	FearGUITextComponent = GameComponent::CreateInstance<TextComponent>(this);
-	AmountOfFearText = GameComponent::CreateInstance<TextComponent>(this);
+
 
 	CoinGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
 	CoinGUITextComponent = GameComponent::CreateInstance<TextComponent>(this);
-	//CoinFont = GameComponent::CreateInstance<FontManager>(this);
+
+	AmountOfHealthText = GameComponent::CreateInstance<TextComponent>(this);
+	AmountOfFearText = GameComponent::CreateInstance<TextComponent>(this);
+	
 }
 
 void GUI::OnPostInit()
@@ -71,6 +72,12 @@ void GUI::OnPostInit()
 	CoinGUITextComponent->SetOffsetX(50.0f);
 	CoinGUITextComponent->SetFont("Fonts/Boxy-Bold.ttf", FontSize);
 
+	AmountOfHealthText->SetOffset(150, -10);
+	AmountOfHealthText->SetFont("Fonts/Boxy-Bold.ttf", FontSize);
+
+	AmountOfFearText->SetOffset(150, 20);
+	AmountOfFearText->SetFont("Fonts/Boxy-Bold.ttf", FontSize);
+
 }
 
 void GUI::OnUpdate(float DeltaTime)
@@ -84,10 +91,10 @@ void GUI::OnUpdate(float DeltaTime)
 		sprintf_s(CoinsCollected, "X %d", player->GetNumberOfCoins());
 		CoinGUITextComponent->SetText(CoinsCollected);
 
-		/*char HealthLeft[50]; Overlay 100/100 over health bar
-		sprintf_s(HealthLeft,"")
-		AmountOfHealthText->SetText(player->GetLivesLeft() + "/" + player->GetMaxLivesLeft());
-		AmountOfHealthText->SetOffset(500, 100);*/
+		char HealthLeft[50]; //Overlay 100/100 over health bar
+		sprintf_s(HealthLeft, "%d/%d", player->GetLivesLeft(), player->GetMaxLivesLeft());
+		AmountOfHealthText->SetText(HealthLeft);
+
 	}
 }
 
@@ -98,8 +105,11 @@ void GUI::SetLifePercentage(float PercentageLife)
 
 void GUI::SetFearPercentage(float FearPercentageLife)
 {
-	//Reduce fear based on the in-game time
 	FearGUIImageComponent->SetScaleX(MAX_LIFESCALE * FearPercentageLife);
+
+	char FearPercent[50]; //Overlay 100/100 over health bar
+	sprintf_s(FearPercent, "%d%%", static_cast<int> (FearPercentageLife * 100));
+	AmountOfFearText->SetText(FearPercent);
 }
 
 void GUI::SetBorderImage(string ImagePath)

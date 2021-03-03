@@ -121,16 +121,21 @@ void AsteroidsGame::OnUpdate(float DeltaTime)
         return;
     }*/
 
-	
+	if (GFlow->GameState() != GameFlow::EState::InGame) //Scoping issue
+	{
+		return;
+	}
 
 	if (RockMgr)
 	{
+		int NumberOfExistingEnemies = 0;
 		for (Rock* CurrentRock : RockMgr->GetRocks())
 		{
 			if (CurrentRock->IsDestroyed())
 			{
 				continue;
 			}
+			NumberOfExistingEnemies++;
 
 			for (Rock* OtherRock : RockMgr->GetRocks())
 			{
@@ -139,10 +144,7 @@ void AsteroidsGame::OnUpdate(float DeltaTime)
 					continue;
 				}
 				
-				/*if (GFlow->GameState != InGame) //Scoping issue
-				{
-					return;
-				}*/
+				
 
 				if (CurrentRock->GetCollision()->DoesCollide(OtherRock->GetCollision()))
 				{
@@ -182,18 +184,18 @@ void AsteroidsGame::OnUpdate(float DeltaTime)
 				if (CurrentRock->GetCollision()->DoesCollide(CurrentCross->GetCollision()))
 				{
 					float ExplosionScale = 1.0f;
-					/*if (CurrentRock->EnemyType::Demon)
+					if (CurrentRock->GetEnemyType() == EEnemyType::Demon)
 					{
-						ExplosionScale = 2.0f;
+						ExplosionScale = 1.8f;
 					}
-					else if(CurrentRock->EnemyType::Bat)
+					else if(CurrentRock->GetEnemyType() == EEnemyType::Bat)
 					{
-						ExplosionScale = 1.0f;
+						ExplosionScale = 0.5f;
 					}
 					else 
 					{
-						ExplosionScale = 3.0f;
-					}*/
+						ExplosionScale = 2.2f;
+					}
 
 					CreateExplosion(CurrentRock->GetWorldPositionX(), CurrentRock->GetWorldPositionY(), ExplosionScale);
 					CurrentRock->EnemyHit();
@@ -217,6 +219,10 @@ void AsteroidsGame::OnUpdate(float DeltaTime)
 					}
 				}
 			}
+		}
+		if (NumberOfExistingEnemies == 0)
+		{
+			GFlow->SetAllDead();
 		}
 	}
 

@@ -25,12 +25,18 @@ class Shop : public GameObject
 protected:
     virtual void OnInit() override;
     virtual void OnPostInit() override;
-    virtual void OnShutdown() override;
+
+	
+
+	virtual void OnShutdown() override;
 
 public:
 	const ShopItem* GetShopItems() const { return ShopItems; }
-	void UpgradeWeaponLevel(ShopItem& WeaponUpgrade);
+	void UpgradeWeaponLevel(const ShopItem& WeaponUpgrade);
+	void UpgradeSpeedLevel(const ShopItem& SpeedUpgrade);
+	void UpgradeHealthLevel(const ShopItem& HealthUpgrade);
 	void SetPlayer(const Player* NewPlayer) { player = NewPlayer; }
+	void UpdateCoinShopText();
 private:
     TextComponent* TitleText = nullptr;
 	TextComponent* CoinText = nullptr;

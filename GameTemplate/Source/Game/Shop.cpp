@@ -39,12 +39,8 @@ void Shop::OnPostInit()
 	CoinText->SetOffset(MiddleX, 150);
 	CoinText->SetFont("Fonts/Boxy-Bold.ttf", 20);
 	//CoinText->SetText("Coins: " + to_string(CurrentNumberOfCoins)); // Need to pull in players money
-	/*if (!player)
-	{
-		char CoinsCollected[10];
-		sprintf_s(CoinsCollected, "Coins: %d", player->GetNumberOfCoins());
-		CoinText->SetText(CoinsCollected);
-	}*/
+	UpdateCoinShopText();
+
 
 	/*	int CoinsCollected = player->col();
 		CoinText->SetText("Coins: 0" + to_string(CoinsCollected));*/
@@ -114,27 +110,71 @@ void Shop::OnPostInit()
 
 }
 
+void Shop::UpdateCoinShopText()
+{
+	if (player)
+	{
+		char CoinsCollected[10];
+		sprintf_s(CoinsCollected, "Coins: %d", player->GetNumberOfCoins());
+		CoinText->SetText(CoinsCollected);
+	}
+}
+
 void Shop::OnShutdown()
 {
     delete TitleText;
     TitleText = nullptr;
 }
 
-void Shop::UpgradeWeaponLevel(ShopItem& WeaponUpgrade)
+void Shop::UpgradeWeaponLevel(const ShopItem& WeaponUpgrade)
 {
-	/*if (player)
+	if (player)
 	{
-		if (player->WeaponLevel == 0)
-		{
-			WeaponUpgradeItemCostText->SetText("Cost: " + to_string(WeaponUpgrade.ItemCost1));
-			WeaponUpgradeImage->LoadImage("Art/PowerUpIcon-WeaponBurst.png");
-		}
 		if (player->WeaponLevel == 1)
 		{
 			WeaponUpgradeItemCostText->SetText("Cost: " + to_string(WeaponUpgrade.ItemCost2));
-			WeaponUpgradeImage->LoadImage("Art/PowerUpIcon-WeaponCirlce.png");
+			WeaponUpgradeImage->LoadImage("Art/PowerUpIcon-WeaponCircle.png");
 		}
-	}*/
+		if (player->WeaponLevel == 2)
+		{
+			WeaponUpgradeItemCostText->SetText("N/A Fully Upgraded");
+			WeaponUpgradeImage->LoadImage(" ");
+		}
+	}
 	
 	
+}
+
+void Shop::UpgradeSpeedLevel(const ShopItem& SpeedUpgrade)
+{
+	if (player)
+	{
+		if (player->SpeedLevel == 1)
+		{
+			SpeedUpgradeItemCostText->SetText("Cost: " + to_string(SpeedUpgrade.ItemCost2));
+			SpeedUpgradeImage->LoadImage("Art/PowerUpIcon-WeaponCircle.png");
+		}
+		if (player->SpeedLevel == 2)
+		{
+			SpeedUpgradeItemCostText->SetText("N/A Fully Upgraded");
+			SpeedUpgradeImage->LoadImage(" ");
+		}
+	}
+}
+
+void Shop::UpgradeHealthLevel(const ShopItem& HealthUpgrade)
+{
+	if (player)
+	{
+		if (player->HealthLevel == 1)
+		{
+			HealthUpgradeItemCostText->SetText("Cost: " + to_string(HealthUpgrade.ItemCost2));
+			HealthUpgradeImage->LoadImage("Art/PowerUpIcon-WeaponCircle.png");
+		}
+		if (player->HealthLevel == 2)
+		{
+			HealthUpgradeItemCostText->SetText("N/A Fully Upgraded");
+			HealthUpgradeImage->LoadImage(" ");
+		}
+	}
 }

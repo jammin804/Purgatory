@@ -22,6 +22,7 @@ void GameFlow::OnPostInit()
 	if (GameShop)
 	{
 		GameShop->SetEnabled(false);
+		GameShop->SetPlayer(player);
 	}
 
 
@@ -89,6 +90,7 @@ void GameFlow::OnUpdate(float DeltaTime)
 				}
 				
             }
+			GameShop->UpdateCoinShopText();
 			GameShop->SetEnabled(true);
         }
 		if (Input)
@@ -121,8 +123,9 @@ void GameFlow::OnUpdate(float DeltaTime)
 					if (player && player->GetNumberOfCoins() >= UpgradeCost)
 					{
 						player->SpendCoins(UpgradeCost);
+						GameShop->UpdateCoinShopText();
 						player->UpgradeWeaponLevel();
-						//GameShop->UpgradeWeaponLevel(); // This will swtich out the image, description and cost. Also, increase Numberbrought
+						GameShop->UpgradeWeaponLevel(WeaponUpgrade); 
 					}
 				}
 
@@ -136,8 +139,9 @@ void GameFlow::OnUpdate(float DeltaTime)
 					if (player && player->GetNumberOfCoins() >= UpgradeCost)
 					{
 						player->SpendCoins(UpgradeCost);
+						GameShop->UpdateCoinShopText();
 						player->UpgradeSpeedLevel();
-						//GameShop->UpgradeSpeedLevel(); // This will swtich out the image, description and cost. Also, increase Numberbrought
+						GameShop->UpgradeSpeedLevel(SpeedUpgrade); // This will swtich out the image, description and cost. Also, increase Numberbrought
 					}
 				}
 			}
@@ -150,8 +154,9 @@ void GameFlow::OnUpdate(float DeltaTime)
 					if (player && player->GetNumberOfCoins() >= UpgradeCost)
 					{
 						player->SpendCoins(UpgradeCost);
+						GameShop->UpdateCoinShopText();
 						player->UpdgradeHealthLevel();
-						//GameShop->UpgradeSpeedLevel(); // This will swtich out the image, description and cost. Also, increase Numberbrought
+						GameShop->UpgradeHealthLevel(HealthUpgrade); // This will swtich out the image, description and cost. Also, increase Numberbrought
 					}
 				}
 			}
@@ -256,21 +261,12 @@ void GameFlow::AddObjectToDisableAtStart(GameObject* ObjectToDisable)
 
 void GameFlow::SetAllDead()
 {
-	CurrentState = EState::Ending;
-	for (GameObject* Object : GameFlowGameObjects)
-	{
-		Object->SetEnabled(false);
-	}
-	if (GameUIText)
-	{
-		GameUIText->SetGameOver(CurrentScore);
-	}
-
+	TimeRemaining = 0;
 }
 
 void GameFlow::AddTime()
 {
-	if (TimeRemaining < MAX_TIME)
+	if (TimeRemaining <= MAX_TIME)
 	{
 		TimeRemaining = TimeRemaining + 5.0f;
 	}
