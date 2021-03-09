@@ -133,12 +133,12 @@ void Shop::UpgradeWeaponLevel(const ShopItem& WeaponUpgrade)
 		if (player->WeaponLevel == 1)
 		{
 			WeaponUpgradeItemCostText->SetText("Cost: " + to_string(WeaponUpgrade.ItemCost2));
-			WeaponUpgradeImage->LoadImage("Art/PowerUpIcon-WeaponCircle.png");
+			WeaponUpgradeImage->LoadImage("Art/PowerUpIcon-WeaponCirlce.png");
 		}
 		if (player->WeaponLevel == 2)
 		{
 			WeaponUpgradeItemCostText->SetText("N/A Fully Upgraded");
-			WeaponUpgradeImage->LoadImage(" ");
+			WeaponUpgradeImage->LoadImage("Art/PowerUpIcon-NA.png");
 		}
 	}
 	
@@ -152,12 +152,12 @@ void Shop::UpgradeSpeedLevel(const ShopItem& SpeedUpgrade)
 		if (player->SpeedLevel == 1)
 		{
 			SpeedUpgradeItemCostText->SetText("Cost: " + to_string(SpeedUpgrade.ItemCost2));
-			SpeedUpgradeImage->LoadImage("Art/PowerUpIcon-WeaponCircle.png");
+			SpeedUpgradeImage->LoadImage("Art/PowerUpIcon-Speed2.png");
 		}
 		if (player->SpeedLevel == 2)
 		{
 			SpeedUpgradeItemCostText->SetText("N/A Fully Upgraded");
-			SpeedUpgradeImage->LoadImage(" ");
+			SpeedUpgradeImage->LoadImage("Art/PowerUpIcon-NA.png");
 		}
 	}
 }
@@ -174,7 +174,7 @@ void Shop::UpgradeHealthLevel(const ShopItem& HealthUpgrade)
 		if (player->HealthLevel == 2)
 		{
 			HealthUpgradeItemCostText->SetText("N/A Fully Upgraded");
-			HealthUpgradeImage->LoadImage(" ");
+			HealthUpgradeImage->LoadImage("Art/PowerUpIcon-NA.png");
 		}
 	}
 }

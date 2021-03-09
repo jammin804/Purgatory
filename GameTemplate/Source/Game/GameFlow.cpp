@@ -117,7 +117,7 @@ void GameFlow::OnUpdate(float DeltaTime)
 			if (Input->IsKeyJustPressed(ALLEGRO_KEY_1))
 			{
 				const ShopItem& WeaponUpgrade = GameShop->GetShopItems()[0];
-				if (WeaponUpgrade.NumberBought < 2)
+				if (WeaponUpgrade.NumberBought <= 2)
 				{
 					int UpgradeCost = WeaponUpgrade.NumberBought == 0 ? WeaponUpgrade.ItemCost1 : WeaponUpgrade.ItemCost2;
 					if (player && player->GetNumberOfCoins() >= UpgradeCost)
@@ -133,7 +133,7 @@ void GameFlow::OnUpdate(float DeltaTime)
 			if (Input->IsKeyJustPressed(ALLEGRO_KEY_2))
 			{
 				const ShopItem& SpeedUpgrade = GameShop->GetShopItems()[1];
-				if (SpeedUpgrade.NumberBought < 2)
+				if (SpeedUpgrade.NumberBought <= 2)
 				{
 					int UpgradeCost = SpeedUpgrade.NumberBought == 0 ? SpeedUpgrade.ItemCost1 : SpeedUpgrade.ItemCost2;
 					if (player && player->GetNumberOfCoins() >= UpgradeCost)
@@ -148,7 +148,7 @@ void GameFlow::OnUpdate(float DeltaTime)
 			if (Input->IsKeyJustPressed(ALLEGRO_KEY_3))
 			{
 				const ShopItem& HealthUpgrade = GameShop->GetShopItems()[2];
-				if (HealthUpgrade.NumberBought < 2)
+				if (HealthUpgrade.NumberBought <= 2)
 				{
 					int UpgradeCost = HealthUpgrade.NumberBought == 0 ? HealthUpgrade.ItemCost1 : HealthUpgrade.ItemCost2;
 					if (player && player->GetNumberOfCoins() >= UpgradeCost)
