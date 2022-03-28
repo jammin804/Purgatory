@@ -9,7 +9,7 @@
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro5.h>
-#include <../packages/Allegro.5.2.6/build/native/include/allegro5/allegro_ttf.h>
+#include <allegro5/allegro_ttf.h>
 
 GameFramework* GameFramework::Instance = nullptr;
 
