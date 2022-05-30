@@ -47,6 +47,8 @@
     <ClCompile Include="Source\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ComponentTypes.h" />
+    <ClInclude Include="GameObjectTypes.h" />
     <ClInclude Include="Source\Framework\BitmapManager.h" />
     <ClInclude Include="Source\Framework\BoxCollisionComponent.h" />
     <ClInclude Include="Source\Framework\FontManager.h" />

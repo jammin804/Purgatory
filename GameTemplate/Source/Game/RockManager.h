@@ -17,13 +17,13 @@ class RockManager : public GameObject
         virtual void OnUpdate(float DeltaTime) override;
 		virtual void OnRestart() override;
 
-    public:
-        Rock* CreateRock(const int MAX_ENEMY_HEALTH = 2); //Changed Splits Left to Max Enemy Health
-        vector<Rock*>& GetRocks() { return Rocks; }
+    public:      
+		const vector<Rock*>& GetRocks() const { return Rocks; }
         virtual void SetEnabled(bool bEnabled) override;
 		void SetPlayer(const Player* NewPlayer) { Player1 = NewPlayer; }
     private:
         void SetRandomPosition(Rock& RockToPosition);
+        Rock* CreateRock(const int MAX_ENEMY_HEALTH = 2); //Changed Splits Left to Max Enemy Health
 private:
         vector<Rock*> Rocks;
 		int NumberOfEnemiesToSpawn = 20;

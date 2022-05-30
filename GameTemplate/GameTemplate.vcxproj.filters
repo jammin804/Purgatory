@@ -185,13 +185,19 @@
     <ClInclude Include="Source\Framework\FontManager.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\Sfx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Framework\BitmapManager.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\Shop.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentTypes.h">
+      <Filter>Header Files\Framework\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectTypes.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Sfx.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
   </ItemGroup>

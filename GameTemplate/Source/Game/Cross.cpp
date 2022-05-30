@@ -2,11 +2,13 @@
 #include "Framework/ImageComponent.h"
 #include "Framework/BoxCollisionComponent.h"
 #include "Framework/SoundComponent.h"
+#include "../GameObjectTypes.h"
 
 
 
 void Cross::OnInit()
 {
+	SetType(GOT_Cross);
     CrossImage = GameComponent::CreateInstance<ImageComponent>(this);
     Collision = GameComponent::CreateInstance<BoxCollisionComponent>(this);
     LaserSound = GameComponent::CreateInstance<SoundComponent>(this);
@@ -65,6 +67,14 @@ void Cross::OnUpdate(float DeltaTime)
         RequestDestroy();
     }
 
+}
+
+void Cross::OnCollision(GameObject* Other)
+{
+	if (Other->GetType() == static_cast<int>(GOT_Rock))
+	{
+		RequestDestroy();
+	}
 }
 
 void Cross::SetInitialDirection(float x, float y)

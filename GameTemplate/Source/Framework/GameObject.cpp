@@ -67,6 +67,18 @@ void GameObject::Shutdown()
     OnShutdown();
 }
 
+GameComponent* GameObject::GetComponent(ComponentType Type)
+{
+	for (GameComponent* Component : GameComponents)
+	{
+		if (Component->GetType() == Type)
+		{
+			return Component;
+		}
+	}
+    return nullptr;
+}
+
 void GameObject::SetWorldPositionX(float NewPosX)
 {
     float ParentWorldPositionX = 0.0f;

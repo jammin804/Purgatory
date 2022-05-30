@@ -137,7 +137,7 @@ void AsteroidsGame::OnUpdate(float DeltaTime)
 			}
 			NumberOfExistingEnemies++;
 
-			for (Rock* OtherRock : RockMgr->GetRocks())
+			/*for (const Rock* OtherRock : RockMgr->GetRocks())
 			{
 				if (CurrentRock->IsDestroyed() || CurrentRock == OtherRock)
 				{
@@ -161,7 +161,7 @@ void AsteroidsGame::OnUpdate(float DeltaTime)
 					}
 
 				}
-			}
+			}*/
 
 			if (!Player1->IsInvulnerable() && Player1->IsEnabled())
 			{
@@ -198,8 +198,7 @@ void AsteroidsGame::OnUpdate(float DeltaTime)
 					}
 
 					CreateExplosion(CurrentRock->GetWorldPositionX(), CurrentRock->GetWorldPositionY(), ExplosionScale);
-					CurrentRock->EnemyHit();
-					CurrentCross->RequestDestroy();
+					//CurrentRock->TakeDamage();
 					
 
 					if (CurrentRock->GetEnemyLivesLeft() < 0.0f)

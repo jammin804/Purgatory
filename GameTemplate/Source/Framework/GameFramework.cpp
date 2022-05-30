@@ -10,6 +10,7 @@
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_ttf.h>
+#include "BoxCollisionComponent.h"
 
 GameFramework* GameFramework::Instance = nullptr;
 
@@ -238,9 +239,30 @@ bool GameFramework::UpdateInternal()
                     continue;
                 }
 
-                if ((*GOIter)->IsEnabled())
+                if (GO->IsEnabled())
                 {
-                    (*GOIter)->Update(DeltaTime);
+                    if(GameComponent * Component = GO->GetComponent(ComponentType::BoxCollisionComponent))
+                    {
+                        BoxCollisionComponent* BoxCollision = static_cast<BoxCollisionComponent*>(Component);
+						for (auto OtherGOIter = GameObjects.begin(); OtherGOIter != GameObjects.end(); ++OtherGOIter)
+						{
+							GameObject* OtherGO = (*OtherGOIter);
+							if (OtherGO->IsEnabled())
+							{
+                                if (GameComponent* OtherComponent = OtherGO->GetComponent(ComponentType::BoxCollisionComponent))
+                                {
+                                    BoxCollisionComponent* OtherBoxCollision = static_cast<BoxCollisionComponent*>(OtherComponent);
+                                    if (BoxCollision->DoesCollide(OtherBoxCollision))
+                                    {
+                                        GO->OnCollision(OtherGO);
+                                        OtherGO->OnCollision(GO);
+                                    }
+                                }
+							}
+						}
+                    }
+                   
+                    (GO)->Update(DeltaTime);
                 }
             }
         

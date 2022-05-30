@@ -4,7 +4,7 @@
 #include <allegro5/allegro_primitives.h>
 
 BoxCollisionComponent::BoxCollisionComponent(GameObject* Owner)
-    : GameComponent(Owner)
+    : GameComponent(Owner, ComponentType::BoxCollisionComponent)
 {
 
 }

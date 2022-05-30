@@ -1,8 +1,9 @@
 #include "GameComponent.h"
 #include "GameObject.h"
 
-GameComponent::GameComponent(GameObject* GOOwner)
+GameComponent::GameComponent(GameObject* GOOwner, ComponentType CTType)
 {
+    Type = CTType;
     Owner = GOOwner;
     if (Owner)
     {

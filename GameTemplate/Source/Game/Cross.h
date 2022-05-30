@@ -14,6 +14,7 @@ class Cross : public GameObject
     virtual void OnInit() override;
     virtual void OnPostInit() override;
     virtual void OnUpdate(float DeltaTime) override;
+    virtual void OnCollision(GameObject* Other) override;
 
     private:
 		float CrossRotationSpeed = 40.0f;

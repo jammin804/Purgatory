@@ -1,5 +1,6 @@
 #pragma once
 #include "GameFramework.h"
+#include "../ComponentTypes.h"
 
 class GameObject;
 
@@ -19,7 +20,7 @@ public:
     static T* CreateInstance(GameObject* Owner);
 
 protected: 
-    GameComponent(GameObject* GOOwner);
+    GameComponent(GameObject* GOOwner, ComponentType CTType);
     virtual ~GameComponent() {}
 
     virtual void OnInit(){}
@@ -32,6 +33,8 @@ protected:
 
     const GameObject* GetOwner() const { return Owner; }
 
+    const ComponentType GetType() const { return Type;  }
+
 private:
 
     void Init();
@@ -39,7 +42,7 @@ private:
     void Shutdown();
     void Render();
     GameObject* Owner = nullptr;
-
+    ComponentType Type;
     float OffsetX = 0.0f;
     float OffsetY = 0.0f;
 };

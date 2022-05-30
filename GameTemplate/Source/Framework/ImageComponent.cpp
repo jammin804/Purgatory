@@ -4,7 +4,7 @@
 #include <allegro5/bitmap_draw.h>
 
 ImageComponent::ImageComponent(GameObject* Owner)
-    : GameComponent(Owner)
+    : GameComponent(Owner, ComponentType::ImageComponent)
 {
 
 }
