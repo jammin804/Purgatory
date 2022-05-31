@@ -1,8 +1,8 @@
 #pragma once
 
 #include <allegro5/allegro_font.h>
-#include <string>
 #include <map>
+#include "EString.h"
 
 using namespace std;
 
@@ -14,7 +14,7 @@ namespace Globals
 
 struct FontKey
 {
-    string FontPath;
+    EString FontPath;
     int FontSize;
     
     bool operator==(FontKey& Other) const
@@ -36,7 +36,7 @@ class FontManager
     void Init();
     void Shutdown();
 public:
-    ALLEGRO_FONT* FindOrAddFont(string FontPath, int Size);
+    ALLEGRO_FONT* FindOrAddFont(EString FontPath, int Size);
 
 private:
      map<FontKey, ALLEGRO_FONT*> FontMap;

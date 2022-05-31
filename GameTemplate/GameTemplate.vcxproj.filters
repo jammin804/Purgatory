@@ -113,9 +113,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Source\Framework\GameFramework.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
@@ -197,8 +194,14 @@
     <ClInclude Include="Source\Game\Shop.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Framework\EString.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Font Include="Fonts\Boxy-Bold.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

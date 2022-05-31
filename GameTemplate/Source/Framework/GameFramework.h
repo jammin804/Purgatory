@@ -55,7 +55,8 @@ private:
     template<typename T>
     static T* CreateObject();
 
-    static void DestroyObject(void*& Object, size_t SizeOfObject);
+    template<typename T>
+    static void DestroyObject(T*& Object);
 
     bool InitInternal();
     bool UpdateInternal();
@@ -72,7 +73,6 @@ private:
     struct ALLEGRO_EVENT_QUEUE* EventQueue;
     struct ALLEGRO_DISPLAY* Display;
 
-    MemoryManager MemManager;
     FontManager FntManager;
     BitmapManager BmpManager;
 
@@ -101,7 +101,7 @@ T* GameFramework::CreateObject()
 {
     if (Instance)
     {
-        void* MemBlock = Instance->MemManager.Allocate(sizeof(T));
+        void* MemBlock = MemManager.Allocate(sizeof(T));
         memset(MemBlock, 0, sizeof(T));
         return new (MemBlock) T;
     }
@@ -113,10 +113,22 @@ T* GameFramework::CreateObjectOneArg(C* OneArgument)
 {
     if (Instance)
     {
-        void* MemBlock = Instance->MemManager.Allocate(sizeof(T));
+        void* MemBlock = MemManager.Allocate(sizeof(T));
         memset(MemBlock, 0, sizeof(T));
         return new (MemBlock) T(OneArgument);
     }
     return nullptr;
 }
 
+template<typename T>
+void GameFramework::DestroyObject(T*& Object)
+{
+    if (Instance)
+    {
+        if (Object)
+        {
+            MemManager.Free(Object, Object->memsize);
+            Object = nullptr;
+        }
+    }
+}

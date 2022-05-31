@@ -22,7 +22,7 @@ void FontManager::Shutdown()
     FontMap.clear();
 }
 
-ALLEGRO_FONT* FontManager::FindOrAddFont(string FontPath, int Size)
+ALLEGRO_FONT* FontManager::FindOrAddFont(EString FontPath, int Size)
 {
     FontKey Key;
     Key.FontPath = FontPath;

@@ -9,12 +9,14 @@
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro5.h>
-#include <../packages/Allegro.5.2.6/build/native/include/allegro5/allegro_ttf.h>
+#include <allegro5/allegro_ttf.h>
 
 GameFramework* GameFramework::Instance = nullptr;
 
 const int Globals::WindowSizeX = 1280;
 const int Globals::WindowSizeY = 720;
+
+#pragma optimize("", off)
 
 //////////////////////////////////////////////////////////////////////////
 GameFramework::GameFramework()
@@ -27,18 +29,6 @@ GameFramework::~GameFramework()
     al_destroy_display(Display);
     al_destroy_timer(Timer);
     al_destroy_event_queue(EventQueue);
-}
-
-void GameFramework::DestroyObject(void*& Object, size_t SizeOfObject)
-{
-    if (Instance)
-    {
-        if (Object)
-        {
-            Instance->MemManager.Free(Object, SizeOfObject);
-            Object = nullptr;
-        }
-    }
 }
 
 bool GameFramework::InitInternal()
@@ -231,8 +221,7 @@ bool GameFramework::UpdateInternal()
                 {
                     GO->Shutdown();
                     GO->bIsDestroyed = true;
-                    void* GOMem = static_cast<void*>(GO);
-                    DestroyObject(GOMem, sizeof(*GO));
+                    DestroyObject<GameObject>(GO);
 
                     GameObjects.erase(GOIter--);
                     continue;
@@ -317,3 +306,5 @@ void GameFramework::Shutdown()
     delete Instance;
     Instance = nullptr;
 }
+
+#pragma optimize("", on)

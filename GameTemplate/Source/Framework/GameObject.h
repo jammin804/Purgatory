@@ -79,11 +79,17 @@ private:
     bool bInitialised = false;
 	bool bFullyInitialised = false;
     int RenderDepth = 0; // Higher values will be rendered(drawn) on top of GameObjects with smaller values
+    size_t memsize;
 };
 
 template<class T>
 T* GameObject::CreateInstance()
 {
-    return GameFramework::template CreateObject<T>();
+    if (T* CreatedInstance = GameFramework::template CreateObject<T>())
+    {
+        CreatedInstance->memsize = sizeof(T);
+        return CreatedInstance;
+    }
+    return nullptr;
 }
 

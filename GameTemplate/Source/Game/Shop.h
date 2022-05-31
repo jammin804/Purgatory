@@ -2,16 +2,17 @@
 
 #include "Framework/GameObject.h"
 #include "Player.h"
+#include "Framework/EString.h"
 
 using namespace std;
 struct ShopItem
 {
-	string ItemName;
-	string ItemDescrption1;
-	string ItemDescrption2;
-	string ItemImage1;
-	string ItemImage2;
-	string ItemImageFull;
+	EString ItemName;
+	EString ItemDescrption1;
+	EString ItemDescrption2;
+	EString ItemImage1;
+	EString ItemImage2;
+	EString ItemImageFull;
 	int ItemCost1;
 	int ItemCost2;
 	int NumberBought = 0;

@@ -179,14 +179,14 @@ void UIText::UpdateLivesLeft(int NewLivesLeft)
 
 void UIText::UpdateTimeRemaining(int NewTimeMins, int NewTimeSeconds)
 {
-    char LivesLeft[50];
-   /* if (NewTimeMins > 0)
-    {
-        sprintf_s(LivesLeft, "Time Left: %d:%s%d", NewTimeMins, NewTimeSeconds < 10 ? "0" : "", NewTimeSeconds);
-    }
-    else
-    {
-        sprintf_s(LivesLeft, "Time Left: %ds", NewTimeSeconds);
-    }*/
-    TopCenterText->SetText(LivesLeft);
+    //char LivesLeft[50];
+    //if (NewTimeMins > 0)
+    //{
+    //    sprintf_s(LivesLeft, "Time Left: %d:%s%d", NewTimeMins, NewTimeSeconds < 10 ? "0" : "", NewTimeSeconds);
+    //}
+    //else
+    //{
+    //    sprintf_s(LivesLeft, "Time Left: %ds", NewTimeSeconds);
+    //}
+    TopCenterText->SetText("");
 }

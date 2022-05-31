@@ -15,8 +15,7 @@ void GameObject::RegisterComponent(GameComponent* Component)
 
 void GameObject::DestroyComponent(GameComponent* Component)
 {
-    void* ComponentPointer = static_cast<void*>(Component);
-    GameFramework::DestroyObject(ComponentPointer, sizeof(*Component));
+    GameFramework::DestroyObject<GameComponent>(Component);
 }
 
 void GameObject::Init()

@@ -6,6 +6,7 @@ class GameObject;
 class GameComponent
 {
     friend class GameObject;
+    friend class GameFramework;
 
 public:
     void SetOffsetX(float NewOffsetX) { OffsetX = NewOffsetX; }
@@ -42,11 +43,18 @@ private:
 
     float OffsetX = 0.0f;
     float OffsetY = 0.0f;
+
+    size_t memsize = 0;
 };
 
 template<class T>
 T* GameComponent::CreateInstance(GameObject* Owner)
 {
-    return  GameFramework::template CreateObjectOneArg<T, GameObject>(Owner);
+    if (T* CreatedInstance = GameFramework::template CreateObjectOneArg<T, GameObject>(Owner))
+    {
+        CreatedInstance->memsize = sizeof(T);
+        return CreatedInstance;
+    }
+    return nullptr;
 }
 

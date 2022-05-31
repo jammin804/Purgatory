@@ -21,7 +21,7 @@ void TextComponent::OnRender()
     }
 }
 
-void TextComponent::SetFont(string FontPath, int FontSize)
+void TextComponent::SetFont(EString FontPath, int FontSize)
 {
     Font = GameFramework::Get().GetFontManager().FindOrAddFont(FontPath, FontSize);
 }

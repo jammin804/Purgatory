@@ -1,8 +1,14 @@
 #include "MemoryManager.h"
 
+#pragma optimize("", off)
+
+char MemoryManager::Buffer[];
+void* MemoryManager::PointerToFreeSpace = nullptr;
+deque<FreeMemoryBlock> MemoryManager::FreeSpaceBlocks;
+
 void* FreeMemoryBlock::Split(size_t SizeNeeded)
 {
-    if (SizeNeeded < BlockSize)
+    if (SizeNeeded <= BlockSize)
     {
         void* MemoryReturned = BlockPosition;
         BlockSize -= SizeNeeded;
@@ -29,12 +35,19 @@ MemoryManager::MemoryManager()
 
 void* MemoryManager::Allocate(size_t SizeWanted)
 {
-    for (FreeMemoryBlock& MemoryBlock : FreeSpaceBlocks)
+    for (auto iter = FreeSpaceBlocks.begin(); iter != FreeSpaceBlocks.end();)
     {
-        if (MemoryBlock.BlockSize > SizeWanted)
+        FreeMemoryBlock& MemoryBlock = (*iter);
+        if (MemoryBlock.BlockSize >= SizeWanted)
         {
-            return MemoryBlock.Split(SizeWanted);
+            void* AvailableMemory = MemoryBlock.Split(SizeWanted);
+            if (MemoryBlock.BlockSize == 0)
+            {
+                iter = FreeSpaceBlocks.erase(iter);
+            }
+            return AvailableMemory;
         }
+        ++iter;
     }
     return nullptr;
 }
@@ -46,8 +59,9 @@ void MemoryManager::Free(void* Location, size_t SizeReturned)
     BlockFreed.BlockSize = SizeReturned;
 
     bool bBlockCombined = false;
-    for (FreeMemoryBlock& MemoryBlock : FreeSpaceBlocks)
+    for (int i = 0; i < FreeSpaceBlocks.size(); ++i)
     {
+        FreeMemoryBlock& MemoryBlock = FreeSpaceBlocks[i];
         if (MemoryBlock.BlockPosition > BlockFreed.BlockPosition)
         {
             void* PointerToEndOfFreeMemoryBlock = (char*)BlockFreed.BlockPosition + SizeReturned;
@@ -65,3 +79,5 @@ void MemoryManager::Free(void* Location, size_t SizeReturned)
         FreeSpaceBlocks.push_front(BlockFreed);
     }
 }
+
+#pragma optimize("", on)

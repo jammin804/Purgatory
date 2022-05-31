@@ -432,7 +432,7 @@ void Rock::EnterFleeState()
 
 	EnemyImage->LoadImage(EnemyImagePath);
 
-	Collision->DoesCollide(false); // Not working yet
+	//Collision->DoesCollide(false); // Not working yet
 	
 }
 
