@@ -28,7 +28,7 @@ public:
     void SetAvatarImage(string ImagePath);
     bool HandleDeath();
     void CreateCross(float DirX, float DirY);
-    vector<Cross*>& GetCross(){ return Crosses; }
+    const vector<Cross*>& GetCross() const { return Crosses; }
     const BoxCollisionComponent* GetCollision() const { return Collision; }
     int GetLivesLeft() const { return HealthLeft; }
 	int GetMaxLivesLeft() const { return MAX_LIFE; }

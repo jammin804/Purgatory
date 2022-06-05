@@ -6,7 +6,7 @@
 #define KEY_PRESSED  2
 
 InputComponent::InputComponent(class GameObject* Owner)
-    : GameComponent(Owner)
+    : GameComponent(Owner, ComponentType::InputComponent)
 {
     GameFramework::RegisterInputComponent(this);
 }

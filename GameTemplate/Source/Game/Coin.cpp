@@ -2,10 +2,12 @@
 #include "Framework/ImageComponent.h"
 #include "Framework/BoxCollisionComponent.h"
 #include "Framework/SoundComponent.h"
+#include "../GameObjectTypes.h"
 
 
 void Coin::OnInit()
 {
+	SetType(GOT_Coin);
 	CoinImage = GameComponent::CreateInstance<ImageComponent>(this);
 	Collision = GameComponent::CreateInstance<BoxCollisionComponent>(this);
 	CoinSoundComponentDrop = GameComponent::CreateInstance<SoundComponent>(this);

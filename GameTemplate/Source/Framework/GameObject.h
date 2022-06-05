@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "GameFramework.h"
+#include "../ComponentTypes.h"
 
 using namespace std;
 
@@ -14,6 +15,11 @@ class GameObject
 public:
     template<class T>
     static T* CreateInstance();
+
+	GameComponent* GetComponent(ComponentType Type);
+
+    int GetType() const { return Type; }
+    void SetType(int NewType) { Type = NewType; }
 
     void SetWorldPositionX(float NewPosX);
     void SetWorldPositionY(float NewPosY);
@@ -45,6 +51,8 @@ public:
     int GetRenderDepth() const { return RenderDepth; }
 
 	virtual void OnRestart() {}
+
+    virtual void OnCollision(GameObject* Other) {}
 protected:
     GameObject();
     virtual ~GameObject() {}
@@ -80,12 +88,13 @@ private:
 	bool bFullyInitialised = false;
     int RenderDepth = 0; // Higher values will be rendered(drawn) on top of GameObjects with smaller values
     size_t memsize;
+    int Type = -1;
 };
 
 template<class T>
 T* GameObject::CreateInstance()
 {
-    if (T* CreatedInstance = GameFramework::template CreateObject<T>())
+    if (T* CreatedInstance = GameFramework::CreateObject<T>())
     {
         CreatedInstance->memsize = sizeof(T);
         return CreatedInstance;

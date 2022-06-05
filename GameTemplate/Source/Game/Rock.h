@@ -35,11 +35,12 @@ protected:
     virtual void OnPostInit() override;
     virtual void OnUpdate(float DeltaTime) override;
 	virtual void OnRestart() override;
+	virtual void OnCollision(GameObject* Other) override;
 
 public:
 	float GetEnemyLivesLeft() const { return EnemyHealthLeft; }
 	float GetEnemyMaxLivesLeft() const { return ENEMY_MAX_LIFE; }
-	void EnemyHit();
+	void TakeDamage();
     void SetMovementSpeed(float NewMovementSpeed) { MovementSpeed = NewMovementSpeed; }
     float GetMovementSpeed() const { return MovementSpeed; }
     void SetMovementDirection(float DirX, float DirY) { MovementDirectionX = DirX; MovementDirectionY = DirY; }
@@ -53,7 +54,7 @@ public:
 	EEnemyType GetEnemyType() const; // Trying to access to the enemy types in AsteroidsGame.cpp to change explosion scale
 	void SetPlayer(const Player* NewPlayer) { Player1 = NewPlayer; }
 	void ChangeDirection();
-	EState GetState();
+	EState GetState() const;
 
 private:
 	

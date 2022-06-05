@@ -3,9 +3,11 @@
 #include "Framework/BoxCollisionComponent.h"
 #include "Game/Player.h"
 #include "Background.h"
+#include "../GameObjectTypes.h"
 
 void Rock::OnInit()
 {
+	SetType(GOT_Rock);
     EnemyImage = GameComponent::CreateInstance<ImageComponent>(this);
     Collision = GameComponent::CreateInstance<BoxCollisionComponent>(this);
 	EnemyHealthLayer = GameComponent::CreateInstance<ImageComponent>(this);
@@ -124,6 +126,14 @@ void Rock::OnRestart()
 	//destroy Current Rocks
 	SetEnabled(false);
 	//RequestDestroy();
+}
+
+void Rock::OnCollision(GameObject* Other)
+{
+	if (Other->GetType() == static_cast<int>(GOT_Cross))
+	{
+		TakeDamage();
+	}
 }
 
 void Rock::SetEnemyLifePercentage(float EnemyPercentageLife)
@@ -349,7 +359,7 @@ void Rock::ChangeDirection()
 	EnemyDirection = static_cast <EEnemyDir>((EnemyDirection + 1) % EEnemyDir::COUNT);
 }
 
-EState Rock::GetState()
+EState Rock::GetState() const
 {
 	return CurrentState;
 }
@@ -497,7 +507,7 @@ EEnemyType Rock::GetEnemyType() const
 	return EnemyType;
 }
 
-void Rock::EnemyHit()
+void Rock::TakeDamage()
 {
 	EnemyHealthLeft -= 0.4f;
 	if (EnemyHealthLeft < 0.0f)

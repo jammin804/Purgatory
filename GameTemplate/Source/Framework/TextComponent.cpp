@@ -5,7 +5,7 @@
 #include "GameFramework.h"
 
 TextComponent::TextComponent(class GameObject* Owner)
-    : GameComponent(Owner){}
+    : GameComponent(Owner, ComponentType::TextComponent){}
 
 void TextComponent::OnRender()
 {

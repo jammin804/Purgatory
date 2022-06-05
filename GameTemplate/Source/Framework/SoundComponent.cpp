@@ -2,7 +2,7 @@
 
 
 SoundComponent::SoundComponent(class GameObject* Owner)
-    : GameComponent(Owner){}
+    : GameComponent(Owner, ComponentType::SoundComponent){}
 
 void SoundComponent::OnShutdown()
 {
