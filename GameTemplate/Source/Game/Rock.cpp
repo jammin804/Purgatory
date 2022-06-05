@@ -4,6 +4,7 @@
 #include "Game/Player.h"
 #include "Background.h"
 #include "../GameObjectTypes.h"
+#include "EventMessage.h"
 
 void Rock::OnInit()
 {
@@ -512,6 +513,7 @@ void Rock::TakeDamage()
 	EnemyHealthLeft -= 0.4f;
 	if (EnemyHealthLeft < 0.0f)
 	{
+		BroadcastEvent(GameEvent::EnemyDied);
  		RequestDestroy();
 		return;
 	}

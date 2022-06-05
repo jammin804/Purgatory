@@ -6,6 +6,8 @@
 #include "Framework/BoxCollisionComponent.h"
 #include "Cross.h"
 #include "Background.h"
+#include "EventMessage.h"
+#include "Framework/EventManager.h"
 
 void Player::OnInit()
 {
@@ -15,6 +17,7 @@ void Player::OnInit()
     InputComp = GameComponent::CreateInstance<InputComponent>(this);
 	CoinSoundComponentPickup = GameComponent::CreateInstance<SoundComponent>(this);
     Collision = GameComponent::CreateInstance<BoxCollisionComponent>(this);
+	AddEventListener(GameEvent::CrossDestroyed);
 
     Crosses.reserve(200);
 }
@@ -30,18 +33,7 @@ void Player::OnPostInit()
 
 void Player::OnUpdate(float DeltaTime)
 {
-	if (Crosses.size() > 0)
-	{
-		for (auto Iter = Crosses.begin(); Iter != Crosses.end();)
-		{
-			if ((*Iter)->IsDestroyed())
-			{
-				Iter = Crosses.erase(Iter);
-				continue;
-			}
-			++Iter;
-		}
-	}
+
 
 	if (bInvulnerable)
 	{
@@ -193,6 +185,30 @@ void Player::OnUpdate(float DeltaTime)
 	if (InputComp->IsKeyReleased(ALLEGRO_KEY_SPACE))
 	{
 		bCanMakeLaser = true;
+	}
+}
+
+void Player::OnShutdown()
+{
+	RemoveEventListener(GameEvent::CrossDestroyed);
+}
+
+void Player::OnEvent(const EventMessage& Msg)
+{
+	if (Msg == GameEvent::CrossDestroyed)
+	{
+		for (auto Iter = Crosses.begin(); Iter != Crosses.end();)
+		{
+			if ((*Iter)->IsDestroyed())
+			{
+				Iter = Crosses.erase(Iter);
+			}
+			else
+			{
+				++Iter;
+			}
+
+		}
 	}
 }
 

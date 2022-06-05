@@ -30,6 +30,7 @@ public:
         virtual void OnUpdate(float DeltaTime) override;
         virtual void OnShutdown() override;
 		virtual void Restart(bool bShouldResetGame);
+        virtual void OnEvent(const EventMessage& Msg);
 		void SetPaused(bool bIsPaused);
     public:
         void SetPlayerIsDead();

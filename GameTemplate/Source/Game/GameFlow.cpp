@@ -4,12 +4,16 @@
 #include "Player.h"
 #include "GUI.h"
 #include "Shop.h"
+#include "Framework/EventManager.h"
+#include "EventMessage.h"
 
 void GameFlow::OnInit()
 {
     Input = GameComponent::CreateInstance<InputComponent>(this);
     GameUIText = GameObject::CreateInstance<UIText>();
 	GameShop = GameObject::CreateInstance<Shop>();
+
+	AddEventListener(GameEvent::EnemyDied);
 }
 
 void GameFlow::OnPostInit()
@@ -180,6 +184,7 @@ void GameFlow::OnUpdate(float DeltaTime)
 
 void GameFlow::OnShutdown()
 {
+	RemoveEventListener(GameEvent::EnemyDied);
 }
 
 void GameFlow::Restart(bool bShouldResetGame)
@@ -191,6 +196,14 @@ void GameFlow::Restart(bool bShouldResetGame)
 		Object->OnRestart();
 	}
 	TimeRemaining = MAX_TIME;
+}
+
+void GameFlow::OnEvent(const EventMessage& Msg)
+{
+	if (Msg == GameEvent::EnemyDied)
+	{
+		AddTime();
+	}
 }
 
 void GameFlow::SetPaused(bool bIsPaused)

@@ -3,6 +3,7 @@
 #include "Framework/BoxCollisionComponent.h"
 #include "Framework/SoundComponent.h"
 #include "../GameObjectTypes.h"
+#include "EventMessage.h"
 
 
 
@@ -74,6 +75,7 @@ void Cross::OnCollision(GameObject* Other)
 	if (Other->GetType() == static_cast<int>(GOT_Rock))
 	{
 		RequestDestroy();
+		BroadcastEvent(GameEvent::CrossDestroyed);	
 	}
 }
 

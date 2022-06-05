@@ -6,6 +6,7 @@
 using namespace std;
 
 class GameComponent;
+struct EventMessage;
 
 class GameObject
 {
@@ -53,6 +54,10 @@ public:
 	virtual void OnRestart() {}
 
     virtual void OnCollision(GameObject* Other) {}
+    virtual void OnEvent(const EventMessage& Msg) {}
+    void BroadcastEvent(int);
+    void AddEventListener(int);
+    void RemoveEventListener(int);
 protected:
     GameObject();
     virtual ~GameObject() {}

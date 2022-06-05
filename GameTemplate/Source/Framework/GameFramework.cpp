@@ -215,16 +215,11 @@ bool GameFramework::UpdateInternal()
 
             for (auto GOIter = GameObjects.begin(); GOIter != GameObjects.end(); ++GOIter)
             {
-                static bool bDeletedSomething = false;
-                bDeletedSomething = false;
                 GameObject* GO = (*GOIter);
                 if (GO->bShouldDestroy)
                 {
                     GO->Shutdown();
                     GO->bIsDestroyed = true;
-                    DestroyObject<GameObject>(GO);
-
-                    GameObjects.erase(GOIter--);
                     continue;
                 }
 
@@ -254,7 +249,19 @@ bool GameFramework::UpdateInternal()
                     (GO)->Update(DeltaTime);
                 }
             }
-        
+
+            for (auto GOIter = GameObjects.begin(); GOIter != GameObjects.end(); ++GOIter)
+            {
+                GameObject* GO = (*GOIter);
+                if (GO->bIsDestroyed)
+                {
+					DestroyObject<GameObject>(GO);
+
+					GameObjects.erase(GOIter--);
+                }
+
+            }
+
             redraw = true;
         }
         break;

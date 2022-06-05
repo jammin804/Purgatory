@@ -1,6 +1,7 @@
 #include "GameObject.h"
 #include "GameFramework.h"
 #include "GameComponent.h"
+#include "EventManager.h"
 
 GameObject::GameObject()
 {
@@ -126,4 +127,19 @@ float GameObject::GetWorldRotation() const
         FinalRotation += MyParent->GetWorldRotation();
     }
     return FinalRotation;
+}
+
+void GameObject::BroadcastEvent(int MsgID)
+{
+    EvtManager.BroadcastEvent(MsgID);
+}
+
+void GameObject::AddEventListener(int MsgID)
+{
+    EvtManager.AddEventListener(this, MsgID);
+}
+
+void GameObject::RemoveEventListener(int MsgID)
+{
+    EvtManager.RemoveEventListener(this, MsgID);
 }

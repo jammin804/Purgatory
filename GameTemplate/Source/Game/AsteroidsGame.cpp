@@ -198,7 +198,6 @@ void AsteroidsGame::OnUpdate(float DeltaTime)
 					}
 
 					CreateExplosion(CurrentRock->GetWorldPositionX(), CurrentRock->GetWorldPositionY(), ExplosionScale);
-					//CurrentRock->TakeDamage();
 					
 
 					if (CurrentRock->GetEnemyLivesLeft() < 0.0f)
@@ -210,10 +209,6 @@ void AsteroidsGame::OnUpdate(float DeltaTime)
 							{
 								CoinMgr->CreateCoin(CurrentRock->GetWorldPositionX(), CurrentRock->GetWorldPositionY());
 							}
-						}
-						if (GFlow)
-						{
-							GFlow->AddTime();
 						}
 					}
 				}
