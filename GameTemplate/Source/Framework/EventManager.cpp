@@ -1,27 +1,27 @@
 #include "EventManager.h"
 #include "GameObject.h"
 
+std::map<int, set<GameObject*>> EventManager::ListenerMap;
 
-
-void EventManager::AddEventListener(GameObject* GO, EventMessage Msg)
+void EventManager::AddEventListener(GameObject* GO, int MsgId)
 {
-	auto iter = ListenerMap.find(Msg);
+	auto iter = ListenerMap.find(MsgId);
 	if (iter != ListenerMap.end())
 	{
 		iter->second.insert(GO);
 	}
 	else
 	{
-		auto newEntry = std::make_pair(Msg, std::set<GameObject*>());
+		auto newEntry = std::make_pair(MsgId, std::set<GameObject*>());
 		newEntry.second.insert(GO);
 		ListenerMap.insert(newEntry);
 
 	}
 }
 
-void EventManager::RemoveEventListener(GameObject* GO, EventMessage Msg)
+void EventManager::RemoveEventListener(GameObject* GO, int MsgId)
 {
-	auto iter = ListenerMap.find(Msg);
+	auto iter = ListenerMap.find(MsgId);
 	if (iter != ListenerMap.end())
 	{
 		iter->second.erase(GO);
@@ -31,12 +31,12 @@ void EventManager::RemoveEventListener(GameObject* GO, EventMessage Msg)
 
 void EventManager::BroadcastEvent(EventMessage Msg)
 {
-	auto iter = ListenerMap.find(Msg);
+ 	auto iter = ListenerMap.find(Msg.messageId);
 	if (iter != ListenerMap.end())
 	{
 		for (GameObject* GO : iter->second)
 		{
-			GO->OnEvent(iter->first);
+			GO->OnEvent(Msg);
 		}
 	}
 }

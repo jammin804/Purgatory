@@ -8,9 +8,12 @@
 #include "Background.h"
 #include "EventMessage.h"
 #include "Framework/EventManager.h"
+#include "Rock.h"
+#include "../GameObjectTypes.h"
 
 void Player::OnInit()
 {
+	SetType(GOT_Player);
     PlayerAvatarThrustersImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
     PlayerAvatarThrustersImageComponent->SetVisible(false);
     PlayerAvatarImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
@@ -191,6 +194,37 @@ void Player::OnUpdate(float DeltaTime)
 void Player::OnShutdown()
 {
 	RemoveEventListener(GameEvent::CrossDestroyed);
+}
+
+void Player::OnCollision(GameObject* Other)
+{
+
+	if (!IsInvulnerable() && IsEnabled())
+	{
+		if (Other->GetType() == static_cast<int>(GOT_Rock))
+		{
+			const Rock* enemy = static_cast<const Rock*>(Other);
+			if (enemy->GetState() != EState::Flee)
+			{
+				//CreateExplosion(Player1->GetPositionX(), Player1->GetPositionY());
+				if (HandleDeath())
+				{
+					EventManager::BroadcastEvent(GameEvent::PlayerDied);
+				}
+				else
+				{
+					EventMessage Evt(GameEvent::PlayerTakeDamage);
+					Evt.PayloadInts.push_back(HealthLeft);
+					EventManager::BroadcastEvent(Evt);
+				}
+			}
+		}
+		else if (Other->GetType() == static_cast<int>(GOT_Coin))
+		{
+			CollectCoin();
+		}
+	}
+
 }
 
 void Player::OnEvent(const EventMessage& Msg)

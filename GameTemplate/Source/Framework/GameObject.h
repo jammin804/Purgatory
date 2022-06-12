@@ -42,7 +42,7 @@ public:
     void RequestDestroy() { bShouldDestroy = true; }
     virtual void SetEnabled(bool bEnabled) { bIsEnabled = bEnabled; }
 	virtual void Restart() {};
-    bool IsEnabled() const { return bIsEnabled; }
+    bool IsEnabled() const { return bIsEnabled && !IsDestroyed(); }
     bool IsDestroyed() const { return bShouldDestroy; }
 
     void SetParent(const GameObject* ParentComponent){ Parent = ParentComponent; }
@@ -55,7 +55,7 @@ public:
 
     virtual void OnCollision(GameObject* Other) {}
     virtual void OnEvent(const EventMessage& Msg) {}
-    void BroadcastEvent(int);
+    
     void AddEventListener(int);
     void RemoveEventListener(int);
 protected:

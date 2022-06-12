@@ -2,6 +2,8 @@
 #include "Rock.h"
 #include "Framework/Globals.h"
 #include "Background.h"
+#include "EventMessage.h"
+#include "Framework/EventManager.h"
 
 void RockManager::OnInit()
 {
@@ -19,6 +21,7 @@ void RockManager::OnPostInit()
 
 void RockManager::OnUpdate(float DeltaTime)
 {
+    bool bEnemyRemoved = false;
     for (auto RockIter = Rocks.begin(); RockIter != Rocks.end();)
     {
         Rock& RockToUpdate = *(*RockIter);
@@ -26,12 +29,19 @@ void RockManager::OnUpdate(float DeltaTime)
         
         if (RockToUpdate.IsDestroyed())
         {
+            bEnemyRemoved = true;
             RockIter = Rocks.erase(RockIter);
             continue;
         }
         ++RockIter;
     }
-
+    if (bEnemyRemoved)
+    {
+        if (Rocks.size() == 0)
+        {
+            EventManager::BroadcastEvent(GameEvent::AllEnemiesDead);
+        }
+    }
 }
 
 void RockManager::OnRestart()

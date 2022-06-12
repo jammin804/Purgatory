@@ -36,8 +36,6 @@ public:
 
     virtual void OnPostInit() {}
 
-    virtual void OnUpdate(float DeltaTime){}
-
     virtual void OnShutdown(){}
 
     void SetGameOver() { bIsGameOver = true;}

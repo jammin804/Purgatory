@@ -12,9 +12,11 @@ class CoinManager : public GameObject
     protected:
         virtual void OnInit() override;
         virtual void OnUpdate(float DeltaTime) override;
-
+        virtual void OnShutdown() override;
+        virtual void OnEvent(const EventMessage& Msg) override;
 		virtual void OnRestart() override;
 		virtual void SetEnabled(bool bEnabled) override;
+
 public:
         Coin* CreateCoin(float posX, float posY); //Changed Splits Left to Max Enemy Health
 

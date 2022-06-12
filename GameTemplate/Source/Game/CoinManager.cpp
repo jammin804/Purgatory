@@ -1,10 +1,13 @@
 #include "CoinManager.h"
 #include "Coin.h"
 #include "Framework/Globals.h"
+#include "EventMessage.h"
+#include "Framework/EventManager.h"
 
 void CoinManager::OnInit()
 {
 	Coins.reserve(100);
+	AddEventListener(GameEvent::EnemyDied);
 }
 
 void CoinManager::OnUpdate(float DeltaTime)
@@ -20,6 +23,23 @@ void CoinManager::OnUpdate(float DeltaTime)
 			continue;
 		}
 		++CoinIter;
+	}
+}
+
+void CoinManager::OnShutdown()
+{
+	RemoveEventListener(GameEvent::EnemyDied);
+}
+
+void CoinManager::OnEvent(const EventMessage& Msg)
+{
+	if (Msg.messageId == GameEvent::EnemyDied)
+	{
+ 		int NumberOfCoinsToSpawn = (rand() % 4) + 1;
+		for (int i = 0; i < NumberOfCoinsToSpawn; i++)
+		{
+			CreateCoin(Msg.PayloadFloats[0], Msg.PayloadFloats[1]);
+		}
 	}
 }
 

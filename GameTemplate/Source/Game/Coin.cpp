@@ -58,16 +58,18 @@ void Coin::OnUpdate(float DeltaTime)
 	}
 }
 
+void Coin::OnCollision(GameObject* Other)
+{
+	if (Other->GetType() == static_cast<int>(GOT_Player))
+	{
+		RequestDestroy();
+	}
+}
+
 void Coin::UpdateMovement(float DeltaTime)
 {
 	SetPosition(GetPositionX() + (StartDirX * DeltaTime * HorizontalMovementSpeed), GetPositionY() + (StartDirY * DeltaTime * VerticalMovementSpeed));
 	HorizontalMovementSpeed *= 0.8f - DeltaTime;
 	VerticalMovementSpeed -= 2000.0f*DeltaTime;
-}
-
-void Coin::CoinCollision()
-{
-
-	RequestDestroy();
 }
 

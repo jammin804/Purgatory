@@ -16,7 +16,6 @@ class AsteroidsGame : public GameFramework
 protected:
     virtual void OnInit() override;
     virtual void OnPostInit() override;
-    virtual void OnUpdate(float DeltaTime) override;
 
 private:
     void CreateExplosion(float PositionX, float PositionY, float ExplosionScale = 1.0f);

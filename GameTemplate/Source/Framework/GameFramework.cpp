@@ -211,8 +211,6 @@ bool GameFramework::UpdateInternal()
                 }
             }
 
-            OnUpdate(DeltaTime);
-
             for (auto GOIter = GameObjects.begin(); GOIter != GameObjects.end(); ++GOIter)
             {
                 GameObject* GO = (*GOIter);

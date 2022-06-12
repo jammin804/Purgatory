@@ -14,6 +14,9 @@ void GameFlow::OnInit()
 	GameShop = GameObject::CreateInstance<Shop>();
 
 	AddEventListener(GameEvent::EnemyDied);
+	AddEventListener(GameEvent::PlayerDied);
+	AddEventListener(GameEvent::PlayerTakeDamage);
+	AddEventListener(GameEvent::AllEnemiesDead);
 }
 
 void GameFlow::OnPostInit()
@@ -185,6 +188,9 @@ void GameFlow::OnUpdate(float DeltaTime)
 void GameFlow::OnShutdown()
 {
 	RemoveEventListener(GameEvent::EnemyDied);
+	RemoveEventListener(GameEvent::PlayerDied);
+	RemoveEventListener(GameEvent::PlayerTakeDamage);
+	RemoveEventListener(GameEvent::AllEnemiesDead);
 }
 
 void GameFlow::Restart(bool bShouldResetGame)
@@ -203,6 +209,18 @@ void GameFlow::OnEvent(const EventMessage& Msg)
 	if (Msg == GameEvent::EnemyDied)
 	{
 		AddTime();
+	}
+	else if(Msg == GameEvent::PlayerTakeDamage)
+	{
+		UpdateLivesLeft(Msg.PayloadInts[0]);
+	}
+	else if (Msg == GameEvent::PlayerDied)
+	{
+		SetPlayerIsDead();
+	}
+	else if (Msg == GameEvent::AllEnemiesDead)
+	{
+		SetAllDead();
 	}
 }
 

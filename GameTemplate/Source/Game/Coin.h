@@ -11,13 +11,13 @@ protected:
     virtual void OnInit() override;
     virtual void OnPostInit() override;
     virtual void OnUpdate(float DeltaTime) override;
-
+	virtual void OnCollision(GameObject* Other) override;
 	void UpdateMovement(float DeltaTime);
 
 	
 public:
-    const BoxCollisionComponent* GetCollision() const { return Collision; }
-	void CoinCollision();
+
+
 private:
     class ImageComponent* CoinImage = nullptr;
     BoxCollisionComponent* Collision = nullptr;

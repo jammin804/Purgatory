@@ -129,17 +129,13 @@ float GameObject::GetWorldRotation() const
     return FinalRotation;
 }
 
-void GameObject::BroadcastEvent(int MsgID)
-{
-    EvtManager.BroadcastEvent(MsgID);
-}
 
 void GameObject::AddEventListener(int MsgID)
 {
-    EvtManager.AddEventListener(this, MsgID);
+    EventManager::AddEventListener(this, MsgID);
 }
 
 void GameObject::RemoveEventListener(int MsgID)
 {
-    EvtManager.RemoveEventListener(this, MsgID);
+    EventManager::RemoveEventListener(this, MsgID);
 }

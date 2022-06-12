@@ -5,6 +5,7 @@
 #include "Background.h"
 #include "../GameObjectTypes.h"
 #include "EventMessage.h"
+#include "Framework/EventManager.h"
 
 void Rock::OnInit()
 {
@@ -513,7 +514,25 @@ void Rock::TakeDamage()
 	EnemyHealthLeft -= 0.4f;
 	if (EnemyHealthLeft < 0.0f)
 	{
-		BroadcastEvent(GameEvent::EnemyDied);
+		float ExplosionScale = 1.0f;
+		if (GetEnemyType() == EEnemyType::Demon)
+		{
+			ExplosionScale = 1.8f;
+		}
+		else if (GetEnemyType() == EEnemyType::Bat)
+		{
+			ExplosionScale = 0.5f;
+		}
+		else
+		{
+			ExplosionScale = 2.2f;
+		}
+
+		EventMessage Evt(GameEvent::EnemyDied);
+ 		Evt.PayloadFloats.push_back(GetWorldPositionX());
+		Evt.PayloadFloats.push_back(GetWorldPositionY());
+		Evt.PayloadFloats.push_back(ExplosionScale);
+		EventManager::BroadcastEvent(Evt);
  		RequestDestroy();
 		return;
 	}

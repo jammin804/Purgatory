@@ -2,20 +2,9 @@
 #include "EString.h"
 #include <map>
 #include <set>
+#include <vector>
 
 class GameObject;
-struct EventMessage;
-class EventManager 
-{
-public:
-	void AddEventListener(GameObject*, EventMessage);
-	void RemoveEventListener(GameObject*, EventMessage);
-	void BroadcastEvent(EventMessage);
-
-private:
-	std::map<EventMessage, set<GameObject*>> ListenerMap;
-};
-
 struct EventMessage
 {
 	int messageId;
@@ -38,6 +27,19 @@ struct EventMessage
 		return messageId < Other.messageId;
 	}
 
+	std::vector<int> PayloadInts;
+	std::vector<bool> PayloadBools;
+	std::vector<float> PayloadFloats;
+
 };
 
-static EventManager EvtManager;
+class EventManager 
+{
+public:
+	static void AddEventListener(GameObject*, int);
+	static void RemoveEventListener(GameObject*, int);
+	static void BroadcastEvent(EventMessage);
+
+private:
+	static std::map<int, set<GameObject*>> ListenerMap;
+};
