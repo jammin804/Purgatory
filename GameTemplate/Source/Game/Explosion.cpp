@@ -3,9 +3,11 @@
 #include "Framework/ImageComponent.h"
 #include "Framework/InputComponent.h"
 #include "Framework/SoundComponent.h"
+#include "../GameObjectTypes.h"
 
 void Explosion::OnInit()
 {
+    SetType(GOT_Explosion);
     ExplosionImage = GameComponent::CreateInstance<ImageComponent>(this);
     ExplosionSound = GameComponent::CreateInstance<SoundComponent>(this);
     ExplosionSound->SetVolume(0.3f);

@@ -36,6 +36,7 @@
     <ClCompile Include="Source\Game\Coin.cpp" />
     <ClCompile Include="Source\Game\CoinManager.cpp" />
     <ClCompile Include="Source\Game\Explosion.cpp" />
+    <ClCompile Include="Source\Game\ExplosionManager.cpp" />
     <ClCompile Include="Source\Game\GameFlow.cpp" />
     <ClCompile Include="Source\Game\Cross.cpp" />
     <ClCompile Include="Source\Game\GUI.cpp" />
@@ -70,6 +71,7 @@
     <ClInclude Include="Source\Game\CoinManager.h" />
     <ClInclude Include="Source\Game\EventMessage.h" />
     <ClInclude Include="Source\Game\Explosion.h" />
+    <ClInclude Include="Source\Game\ExplosionManager.h" />
     <ClInclude Include="Source\Game\GameFlow.h" />
     <ClInclude Include="Source\Game\Cross.h" />
     <ClInclude Include="Source\Game\GUI.h" />
