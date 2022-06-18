@@ -102,7 +102,7 @@ void AsteroidsGame::OnPostInit()
 	}
 }
 
-void AsteroidsGame::CreateExplosion(float PositionX, float PositionY, float ExplosionScale /*= 1.0f*/)
+/*void AsteroidsGame::CreateExplosion(float PositionX, float PositionY, float ExplosionScale)
 {
     Explosion* NewExplosion = GameObject::CreateInstance<Explosion>();
 	if (BG)
@@ -111,4 +111,4 @@ void AsteroidsGame::CreateExplosion(float PositionX, float PositionY, float Expl
 	}
     NewExplosion->SetWorldPosition(PositionX, PositionY);
     NewExplosion->SetExplosionScale(ExplosionScale);
-}
+}*/

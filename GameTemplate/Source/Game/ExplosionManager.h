@@ -15,6 +15,9 @@ protected:
 	virtual void OnRestart() override;
 	virtual void SetEnabled(bool bEnabled) override;
 public:
-	Explosion* CreateExplosion(float posX, float posY);
+	Explosion* CreateExplosion(float posX, float posY, float ExplosionScale);
+
+	vector<Explosion*>& GetExplosion() { return Explosions; }
 private:
+	vector<Explosion*> Explosions;
 };

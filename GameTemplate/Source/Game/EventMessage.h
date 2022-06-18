@@ -6,6 +6,7 @@ namespace GameEvent
 	{
 		INVALID = -1,
 		EnemyDied,
+		EnemyHurt,
 		AllEnemiesDead,
 		CrossDestroyed,
 		PlayerDied,
