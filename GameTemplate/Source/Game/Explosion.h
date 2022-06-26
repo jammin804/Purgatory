@@ -14,7 +14,6 @@ protected:
     virtual void OnInit() override;
     virtual void OnPostInit() override;
     virtual void OnUpdate(float DeltaTime) override;
-    virtual void OnShutdown() override;
 
 public:
     void SetExplosionScale(float Scale) { ExplosionScale = Scale; }

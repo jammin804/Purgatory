@@ -115,7 +115,7 @@ void RockManager::SetRandomPosition(Rock& RockToPosition)
     case 0:
     {
         StartPosX = -rand() % static_cast <int> (BG->GetBackgroundWidth()*0.5f);
-		StartPosY = rand() % BG->GetBackgroundHeight();
+		StartPosY = rand() % BG->GetBackgroundHeight(); //Potentially needs to offset by half the background height
         float DirectionY = 1.0f - (StartPosY / (Globals::WindowSizeY * 0.5f));
         StartDirX = 0.6f;
         StartDirY = DirectionY * 0.25f;
@@ -124,7 +124,7 @@ void RockManager::SetRandomPosition(Rock& RockToPosition)
     break;
     case 1:
     {
-		StartPosX = rand() % BG->GetBackgroundWidth();
+		StartPosX = rand() % BG->GetBackgroundWidth(); //Potentially needs to offset by half the background width
         StartPosY = -rand() % static_cast <int> (BG->GetBackgroundHeight()*0.5f);
         float DirectionX = 1.0f - (StartPosX / (Globals::WindowSizeX * 0.5f));
         StartDirX = DirectionX * 0.4f;

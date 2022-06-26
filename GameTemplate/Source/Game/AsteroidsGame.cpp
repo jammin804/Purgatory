@@ -13,6 +13,7 @@
 #include <sstream>
 #include "Game/Coin.h"
 #include "Game/CoinManager.h"
+#include "Game/ExplosionManager.h"
 #include "Game/Sfx.h"
 
 void AsteroidsGame::OnInit()
@@ -23,6 +24,7 @@ void AsteroidsGame::OnInit()
     Player1 = GameObject::CreateInstance<Player>();
     RockMgr = GameObject::CreateInstance<RockManager>();
 	CoinMgr = GameObject::CreateInstance<CoinManager>();
+	ExplodeMgr = GameObject::CreateInstance<ExplosionManager>();
 }
 
 void AsteroidsGame::OnPostInit()
@@ -100,15 +102,12 @@ void AsteroidsGame::OnPostInit()
 			CoinMgr->SetParent(BG);
 		}
 	}
-}
 
-/*void AsteroidsGame::CreateExplosion(float PositionX, float PositionY, float ExplosionScale)
-{
-    Explosion* NewExplosion = GameObject::CreateInstance<Explosion>();
-	if (BG)
+	if (ExplodeMgr)
 	{
-		NewExplosion->SetParent(BG);
+		if (BG)
+		{
+			ExplodeMgr->SetParent(BG);
+		}
 	}
-    NewExplosion->SetWorldPosition(PositionX, PositionY);
-    NewExplosion->SetExplosionScale(ExplosionScale);
-}*/
+}

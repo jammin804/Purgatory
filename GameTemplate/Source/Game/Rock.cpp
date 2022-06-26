@@ -512,26 +512,31 @@ EEnemyType Rock::GetEnemyType() const
 void Rock::TakeDamage()
 {
 	EnemyHealthLeft -= 0.4f;
+	float ExplosionScale = 1.0f;
+	if (GetEnemyType() == EEnemyType::Demon)
+	{
+		ExplosionScale = 1.8f;
+	}
+	else if (GetEnemyType() == EEnemyType::Bat)
+	{
+		ExplosionScale = 0.5f;
+	}
+	else
+	{
+		ExplosionScale = 2.2f;
+	}
+
+	EventMessage Evt(GameEvent::EnemyHurt);
+	Evt.PayloadFloats.push_back(GetWorldPositionX());
+	Evt.PayloadFloats.push_back(GetWorldPositionY());
+	Evt.PayloadFloats.push_back(ExplosionScale);
+	EventManager::BroadcastEvent(Evt);
+
 	if (EnemyHealthLeft < 0.0f)
 	{
-		float ExplosionScale = 1.0f;
-		if (GetEnemyType() == EEnemyType::Demon)
-		{
-			ExplosionScale = 1.8f;
-		}
-		else if (GetEnemyType() == EEnemyType::Bat)
-		{
-			ExplosionScale = 0.5f;
-		}
-		else
-		{
-			ExplosionScale = 2.2f;
-		}
-
 		EventMessage Evt(GameEvent::EnemyDied);
- 		Evt.PayloadFloats.push_back(GetWorldPositionX());
+		Evt.PayloadFloats.push_back(GetWorldPositionX());
 		Evt.PayloadFloats.push_back(GetWorldPositionY());
-		Evt.PayloadFloats.push_back(ExplosionScale);
 		EventManager::BroadcastEvent(Evt);
  		RequestDestroy();
 		return;

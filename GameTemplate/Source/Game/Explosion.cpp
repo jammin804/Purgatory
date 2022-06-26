@@ -35,7 +35,3 @@ void Explosion::OnUpdate(float DeltaTime)
         RequestDestroy();
     }
 }
-
-void Explosion::OnShutdown()
-{
-}

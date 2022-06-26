@@ -10,6 +10,7 @@ class RockManager;
 class GameFlow;
 class GUI;
 class CoinManager;
+class ExplosionManager;
 
 class AsteroidsGame : public GameFramework
 {
@@ -18,11 +19,10 @@ protected:
     virtual void OnPostInit() override;
 
 private:
-    void CreateExplosion(float PositionX, float PositionY, float ExplosionScale = 1.0f);
-
     Player* Player1 = nullptr;
 	Player* Player2 = nullptr;
 	CoinManager* CoinMgr = nullptr;
+    ExplosionManager* ExplodeMgr = nullptr;
     Background* BG = nullptr;
     RockManager* RockMgr = nullptr;
     GameFlow* GFlow = nullptr;
