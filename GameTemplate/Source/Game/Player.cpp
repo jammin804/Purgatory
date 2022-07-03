@@ -6,10 +6,11 @@
 #include "Framework/BoxCollisionComponent.h"
 #include "Cross.h"
 #include "Background.h"
-#include "EventMessage.h"
+#include "GameEvent.h"
 #include "Framework/EventManager.h"
 #include "Rock.h"
 #include "../GameObjectTypes.h"
+#include "Framework/EventMessage.h"
 
 void Player::OnInit()
 {
@@ -214,7 +215,9 @@ void Player::OnCollision(GameObject* Other)
 				else
 				{
 					EventMessage Evt(GameEvent::PlayerTakeDamage);
-					Evt.PayloadInts.push_back(HealthLeft);
+					EventPayload HPLeft;
+					HPLeft.SetAsInt(HealthLeft);
+					Evt.payload.push_back(HPLeft);
 					EventManager::BroadcastEvent(Evt);
 				}
 			}
@@ -284,7 +287,6 @@ void Player::OnRestart()
 {
 	SetPosition(638.0f, 360.0f);
 	SetLivesLeft(MAX_LIFE);
-	//SetFearLeft(MAX_FEAR); //Need to call Max Fear to Gameflow
 	BG->SetPosition(0.0f, 0.0f);
 }
 

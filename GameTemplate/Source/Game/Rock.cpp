@@ -4,8 +4,9 @@
 #include "Game/Player.h"
 #include "Background.h"
 #include "../GameObjectTypes.h"
-#include "EventMessage.h"
+#include "GameEvent.h"
 #include "Framework/EventManager.h"
+#include "Framework/EventMessage.h"
 
 void Rock::OnInit()
 {
@@ -527,16 +528,22 @@ void Rock::TakeDamage()
 	}
 
 	EventMessage Evt(GameEvent::EnemyHurt);
-	Evt.PayloadFloats.push_back(GetWorldPositionX());
-	Evt.PayloadFloats.push_back(GetWorldPositionY());
-	Evt.PayloadFloats.push_back(ExplosionScale);
+	EventPayload WorldPosX, WorldPosY, Scale;
+
+	WorldPosX.SetAsFloat(GetWorldPositionX());
+	WorldPosY.SetAsFloat(GetWorldPositionY());
+	Scale.SetAsFloat(ExplosionScale);
+
+	Evt.payload.push_back(WorldPosX);
+	Evt.payload.push_back(WorldPosY);
+	Evt.payload.push_back(Scale);
 	EventManager::BroadcastEvent(Evt);
 
 	if (EnemyHealthLeft < 0.0f)
 	{
 		EventMessage Evt(GameEvent::EnemyDied);
-		Evt.PayloadFloats.push_back(GetWorldPositionX());
-		Evt.PayloadFloats.push_back(GetWorldPositionY());
+		Evt.payload.push_back(WorldPosX);
+		Evt.payload.push_back(WorldPosY);
 		EventManager::BroadcastEvent(Evt);
  		RequestDestroy();
 		return;

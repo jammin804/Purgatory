@@ -5,40 +5,14 @@
 #include <vector>
 
 class GameObject;
-struct EventMessage
-{
-	int messageId;
-
-	EventMessage(int);
-
-	bool operator==(EventMessage& Other) const
-	{
-		return messageId == Other.messageId;
-	}
-
-	bool operator==(int Other) const
-	{
-		return messageId == Other;
-	}
-
-
-	bool operator<(const EventMessage& Other) const
-	{
-		return messageId < Other.messageId;
-	}
-
-	std::vector<int> PayloadInts;
-	std::vector<bool> PayloadBools;
-	std::vector<float> PayloadFloats;
-
-};
+struct EventMessage;
 
 class EventManager 
 {
 public:
 	static void AddEventListener(GameObject*, int);
 	static void RemoveEventListener(GameObject*, int);
-	static void BroadcastEvent(EventMessage);
+	static void BroadcastEvent(const EventMessage&);
 
 private:
 	static std::map<int, set<GameObject*>> ListenerMap;

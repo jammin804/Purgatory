@@ -1,8 +1,9 @@
 #include "CoinManager.h"
 #include "Coin.h"
 #include "Framework/Globals.h"
-#include "EventMessage.h"
+#include "Framework/EventMessage.h"
 #include "Framework/EventManager.h"
+#include "GameEvent.h"
 
 void CoinManager::OnInit()
 {
@@ -35,10 +36,15 @@ void CoinManager::OnEvent(const EventMessage& Msg)
 {
 	if (Msg.messageId == GameEvent::EnemyDied)
 	{
+		if (Msg.payload.size() < 2)
+		{
+			return;
+		}
+		
  		int NumberOfCoinsToSpawn = (rand() % 4) + 1;
 		for (int i = 0; i < NumberOfCoinsToSpawn; i++)
 		{
-			CreateCoin(Msg.PayloadFloats[0], Msg.PayloadFloats[1]);
+			CreateCoin(Msg.payload[0].GetAsFloat(), Msg.payload[1].GetAsFloat());
 		}
 	}
 }

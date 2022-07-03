@@ -2,8 +2,9 @@
 #include "Rock.h"
 #include "Framework/Globals.h"
 #include "Background.h"
-#include "EventMessage.h"
+#include "GameEvent.h"
 #include "Framework/EventManager.h"
+#include "Framework/EventMessage.h"
 
 void RockManager::OnInit()
 {
@@ -90,15 +91,15 @@ void RockManager::SetRandomPosition(Rock& RockToPosition)
 	{
 		return;
 	}
-	if (NumberOfEnemiesInASpace <= 5)
+	else if (NumberOfEnemiesInASpace <= NumberOfEnemiesToSpawn/4)
 	{
 		OffscreenStart = 3;
 	}
-	if (NumberOfEnemiesInASpace > 5 && NumberOfEnemiesInASpace <= 10)
+	else if (NumberOfEnemiesInASpace > NumberOfEnemiesToSpawn / 4 && NumberOfEnemiesInASpace <= NumberOfEnemiesToSpawn / 2)
 	{
 		OffscreenStart = 1;
 	} 
-	if (NumberOfEnemiesInASpace > 10 && NumberOfEnemiesInASpace <= 15)
+	else if (NumberOfEnemiesInASpace > NumberOfEnemiesToSpawn / 2 && NumberOfEnemiesInASpace <= (NumberOfEnemiesToSpawn / 4) * 3)
 	{
 		OffscreenStart = 2;
 	}
@@ -106,16 +107,33 @@ void RockManager::SetRandomPosition(Rock& RockToPosition)
 	{
 		OffscreenStart = 0;
 	}
-    //int OffscreenStart = rand() % 4;
 
     float StartPosX, StartPosY;
     float StartDirX, StartDirY;
+
+    enum Quadrant
+    {
+		TL = 0,
+		TM,
+		TR,
+		ML,
+        MR,
+        BL,
+        BM,
+        BR
+    };
+    
+    int BGWidth = BG->GetBackgroundWidth();
+    int BGHeight = BG->GetBackgroundHeight();
+    int HalfBGWidth = BG->GetBackgroundWidth() / 2;
+    int HalfBGHeight = BG->GetBackgroundHeight() / 2;
+
     switch (OffscreenStart)
     {
     case 0:
     {
-        StartPosX = -rand() % static_cast <int> (BG->GetBackgroundWidth()*0.5f);
-		StartPosY = rand() % BG->GetBackgroundHeight(); //Potentially needs to offset by half the background height
+        StartPosX = -(Globals::WindowSizeX) - (rand() % (HalfBGWidth-Globals::WindowSizeX));
+		StartPosY = (rand() % BGHeight) - HalfBGHeight;
         float DirectionY = 1.0f - (StartPosY / (Globals::WindowSizeY * 0.5f));
         StartDirX = 0.6f;
         StartDirY = DirectionY * 0.25f;
@@ -124,8 +142,8 @@ void RockManager::SetRandomPosition(Rock& RockToPosition)
     break;
     case 1:
     {
-		StartPosX = rand() % BG->GetBackgroundWidth(); //Potentially needs to offset by half the background width
-        StartPosY = -rand() % static_cast <int> (BG->GetBackgroundHeight()*0.5f);
+		StartPosX = (rand() % BGWidth)- HalfBGWidth;
+        StartPosY = -(Globals::WindowSizeY) - (rand() % (HalfBGHeight-Globals::WindowSizeY));
         float DirectionX = 1.0f - (StartPosX / (Globals::WindowSizeX * 0.5f));
         StartDirX = DirectionX * 0.4f;
         StartDirY = 0.4f;
@@ -133,8 +151,8 @@ void RockManager::SetRandomPosition(Rock& RockToPosition)
     break;
     case 2:
     {
-        StartPosX = Globals::WindowSizeX + rand() % static_cast <int> (BG->GetBackgroundWidth()*0.5f);;
-        StartPosY = rand() % BG->GetBackgroundHeight();
+        StartPosX = Globals::WindowSizeX + (rand() % (HalfBGWidth-Globals::WindowSizeX));
+        StartPosY = (rand() % BGHeight) - HalfBGHeight;
         float DirectionY = 1.0f - (StartPosY / (Globals::WindowSizeY * 0.5f));
         StartDirX = -0.6f;
         StartDirY = DirectionY * 0.25f;
@@ -142,8 +160,8 @@ void RockManager::SetRandomPosition(Rock& RockToPosition)
     break;
     case 3:
     {
-        StartPosX = rand() % BG->GetBackgroundWidth();
-        StartPosY = Globals::WindowSizeY + rand() % static_cast <int> (BG->GetBackgroundHeight()*0.5f);
+        StartPosX = (rand() % BGWidth) - HalfBGWidth;
+        StartPosY = Globals::WindowSizeY + (rand() % (HalfBGHeight-Globals::WindowSizeY));
         float DirectionX = 1.0f - (StartPosX / (Globals::WindowSizeX * 0.5f));
         StartDirX = DirectionX * 0.4f;
         StartDirY = -0.4f;

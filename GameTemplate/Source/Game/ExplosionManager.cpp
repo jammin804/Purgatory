@@ -1,7 +1,8 @@
 #include "ExplosionManager.h"
-#include "EventMessage.h"
+#include "GameEvent.h"
 #include "Framework/EventManager.h"
 #include "Explosion.h"
+#include "Framework/EventMessage.h"
 
 void ExplosionManager::OnInit()
 {
@@ -33,8 +34,12 @@ void ExplosionManager::OnEvent(const EventMessage& Msg)
 {
 	if(Msg.messageId == GameEvent::EnemyHurt)
 	{
+		if (Msg.payload.size() < 3)
+		{
+			return;
+		}
 
-		CreateExplosion(Msg.PayloadFloats[0], Msg.PayloadFloats[1], Msg.PayloadFloats[2]);
+		CreateExplosion(Msg.payload[0].GetAsFloat(), Msg.payload[1].GetAsFloat(), Msg.payload[2].GetAsFloat());
 	}
 }
 

@@ -1,5 +1,6 @@
 #include "EventManager.h"
 #include "GameObject.h"
+#include "EventMessage.h"
 
 std::map<int, set<GameObject*>> EventManager::ListenerMap;
 
@@ -29,7 +30,7 @@ void EventManager::RemoveEventListener(GameObject* GO, int MsgId)
 	}
 }
 
-void EventManager::BroadcastEvent(EventMessage Msg)
+void EventManager::BroadcastEvent(const EventMessage& Msg)
 {
  	auto iter = ListenerMap.find(Msg.messageId);
 	if (iter != ListenerMap.end())
@@ -41,7 +42,4 @@ void EventManager::BroadcastEvent(EventMessage Msg)
 	}
 }
 
-EventMessage::EventMessage(int MsgId)
-{
-	messageId = MsgId;
-}
+

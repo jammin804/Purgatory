@@ -24,7 +24,7 @@ private:
 	ImageComponent* BackgroundImage[9] = { nullptr };
 	SoundComponent* BackgroundMusic = nullptr;
 	ImageComponent* WallVImage = nullptr;
-	int BackgroundHeight = 1440*3;
-	int BackgroundWidth = 2560*3;
+	static int const BackgroundHeight = 4320;
+	static int const BackgroundWidth = 7680;
 };
 

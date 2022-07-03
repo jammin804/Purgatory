@@ -3,8 +3,9 @@
 #include "Framework/BoxCollisionComponent.h"
 #include "Framework/SoundComponent.h"
 #include "../GameObjectTypes.h"
-#include "EventMessage.h"
+#include "GameEvent.h"
 #include "Framework/EventManager.h"
+#include "Framework/EventMessage.h"
 
 
 

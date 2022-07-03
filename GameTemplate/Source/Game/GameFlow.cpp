@@ -5,7 +5,8 @@
 #include "GUI.h"
 #include "Shop.h"
 #include "Framework/EventManager.h"
-#include "EventMessage.h"
+#include "GameEvent.h"
+#include "Framework/EventMessage.h"
 
 void GameFlow::OnInit()
 {
@@ -76,7 +77,7 @@ void GameFlow::OnUpdate(float DeltaTime)
         }
         break;
     case EState::InGame:
-        TimeRemaining -= DeltaTime;
+        //TimeRemaining -= DeltaTime;
         if (GameUIText)
         {
             GameUIText->UpdateTimeRemaining((int)TimeRemaining / 60, (int)TimeRemaining% 60);
@@ -212,7 +213,12 @@ void GameFlow::OnEvent(const EventMessage& Msg)
 	}
 	else if(Msg == GameEvent::PlayerTakeDamage)
 	{
-		UpdateLivesLeft(Msg.PayloadInts[0]);
+		if (Msg.payload.size() < 1)
+		{
+			return;
+		}
+
+		UpdateLivesLeft(Msg.payload[0].GetAsInt());
 	}
 	else if (Msg == GameEvent::PlayerDied)
 	{

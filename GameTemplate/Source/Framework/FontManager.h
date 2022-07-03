@@ -39,5 +39,6 @@ public:
     ALLEGRO_FONT* FindOrAddFont(EString FontPath, int Size);
 
 private:
+    FontManager() = default;
      map<FontKey, ALLEGRO_FONT*> FontMap;
 };
