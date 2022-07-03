@@ -348,8 +348,17 @@ void Rock::UpdatePatrolState(float Deltatime)
 
 	}
 
+	float TotalTimeToMove = MaxMoveTime;
+	
+	if ((EnemyDirection == Left && SpawnStart == ESpawnStart::Right) ||
+		(EnemyDirection == Right && SpawnStart == ESpawnStart::Left) ||
+		(EnemyDirection == Up && SpawnStart == ESpawnStart::Bottom) ||
+		(EnemyDirection == Down && SpawnStart == ESpawnStart::Top))
+	{
+		TotalTimeToMove *= 3.0f;
+	}
 
-	if (TimeInState > MaxMoveTime)
+	if (TimeInState > TotalTimeToMove)
 	{
 		ChangeDirection();
 

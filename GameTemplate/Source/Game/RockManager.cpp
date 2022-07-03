@@ -91,37 +91,25 @@ void RockManager::SetRandomPosition(Rock& RockToPosition)
 	{
 		return;
 	}
-	else if (NumberOfEnemiesInASpace <= NumberOfEnemiesToSpawn/4)
+
+    ESpawnStart OffscreenStart = ESpawnStart::Left;
+	if (NumberOfEnemiesInASpace <= NumberOfEnemiesToSpawn/4)
 	{
-		OffscreenStart = 3;
+		OffscreenStart = ESpawnStart::Bottom;
 	}
 	else if (NumberOfEnemiesInASpace > NumberOfEnemiesToSpawn / 4 && NumberOfEnemiesInASpace <= NumberOfEnemiesToSpawn / 2)
 	{
-		OffscreenStart = 1;
+		OffscreenStart = ESpawnStart::Top;
 	} 
 	else if (NumberOfEnemiesInASpace > NumberOfEnemiesToSpawn / 2 && NumberOfEnemiesInASpace <= (NumberOfEnemiesToSpawn / 4) * 3)
 	{
-		OffscreenStart = 2;
-	}
-	else
-	{
-		OffscreenStart = 0;
+		OffscreenStart = ESpawnStart::Right;
 	}
 
     float StartPosX, StartPosY;
     float StartDirX, StartDirY;
 
-    enum Quadrant
-    {
-		TL = 0,
-		TM,
-		TR,
-		ML,
-        MR,
-        BL,
-        BM,
-        BR
-    };
+ 
     
     int BGWidth = BG->GetBackgroundWidth();
     int BGHeight = BG->GetBackgroundHeight();
@@ -130,7 +118,7 @@ void RockManager::SetRandomPosition(Rock& RockToPosition)
 
     switch (OffscreenStart)
     {
-    case 0:
+    case ESpawnStart::Left:
     {
         StartPosX = -(Globals::WindowSizeX) - (rand() % (HalfBGWidth-Globals::WindowSizeX));
 		StartPosY = (rand() % BGHeight) - HalfBGHeight;
@@ -140,7 +128,7 @@ void RockManager::SetRandomPosition(Rock& RockToPosition)
     }
 
     break;
-    case 1:
+    case ESpawnStart::Top:
     {
 		StartPosX = (rand() % BGWidth)- HalfBGWidth;
         StartPosY = -(Globals::WindowSizeY) - (rand() % (HalfBGHeight-Globals::WindowSizeY));
@@ -149,7 +137,7 @@ void RockManager::SetRandomPosition(Rock& RockToPosition)
         StartDirY = 0.4f;
     }
     break;
-    case 2:
+    case ESpawnStart::Right:
     {
         StartPosX = Globals::WindowSizeX + (rand() % (HalfBGWidth-Globals::WindowSizeX));
         StartPosY = (rand() % BGHeight) - HalfBGHeight;
@@ -158,7 +146,7 @@ void RockManager::SetRandomPosition(Rock& RockToPosition)
         StartDirY = DirectionY * 0.25f;
     }
     break;
-    case 3:
+    case ESpawnStart::Bottom:
     {
         StartPosX = (rand() % BGWidth) - HalfBGWidth;
         StartPosY = Globals::WindowSizeY + (rand() % (HalfBGHeight-Globals::WindowSizeY));

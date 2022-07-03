@@ -28,6 +28,14 @@ enum class EState : int
 	Flee,
 	COUNT
 };
+
+enum class ESpawnStart : int
+{
+	Left = 0,
+	Top,
+	Right,
+	Bottom
+};
 class Rock : public GameObject
 {
 protected:
@@ -77,6 +85,7 @@ private:
 	EEnemyType EnemyType = EEnemyType::Demon;
 	EEnemyDir EnemyDirection = EEnemyDir::Right;
 	EState CurrentState = EState::Idle;
+	ESpawnStart SpawnStart = ESpawnStart::Left;
 	float MaxIdleTime = 5.0f;
 	float TimeInState = MaxIdleTime;
 	float MaxDetectionRadius = 0.0f;

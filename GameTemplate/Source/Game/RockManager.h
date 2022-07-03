@@ -26,8 +26,7 @@ class RockManager : public GameObject
         Rock* CreateRock(const int MAX_ENEMY_HEALTH = 2); //Changed Splits Left to Max Enemy Health
 private:
         vector<Rock*> Rocks;
-		int NumberOfEnemiesToSpawn = 50;
+		int NumberOfEnemiesToSpawn = 100;
 		int NumberOfEnemiesInASpace = 1;
-		int OffscreenStart = 0;
 		const Player* Player1 = nullptr;
 };

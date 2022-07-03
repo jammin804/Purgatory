@@ -21,8 +21,8 @@ public:
 
 private:
     //static const long long MemSizeBytes = 1073741274; // 1GB
-    //static const long long MemSizeBytes = 536870912; // 512MB
-    static const long long MemSizeBytes = 268435456; // 256MB
+    static const long long MemSizeBytes = 536870912; // 512MB
+    //static const long long MemSizeBytes = 268435456; // 256MB
     //static const long long MemSizeBytes = 134217728; // 128MB
     static char Buffer[MemSizeBytes];
     static void * PointerToFreeSpace;
