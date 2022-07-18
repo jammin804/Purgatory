@@ -36,15 +36,15 @@
     <ClCompile Include="Source\Game\Background.cpp" />
     <ClCompile Include="Source\Game\Coin.cpp" />
     <ClCompile Include="Source\Game\CoinManager.cpp" />
+    <ClCompile Include="Source\Game\Enemy.cpp" />
+    <ClCompile Include="Source\Game\EnemyManager.cpp" />
     <ClCompile Include="Source\Game\Explosion.cpp" />
     <ClCompile Include="Source\Game\ExplosionManager.cpp" />
     <ClCompile Include="Source\Game\GameFlow.cpp" />
     <ClCompile Include="Source\Game\Cross.cpp" />
     <ClCompile Include="Source\Game\GUI.cpp" />
     <ClCompile Include="Source\Game\LevelManager.cpp" />
-    <ClCompile Include="Source\Game\Rock.cpp" />
     <ClCompile Include="Source\Game\Player.cpp" />
-    <ClCompile Include="Source\Game\RockManager.cpp" />
     <ClCompile Include="Source\Game\Sfx.cpp" />
     <ClCompile Include="Source\Game\Shop.cpp" />
     <ClCompile Include="Source\Game\UIText.cpp" />
@@ -72,6 +72,8 @@
     <ClInclude Include="Source\Game\Background.h" />
     <ClInclude Include="Source\Game\Coin.h" />
     <ClInclude Include="Source\Game\CoinManager.h" />
+    <ClInclude Include="Source\Game\Enemy.h" />
+    <ClInclude Include="Source\Game\EnemyManager.h" />
     <ClInclude Include="Source\Game\GameEvent.h" />
     <ClInclude Include="Source\Game\Explosion.h" />
     <ClInclude Include="Source\Game\ExplosionManager.h" />
@@ -80,9 +82,7 @@
     <ClInclude Include="Source\Game\GUI.h" />
     <ClInclude Include="Source\Game\LevelManager.h" />
     <ClInclude Include="Source\Game\Powerup.h" />
-    <ClInclude Include="Source\Game\Rock.h" />
     <ClInclude Include="Source\Game\Player.h" />
-    <ClInclude Include="Source\Game\RockManager.h" />
     <ClInclude Include="Source\Game\Sfx.h" />
     <ClInclude Include="Source\Game\Shop.h" />
     <ClInclude Include="Source\Game\UIText.h" />

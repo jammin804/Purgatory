@@ -72,16 +72,10 @@
     <ClCompile Include="Source\Framework\BoxCollisionComponent.cpp">
       <Filter>Source Files\Framework\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\Rock.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Game\Explosion.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
     <ClCompile Include="Source\Game\GameFlow.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Game\RockManager.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
     <ClCompile Include="Source\Framework\MemoryManager.cpp">
@@ -122,6 +116,12 @@
     </ClCompile>
     <ClCompile Include="Source\Game\LevelManager.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Enemy.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\EnemyManager.cpp">
+      <Filter>Source Files\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -164,16 +164,10 @@
     <ClInclude Include="Source\Framework\BoxCollisionComponent.h">
       <Filter>Header Files\Framework\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\Rock.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Game\Explosion.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\GameFlow.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\RockManager.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="Source\Framework\MemoryManager.h">
@@ -228,6 +222,12 @@
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\LevelManager.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Enemy.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\EnemyManager.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
   </ItemGroup>

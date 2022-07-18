@@ -6,7 +6,7 @@ using namespace std;
 struct FreeMemoryBlock
 {
     void* BlockPosition;
-    int BlockSize;
+    size_t BlockSize;
     void* Split(size_t);
     void CombineFromLeft(size_t);
 };
