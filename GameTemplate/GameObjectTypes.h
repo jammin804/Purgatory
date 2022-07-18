@@ -12,8 +12,8 @@ enum GameObjectType
 	GOT_GUI,
 	GOT_Player,
 	GOT_Powerup,
-	GOT_Rock,
-	GOT_RockManager,
+	GOT_Enemy,
+	GOT_EnemyManager,
 	GOT_Sfx,
 	GOT_Shop,
 	GOT_UIText

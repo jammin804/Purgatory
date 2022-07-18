@@ -120,6 +120,9 @@
     <ClCompile Include="Source\Framework\EventMessage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Game\LevelManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Framework\GameFramework.h">
@@ -223,6 +226,9 @@
     </ClInclude>
     <ClInclude Include="Source\Framework\EventMessage.h">
       <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\LevelManager.h">
+      <Filter>Header Files\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

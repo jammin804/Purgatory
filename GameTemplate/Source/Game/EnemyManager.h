@@ -3,13 +3,13 @@
 #include "Framework/GameObject.h"
 #include <vector>
 
-class Rock;
+class Enemy;
 class Player;
 class GameFlow;
 
 using namespace std;
 
-class RockManager : public GameObject
+class EnemyManager : public GameObject
 {
     protected:
         virtual void OnInit() override;
@@ -18,15 +18,15 @@ class RockManager : public GameObject
 		virtual void OnRestart() override;
 
     public:      
-		const vector<Rock*>& GetRocks() const { return Rocks; }
+		const vector<Enemy*>& GetEnemies() const { return Enemies; }
         virtual void SetEnabled(bool bEnabled) override;
 		void SetPlayer(const Player* NewPlayer) { Player1 = NewPlayer; }
     private:
-        void SetRandomPosition(Rock& RockToPosition);
-        Rock* CreateRock(const int MAX_ENEMY_HEALTH = 2); //Changed Splits Left to Max Enemy Health
+        void SetRandomPosition(Enemy& EnemyToPosition);
+        Enemy* CreateEnemy(const int MAX_ENEMY_HEALTH = 2); //Changed Splits Left to Max Enemy Health
 private:
-        vector<Rock*> Rocks;
-		int NumberOfEnemiesToSpawn = 100;
+        vector<Enemy*> Enemies;
+		int NumberOfEnemiesToSpawn = 20;
 		int NumberOfEnemiesInASpace = 1;
 		const Player* Player1 = nullptr;
 };

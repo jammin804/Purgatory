@@ -74,7 +74,7 @@ void Cross::OnUpdate(float DeltaTime)
 
 void Cross::OnCollision(GameObject* Other)
 {
-	if (Other->GetType() == static_cast<int>(GOT_Rock))
+	if (Other->GetType() == static_cast<int>(GOT_Enemy))
 	{
 		RequestDestroy();
 		EventManager::BroadcastEvent(GameEvent::CrossDestroyed);	

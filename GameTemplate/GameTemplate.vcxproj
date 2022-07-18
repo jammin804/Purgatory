@@ -41,6 +41,7 @@
     <ClCompile Include="Source\Game\GameFlow.cpp" />
     <ClCompile Include="Source\Game\Cross.cpp" />
     <ClCompile Include="Source\Game\GUI.cpp" />
+    <ClCompile Include="Source\Game\LevelManager.cpp" />
     <ClCompile Include="Source\Game\Rock.cpp" />
     <ClCompile Include="Source\Game\Player.cpp" />
     <ClCompile Include="Source\Game\RockManager.cpp" />
@@ -77,6 +78,7 @@
     <ClInclude Include="Source\Game\GameFlow.h" />
     <ClInclude Include="Source\Game\Cross.h" />
     <ClInclude Include="Source\Game\GUI.h" />
+    <ClInclude Include="Source\Game\LevelManager.h" />
     <ClInclude Include="Source\Game\Powerup.h" />
     <ClInclude Include="Source\Game\Rock.h" />
     <ClInclude Include="Source\Game\Player.h" />

@@ -8,7 +8,7 @@
 #include "Background.h"
 #include "GameEvent.h"
 #include "Framework/EventManager.h"
-#include "Rock.h"
+#include "Enemy.h"
 #include "../GameObjectTypes.h"
 #include "Framework/EventMessage.h"
 
@@ -202,9 +202,9 @@ void Player::OnCollision(GameObject* Other)
 
 	if (!IsInvulnerable() && IsEnabled())
 	{
-		if (Other->GetType() == static_cast<int>(GOT_Rock))
+		if (Other->GetType() == static_cast<int>(GOT_Enemy))
 		{
-			const Rock* enemy = static_cast<const Rock*>(Other);
+			const Enemy* enemy = static_cast<const Enemy*>(Other);
 			if (enemy->GetState() != EState::Flee)
 			{
 				//CreateExplosion(Player1->GetPositionX(), Player1->GetPositionY());

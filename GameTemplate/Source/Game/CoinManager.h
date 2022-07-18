@@ -23,4 +23,5 @@ public:
 		vector<Coin*>& GetCoins() { return Coins; }
 private:
         vector<Coin*> Coins;
+        int MaxCoins = 100;
 };

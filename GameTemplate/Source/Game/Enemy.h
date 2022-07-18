@@ -31,12 +31,16 @@ enum class EState : int
 
 enum class ESpawnStart : int
 {
-	Left = 0,
-	Top,
-	Right,
-	Bottom
+	LeftCenter = 0,
+	TopLeft,
+	TopCenter,
+	TopRight,
+	RightCenter,
+	BottomRight,
+	BottomCenter,
+	BottomLeft
 };
-class Rock : public GameObject
+class Enemy : public GameObject
 {
 protected:
     virtual void OnInit() override;
@@ -85,7 +89,7 @@ private:
 	EEnemyType EnemyType = EEnemyType::Demon;
 	EEnemyDir EnemyDirection = EEnemyDir::Right;
 	EState CurrentState = EState::Idle;
-	ESpawnStart SpawnStart = ESpawnStart::Left;
+	ESpawnStart SpawnStart = ESpawnStart::LeftCenter;
 	float MaxIdleTime = 5.0f;
 	float TimeInState = MaxIdleTime;
 	float MaxDetectionRadius = 0.0f;

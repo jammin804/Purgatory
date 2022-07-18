@@ -7,7 +7,7 @@
 
 void CoinManager::OnInit()
 {
-	Coins.reserve(100);
+	Coins.reserve(MaxCoins);
 	AddEventListener(GameEvent::EnemyDied);
 }
 
@@ -61,12 +61,16 @@ void CoinManager::OnRestart()
 
 Coin* CoinManager::CreateCoin(float posX, float posY)
 {
-	Coin* NewCoin = GameObject::CreateInstance<Coin>();
-	NewCoin->SetParent(GetParent());
-	Coins.push_back(NewCoin);
-	NewCoin->SetWorldPosition(posX, posY);
-	return NewCoin;
-
+	if (Coins.size() < MaxCoins)
+	{
+		Coin* NewCoin = GameObject::CreateInstance<Coin>();
+		NewCoin->SetParent(GetParent());
+		Coins.push_back(NewCoin);
+		NewCoin->SetWorldPosition(posX, posY);
+		return NewCoin;
+	}
+	
+	return nullptr;
 
 }
 

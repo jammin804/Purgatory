@@ -7,14 +7,15 @@
 #include "Game/GUI.h" 
 #include "Game/Cross.h"
 #include "Game/Player.h"
-#include "Game/Rock.h"
-#include "Game/RockManager.h"
+#include "Game/Enemy.h"
+#include "Game/EnemyManager.h"
 #include "Game/UIText.h"
 #include <sstream>
 #include "Game/Coin.h"
 #include "Game/CoinManager.h"
 #include "Game/ExplosionManager.h"
 #include "Game/Sfx.h"
+#include "Game/LevelManager.h"
 
 void AsteroidsGame::OnInit()
 {
@@ -22,9 +23,10 @@ void AsteroidsGame::OnInit()
     BG = GameObject::CreateInstance<Background>();
 	UI = GameObject::CreateInstance<GUI>();
     Player1 = GameObject::CreateInstance<Player>();
-    RockMgr = GameObject::CreateInstance<RockManager>();
+    EnemyMgr = GameObject::CreateInstance<EnemyManager>();
 	CoinMgr = GameObject::CreateInstance<CoinManager>();
 	ExplodeMgr = GameObject::CreateInstance<ExplosionManager>();
+	LevelMgr = GameObject::CreateInstance<LevelManager>();
 }
 
 void AsteroidsGame::OnPostInit()
@@ -50,7 +52,7 @@ void AsteroidsGame::OnPostInit()
     if (GFlow)
     {
         GFlow->AddObjectToDisableAtStart(Player1);
-        GFlow->AddObjectToDisableAtStart(RockMgr);
+        GFlow->AddObjectToDisableAtStart(EnemyMgr);
 		GFlow->AddObjectToDisableAtStart(UI);
 		GFlow->SetRenderDepth(50);
 		GFlow->SetGUI(UI);
@@ -83,15 +85,15 @@ void AsteroidsGame::OnPostInit()
 		UI->SetRenderDepth(100);
 	}
 
-	if (RockMgr)
+	if (EnemyMgr)
 	{
 		if (BG)
 		{
-			RockMgr->SetParent(BG);
+			EnemyMgr->SetParent(BG);
 		}
 		if (Player1)
 		{
-			RockMgr->SetPlayer(Player1);
+			EnemyMgr->SetPlayer(Player1);
 		}
 	}
 

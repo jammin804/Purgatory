@@ -6,11 +6,12 @@ using namespace std;
 
 class Player;
 class Background;
-class RockManager;
+class EnemyManager;
 class GameFlow;
 class GUI;
 class CoinManager;
 class ExplosionManager;
+class LevelManager;
 
 class AsteroidsGame : public GameFramework
 {
@@ -24,8 +25,9 @@ private:
 	CoinManager* CoinMgr = nullptr;
     ExplosionManager* ExplodeMgr = nullptr;
     Background* BG = nullptr;
-    RockManager* RockMgr = nullptr;
+    EnemyManager* EnemyMgr = nullptr;
     GameFlow* GFlow = nullptr;
 	GUI* UI = nullptr;
-    int CurrentScore = 0;
+    LevelManager* LevelMgr = nullptr;
+
 };

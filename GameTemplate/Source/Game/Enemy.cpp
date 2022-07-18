@@ -1,4 +1,4 @@
-#include "Rock.h"
+#include "Enemy.h"
 #include "Framework/ImageComponent.h"
 #include "Framework/BoxCollisionComponent.h"
 #include "Game/Player.h"
@@ -8,9 +8,9 @@
 #include "Framework/EventManager.h"
 #include "Framework/EventMessage.h"
 
-void Rock::OnInit()
+void Enemy::OnInit()
 {
-	SetType(GOT_Rock);
+	SetType(GOT_Enemy);
     EnemyImage = GameComponent::CreateInstance<ImageComponent>(this);
     Collision = GameComponent::CreateInstance<BoxCollisionComponent>(this);
 	EnemyHealthLayer = GameComponent::CreateInstance<ImageComponent>(this);
@@ -18,7 +18,7 @@ void Rock::OnInit()
 	//Player1 = GameObject::CreateInstance<Player>();
 }
 
-void Rock::OnPostInit()
+void Enemy::OnPostInit()
 {
 	IsEnabled();
 
@@ -101,7 +101,7 @@ void Rock::OnPostInit()
 	EnterIdleState();
 }
 
-void Rock::OnUpdate(float DeltaTime)
+void Enemy::OnUpdate(float DeltaTime)
 {
 
 	switch (CurrentState)
@@ -124,14 +124,13 @@ void Rock::OnUpdate(float DeltaTime)
 	TimeInState += DeltaTime;
 }
 
-void Rock::OnRestart()
+void Enemy::OnRestart()
 {
-	//destroy Current Rocks
 	SetEnabled(false);
 	//RequestDestroy();
 }
 
-void Rock::OnCollision(GameObject* Other)
+void Enemy::OnCollision(GameObject* Other)
 {
 	if (Other->GetType() == static_cast<int>(GOT_Cross))
 	{
@@ -139,13 +138,13 @@ void Rock::OnCollision(GameObject* Other)
 	}
 }
 
-void Rock::SetEnemyLifePercentage(float EnemyPercentageLife)
+void Enemy::SetEnemyLifePercentage(float EnemyPercentageLife)
 {
 	EnemyHealth->SetScaleX(EnemyLifeBarScale * EnemyPercentageLife);
 }
 
 
-void Rock::ChangeState(EState NewState)
+void Enemy::ChangeState(EState NewState)
 {
 	switch(CurrentState)
 	{
@@ -193,7 +192,7 @@ float RandomRange(float min, float max)
 	return (RandomNum / Accuracy) + min;
 }
 
-void Rock::EnterIdleState()
+void Enemy::EnterIdleState()
 {
 	//Initializing information - change to switch
 	std::string EnemyImagePath = "";
@@ -223,7 +222,7 @@ void Rock::EnterIdleState()
 
 }
 
-void Rock::UpdateIdleState(float Deltatime)
+void Enemy::UpdateIdleState(float Deltatime)
 {
 	if (CheckForFear())
 	{
@@ -242,7 +241,7 @@ void Rock::UpdateIdleState(float Deltatime)
 
 }
 
-bool Rock::CheckForChase()
+bool Enemy::CheckForChase()
 {
 	float DirectionToPlayerX = Player1->GetWorldPositionX() - GetWorldPositionX();
 	float DirectionToPlayerY = Player1->GetWorldPositionY() - GetWorldPositionY();
@@ -256,7 +255,7 @@ bool Rock::CheckForChase()
 	return false;
 }
 
-bool Rock::CheckForLostPlayer()
+bool Enemy::CheckForLostPlayer()
 {
 	float DirectionToPlayerX = Player1->GetWorldPositionX() - GetWorldPositionX();
 	float DirectionToPlayerY = Player1->GetWorldPositionY() - GetWorldPositionY();
@@ -270,7 +269,7 @@ bool Rock::CheckForLostPlayer()
 	return false;
 }
 
-bool Rock::CheckForFear()
+bool Enemy::CheckForFear()
 {
 	float DirectionToPlayerX = Player1->GetWorldPositionX() - GetWorldPositionX();
 	float DirectionToPlayerY = Player1->GetWorldPositionY() - GetWorldPositionY();
@@ -285,12 +284,12 @@ bool Rock::CheckForFear()
 	return false;
 }
 
-void Rock::ExitIdleState()
+void Enemy::ExitIdleState()
 {
 
 }
 
-void Rock::EnterPatrolState()
+void Enemy::EnterPatrolState()
 {
 	std::string EnemyImagePath = "";
 	if (EnemyType == EEnemyType::Demon)
@@ -316,7 +315,7 @@ void Rock::EnterPatrolState()
 
 }
 
-void Rock::UpdatePatrolState(float Deltatime)
+void Enemy::UpdatePatrolState(float Deltatime)
 {
 
 	if (CheckForFear())
@@ -350,10 +349,10 @@ void Rock::UpdatePatrolState(float Deltatime)
 
 	float TotalTimeToMove = MaxMoveTime;
 	
-	if ((EnemyDirection == Left && SpawnStart == ESpawnStart::Right) ||
-		(EnemyDirection == Right && SpawnStart == ESpawnStart::Left) ||
-		(EnemyDirection == Up && SpawnStart == ESpawnStart::Bottom) ||
-		(EnemyDirection == Down && SpawnStart == ESpawnStart::Top))
+	if ((EnemyDirection == Left && SpawnStart == ESpawnStart::RightCenter) ||
+		(EnemyDirection == Right && SpawnStart == ESpawnStart::LeftCenter) ||
+		(EnemyDirection == Up && SpawnStart == ESpawnStart::BottomCenter) ||
+		(EnemyDirection == Down && SpawnStart == ESpawnStart::TopCenter))
 	{
 		TotalTimeToMove *= 3.0f;
 	}
@@ -366,23 +365,23 @@ void Rock::UpdatePatrolState(float Deltatime)
 	}
 }
 
-void Rock::ChangeDirection()
+void Enemy::ChangeDirection()
 {
 	EnemyDirection = static_cast <EEnemyDir>((EnemyDirection + 1) % EEnemyDir::COUNT);
 }
 
-EState Rock::GetState() const
+EState Enemy::GetState() const
 {
 	return CurrentState;
 }
 
-void Rock::ExitPatrolState()
+void Enemy::ExitPatrolState()
 {
 	bNeedsSwitch = !bNeedsSwitch;
 	MoveTimer = 0.0f;
 }
 
-void Rock::EnterChaseState()
+void Enemy::EnterChaseState()
 {
 	std::string EnemyImagePath = "";
 	if (EnemyType == EEnemyType::Demon)
@@ -402,7 +401,7 @@ void Rock::EnterChaseState()
 
 }
 
-void Rock::UpdateChaseState(float Deltatime)
+void Enemy::UpdateChaseState(float Deltatime)
 {
 	if (CheckForFear())
 	{
@@ -428,12 +427,12 @@ void Rock::UpdateChaseState(float Deltatime)
 	
 }
 
-void Rock::ExitChaseState()
+void Enemy::ExitChaseState()
 {
 
 }
 
-void Rock::EnterFleeState()
+void Enemy::EnterFleeState()
 {
 	std::string EnemyImagePath = "";
 	if (EnemyType == EEnemyType::Demon)
@@ -458,7 +457,7 @@ void Rock::EnterFleeState()
 	
 }
 
-void Rock::UpdateFleeState(float DeltaTime)
+void Enemy::UpdateFleeState(float DeltaTime)
 {
 	
 
@@ -480,12 +479,12 @@ void Rock::UpdateFleeState(float DeltaTime)
 	}
 }
 
-void Rock::ExitFleeState()
+void Enemy::ExitFleeState()
 {
 
 }
 
-void Rock::UpdateMovement(float DesiredX, float DesiredY)
+void Enemy::UpdateMovement(float DesiredX, float DesiredY)
 {
 	if (const Background* BG = static_cast<const Background*>(GetParent()))
 	{
@@ -499,27 +498,27 @@ void Rock::UpdateMovement(float DesiredX, float DesiredY)
 
 }
 
-void Rock::Switch()
+void Enemy::Switch()
 {
 	bNeedsSwitch = true;
 }
 
-void Rock::SetEnemyDirection(EEnemyDir direction)
+void Enemy::SetEnemyDirection(EEnemyDir direction)
 {
 	EnemyDirection = direction;
 }
 
-void Rock::SetEnemyType(EEnemyType type)
+void Enemy::SetEnemyType(EEnemyType type)
 {
 	EnemyType = type;
 }
 
-EEnemyType Rock::GetEnemyType() const
+EEnemyType Enemy::GetEnemyType() const
 {
 	return EnemyType;
 }
 
-void Rock::TakeDamage()
+void Enemy::TakeDamage()
 {
 	EnemyHealthLeft -= 0.4f;
 	float ExplosionScale = 1.0f;
