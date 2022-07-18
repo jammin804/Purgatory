@@ -123,6 +123,9 @@
     <ClCompile Include="Source\Game\EnemyManager.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Game\Wall.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Framework\GameFramework.h">
@@ -228,6 +231,9 @@
       <Filter>Header Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\EnemyManager.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Wall.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
   </ItemGroup>

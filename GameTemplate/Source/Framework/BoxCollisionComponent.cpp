@@ -73,6 +73,11 @@ bool BoxCollisionComponent::DoesCollide(const BoxCollisionComponent* OtherCollis
     return false;
 }
 
+void BoxCollisionComponent::SetDrawDebug()
+{
+    bDrawDebug = true;
+}
+
 void BoxCollisionComponent::OnRender()
 {
     if (bDrawDebug)

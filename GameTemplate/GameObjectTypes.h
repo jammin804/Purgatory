@@ -7,6 +7,7 @@ enum GameObjectType
 	GOT_CoinManager,
 	GOT_Cross,
 	GOT_Explosion,
+	GOT_Wall,
 	GOT_ExplosionManager,
 	GOT_GameFlow,
 	GOT_GUI,

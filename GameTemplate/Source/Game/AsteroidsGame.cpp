@@ -16,11 +16,13 @@
 #include "Game/ExplosionManager.h"
 #include "Game/Sfx.h"
 #include "Game/LevelManager.h"
+#include "Game/Wall.h"
 
 void AsteroidsGame::OnInit()
 {
     GFlow = GameObject::CreateInstance<GameFlow>();
     BG = GameObject::CreateInstance<Background>();
+	//WallImg = GameObject::CreateInstance<Wall>();
 	UI = GameObject::CreateInstance<GUI>();
     Player1 = GameObject::CreateInstance<Player>();
     EnemyMgr = GameObject::CreateInstance<EnemyManager>();
@@ -95,6 +97,11 @@ void AsteroidsGame::OnPostInit()
 		{
 			EnemyMgr->SetPlayer(Player1);
 		}
+	}
+
+	if (WallImg)
+	{
+		WallImg->SetParent(BG);
 	}
 
 	if (CoinMgr)

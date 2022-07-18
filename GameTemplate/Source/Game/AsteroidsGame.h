@@ -6,6 +6,7 @@ using namespace std;
 
 class Player;
 class Background;
+class Wall;
 class EnemyManager;
 class GameFlow;
 class GUI;
@@ -25,6 +26,7 @@ private:
 	CoinManager* CoinMgr = nullptr;
     ExplosionManager* ExplodeMgr = nullptr;
     Background* BG = nullptr;
+    Wall* WallImg = nullptr;
     EnemyManager* EnemyMgr = nullptr;
     GameFlow* GFlow = nullptr;
 	GUI* UI = nullptr;

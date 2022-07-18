@@ -12,6 +12,7 @@ public:
     bool DoesCollide(const BoxCollisionComponent* OtherCollisionComponent) const;
     void SetScale(float NewScale) { Scale = NewScale; }
     void SetCollisionSize(float Width, float Height){ BoxWidth = Width; BoxHeight = Height; }
+    void SetDrawDebug();
 protected:
     virtual void OnRender() override;
 
