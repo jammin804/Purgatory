@@ -26,7 +26,8 @@ class EnemyManager : public GameObject
         Enemy* CreateEnemy(const int MAX_ENEMY_HEALTH = 2); //Changed Splits Left to Max Enemy Health
 private:
         vector<Enemy*> Enemies;
-		int NumberOfEnemiesToSpawn = 20;
+        int NumberOfEnemiesToSpawn = 20;
+		//int NumberOfEnemiesToSpawn = 300;
 		int NumberOfEnemiesInASpace = 1;
 		const Player* Player1 = nullptr;
 };

@@ -38,6 +38,8 @@ protected:
 
 private:
 
+    GameObject* GetOwnerPrivate() { return Owner; }
+
     void Init();
     void Update(float DeltaTime);
     void Shutdown();
