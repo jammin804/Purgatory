@@ -27,10 +27,6 @@ protected:
     virtual void OnInit() override;
     virtual void OnPostInit() override;
 
-	
-
-	virtual void OnShutdown() override;
-
 public:
 	const ShopItem* GetShopItems() const { return ShopItems; }
 	void UpgradeWeaponLevel(const ShopItem& WeaponUpgrade);

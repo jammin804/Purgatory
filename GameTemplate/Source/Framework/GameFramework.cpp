@@ -113,6 +113,7 @@ bool GameFramework::InitInternal()
         return false;
     }
 
+    BmpManager.Init();
     FntManager.Init();
 
     GameObjects.reserve(512);
@@ -169,6 +170,29 @@ void GameFramework::RegisterInputComponent(InputComponent* NewInputComponent)
     }
 }
 
+int GameFramework::RegisterCollisionComponent(BoxCollisionComponent* NewCollisionComponent)
+{
+    if (Instance && NewCollisionComponent)
+    {
+        Instance->CollisionComponents.push_back(NewCollisionComponent);
+        return static_cast<int>(Instance->CollisionComponents.size()) - 1;
+    }
+    return -1;
+}
+
+void GameFramework::UnregisterCollisionComponent(int Index)
+{
+    if (Instance)
+    {
+        auto iter = Instance->CollisionComponents.begin() + Index;
+        iter = Instance->CollisionComponents.erase(iter);
+        for (; iter != Instance->CollisionComponents.end(); ++iter)
+        {
+            (*iter)->CollisionIndex = Index++;
+        }
+    }
+}
+
 bool GameFramework::Update()
 {
     return Instance->UpdateInternal();
@@ -222,29 +246,34 @@ bool GameFramework::UpdateInternal()
                 }
 
                 if (GO->IsEnabled())
-                {
-                    if(GameComponent * Component = GO->GetComponent(ComponentType::BoxCollisionComponent))
-                    {
-                        BoxCollisionComponent* BoxCollision = static_cast<BoxCollisionComponent*>(Component);
-						for (auto OtherGOIter = GameObjects.begin(); OtherGOIter != GameObjects.end(); ++OtherGOIter)
-						{
-							GameObject* OtherGO = (*OtherGOIter);
-							if (OtherGO->IsEnabled())
-							{
-                                if (GameComponent* OtherComponent = OtherGO->GetComponent(ComponentType::BoxCollisionComponent))
-                                {
-                                    BoxCollisionComponent* OtherBoxCollision = static_cast<BoxCollisionComponent*>(OtherComponent);
-                                    if (BoxCollision->DoesCollide(OtherBoxCollision))
-                                    {
-                                        GO->OnCollision(OtherGO);
-                                        OtherGO->OnCollision(GO);
-                                    }
-                                }
-							}
-						}
-                    }
-                   
+                {                   
                     (GO)->Update(DeltaTime);
+                }
+            }
+
+            for (auto CollisionIter = CollisionComponents.begin(); CollisionIter != CollisionComponents.end(); ++CollisionIter)
+            {
+                BoxCollisionComponent* BoxCollision = *CollisionIter;
+                GameObject* Owner = BoxCollision->GetOwnerPrivate();
+                if (!Owner->IsEnabled())
+                {
+                    continue;
+                }
+
+                for (auto OtherCollisionIter = CollisionIter + 1; OtherCollisionIter != CollisionComponents.end(); ++OtherCollisionIter)
+                {
+                    BoxCollisionComponent* OtherBoxCollision = *OtherCollisionIter;
+                    GameObject* OtherOwner = OtherBoxCollision->GetOwnerPrivate();
+                    if (!OtherOwner->IsEnabled())
+                    {
+                        continue;
+                    }
+
+                    if (BoxCollision->DoesCollide(OtherBoxCollision))
+                    {
+                        Owner->OnCollision(OtherOwner);
+                        OtherOwner->OnCollision(Owner);
+                    }
                 }
             }
 
@@ -286,7 +315,7 @@ bool GameFramework::UpdateInternal()
         al_clear_to_color(al_map_rgb(0, 0, 0));
 
         vector<GameObject*> GameObjectsToRender;
-        GameObjectsToRender.reserve(32);
+        GameObjectsToRender.reserve(GameObjects.size());
 
         for (GameObject* GO : GameObjects)
         {
@@ -320,6 +349,7 @@ bool GameFramework::UpdateInternal()
 
 void GameFramework::ShutdownInternal()
 {
+    BmpManager.Shutdown();
     FntManager.Shutdown();
 
     for (GameObject* GO : GameObjects)
@@ -330,6 +360,11 @@ void GameFramework::ShutdownInternal()
 
 void GameFramework::Shutdown()
 {
+    if (Instance)
+    {
+        Instance->ShutdownInternal();
+    }
+
     delete Instance;
     Instance = nullptr;
 }

@@ -6,7 +6,27 @@
 BoxCollisionComponent::BoxCollisionComponent(GameObject* Owner)
     : GameComponent(Owner, ComponentType::BoxCollisionComponent)
 {
+    CollisionIndex = GameFramework::RegisterCollisionComponent(this);
+}
 
+void BoxCollisionComponent::OnShutdown()
+{
+    if (CollisionIndex != -1)
+    {
+        GameFramework::UnregisterCollisionComponent(CollisionIndex);
+    }
+}
+
+void BoxCollisionComponent::OnUpdate(float deltaTime)
+{
+    float CenterX = GetOwner()->GetWorldPositionX() + GetOffsetX();
+    float CenterY = GetOwner()->GetWorldPositionY() + GetOffsetY();
+    float HalfBoxWidth = BoxWidth * 0.5f;
+    float HalfBoxHeight = BoxHeight * 0.5f;
+    CurrentBox[0] = CenterX - (HalfBoxWidth * Scale);
+    CurrentBox[1] = CenterY - (HalfBoxHeight * Scale);
+    CurrentBox[2] = BoxWidth * Scale;
+    CurrentBox[3] = BoxHeight * Scale;
 }
 
 bool BoxCollisionComponent::DoesCollide(const BoxCollisionComponent* OtherCollisionComponent) const
@@ -24,48 +44,12 @@ bool BoxCollisionComponent::DoesCollide(const BoxCollisionComponent* OtherCollis
         Height
     };
 
-    float Box1[4];
-    {
-        float CenterX = GetOwner()->GetWorldPositionX() + GetOffsetX();
-        float CenterY = GetOwner()->GetWorldPositionY() + GetOffsetY();
-        float HalfBoxWidth = BoxWidth * 0.5f;
-        float HalfBoxHeight = BoxHeight * 0.5f;
-        float BoxLocal[] = { CenterX - (HalfBoxWidth * Scale),
-        CenterY - (HalfBoxHeight * Scale),
-        BoxWidth * Scale,
-        BoxHeight * Scale};
-        for (int i = 0; i < 4; ++i)
-        {
-            Box1[i] = BoxLocal[i];
-        }
-    }
-    float Box2[4];
-    {
-        float CenterX = OtherCollisionComponent->GetOwner()->GetWorldPositionX() + GetOffsetX();
-        float CenterY = OtherCollisionComponent->GetOwner()->GetWorldPositionY() + GetOffsetY();
-        float HalfBoxWidth = OtherCollisionComponent->BoxWidth * 0.5f;
-        float HalfBoxHeight = OtherCollisionComponent->BoxHeight * 0.5f;
-        float BoxLocal[] = { CenterX - (HalfBoxWidth * OtherCollisionComponent->Scale),
-        CenterY - (HalfBoxHeight * OtherCollisionComponent->Scale),
-        OtherCollisionComponent->BoxWidth * OtherCollisionComponent->Scale,
-        OtherCollisionComponent->BoxHeight * OtherCollisionComponent->Scale };
-        for (int i = 0; i < 4; ++i)
-        {
-            Box2[i] = BoxLocal[i];
-        }
-    }
+    const float* OtherBox = OtherCollisionComponent->CurrentBox;
 
-    /*
-    if (1.position.left < 2.position.left + 2.position.width &&
-      1.position.left + 1.position.width > 2.position.left &&
-      1.position.top < 2.position.top + 2.position.height &&
-      1.position.height + 1.position.top > 2.position.top)
-    */
-
-    if ((Box1[Left] < Box2[Left] + Box2[Width]) &&
-        (Box1[Left] + Box1[Width] > Box2[Left]) &&
-        (Box1[Top] < Box2[Top] + Box2[Height]) &&
-        (Box1[Height] + Box1[Top] > Box2[Top])) 
+    if ((CurrentBox[Left] < OtherBox[Left] + OtherBox[Width]) &&
+        (CurrentBox[Left] + CurrentBox[Width] > OtherBox[Left]) &&
+        (CurrentBox[Top] < OtherBox[Top] + OtherBox[Height]) &&
+        (CurrentBox[Height] + CurrentBox[Top] > OtherBox[Top]))
     {
         return true;
     }

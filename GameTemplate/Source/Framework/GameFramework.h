@@ -11,12 +11,14 @@ using namespace std;
 
 class GameObject;
 class InputComponent;
+class BoxCollisionComponent;
 
 class GameFramework
 {
     friend class GameObject;
     friend class GameComponent;
     friend class InputComponent;
+    friend class BoxCollisionComponent;
 
 protected:
     GameFramework();
@@ -46,6 +48,8 @@ public:
 private:
     static void RegisterGameObject(GameObject* NewGameObject);
     static void RegisterInputComponent(InputComponent* NewInputComponent);
+    static int RegisterCollisionComponent(BoxCollisionComponent* NewCollisionComponent);
+    static void UnregisterCollisionComponent(int Index);
 
     template<typename T, class C>
     static T* CreateObjectOneArg(C* OneArgument);
@@ -64,6 +68,7 @@ private:
 
     vector<GameObject*> GameObjects;
     vector<InputComponent*> InputComponents;
+    vector<BoxCollisionComponent*> CollisionComponents;
 
     static GameFramework* Instance;
 
