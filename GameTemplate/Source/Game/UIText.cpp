@@ -46,42 +46,6 @@ void UIText::OnPostInit()
 	BottomCenterText->SetFont("Fonts/Boxy-Bold.ttf", FontSize);
 }
 
-void UIText::OnShutdown()
-{
-    delete TopLeftText;
-    TopLeftText = nullptr;
-
-    delete TopCenterText;
-    TopCenterText = nullptr;
-
-    delete TopRightText;
-    TopRightText = nullptr;
-
-    delete MiddleTextLine1;
-    MiddleTextLine1 = nullptr;
-
-    delete MiddleTextLine2;
-    MiddleTextLine2 = nullptr;
-
-    delete MiddleTextLine3;
-    MiddleTextLine3 = nullptr;
-
-	delete MiddleTextLine4;
-	MiddleTextLine4 = nullptr;
-
-	delete MiddleTextLine5;
-	MiddleTextLine5 = nullptr;
-
-	delete MiddleTextLine6;
-	MiddleTextLine6 = nullptr;
-
-	delete MiddleTextLine7;
-	MiddleTextLine7 = nullptr;
-
-	delete BottomCenterText;
-	BottomCenterText = nullptr;
-}
-
 void UIText::SetWelcomeToTheGame()
 {
     TopLeftText->SetVisible(false);

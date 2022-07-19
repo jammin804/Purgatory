@@ -35,7 +35,7 @@ void ImageComponent::OnRender()
 
 void ImageComponent::LoadImage(string ImagePath)
 {
-    ImageBitmap = GameFramework::Get().GetBitmapManager().FindOrAddBitmap(ImagePath);;
+    ImageBitmap = GameFramework::Get().GetBitmapManager().FindOrAddBitmap(ImagePath);
     if (!ImageBitmap)
     {
         printf("Couldn't load Image\n");

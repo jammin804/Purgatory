@@ -120,12 +120,6 @@ void Shop::UpdateCoinShopText()
 	}
 }
 
-void Shop::OnShutdown()
-{
-    delete TitleText;
-    TitleText = nullptr;
-}
-
 void Shop::UpgradeWeaponLevel(const ShopItem& WeaponUpgrade)
 {
 	if (player)

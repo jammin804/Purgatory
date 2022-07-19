@@ -58,13 +58,13 @@ void GameObject::Render()
 
 void GameObject::Shutdown()
 {
+    OnShutdown();
     for (GameComponent* Component : GameComponents)
     {
         Component->Shutdown();
         DestroyComponent(Component);
     }
     GameComponents.clear();
-    OnShutdown();
 }
 
 GameComponent* GameObject::GetComponent(ComponentType Type)

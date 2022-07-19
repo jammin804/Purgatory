@@ -113,6 +113,7 @@ bool GameFramework::InitInternal()
         return false;
     }
 
+    BmpManager.Init();
     FntManager.Init();
 
     GameObjects.reserve(512);
@@ -320,6 +321,7 @@ bool GameFramework::UpdateInternal()
 
 void GameFramework::ShutdownInternal()
 {
+    BmpManager.Shutdown();
     FntManager.Shutdown();
 
     for (GameObject* GO : GameObjects)
@@ -330,6 +332,11 @@ void GameFramework::ShutdownInternal()
 
 void GameFramework::Shutdown()
 {
+    if (Instance)
+    {
+        Instance->ShutdownInternal();
+    }
+
     delete Instance;
     Instance = nullptr;
 }
