@@ -237,7 +237,8 @@ void Player::OnCollision(GameObject* Other)
 		}
 		else if (Other->GetType() == static_cast<int>(GOT_Wall))
 		{
-			SetPosition(PosX, PosY);
+			DesiredPostionX = PosX;
+			DesiredPostionY = PosY;
 		}
 	}
 

@@ -329,7 +329,7 @@ void Enemy::UpdatePatrolState(float Deltatime)
 	}
 
 
-	switch (EnemyDirection)
+	switch (EnemyDirection) /*Talk about on Sunday*/
 	{
 	case Right:
 	default:
@@ -488,10 +488,25 @@ void Enemy::UpdateMovement(float DesiredX, float DesiredY)
 {
 	if (const Background* BG = static_cast<const Background*>(GetParent()))
 	{
+		float PosX = BG->GetPositionX();
+		float PosY = BG->GetPositionY();
+
+
 		if (DesiredX > -BG->GetBackgroundWidth() * 0.5f && DesiredX < BG->GetBackgroundWidth()*0.5f &&
 			DesiredY > -BG->GetBackgroundHeight() * 0.5f && DesiredY < BG->GetBackgroundHeight()*0.5f)
 		{
 			SetPosition(DesiredX, DesiredY);
+		}
+
+		if (DesiredX > BG->GetBackgroundHeight() * 0.49f ||
+			DesiredY < -BG->GetBackgroundHeight() * 0.49f)
+		{
+			DesiredY = PosY;
+		}
+		if (DesiredX > BG->GetBackgroundWidth() * 0.5f ||
+			DesiredY < -BG->GetBackgroundWidth() * 0.5f)
+		{
+			DesiredX = PosX;
 		}
 
 	}
