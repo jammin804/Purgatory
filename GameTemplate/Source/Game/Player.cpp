@@ -11,6 +11,7 @@
 #include "Enemy.h"
 #include "../GameObjectTypes.h"
 #include "Framework/EventMessage.h"
+#include <iostream>
 
 void Player::OnInit()
 {
@@ -129,7 +130,6 @@ void Player::OnUpdate(float DeltaTime)
 	}
 
 
-
     
 
 	/*Is just key pressed for looking direction - code below*/
@@ -200,6 +200,15 @@ void Player::OnShutdown()
 void Player::OnCollision(GameObject* Other)
 {
 
+	float DirectionX = 0.0f;
+	float DirectionY = 0.0f;
+	float PosX = BG->GetPositionX();
+	float PosY = BG->GetPositionY();
+
+
+	float DesiredPostionX = PosX - DirectionX;
+	float DesiredPostionY = PosY - DirectionY;
+
 	if (!IsInvulnerable() && IsEnabled())
 	{
 		if (Other->GetType() == static_cast<int>(GOT_Enemy))
@@ -225,6 +234,10 @@ void Player::OnCollision(GameObject* Other)
 		else if (Other->GetType() == static_cast<int>(GOT_Coin))
 		{
 			CollectCoin();
+		}
+		else if (Other->GetType() == static_cast<int>(GOT_Wall))
+		{
+			SetPosition(PosX, PosY);
 		}
 	}
 

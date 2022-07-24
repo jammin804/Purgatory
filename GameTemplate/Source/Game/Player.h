@@ -12,6 +12,7 @@ class InputComponent;
 class SoundComponent;
 class Cross;
 class Background;
+class Wall;
 
 class Player : public GameObject
 {
@@ -58,6 +59,7 @@ private:
 	SoundComponent* CoinSoundComponentPickup = nullptr;
     BoxCollisionComponent* Collision = nullptr;
 	Background* BG = nullptr;
+	Wall* WallImg = nullptr;
 
     float PlayerVerticalMovementSpeed = 200.0f;
 	float PlayerHorizontalMovementSpeed = 200.0f;

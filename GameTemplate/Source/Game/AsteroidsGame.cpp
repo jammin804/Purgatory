@@ -22,7 +22,7 @@ void AsteroidsGame::OnInit()
 {
     GFlow = GameObject::CreateInstance<GameFlow>();
     BG = GameObject::CreateInstance<Background>();
-	//WallImg = GameObject::CreateInstance<Wall>();
+	WallImg = GameObject::CreateInstance<Wall>();
 	UI = GameObject::CreateInstance<GUI>();
     Player1 = GameObject::CreateInstance<Player>();
     EnemyMgr = GameObject::CreateInstance<EnemyManager>();
@@ -37,7 +37,7 @@ void AsteroidsGame::OnPostInit()
     {
         BG->SetImage("Art/background_with_tiles.png");
         BG->SetMusic("Audio/Horror.mp3");
-		//BG->SetWallVImage("Art/backgroundWall_V.png");
+		
     }
 
     if (Player1)
