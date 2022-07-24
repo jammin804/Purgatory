@@ -13,6 +13,8 @@
 #include "Framework/EventMessage.h"
 #include <iostream>
 
+const float Player::BASE_MOVEMENT_SPEED = 400.0f;
+
 void Player::OnInit()
 {
 	SetType(GOT_Player);
@@ -39,53 +41,79 @@ void Player::OnPostInit()
 void Player::OnUpdate(float DeltaTime)
 {
 
+	UpdateRespawn(DeltaTime);
 
-	if (bInvulnerable)
+	UpdateMovement(DeltaTime);
+
+	UpdateWeapon();
+
+	UpdateSprite();
+
+}
+
+void Player::UpdateWeapon()
+{
+	if (!bInvulnerable && InputComp->IsKeyPressed(ALLEGRO_KEY_SPACE))
 	{
-		PlayerAvatarImageComponent->SetVisible(!PlayerAvatarImageComponent->IsVisible());
-		RespawnTimer += DeltaTime;
-		if (RespawnTimer > RespawningTime)
+		if (bCanMakeLaser)
 		{
-			bInvulnerable = false;
-			PlayerAvatarImageComponent->SetVisible(true);
+
+
+			if (WeaponLevel == 0)
+			{
+				ShootBase();
+			}
+			else if (WeaponLevel == 1)
+			{
+				ShootSpread();
+			}
+			else
+			{
+				ShootOrbital();
+			}
+
+
+			bCanMakeLaser = false;
+
+
 		}
 	}
 
-	//Checks if health was upgraded
-	if (HealthLevel == 0)
+	if (InputComp->IsKeyReleased(ALLEGRO_KEY_SPACE))
 	{
-		MAX_LIFE = MAX_LIFE;
+		bCanMakeLaser = true;
 	}
-	else if (HealthLevel == 1)
-	{
-		MAX_LIFE = MAX_LIFE + 5;
-	}
-	else
-	{
-		MAX_LIFE = MAX_LIFE + 10;
-	}
+}
 
+void Player::UpdateSprite()
+{
+	//Update Sprite
+
+	if (LookingDirectionY > 0)
+	{
+		PlayerAvatarImageComponent->LoadImage("Art/Player_P_Back.png");
+	}
+	if (LookingDirectionY < 0)
+	{
+		PlayerAvatarImageComponent->LoadImage("Art/Player_P.png");
+	}
+	if (LookingDirectionX > 0)
+	{
+		PlayerAvatarImageComponent->LoadImage("Art/Player_P_Side.png");
+		PlayerAvatarImageComponent->SetScaleX(-1.0f);
+	}
+	if (LookingDirectionX < 0)
+	{
+		PlayerAvatarImageComponent->LoadImage("Art/Player_P_Side.png");
+		PlayerAvatarImageComponent->SetScaleX(1.0f);
+	}
+}
+
+void Player::UpdateMovement(float DeltaTime)
+{
 
 	float DirectionX = 0.0f;
 	float DirectionY = 0.0f;
-	float PosX = BG->GetPositionX();
-	float PosY = BG->GetPositionY();
-
-	if (SpeedLevel == 0)
-	{
-		PlayerVerticalMovementSpeed = 200;
-		PlayerHorizontalMovementSpeed = 200;
-	}
-	else if (SpeedLevel == 1)
-	{
-		PlayerVerticalMovementSpeed = 200 * 1.5f;
-		PlayerHorizontalMovementSpeed = 200 * 1.5f;
-	}
-	else
-	{
-		PlayerVerticalMovementSpeed = 200 * 2.0f;
-		PlayerHorizontalMovementSpeed = 200 * 2.0f;
-	}
 
 	//Add a while loop to check to see if the player + 32 px is near the edge of the world.		
 	if (InputComp->IsKeyPressed(ALLEGRO_KEY_UP) || InputComp->IsKeyPressed(ALLEGRO_KEY_W))
@@ -115,80 +143,45 @@ void Player::OnUpdate(float DeltaTime)
 		LookingDirectionX = 1;
 		LookingDirectionY = 0;
 	}
-	float DesiredPostionX = PosX - DirectionX;
-	float DesiredPostionY = PosY - DirectionY;
+	float DesiredPostionX = PreviousPosX - DirectionX;
+	float DesiredPostionY = PreviousPosY - DirectionY;
 
-	if (DesiredPostionY > BG->GetBackgroundHeight()*0.49f ||
-		DesiredPostionY < -BG->GetBackgroundHeight()*0.49f)
+	if (DesiredPostionY > BG->GetBackgroundHeight() * 0.49f ||
+		DesiredPostionY < -BG->GetBackgroundHeight() * 0.49f)
 	{
-		DesiredPostionY = PosY;
+		DesiredPostionY = PreviousPosY;
 	}
-	if (DesiredPostionX > BG->GetBackgroundWidth()*0.5f ||
-		DesiredPostionX < -BG->GetBackgroundWidth()*0.5f)
+	if (DesiredPostionX > BG->GetBackgroundWidth() * 0.5f ||
+		DesiredPostionX < -BG->GetBackgroundWidth() * 0.5f)
 	{
-		DesiredPostionX = PosX;
+		DesiredPostionX = PreviousPosX;
 	}
 
 
-    
+
 
 	/*Is just key pressed for looking direction - code below*/
-	
+
 	if (BG)
 	{
+		PreviousPosX = BG->GetPositionX();
+		PreviousPosY = BG->GetPositionY();
+
 		BG->SetPosition(DesiredPostionX, DesiredPostionY);
 	}
-	//Update Sprite
-	
-	if (LookingDirectionY > 0)
-	{
-		PlayerAvatarImageComponent->LoadImage("Art/Player_P_Back.png");
-	}
-	if (LookingDirectionY < 0)
-	{
-		PlayerAvatarImageComponent->LoadImage("Art/Player_P.png");
-	}
-	if (LookingDirectionX > 0)
-	{
-		PlayerAvatarImageComponent->LoadImage("Art/Player_P_Side.png");
-		PlayerAvatarImageComponent->SetScaleX(-1.0f);
-	}
-	if (LookingDirectionX < 0)
-	{
-		PlayerAvatarImageComponent->LoadImage("Art/Player_P_Side.png");
-		PlayerAvatarImageComponent->SetScaleX(1.0f);
-	}
+}
 
-
-	if (!bInvulnerable && InputComp->IsKeyPressed(ALLEGRO_KEY_SPACE))
+void Player::UpdateRespawn(float DeltaTime)
+{
+	if (bInvulnerable)
 	{
-		if (bCanMakeLaser)
+		PlayerAvatarImageComponent->SetVisible(!PlayerAvatarImageComponent->IsVisible());
+		RespawnTimer += DeltaTime;
+		if (RespawnTimer > RespawningTime)
 		{
-			
-			
-  			if (WeaponLevel == 0)
-			{
-				ShootBase();
-			} 
-			else if(WeaponLevel == 1)
-			{
-				ShootSpread();
-			}
-			else
-			{
-				ShootOrbital();
-			}
-
-
-			bCanMakeLaser = false;
-
-
+			bInvulnerable = false;
+			PlayerAvatarImageComponent->SetVisible(true);
 		}
-	}
-
-	if (InputComp->IsKeyReleased(ALLEGRO_KEY_SPACE))
-	{
-		bCanMakeLaser = true;
 	}
 }
 
@@ -199,15 +192,6 @@ void Player::OnShutdown()
 
 void Player::OnCollision(GameObject* Other)
 {
-
-	float DirectionX = 0.0f;
-	float DirectionY = 0.0f;
-	float PosX = BG->GetPositionX();
-	float PosY = BG->GetPositionY();
-
-
-	float DesiredPostionX = PosX - DirectionX;
-	float DesiredPostionY = PosY - DirectionY;
 
 	if (!IsInvulnerable() && IsEnabled())
 	{
@@ -234,11 +218,6 @@ void Player::OnCollision(GameObject* Other)
 		else if (Other->GetType() == static_cast<int>(GOT_Coin))
 		{
 			CollectCoin();
-		}
-		else if (Other->GetType() == static_cast<int>(GOT_Wall))
-		{
-			DesiredPostionX = PosX;
-			DesiredPostionY = PosY;
 		}
 	}
 
@@ -299,9 +278,43 @@ void Player::ShootBase()
 
 void Player::OnRestart()
 {
-	SetPosition(638.0f, 360.0f);
-	SetLivesLeft(MAX_LIFE);
+
+	//Checks if health was upgraded
+	if (HealthLevel == 0)
+	{
+		MaxLife = BASE_LIFE;
+	}
+	else if (HealthLevel == 1)
+	{
+		MaxLife = BASE_LIFE + 5;
+	}
+	else
+	{
+		MaxLife = BASE_LIFE + 10;
+	}
+
+	SetLivesLeft(MaxLife);
+	
 	BG->SetPosition(0.0f, 0.0f);
+
+
+	if (SpeedLevel == 0)
+	{
+		PlayerVerticalMovementSpeed = BASE_MOVEMENT_SPEED;
+		PlayerHorizontalMovementSpeed = BASE_MOVEMENT_SPEED;
+	}
+	else if (SpeedLevel == 1)
+	{
+		PlayerVerticalMovementSpeed = BASE_MOVEMENT_SPEED * 1.5f;
+		PlayerHorizontalMovementSpeed = BASE_MOVEMENT_SPEED * 1.5f;
+	}
+	else
+	{
+		PlayerVerticalMovementSpeed = BASE_MOVEMENT_SPEED * 2.0f;
+		PlayerHorizontalMovementSpeed = BASE_MOVEMENT_SPEED * 2.0f;
+	}
+
+
 }
 
 void Player::SetAvatarImage(string ImagePath)
@@ -363,5 +376,13 @@ void Player::CollectCoin()
 	if (CoinSoundComponentPickup)
 	{
 		CoinSoundComponentPickup->Play();
+	}
+}
+
+void Player::RewindPosition()
+{
+	if (BG)
+	{
+		BG->SetPosition(PreviousPosX, PreviousPosY);
 	}
 }

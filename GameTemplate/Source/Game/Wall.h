@@ -4,6 +4,8 @@
 #include "Framework/SoundComponent.h"
 
 class BoxCollisionComponent;
+class Player;
+class Enemy;
 
 class Wall : public GameObject
 {

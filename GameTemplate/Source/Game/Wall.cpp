@@ -2,6 +2,7 @@
 #include "Framework/ImageComponent.h"
 #include "Framework/BoxCollisionComponent.h"
 #include "../GameObjectTypes.h"
+#include "Player.h"
 
 
 void Wall::OnInit()
@@ -9,6 +10,7 @@ void Wall::OnInit()
 	SetType(GOT_Wall);
 	WallImage = GameComponent::CreateInstance<ImageComponent>(this);
 	Collision = GameComponent::CreateInstance<BoxCollisionComponent>(this);
+
 }
 
 void Wall::OnPostInit()
@@ -31,5 +33,9 @@ void Wall::OnPostInit()
 
 void Wall::OnCollision(GameObject* Other)
 {
-	
+	if (Other->GetType() == GOT_Player)
+	{
+		Player* player = static_cast<Player*>(Other);
+		player->RewindPosition();
+	}
 }

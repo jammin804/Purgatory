@@ -32,7 +32,7 @@ public:
     const vector<Cross*>& GetCross() const { return Crosses; }
     const BoxCollisionComponent* GetCollision() const { return Collision; }
     int GetLivesLeft() const { return HealthLeft; }
-	int GetMaxLivesLeft() const { return MAX_LIFE; }
+	int GetMaxLivesLeft() const { return MaxLife; }
 	int GetFearLeft() const { return FearLeft; }
 	int GetMaxFearLeft() const { return MAX_FEAR; }
 	bool IsInvulnerable() const;
@@ -43,6 +43,7 @@ public:
 	void UpgradeSpeedLevel() { SpeedLevel = SpeedLevel < 2 ? SpeedLevel + 1 : SpeedLevel; }
 	void UpdgradeHealthLevel() { HealthLevel = HealthLevel < 2 ? HealthLevel + 1 : HealthLevel; }
 	void SpendCoins(int NumberOfCoinsToSpend) { NumberOfCoins -= NumberOfCoinsToSpend; }
+	void RewindPosition();
 	int WeaponLevel = 0;
 	int SpeedLevel = 0;
 	int HealthLevel = 0;
@@ -53,6 +54,10 @@ private:
 	void ShootSpread();
 	void ShootOrbital();
 	void ShootBase();
+	void UpdateWeapon();
+	void UpdateSprite();
+	void UpdateMovement(float DeltaTime);
+	void UpdateRespawn(float DeltaTime);
 	ImageComponent* PlayerAvatarImageComponent = nullptr;
     ImageComponent* PlayerAvatarThrustersImageComponent = nullptr;
     InputComponent* InputComp = nullptr;
@@ -61,13 +66,15 @@ private:
 	Background* BG = nullptr;
 	Wall* WallImg = nullptr;
 
-    float PlayerVerticalMovementSpeed = 200.0f;
-	float PlayerHorizontalMovementSpeed = 200.0f;
+	static const float BASE_MOVEMENT_SPEED;
+    float PlayerVerticalMovementSpeed = BASE_MOVEMENT_SPEED;
+	float PlayerHorizontalMovementSpeed = BASE_MOVEMENT_SPEED;
     float RotationSpeed = 2.0f;
     bool bCanMakeLaser = true;
     vector<Cross*> Crosses;
-	int MAX_LIFE = 5;
-    int HealthLeft = MAX_LIFE;
+	static const int BASE_LIFE = 5;
+	int MaxLife = BASE_LIFE;
+    int HealthLeft = MaxLife;
 	const int MAX_FEAR = 120;
 	int FearLeft = MAX_FEAR;
     bool bInvulnerable = false;
@@ -79,6 +86,9 @@ private:
 	int LookingDirectionY = -1;
 
 	int NumberOfCoins = 0;
+
+	float PreviousPosX = 0.0f;
+	float PreviousPosY = 0.0f;
 
 };
 
