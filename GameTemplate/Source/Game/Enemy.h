@@ -67,12 +67,16 @@ public:
 	void SetPlayer(const Player* NewPlayer) { Player1 = NewPlayer; }
 	void ChangeDirection();
 	EState GetState() const;
+	//TODO: Create Rewind function for enemy class
+	void RewindPostion();
+
 
 private:
 	
     float RotationSpeed = 1.0f;
     class ImageComponent* EnemyImage = nullptr;
     BoxCollisionComponent* Collision = nullptr;
+
 	class ImageComponent* EnemyHealthLayer = nullptr;
 	class ImageComponent* EnemyHealth = nullptr;
     float LifeTimer = 0.0f;
@@ -96,6 +100,9 @@ private:
 	const Player* Player1 = nullptr;
 	float CollisionScaleX = 150.0f;
 	float CollisionScaleY = 150.0f;
+	float PreviousPosX = 0.0f;
+	float PreviousPosY = 0.0f;
+
 private:
 	void SetEnemyLifePercentage(float EnemyPercentageLife);
 	void ChangeState(EState NewState);

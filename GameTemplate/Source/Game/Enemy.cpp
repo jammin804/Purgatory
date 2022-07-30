@@ -127,7 +127,6 @@ void Enemy::OnUpdate(float DeltaTime)
 void Enemy::OnRestart()
 {
 	SetEnabled(false);
-	//RequestDestroy();
 }
 
 void Enemy::OnCollision(GameObject* Other)
@@ -375,6 +374,12 @@ EState Enemy::GetState() const
 	return CurrentState;
 }
 
+void Enemy::RewindPostion()
+{
+	SetPosition(PreviousPosX, PreviousPosY);
+
+}
+
 void Enemy::ExitPatrolState()
 {
 	bNeedsSwitch = !bNeedsSwitch;
@@ -486,10 +491,10 @@ void Enemy::ExitFleeState()
 
 void Enemy::UpdateMovement(float DesiredX, float DesiredY)
 {
-	if (const Background* BG = static_cast<const Background*>(GetParent()))
+	if (const Background* BG = static_cast<const Background*>(GetParent())) //TODO: Ask Nick about this const Background* BG = static_cast<const Background*>(GetParent()) because this shows that the enmey is using BG Set position
 	{
-		float PosX = BG->GetPositionX();
-		float PosY = BG->GetPositionY();
+		PreviousPosX = BG->GetPositionX();
+		PreviousPosY = BG->GetPositionY();
 
 
 		if (DesiredX > -BG->GetBackgroundWidth() * 0.5f && DesiredX < BG->GetBackgroundWidth()*0.5f &&
@@ -497,16 +502,16 @@ void Enemy::UpdateMovement(float DesiredX, float DesiredY)
 		{
 			SetPosition(DesiredX, DesiredY);
 		}
-
+		//TODO: Ask Nick if this should be changed to keep the enemies in the world
 		if (DesiredX > BG->GetBackgroundHeight() * 0.49f ||
 			DesiredY < -BG->GetBackgroundHeight() * 0.49f)
 		{
-			DesiredY = PosY;
+			DesiredY = PreviousPosY;
 		}
 		if (DesiredX > BG->GetBackgroundWidth() * 0.5f ||
 			DesiredY < -BG->GetBackgroundWidth() * 0.5f)
 		{
-			DesiredX = PosX;
+			DesiredX = PreviousPosX;
 		}
 
 	}

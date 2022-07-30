@@ -3,6 +3,7 @@
 #include "Framework/BoxCollisionComponent.h"
 #include "../GameObjectTypes.h"
 #include "Player.h"
+#include "Enemy.h"
 
 
 void Wall::OnInit()
@@ -37,5 +38,10 @@ void Wall::OnCollision(GameObject* Other)
 	{
 		Player* player = static_cast<Player*>(Other);
 		player->RewindPosition();
+	}
+	else if (Other->GetType() == GOT_Enemy)
+	{
+		Enemy* enemy = static_cast<Enemy*>(Other);
+		enemy->RewindPostion(); //Disappears?
 	}
 }

@@ -383,6 +383,7 @@ void Player::RewindPosition()
 {
 	if (BG)
 	{
+		//TODO: Fix player from sticking to the wall
 		BG->SetPosition(PreviousPosX, PreviousPosY);
 	}
 }
