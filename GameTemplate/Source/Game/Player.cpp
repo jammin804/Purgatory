@@ -115,6 +115,7 @@ void Player::UpdateMovement(float DeltaTime)
 	float DirectionX = 0.0f;
 	float DirectionY = 0.0f;
 
+
 	//Add a while loop to check to see if the player + 32 px is near the edge of the world.		
 	if (InputComp->IsKeyPressed(ALLEGRO_KEY_UP) || InputComp->IsKeyPressed(ALLEGRO_KEY_W))
 	{
@@ -143,31 +144,16 @@ void Player::UpdateMovement(float DeltaTime)
 		LookingDirectionX = 1;
 		LookingDirectionY = 0;
 	}
-	float DesiredPostionX = PreviousPosX - DirectionX;
-	float DesiredPostionY = PreviousPosY - DirectionY;
-
-	if (DesiredPostionY > BG->GetBackgroundHeight() * 0.49f ||
-		DesiredPostionY < -BG->GetBackgroundHeight() * 0.49f)
-	{
-		DesiredPostionY = PreviousPosY;
-	}
-	if (DesiredPostionX > BG->GetBackgroundWidth() * 0.5f ||
-		DesiredPostionX < -BG->GetBackgroundWidth() * 0.5f)
-	{
-		DesiredPostionX = PreviousPosX;
-	}
-
-
-
-
-	/*Is just key pressed for looking direction - code below*/
 
 	if (BG)
 	{
 		PreviousPosX = BG->GetPositionX();
 		PreviousPosY = BG->GetPositionY();
 
-		BG->SetPosition(DesiredPostionX, DesiredPostionY);
+		float NewPosX = PreviousPosX - DirectionX;
+		float NewPosY = PreviousPosY - DirectionY;
+
+		BG->SetPosition(NewPosX, NewPosY);
 	}
 }
 
@@ -383,7 +369,6 @@ void Player::RewindPosition()
 {
 	if (BG)
 	{
-		//TODO: Fix player from sticking to the wall
 		BG->SetPosition(PreviousPosX, PreviousPosY);
 	}
 }

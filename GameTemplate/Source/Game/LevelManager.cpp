@@ -2,6 +2,7 @@
 #include "Framework/EventMessage.h"
 #include "GameEvent.h"
 #include "Framework/EventManager.h"
+#include "Wall.h"
 
 
 
@@ -44,19 +45,39 @@ void LevelManager::OnPostInit()
 			if (ColumnData == true)
 			{
 				EventMessage Evt(GameEvent::EnemyHurt);
-				EventPayload WorldPosX, WorldPosY, Scale;
+				//EventPayload WorldPosX, WorldPosY, Scale;
 
+				float WorldPosX, WorldPosY, Scale;
 
-				WorldPosX.SetAsFloat(i*15);
-				WorldPosY.SetAsFloat(j*15);
-				Scale.SetAsFloat(1);
+				//TODO: Build the wall. Parent it to the level manager add it to a vector in the level manager of wall pointers
+				//TODO: Set world position multiple by a scale
 
-				Evt.payload.push_back(WorldPosX);
+				WorldPosX = i*15;
+				WorldPosY = j*15;
+				Scale = 1;
+
+				CreateWall(WorldPosX, WorldPosY);
+
+				/*Evt.payload.push_back(WorldPosX);
 				Evt.payload.push_back(WorldPosY);
 				Evt.payload.push_back(Scale);
-				//EventManager::BroadcastEvent(Evt);
+				EventManager::BroadcastEvent(Evt);*/
 			}
 			
 		}
 	}
+}
+
+Wall* LevelManager::CreateWall(float posX, float posY)
+{
+	if (Walls.size() < MaxWalls)
+	{
+		Wall* NewWall = GameObject::CreateInstance<Wall>();
+		NewWall->SetParent(GetParent());
+		Walls.push_back(NewWall);
+		NewWall->SetWorldPosition(posX, posY);
+		return NewWall;
+	}
+
+	return nullptr;
 }

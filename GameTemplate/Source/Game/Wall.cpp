@@ -27,7 +27,6 @@ void Wall::OnPostInit()
 
 	if (Collision)
 	{
-		Collision->SetDrawDebug();
 		Collision->SetCollisionSize(CollisionScaleX, CollisionScaleY);
 	}
 }

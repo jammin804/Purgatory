@@ -2,6 +2,8 @@
 
 #include "Framework/GameObject.h"
 
+class Wall;
+
 using namespace std;
 
 class LevelManager : public GameObject
@@ -16,8 +18,12 @@ protected:
 // 	virtual void SetEnabled(bool bEnabled) override;
 
 public:
+	Wall* CreateWall(float posX, float posY); //Changed Splits Left to Max Enemy Health
 
+	vector<Wall*>& GetCoins() { return Walls; }
 private:
 	SBitmapCache* LevelData;
 	vector<vector <bool>> SpawnPositions;
+	vector<Wall*> Walls;
+	int MaxWalls = 100;
 };

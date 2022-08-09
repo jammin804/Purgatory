@@ -22,13 +22,13 @@ void AsteroidsGame::OnInit()
 {
     GFlow = GameObject::CreateInstance<GameFlow>();
     BG = GameObject::CreateInstance<Background>();
-	WallImg = GameObject::CreateInstance<Wall>();
-	UI = GameObject::CreateInstance<GUI>();
-    Player1 = GameObject::CreateInstance<Player>();
+	Player1 = GameObject::CreateInstance<Player>();
+	LevelMgr = GameObject::CreateInstance<LevelManager>();
     EnemyMgr = GameObject::CreateInstance<EnemyManager>();
 	CoinMgr = GameObject::CreateInstance<CoinManager>();
 	ExplodeMgr = GameObject::CreateInstance<ExplosionManager>();
-	LevelMgr = GameObject::CreateInstance<LevelManager>();
+	WallImg = GameObject::CreateInstance<Wall>();
+	UI = GameObject::CreateInstance<GUI>();
 }
 
 void AsteroidsGame::OnPostInit()

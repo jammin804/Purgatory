@@ -67,7 +67,6 @@ public:
 	void SetPlayer(const Player* NewPlayer) { Player1 = NewPlayer; }
 	void ChangeDirection();
 	EState GetState() const;
-	//TODO: Create Rewind function for enemy class
 	void RewindPostion();
 
 
