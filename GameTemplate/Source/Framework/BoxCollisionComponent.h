@@ -22,7 +22,7 @@ private:
     float BoxWidth = 50.0f;
     float BoxHeight = 50.0f;
     float Scale = 1.0f;
-    bool bDrawDebug = false;
+    bool bDrawDebug = true;
     int CollisionIndex = -1;
     float CurrentBox[4];
 };

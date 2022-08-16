@@ -18,7 +18,7 @@ protected:
 // 	virtual void SetEnabled(bool bEnabled) override;
 
 public:
-	Wall* CreateWall(float posX, float posY); //Changed Splits Left to Max Enemy Health
+	Wall* CreateWall(float posX, float posY, int Width, int Height); 
 
 	vector<Wall*>& GetCoins() { return Walls; }
 private:

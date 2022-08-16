@@ -9,25 +9,33 @@
 void Wall::OnInit()
 {
 	SetType(GOT_Wall);
-	WallImage = GameComponent::CreateInstance<ImageComponent>(this);
-	Collision = GameComponent::CreateInstance<BoxCollisionComponent>(this);
+	ImageCpt = GameComponent::CreateInstance<ImageComponent>(this);
+	CollisionCpt = GameComponent::CreateInstance<BoxCollisionComponent>(this);
 
 }
 
 void Wall::OnPostInit()
 {
-	float CollisionScaleX = 20.0f;
-	float CollisionScaleY = 20.0f;
+	float CollisionScaleX = 0.0f;
+	float CollisionScaleY = 0.0f;
 
-	if (WallImage)
+	if (ImageCpt)
 	{
-		WallImage->LoadImage("Art/Coins.png");
+		ImageCpt->LoadImage("Art/Column.png");
+
+		CollisionScaleX = ImageCpt->GetImageWidth();
+		CollisionScaleY = ImageCpt->GetImageHeight();
+
+		ImageCpt->SetTilingU(Width);
+		ImageCpt->SetTilingV(Height);
 
 	}
 
-	if (Collision)
+
+
+	if (CollisionCpt)
 	{
-		Collision->SetCollisionSize(CollisionScaleX, CollisionScaleY);
+		CollisionCpt->SetCollisionSize(CollisionScaleX, CollisionScaleY);
 	}
 }
 
@@ -41,6 +49,6 @@ void Wall::OnCollision(GameObject* Other)
 	else if (Other->GetType() == GOT_Enemy)
 	{
 		Enemy* enemy = static_cast<Enemy*>(Other);
-		enemy->RewindPostion(); //Disappears?
+		enemy->RewindPostion();
 	}
 }

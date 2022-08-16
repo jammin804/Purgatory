@@ -1,22 +1,18 @@
 #include "AsteroidsGame.h"
 
 #include "Game/Background.h"
-#include "Game/Explosion.h"
 #include "Framework/BoxCollisionComponent.h"
 #include "Game/GameFlow.h"
 #include "Game/GUI.h" 
 #include "Game/Cross.h"
 #include "Game/Player.h"
-#include "Game/Enemy.h"
 #include "Game/EnemyManager.h"
 #include "Game/UIText.h"
 #include <sstream>
-#include "Game/Coin.h"
 #include "Game/CoinManager.h"
 #include "Game/ExplosionManager.h"
 #include "Game/Sfx.h"
 #include "Game/LevelManager.h"
-#include "Game/Wall.h"
 
 void AsteroidsGame::OnInit()
 {
@@ -27,7 +23,6 @@ void AsteroidsGame::OnInit()
     EnemyMgr = GameObject::CreateInstance<EnemyManager>();
 	CoinMgr = GameObject::CreateInstance<CoinManager>();
 	ExplodeMgr = GameObject::CreateInstance<ExplosionManager>();
-	WallImg = GameObject::CreateInstance<Wall>();
 	UI = GameObject::CreateInstance<GUI>();
 }
 
@@ -63,11 +58,6 @@ void AsteroidsGame::OnPostInit()
 			GFlow->SetPlayer(Player1);
 		}
 
-		
-		/*if (GFlow->GameState() != GameFlow::EState::InGame)
-		{
-			return;
-		}*/ //GameFlow::EState::InGame throwing error
     }
 
 	if (UI)
@@ -99,11 +89,6 @@ void AsteroidsGame::OnPostInit()
 		}
 	}
 
-	if (WallImg)
-	{
-		WallImg->SetParent(BG);
-	}
-
 	if (CoinMgr)
 	{
 		if (BG)
@@ -117,6 +102,14 @@ void AsteroidsGame::OnPostInit()
 		if (BG)
 		{
 			ExplodeMgr->SetParent(BG);
+		}
+	}
+
+	if (LevelMgr)
+	{
+		if (BG)
+		{
+			LevelMgr->SetParent(BG);
 		}
 	}
 }

@@ -22,13 +22,23 @@ void ImageComponent::OnRender()
     if (ImageBitmap && bIsVisible)
     {
         const GameObject* Owner = GetOwner();
-        if (ScaleFromLeft)
+        
+        float Rotation = Owner->GetWorldRotation();
+        ALLEGRO_BITMAP* ImageBMP = ImageBitmap->ImageBitmap;
+
+        for (int i = 0; i < TilingU; i++)
         {
-            al_draw_scaled_rotated_bitmap(ImageBitmap->ImageBitmap, ImageBitmap->ImageWidth * 0.0f, ImageBitmap->ImageHeight * 0.5f, Owner->GetWorldPositionX() + GetOffsetX(), Owner->GetWorldPositionY() + GetOffsetY(), ScaleX, ScaleY, Owner->GetWorldRotation(), 0);
-        }
-        else
-        {
-            al_draw_scaled_rotated_bitmap(ImageBitmap->ImageBitmap, ImageBitmap->ImageWidth * 0.5f, ImageBitmap->ImageHeight * 0.5f, Owner->GetWorldPositionX() + GetOffsetX(), Owner->GetWorldPositionY() + GetOffsetY(), ScaleX, ScaleY, Owner->GetWorldRotation(), 0);
+
+            for (int j = 0; j < TilingV; j++)
+            {
+                float CenterX = ImageBitmap->ImageWidth * (ScaleFromLeft ? 0.0f : 0.5f);
+                float CenterY = ImageBitmap->ImageHeight * 0.5f;
+                float DestinationX = Owner->GetWorldPositionX() + GetOffsetX() + i * ImageBitmap->ImageWidth;
+                float DestinationY = Owner->GetWorldPositionY() + GetOffsetY() + j * ImageBitmap->ImageHeight;
+
+				al_draw_scaled_rotated_bitmap(ImageBMP, CenterX, CenterY, DestinationX, DestinationY, ScaleX, ScaleY, Rotation, 0);
+				
+            }
         }
     }
 }
@@ -50,5 +60,26 @@ void ImageComponent::SetVisible(bool bIsNowVisible)
 bool ImageComponent::IsVisible() const
 {
     return bIsVisible;
+}
+
+
+int ImageComponent::GetImageHeight() const
+{
+    if (ImageBitmap)
+    {
+        return ImageBitmap->ImageHeight;
+    }
+
+    return 0;
+}
+
+int ImageComponent::GetImageWidth() const
+{
+	if (ImageBitmap)
+	{
+		return ImageBitmap->ImageWidth;
+	}
+
+    return 0;
 }
 

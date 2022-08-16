@@ -35,40 +35,56 @@ void LevelManager::OnInit()
 
 void LevelManager::OnPostInit()
 {
+	int	CurrentHeight = 1;
+	bool isWallCreatingVert = false;
+	float WorldPosX, WorldPosY, Scale;
+
 	for (int i = 0; i < SpawnPositions.size(); i++)
 	{
 		vector<bool>& RowData = SpawnPositions[i];
+		int CurrentWidth = 1;
+		bool isWallCreatingHoriz = false;
+
 
 		for (int j = 0; j < RowData.size(); ++j)
 		{
 			bool ColumnData = RowData[j];
 			if (ColumnData == true)
 			{
-				EventMessage Evt(GameEvent::EnemyHurt);
-				//EventPayload WorldPosX, WorldPosY, Scale;
 
-				float WorldPosX, WorldPosY, Scale;
+				if (!isWallCreatingHoriz)
+				{
+					isWallCreatingHoriz = true;
+					CurrentHeight = 1;
+					CurrentWidth = 1;
 
-				//TODO: Build the wall. Parent it to the level manager add it to a vector in the level manager of wall pointers
-				//TODO: Set world position multiple by a scale
+					WorldPosX = j * 25;
+					WorldPosY = i * 25;
+					Scale = 1;
+				}
+				else
+				{
+					CurrentWidth += 1;
+					isWallCreatingVert = false;
+				}
 
-				WorldPosX = i*15;
-				WorldPosY = j*15;
-				Scale = 1;
-
-				CreateWall(WorldPosX, WorldPosY);
-
-				/*Evt.payload.push_back(WorldPosX);
-				Evt.payload.push_back(WorldPosY);
-				Evt.payload.push_back(Scale);
-				EventManager::BroadcastEvent(Evt);*/
+			}
+			else if (isWallCreatingHoriz)
+			{
+				CreateWall(WorldPosX, WorldPosY, CurrentWidth, CurrentHeight);
+				isWallCreatingHoriz = false;
 			}
 			
+		}
+		if (isWallCreatingHoriz)
+		{
+			CreateWall(WorldPosX, WorldPosY, CurrentWidth, CurrentHeight);
+			isWallCreatingHoriz = false;
 		}
 	}
 }
 
-Wall* LevelManager::CreateWall(float posX, float posY)
+Wall* LevelManager::CreateWall(float posX, float posY, int Width, int Height)
 {
 	if (Walls.size() < MaxWalls)
 	{
@@ -76,6 +92,9 @@ Wall* LevelManager::CreateWall(float posX, float posY)
 		NewWall->SetParent(GetParent());
 		Walls.push_back(NewWall);
 		NewWall->SetWorldPosition(posX, posY);
+
+		NewWall->SetWidth(Width);
+		NewWall->SetHeight(Height);
 		return NewWall;
 	}
 
