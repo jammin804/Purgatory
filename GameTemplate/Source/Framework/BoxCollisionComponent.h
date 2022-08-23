@@ -14,6 +14,7 @@ public:
     void SetScale(float NewScale) { Scale = NewScale; }
     void SetCollisionSize(float Width, float Height){ BoxWidth = Width; BoxHeight = Height; }
     void SetDrawDebug();
+    void SetBoxOffset(float OffsetX, float OffsetY);
 protected:
     virtual void OnRender() override;
     virtual void OnShutdown() override;
@@ -25,5 +26,8 @@ private:
     bool bDrawDebug = true;
     int CollisionIndex = -1;
     float CurrentBox[4];
+    float BoxOffsetX;
+    float BoxOffsetY;
+    bool isOverridingCenter = false;
 };
 

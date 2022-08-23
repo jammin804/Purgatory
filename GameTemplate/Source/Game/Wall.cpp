@@ -29,13 +29,21 @@ void Wall::OnPostInit()
 		ImageCpt->SetTilingU(Width);
 		ImageCpt->SetTilingV(Height);
 
+		//TODO:Start Posx Start PosY and multiple by the width and height
+		StartPosX = StartPosX * CollisionScaleX;
+		StartPosY = StartPosY * CollisionScaleY;
+
+		SetWorldPosition(StartPosX, StartPosY);
+
+
 	}
 
-
+	
 
 	if (CollisionCpt)
 	{
-		CollisionCpt->SetCollisionSize(CollisionScaleX, CollisionScaleY);
+		CollisionCpt->SetBoxOffset(-(CollisionScaleX * 0.5f), -(CollisionScaleY * 0.5f));
+		CollisionCpt->SetCollisionSize(CollisionScaleX * Width, CollisionScaleY * Height);
 	}
 }
 
@@ -51,4 +59,24 @@ void Wall::OnCollision(GameObject* Other)
 		Enemy* enemy = static_cast<Enemy*>(Other);
 		enemy->RewindPostion();
 	}
+}
+
+float Wall::GetImageWidth() const
+{
+	if (ImageCpt)
+	{
+		return ImageCpt->GetImageWidth();
+	}
+
+	return 0.0f;
+}
+
+float Wall::GetImageHeight() const
+{
+	if (ImageCpt)
+	{
+		return ImageCpt->GetImageHeight();
+	}
+
+	return 0.0f;
 }

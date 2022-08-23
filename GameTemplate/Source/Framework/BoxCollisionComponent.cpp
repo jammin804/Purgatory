@@ -23,8 +23,17 @@ void BoxCollisionComponent::OnUpdate(float deltaTime)
     float CenterY = GetOwner()->GetWorldPositionY() + GetOffsetY();
     float HalfBoxWidth = BoxWidth * 0.5f;
     float HalfBoxHeight = BoxHeight * 0.5f;
-    CurrentBox[0] = CenterX - (HalfBoxWidth * Scale);
-    CurrentBox[1] = CenterY - (HalfBoxHeight * Scale);
+   if (isOverridingCenter)
+   {
+	   CurrentBox[0] = CenterX + (BoxOffsetX * Scale);
+	   CurrentBox[1] = CenterY + (BoxOffsetY * Scale);
+   }
+   else
+   {
+	   CurrentBox[0] = CenterX - (HalfBoxWidth * Scale);
+	   CurrentBox[1] = CenterY - (HalfBoxHeight * Scale);
+   }
+
     CurrentBox[2] = BoxWidth * Scale;
     CurrentBox[3] = BoxHeight * Scale;
 }
@@ -62,20 +71,24 @@ void BoxCollisionComponent::SetDrawDebug()
     bDrawDebug = true;
 }
 
+void BoxCollisionComponent::SetBoxOffset(float OffsetX, float OffsetY)
+{
+
+    BoxOffsetX = OffsetX; 
+    BoxOffsetY = OffsetY;
+
+    isOverridingCenter = true;
+}
+
 void BoxCollisionComponent::OnRender()
 {
     if (bDrawDebug)
     {
-        const GameObject* Owner = GetOwner();
-        float CenterX = Owner->GetWorldPositionX() + GetOffsetX();
-        float CenterY = Owner->GetWorldPositionY() + GetOffsetY();
-        float HalfBoxWidth = BoxWidth * 0.5f;
-        float HalfBoxHeight = BoxHeight * 0.5f;
+
         al_draw_filled_rectangle(
-        CenterX - (HalfBoxWidth * Scale), 
-        CenterY - (HalfBoxHeight * Scale),
-        CenterX + (HalfBoxWidth * Scale),
-        CenterY + (HalfBoxHeight * Scale),
+        CurrentBox[0], CurrentBox[1],
+        (CurrentBox[0]+ CurrentBox[2]),
+        (CurrentBox[1] + CurrentBox[3]),
         al_map_rgba_f(0.5f, 0, 0.0f, 0.8f));
     }
 }

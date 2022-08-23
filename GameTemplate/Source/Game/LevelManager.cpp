@@ -58,8 +58,8 @@ void LevelManager::OnPostInit()
 					CurrentHeight = 1;
 					CurrentWidth = 1;
 
-					WorldPosX = j * 25;
-					WorldPosY = i * 25;
+					WorldPosX = j;
+					WorldPosY = i;
 					Scale = 1;
 				}
 				else
@@ -91,10 +91,14 @@ Wall* LevelManager::CreateWall(float posX, float posY, int Width, int Height)
 		Wall* NewWall = GameObject::CreateInstance<Wall>();
 		NewWall->SetParent(GetParent());
 		Walls.push_back(NewWall);
-		NewWall->SetWorldPosition(posX, posY);
+
+		//NewWall->SetWorldPosition(posX, posY);
 
 		NewWall->SetWidth(Width);
 		NewWall->SetHeight(Height);
+
+		NewWall->SetStartPosX(posX);
+		NewWall->SetStartPosY(posY);
 		return NewWall;
 	}
 
