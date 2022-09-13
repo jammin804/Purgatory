@@ -33,7 +33,7 @@ void Wall::OnPostInit()
 		StartPosX = StartPosX * CollisionScaleX;
 		StartPosY = StartPosY * CollisionScaleY;
 
-		SetWorldPosition(StartPosX, StartPosY);
+		SetPosition(StartPosX, StartPosY);
 
 
 	}

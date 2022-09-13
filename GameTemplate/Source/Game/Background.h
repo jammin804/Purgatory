@@ -16,12 +16,11 @@ protected:
 
 public:
     void SetImage(string ImagePath);
-	void SetWallVImage(string ImagePath);
     void SetMusic(string MusicPath);
 	int GetBackgroundHeight() const { return BackgroundHeight; }
 	int GetBackgroundWidth() const { return BackgroundWidth; }
 private:
-	ImageComponent* BackgroundImage[9] = { nullptr };
+	ImageComponent* BackgroundImage;
 	SoundComponent* BackgroundMusic = nullptr;
 	ImageComponent* WallVImage = nullptr;
 	static int const BackgroundHeight = 4320;

@@ -5,31 +5,15 @@
 
 void Background::OnInit()
 {
-	for (int i = 0; i < 9; i++)
-	{
-		BackgroundImage[i] = GameComponent::CreateInstance<ImageComponent>(this);
-	}
- 
-	WallVImage = GameComponent::CreateInstance<ImageComponent>(this);
+	BackgroundImage = GameComponent::CreateInstance<ImageComponent>(this);
     BackgroundMusic = GameComponent::CreateInstance<SoundComponent>(this);
 }
 
 void Background::OnPostInit()
 {
-	int row = 0;
-	int column = 0;
-	for (int i = 0; i < 9; i++)
-	{
-		row = i / 3;
-		column = i % 3;
-		if (BackgroundImage[i])
-		{
-			float x = -2560.0f + row * 2560.0f + Globals::WindowSizeX * 0.5f;
-			float y = -1440.0f + column * 1440.0f + Globals::WindowSizeY * 0.5f;
-			BackgroundImage[i]->SetOffset(x, y);
-		}
-	}
-
+	BackgroundImage->SetTilingU(10);
+	BackgroundImage->SetTilingV(10);
+    BackgroundImage->SetOffset(-3000, -2000);
 }
 
 void Background::OnUpdate(float DeltaTime)
@@ -38,22 +22,7 @@ void Background::OnUpdate(float DeltaTime)
 
 void Background::SetImage(string ImagePath)
 {
-	for (int i = 0; i < 9; i++)
-	{
-		if (BackgroundImage[i])
-		{
-			BackgroundImage[i]->LoadImage(ImagePath);
-		}
-	}
-}
-
-void Background::SetWallVImage(string ImagePath)
-{
-	if (WallVImage)
-	{
-		WallVImage->LoadImage(ImagePath);
-	}
-
+	BackgroundImage->LoadImage(ImagePath);
 }
 
 void Background::SetMusic(string MusicPath)

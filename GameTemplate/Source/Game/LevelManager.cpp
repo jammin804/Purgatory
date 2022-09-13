@@ -35,53 +35,94 @@ void LevelManager::OnInit()
 
 void LevelManager::OnPostInit()
 {
-	int	CurrentHeight = 1;
-	bool isWallCreatingVert = false;
-	float WorldPosX, WorldPosY, Scale;
+	struct WallData
+	{
+		int WorldPosX;
+		int WorldPosY;
+		int Length = 1;
+		bool bIsVerticalWall = false;
+	};
+
+	vector<WallData> VerticalWalls;
+
+	auto ExtendVerticalWall = [](vector<WallData>& VerticalWalls, int CurrentX, int CurrentY)->bool
+	{
+        for (WallData& VerticalWall : VerticalWalls)
+        {
+            if (VerticalWall.WorldPosX == CurrentX && VerticalWall.WorldPosY + VerticalWall.Length == CurrentY)
+            {
+                VerticalWall.Length++;
+                return true;//found it
+            }
+        }
+        return false;
+	};
 
 	for (int i = 0; i < SpawnPositions.size(); i++)
 	{
 		vector<bool>& RowData = SpawnPositions[i];
-		int CurrentWidth = 1;
-		bool isWallCreatingHoriz = false;
+		bool isCurrentlyCreatingHorizontalWall = false;
+		WallData HorizontalWall;
 
+		auto CreateHorizontalWall = [this, &isCurrentlyCreatingHorizontalWall](const WallData& HorizontalWall)
+		{
+            CreateWall(HorizontalWall.WorldPosX, HorizontalWall.WorldPosY, HorizontalWall.Length, 1);
+            isCurrentlyCreatingHorizontalWall = false;
+		};
 
 		for (int j = 0; j < RowData.size(); ++j)
 		{
 			bool ColumnData = RowData[j];
 			if (ColumnData == true)
 			{
-
-				if (!isWallCreatingHoriz)
+				if (isCurrentlyCreatingHorizontalWall)
 				{
-					isWallCreatingHoriz = true;
-					CurrentHeight = 1;
-					CurrentWidth = 1;
-
-					WorldPosX = j;
-					WorldPosY = i;
-					Scale = 1;
+					HorizontalWall.Length++; // still extending the wall
+				}
+				else if (!ExtendVerticalWall(VerticalWalls, j, i))
+				{
+					//creating a new wall
+					isCurrentlyCreatingHorizontalWall = true;
+					HorizontalWall.Length = 1;
+					HorizontalWall.WorldPosX = j;
+                    HorizontalWall.WorldPosY = i;
+					HorizontalWall.bIsVerticalWall = false;
+				}
+			}
+			else if (isCurrentlyCreatingHorizontalWall)
+			{
+				if (HorizontalWall.Length == 1)
+				{
+					VerticalWalls.push_back(HorizontalWall);
+					isCurrentlyCreatingHorizontalWall = false;
 				}
 				else
 				{
-					CurrentWidth += 1;
-					isWallCreatingVert = false;
+					CreateHorizontalWall(HorizontalWall);
 				}
-
-			}
-			else if (isWallCreatingHoriz)
-			{
-				CreateWall(WorldPosX, WorldPosY, CurrentWidth, CurrentHeight);
-				isWallCreatingHoriz = false;
 			}
 			
 		}
-		if (isWallCreatingHoriz)
+		if (isCurrentlyCreatingHorizontalWall)
 		{
-			CreateWall(WorldPosX, WorldPosY, CurrentWidth, CurrentHeight);
-			isWallCreatingHoriz = false;
+            if (HorizontalWall.Length == 1)
+            {
+				VerticalWalls.push_back(HorizontalWall);
+				isCurrentlyCreatingHorizontalWall = false;
+			}
+			else 
+			{
+				CreateHorizontalWall(HorizontalWall);
+			}
 		}
 	}
+
+	for (WallData& VerticalWall : VerticalWalls)
+	{
+		CreateWall(VerticalWall.WorldPosX, VerticalWall.WorldPosY, 1, VerticalWall.Length);
+	}
+
+	SetWorldPosition(-45 * 64, -24 * 64);
 }
 
 Wall* LevelManager::CreateWall(float posX, float posY, int Width, int Height)
@@ -89,7 +130,7 @@ Wall* LevelManager::CreateWall(float posX, float posY, int Width, int Height)
 	if (Walls.size() < MaxWalls)
 	{
 		Wall* NewWall = GameObject::CreateInstance<Wall>();
-		NewWall->SetParent(GetParent());
+		NewWall->SetParent(this);
 		Walls.push_back(NewWall);
 
 		//NewWall->SetWorldPosition(posX, posY);
