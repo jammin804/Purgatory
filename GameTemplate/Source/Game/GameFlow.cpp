@@ -77,7 +77,7 @@ void GameFlow::OnUpdate(float DeltaTime)
         }
         break;
     case EState::InGame:
-        TimeRemaining -= DeltaTime;
+        //TimeRemaining -= DeltaTime;
         if (GameUIText)
         {
             GameUIText->UpdateTimeRemaining((int)TimeRemaining / 60, (int)TimeRemaining% 60);
@@ -303,13 +303,9 @@ void GameFlow::SetAllDead()
 
 void GameFlow::AddTime()
 {
-	if (TimeRemaining < MAX_TIME)
+	if (TimeRemaining <= MAX_TIME)
 	{
 		TimeRemaining = TimeRemaining + 5.0f;
-		if (TimeRemaining > MAX_TIME)
-		{
-			TimeRemaining = MAX_TIME;
-		}
 	}
 	
 }
