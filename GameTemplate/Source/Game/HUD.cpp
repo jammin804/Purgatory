@@ -1,10 +1,10 @@
-#include "GUI.h"
+#include "HUD.h"
 
 #include "Framework/ImageComponent.h"
 #include "Framework/InputComponent.h"
 #include "Framework/TextComponent.h"
 
-void GUI::OnInit()
+void HUD::OnInit()
 {
 	LifeGUITextComponent = GameComponent::CreateInstance<TextComponent>(this);
 	LayerGUIImageComponent = GameComponent::CreateInstance<ImageComponent>(this);
@@ -25,7 +25,7 @@ void GUI::OnInit()
 	
 }
 
-void GUI::OnPostInit()
+void HUD::OnPostInit()
 {
 	
 
@@ -80,7 +80,7 @@ void GUI::OnPostInit()
 
 }
 
-void GUI::OnUpdate(float DeltaTime)
+void HUD::OnUpdate(float DeltaTime)
 {
 	if (player)
 	{
@@ -98,12 +98,12 @@ void GUI::OnUpdate(float DeltaTime)
 	}
 }
 
-void GUI::SetLifePercentage(float PercentageLife)
+void HUD::SetLifePercentage(float PercentageLife)
 {
 	LifeGUIImageComponent->SetScaleX(MAX_LIFESCALE * PercentageLife);
 }
 
-void GUI::SetFearPercentage(float FearPercentageLife)
+void HUD::SetFearPercentage(float FearPercentageLife)
 {
 	FearGUIImageComponent->SetScaleX(MAX_LIFESCALE * FearPercentageLife);
 
@@ -112,7 +112,7 @@ void GUI::SetFearPercentage(float FearPercentageLife)
 	AmountOfFearText->SetText(FearPercent);
 }
 
-void GUI::SetBorderImage(string ImagePath)
+void HUD::SetBorderImage(string ImagePath)
 {
 	if (BorderGUIImageComponent)
 	{
@@ -120,7 +120,7 @@ void GUI::SetBorderImage(string ImagePath)
 	}
 }
 
-void GUI::SetLayerImage(string ImagePath)
+void HUD::SetLayerImage(string ImagePath)
 {
 	if (LayerGUIImageComponent)
 	{
@@ -128,7 +128,7 @@ void GUI::SetLayerImage(string ImagePath)
 	}
 }
 
-void GUI::SetLifeImage(string ImagePath)
+void HUD::SetLifeImage(string ImagePath)
 {
 	if (LifeGUIImageComponent)
 	{
@@ -136,7 +136,7 @@ void GUI::SetLifeImage(string ImagePath)
 	}
 }
 
-void GUI::SetFearLayerImage(string ImagePath)
+void HUD::SetFearLayerImage(string ImagePath)
 {
 	if (FearLayerGUIImageComponent)
 	{
@@ -145,7 +145,7 @@ void GUI::SetFearLayerImage(string ImagePath)
 
 }
 
-void GUI::SetFearImage(string ImagePath)
+void HUD::SetFearImage(string ImagePath)
 {
 	if (FearGUIImageComponent)
 	{
@@ -153,7 +153,7 @@ void GUI::SetFearImage(string ImagePath)
 	}
 }
 
-void GUI::SetFearBorderImage(string ImagePath)
+void HUD::SetFearBorderImage(string ImagePath)
 {
 	if (FearBorderGUIImageComponent)
 	{
@@ -161,7 +161,7 @@ void GUI::SetFearBorderImage(string ImagePath)
 	}
 }
 
-void GUI::SetCoinImage(string ImagePath)
+void HUD::SetCoinImage(string ImagePath)
 {
 	if (CoinGUIImageComponent)
 	{

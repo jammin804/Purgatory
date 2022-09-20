@@ -19,7 +19,7 @@ class GameFlow;
 class UIText;
 class FontManager;
 
-class GUI : public GameObject
+class HUD : public GameObject
 {
 protected:
 	virtual void OnInit() override;

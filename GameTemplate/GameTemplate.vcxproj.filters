@@ -84,7 +84,7 @@
     <ClCompile Include="Source\Game\Cross.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\GUI.cpp">
+    <ClCompile Include="Source\Game\HUD.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
     <ClCompile Include="Source\Game\Coin.cpp">
@@ -179,7 +179,7 @@
     <ClInclude Include="Source\Game\Cross.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\GUI.h">
+    <ClInclude Include="Source\Game\HUD.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\Powerup.h">

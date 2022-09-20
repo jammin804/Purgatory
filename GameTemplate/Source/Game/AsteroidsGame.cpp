@@ -3,7 +3,7 @@
 #include "Game/Background.h"
 #include "Framework/BoxCollisionComponent.h"
 #include "Game/GameFlow.h"
-#include "Game/GUI.h" 
+#include "Game/HUD.h" 
 #include "Game/Cross.h"
 #include "Game/Player.h"
 #include "Game/EnemyManager.h"
@@ -23,7 +23,7 @@ void AsteroidsGame::OnInit()
     EnemyMgr = GameObject::CreateInstance<EnemyManager>();
 	CoinMgr = GameObject::CreateInstance<CoinManager>();
 	ExplodeMgr = GameObject::CreateInstance<ExplosionManager>();
-	UI = GameObject::CreateInstance<GUI>();
+	UI = GameObject::CreateInstance<HUD>();
 }
 
 void AsteroidsGame::OnPostInit()

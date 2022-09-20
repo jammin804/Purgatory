@@ -549,7 +549,7 @@ void Enemy::TakeDamage()
 
 	if (EnemyHealthLeft < 0.0f)
 	{
-		EventMessage Evt(GameEvent::EnemyDied);
+ 		EventMessage Evt(GameEvent::EnemyDied);
 		Evt.payload.push_back(WorldPosX);
 		Evt.payload.push_back(WorldPosY);
 		EventManager::BroadcastEvent(Evt);

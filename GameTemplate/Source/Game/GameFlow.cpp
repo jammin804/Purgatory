@@ -2,7 +2,7 @@
 #include "Framework/InputComponent.h"
 #include "UIText.h"
 #include "Player.h"
-#include "GUI.h"
+#include "HUD.h"
 #include "Shop.h"
 #include "Framework/EventManager.h"
 #include "GameEvent.h"
@@ -303,15 +303,5 @@ void GameFlow::SetAllDead()
 
 void GameFlow::AddTime()
 {
-	if (TimeRemaining < MAX_TIME)
-	{
-		TimeRemaining = TimeRemaining + 5.0f;
-
-		if (TimeRemaining >= MAX_TIME)
-		{
-			TimeRemaining = MAX_TIME;
-		}
-
-	}
-	
+	TimeRemaining = min(TimeRemaining + 5.0f, MAX_TIME);
 }

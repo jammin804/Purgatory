@@ -4,7 +4,7 @@
 #include "Player.h"
 #include <vector>
 
-class GUI;
+class HUD;
 class Shop;
 class Player;
 
@@ -39,7 +39,7 @@ public:
         void AddObjectToDisableAtStart(GameObject* ObjectToDisable);
         bool ShouldEndGame() const { return bShouldEndGame; }
 		bool ShouldResetGame() const { return bShouldResetGame; }
-		void SetGUI(GUI* GameUIRef) { GameUI = GameUIRef; }
+		void SetGUI(HUD* GameUIRef) { GameUI = GameUIRef; }
 		void SetPlayer(Player* NewPlayer) { player = NewPlayer; }
 		EState GameState() {return CurrentState;}
 		void SetAllDead();
@@ -54,7 +54,7 @@ public:
 		int FearTimer;
         class UIText* GameUIText = nullptr;
 		Shop* GameShop = nullptr;
-        GUI* GameUI = nullptr;
+        HUD* GameUI = nullptr;
 		Player* player = nullptr;
         bool bReturnPressed = false;
         bool bShouldEndGame = false;

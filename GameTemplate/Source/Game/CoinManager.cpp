@@ -41,10 +41,13 @@ void CoinManager::OnEvent(const EventMessage& Msg)
 			return;
 		}
 		
+		float WorldPosX = Msg.payload[0].GetAsFloat();
+		float WorldPosY = Msg.payload[1].GetAsFloat();
+
  		int NumberOfCoinsToSpawn = (rand() % 4) + 1;
 		for (int i = 0; i < NumberOfCoinsToSpawn; i++)
 		{
-			CreateCoin(Msg.payload[0].GetAsFloat(), Msg.payload[1].GetAsFloat());
+			CreateCoin(WorldPosX, WorldPosY);
 		}
 	}
 }
