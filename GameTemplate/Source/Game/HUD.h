@@ -7,7 +7,7 @@ If the player gets hit, scale the life rectangle with by 1/player health
 */
 
 #include "Framework/GameObject.h"
-#include "Player.h"
+
 
 
 using namespace std;
@@ -16,7 +16,6 @@ class ImageComponent;
 class TextComponent;
 class Player; 
 class GameFlow;
-class UIText;
 class FontManager;
 
 class HUD : public GameObject
@@ -55,7 +54,6 @@ private:
 	TextComponent* CoinGUITextComponent = nullptr;
 	FontManager* CoinFont = nullptr;
 	const Player* player = nullptr;
-	const UIText* uitext = nullptr;
 	const float MAX_LIFESCALE = 2.0f;
 	const int FontSize = 18;
 };

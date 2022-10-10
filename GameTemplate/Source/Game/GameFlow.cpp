@@ -2,6 +2,7 @@
 #include "Framework/InputComponent.h"
 #include "UIText.h"
 #include "Player.h"
+#include "WelcomeMessage.h"
 #include "HUD.h"
 #include "Shop.h"
 #include "Framework/EventManager.h"
@@ -12,6 +13,7 @@ void GameFlow::OnInit()
 {
     Input = GameComponent::CreateInstance<InputComponent>(this);
     GameUIText = GameObject::CreateInstance<UIText>();
+	WelcomeMessageText = GameObject::CreateInstance<WelcomeMessage>();
 	GameShop = GameObject::CreateInstance<Shop>();
 
 	AddEventListener(GameEvent::EnemyDied);
@@ -22,10 +24,11 @@ void GameFlow::OnInit()
 
 void GameFlow::OnPostInit()
 {
-    if (GameUIText)
+
+	/*if (GameUIText)
     {
 		GameUIText->SetWelcomeToTheGame();
-    }
+    }*/
 
 	if (GameShop)
 	{
@@ -66,6 +69,11 @@ void GameFlow::OnUpdate(float DeltaTime)
 					}
 
                 }
+				if (WelcomeMessageText)
+				{
+					WelcomeMessageText->RequestDestroy();
+					WelcomeMessageText = nullptr;
+				}
                 if (GameUIText)
                 {
                     GameUIText->SetInGame();
@@ -197,6 +205,10 @@ void GameFlow::OnShutdown()
 void GameFlow::Restart(bool bShouldResetGame)
 {
 	CurrentState = EState::Starting;
+	if (WelcomeMessageText == nullptr)
+	{
+		WelcomeMessageText = GameObject::CreateInstance<WelcomeMessage>();
+	}
 	GameShop->SetEnabled(false);
 	for (GameObject* Object : GameFlowGameObjects)
 	{

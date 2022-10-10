@@ -3,6 +3,7 @@
 #include "Framework/ImageComponent.h"
 #include "Framework/InputComponent.h"
 #include "Framework/TextComponent.h"
+#include "Player.h"
 
 void HUD::OnInit()
 {

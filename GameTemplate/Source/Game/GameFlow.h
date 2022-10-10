@@ -1,12 +1,14 @@
 #pragma once
 
 #include "Framework/GameObject.h"
-#include "Player.h"
 #include <vector>
 
 class HUD;
 class Shop;
 class Player;
+class UIText;
+class InputComponent;
+class WelcomeMessage;
 
 using namespace std;
 
@@ -48,13 +50,14 @@ public:
         vector<GameObject*> GameFlowGameObjects;
         int CurrentScore = 0;
         EState CurrentState = EState::Starting;
-        class InputComponent* Input = nullptr;
 		const float MAX_TIME = 10.0f;
         float TimeRemaining = MAX_TIME;
 		int FearTimer;
-        class UIText* GameUIText = nullptr;
+        InputComponent* Input = nullptr;
+        UIText* GameUIText = nullptr;
 		Shop* GameShop = nullptr;
         HUD* GameUI = nullptr;
+        WelcomeMessage* WelcomeMessageText = nullptr;
 		Player* player = nullptr;
         bool bReturnPressed = false;
         bool bShouldEndGame = false;
