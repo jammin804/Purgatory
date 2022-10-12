@@ -1,11 +1,11 @@
-#include "WelcomeMessage.h"
+#include "UIWelcomeMessage.h"
 
 #include "Framework/TextComponent.h"
 #include "Framework/Globals.h"
 #include <stdio.h>
 
 
-void WelcomeMessage::OnInit()
+void UIWelcomeMessage::OnInit()
 {
 	for (int i = 0; i < COUNT; i++)
 	{
@@ -14,7 +14,7 @@ void WelcomeMessage::OnInit()
 
 }
 
-void WelcomeMessage::OnPostInit()
+void UIWelcomeMessage::OnPostInit()
 {
 	float MiddleX = Globals::WindowSizeX * 0.5f;
 	float MiddleY = Globals::WindowSizeY * 0.5f;

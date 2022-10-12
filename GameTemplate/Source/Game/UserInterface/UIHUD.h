@@ -18,7 +18,7 @@ class Player;
 class GameFlow;
 class FontManager;
 
-class HUD : public GameObject
+class UIHUD : public GameObject
 {
 protected:
 	virtual void OnInit() override;

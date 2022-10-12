@@ -3,12 +3,14 @@
 #include "Framework/GameObject.h"
 #include <vector>
 
-class HUD;
-class Shop;
+class UIHUD;
+class UIShop;
 class Player;
 class UIText;
 class InputComponent;
-class WelcomeMessage;
+class UIWelcomeMessage;
+class UIEndGameMessage;
+class UIPause;
 
 using namespace std;
 
@@ -41,7 +43,7 @@ public:
         void AddObjectToDisableAtStart(GameObject* ObjectToDisable);
         bool ShouldEndGame() const { return bShouldEndGame; }
 		bool ShouldResetGame() const { return bShouldResetGame; }
-		void SetGUI(HUD* GameUIRef) { GameUI = GameUIRef; }
+		void SetGUI(UIHUD* GameUIRef) { GameUI = GameUIRef; }
 		void SetPlayer(Player* NewPlayer) { player = NewPlayer; }
 		EState GameState() {return CurrentState;}
 		void SetAllDead();
@@ -55,9 +57,11 @@ public:
 		int FearTimer;
         InputComponent* Input = nullptr;
         UIText* GameUIText = nullptr;
-		Shop* GameShop = nullptr;
-        HUD* GameUI = nullptr;
-        WelcomeMessage* WelcomeMessageText = nullptr;
+		UIShop* GameShop = nullptr;
+        UIHUD* GameUI = nullptr;
+        UIWelcomeMessage* WelcomeMessageText = nullptr;
+        UIEndGameMessage* EndGameMessageText = nullptr;
+        UIPause* PauseText = nullptr;
 		Player* player = nullptr;
         bool bReturnPressed = false;
         bool bShouldEndGame = false;

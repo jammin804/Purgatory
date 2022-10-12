@@ -8,7 +8,7 @@ class Player;
 class Background;
 class EnemyManager;
 class GameFlow;
-class HUD;
+class UIHUD;
 class CoinManager;
 class ExplosionManager;
 class LevelManager;
@@ -27,7 +27,7 @@ private:
     Background* BG = nullptr;
     EnemyManager* EnemyMgr = nullptr;
     GameFlow* GFlow = nullptr;
-	HUD* UI = nullptr;
+	UIHUD* UI = nullptr;
     LevelManager* LevelMgr = nullptr;
 
 };

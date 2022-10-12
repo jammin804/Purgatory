@@ -48,7 +48,7 @@
     <ClCompile Include="Source\Game\AsteroidsGame.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\UIText.cpp">
+    <ClCompile Include="Source\Game\UserInterface\UIText.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
     <ClCompile Include="Source\Game\Player.cpp">
@@ -84,7 +84,7 @@
     <ClCompile Include="Source\Game\Cross.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\HUD.cpp">
+    <ClCompile Include="Source\Game\UserInterface\UIHUD.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
     <ClCompile Include="Source\Game\Coin.cpp">
@@ -102,7 +102,7 @@
     <ClCompile Include="Source\Framework\BitmapManager.cpp">
       <Filter>Source Files\Framework</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\Shop.cpp">
+    <ClCompile Include="Source\Game\UserInterface\UIShop.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
     <ClCompile Include="Source\Framework\EventManager.cpp">
@@ -126,7 +126,13 @@
     <ClCompile Include="Source\Game\Wall.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\WelcomeMessage.cpp">
+    <ClCompile Include="Source\Game\UserInterface\UIWelcomeMessage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\UserInterface\UIEndGameMessage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\UserInterface\UIPause.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -146,7 +152,7 @@
     <ClInclude Include="Source\Game\AsteroidsGame.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\UIText.h">
+    <ClInclude Include="Source\Game\UserInterface\UIText.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\Player.h">
@@ -182,7 +188,7 @@
     <ClInclude Include="Source\Game\Cross.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\HUD.h">
+    <ClInclude Include="Source\Game\UserInterface\UIHUD.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\Powerup.h">
@@ -200,7 +206,7 @@
     <ClInclude Include="Source\Framework\BitmapManager.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\Shop.h">
+    <ClInclude Include="Source\Game\UserInterface\UIShop.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="Source\Framework\EString.h">
@@ -239,7 +245,13 @@
     <ClInclude Include="Source\Game\Wall.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\WelcomeMessage.h">
+    <ClInclude Include="Source\Game\UserInterface\UIWelcomeMessage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\UserInterface\UIEndGameMessage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\UserInterface\UIPause.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

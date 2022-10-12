@@ -72,7 +72,7 @@ private:
     float RotationSpeed = 2.0f;
     bool bCanMakeLaser = true;
     vector<Cross*> Crosses;
-	static const int BASE_LIFE = 5;
+	static const int BASE_LIFE = 1;
 	int MaxLife = BASE_LIFE;
     int HealthLeft = MaxLife;
 	const int MAX_FEAR = 120;

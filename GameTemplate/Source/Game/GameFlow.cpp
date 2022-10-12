@@ -1,20 +1,24 @@
 #include "GameFlow.h"
-#include "Framework/InputComponent.h"
-#include "UIText.h"
-#include "Player.h"
-#include "WelcomeMessage.h"
-#include "HUD.h"
-#include "Shop.h"
 #include "Framework/EventManager.h"
-#include "GameEvent.h"
 #include "Framework/EventMessage.h"
+#include "Framework/InputComponent.h"
+#include "Game/GameEvent.h"
+#include "Game/Player.h"
+#include "Game/UserInterface/UIEndGameMessage.h"
+#include "Game/UserInterface/UIHUD.h"
+#include "Game/UserInterface/UIShop.h"
+#include "Game/UserInterface/UIText.h"
+#include "Game/UserInterface/UIWelcomeMessage.h"
+#include "Game/UserInterface/UIPause.h"
+
+
 
 void GameFlow::OnInit()
 {
     Input = GameComponent::CreateInstance<InputComponent>(this);
     GameUIText = GameObject::CreateInstance<UIText>();
-	WelcomeMessageText = GameObject::CreateInstance<WelcomeMessage>();
-	GameShop = GameObject::CreateInstance<Shop>();
+	WelcomeMessageText = GameObject::CreateInstance<UIWelcomeMessage>();
+	GameShop = GameObject::CreateInstance<UIShop>();
 
 	AddEventListener(GameEvent::EnemyDied);
 	AddEventListener(GameEvent::PlayerDied);
@@ -25,10 +29,6 @@ void GameFlow::OnInit()
 void GameFlow::OnPostInit()
 {
 
-	/*if (GameUIText)
-    {
-		GameUIText->SetWelcomeToTheGame();
-    }*/
 
 	if (GameShop)
 	{
@@ -74,9 +74,11 @@ void GameFlow::OnUpdate(float DeltaTime)
 					WelcomeMessageText->RequestDestroy();
 					WelcomeMessageText = nullptr;
 				}
+
+				
                 if (GameUIText)
                 {
-                    GameUIText->SetInGame();
+                    //GameUIText->SetInGame();
                     GameUIText->UpdateTimeRemaining((int)TimeRemaining / 60, (int)TimeRemaining % 60);
                     GameUIText->UpdateLivesLeft(2);
                     GameUIText->UpdateScore(0);
@@ -114,6 +116,9 @@ void GameFlow::OnUpdate(float DeltaTime)
 			if (Input->IsKeyJustPressed(ALLEGRO_KEY_ESCAPE))
 			{
 				SetPaused(true);
+
+				
+
 			}
 		}
         break;
@@ -124,6 +129,7 @@ void GameFlow::OnUpdate(float DeltaTime)
 			if (Input->IsKeyJustPressed(ALLEGRO_KEY_ESCAPE))
 			{
 				SetPaused(false);
+
 			}
 		}
 		break;
@@ -205,15 +211,17 @@ void GameFlow::OnShutdown()
 void GameFlow::Restart(bool bShouldResetGame)
 {
 	CurrentState = EState::Starting;
-	if (WelcomeMessageText == nullptr)
-	{
-		WelcomeMessageText = GameObject::CreateInstance<WelcomeMessage>();
-	}
 	GameShop->SetEnabled(false);
 	for (GameObject* Object : GameFlowGameObjects)
 	{
 		Object->OnRestart();
 	}
+	if (EndGameMessageText)
+	{
+		EndGameMessageText->RequestDestroy();
+		EndGameMessageText = nullptr;
+	}
+
 	TimeRemaining = MAX_TIME;
 }
 
@@ -251,9 +259,11 @@ void GameFlow::SetPaused(bool bIsPaused)
 		{
 			Object->SetEnabled(false);
 		}
-		if (GameUIText)
+		
+
+		if (PauseText == nullptr)
 		{
-			GameUIText->SetGamePaused();
+			PauseText = GameObject::CreateInstance<UIPause>();
 		}
 
 	}
@@ -264,11 +274,12 @@ void GameFlow::SetPaused(bool bIsPaused)
 		{
 			Object->SetEnabled(true);
 		}
-		if (GameUIText)
-		{
-			GameUIText->SetInGame();
-		}
 
+		if (PauseText)
+		{
+			PauseText->RequestDestroy();
+			PauseText = nullptr;
+		}
 	}
 
 }
@@ -280,10 +291,13 @@ void GameFlow::SetPlayerIsDead()
     {
         Object->SetEnabled(false);
     }
-    if (GameUIText)
-    {
-        GameUIText->SetGameOver(CurrentScore);
-    }
+
+	if (EndGameMessageText == nullptr)
+	{
+		EndGameMessageText = GameObject::CreateInstance<UIEndGameMessage>();
+	}
+	
+
 }
 
 void GameFlow::UpdateLivesLeft(int NewLivesLeft)

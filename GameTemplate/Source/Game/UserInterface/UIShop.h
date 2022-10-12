@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Framework/GameObject.h"
-#include "Player.h"
+#include "Game/Player.h"
 #include "Framework/EString.h"
 
 using namespace std;
@@ -21,7 +21,7 @@ class TextComponent;
 class ImageComponent;
 class Player;
 
-class Shop : public GameObject
+class UIShop : public GameObject
 {
 protected:
     virtual void OnInit() override;

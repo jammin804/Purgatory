@@ -1,11 +1,11 @@
-#include "Shop.h"
+#include "UIShop.h"
+#include "Framework/Globals.h"
 #include "Framework/ImageComponent.h"
 #include "Framework/TextComponent.h"
-#include "Framework/Globals.h"
-#include "Player.h"
+#include "Game/Player.h"
 #include <stdio.h>
 
-void Shop::OnInit()
+void UIShop::OnInit()
 {
 	TitleText = GameComponent::CreateInstance<TextComponent>(this);
 	CoinText = GameComponent::CreateInstance<TextComponent>(this);
@@ -24,7 +24,7 @@ void Shop::OnInit()
 	HealthUpgradeImage = GameComponent::CreateInstance<ImageComponent>(this);
 }
 
-void Shop::OnPostInit()
+void UIShop::OnPostInit()
 {
 	float MiddleX = Globals::WindowSizeX * 0.5f;
 	float MiddleY = Globals::WindowSizeY * 0.5f;
@@ -110,7 +110,7 @@ void Shop::OnPostInit()
 
 }
 
-void Shop::UpdateCoinShopText()
+void UIShop::UpdateCoinShopText()
 {
 	if (player)
 	{
@@ -120,7 +120,7 @@ void Shop::UpdateCoinShopText()
 	}
 }
 
-void Shop::UpgradeWeaponLevel(const ShopItem& WeaponUpgrade)
+void UIShop::UpgradeWeaponLevel(const ShopItem& WeaponUpgrade)
 {
 	if (player)
 	{
@@ -139,7 +139,7 @@ void Shop::UpgradeWeaponLevel(const ShopItem& WeaponUpgrade)
 	
 }
 
-void Shop::UpgradeSpeedLevel(const ShopItem& SpeedUpgrade)
+void UIShop::UpgradeSpeedLevel(const ShopItem& SpeedUpgrade)
 {
 	if (player)
 	{
@@ -156,7 +156,7 @@ void Shop::UpgradeSpeedLevel(const ShopItem& SpeedUpgrade)
 	}
 }
 
-void Shop::UpgradeHealthLevel(const ShopItem& HealthUpgrade)
+void UIShop::UpgradeHealthLevel(const ShopItem& HealthUpgrade)
 {
 	if (player)
 	{
