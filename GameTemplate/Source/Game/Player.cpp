@@ -320,10 +320,10 @@ bool Player::HandleDeath()
     {
         PlayerAvatarImageComponent->SetVisible(false);
     }*/
+	HealthLeft--;
 
     if (HealthLeft > 0)
     {
-        HealthLeft--;
         bInvulnerable = true;
         RespawnTimer = 0.0f;
         return false;

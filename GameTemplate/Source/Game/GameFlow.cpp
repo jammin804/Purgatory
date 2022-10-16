@@ -215,6 +215,7 @@ void GameFlow::Restart(bool bShouldResetGame)
 	for (GameObject* Object : GameFlowGameObjects)
 	{
 		Object->OnRestart();
+		
 	}
 	if (EndGameMessageText)
 	{
