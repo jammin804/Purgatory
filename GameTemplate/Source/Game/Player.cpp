@@ -186,19 +186,7 @@ void Player::OnCollision(GameObject* Other)
 			const Enemy* enemy = static_cast<const Enemy*>(Other);
 			if (enemy->GetState() != EState::Flee)
 			{
-				//CreateExplosion(Player1->GetPositionX(), Player1->GetPositionY());
-				if (HandleDeath())
-				{
-					EventManager::BroadcastEvent(GameEvent::PlayerDied);
-				}
-				else
-				{
-					EventMessage Evt(GameEvent::PlayerTakeDamage);
-					EventPayload HPLeft;
-					HPLeft.SetAsInt(HealthLeft);
-					Evt.payload.push_back(HPLeft);
-					EventManager::BroadcastEvent(Evt);
-				}
+				TakeDamage();
 			}
 		}
 		else if (Other->GetType() == static_cast<int>(GOT_Coin))
@@ -207,6 +195,32 @@ void Player::OnCollision(GameObject* Other)
 		}
 	}
 
+}
+
+void Player::TakeDamage()
+{
+	if (HealthLeft > 0)
+	{
+		HealthLeft--;
+	}
+
+	if (IsDead())
+	{
+		SetEnabled(false);
+
+		EventManager::BroadcastEvent(GameEvent::PlayerDied);
+	}
+	else
+	{
+		bInvulnerable = true;
+		RespawnTimer = 0.0f;
+
+		EventMessage Evt(GameEvent::PlayerTakeDamage);
+		EventPayload HPLeft;
+		HPLeft.SetAsInt(HealthLeft);
+		Evt.payload.push_back(HPLeft);
+		EventManager::BroadcastEvent(Evt);
+	}
 }
 
 void Player::OnEvent(const EventMessage& Msg)
@@ -313,24 +327,15 @@ void Player::SetAvatarImage(string ImagePath)
 
 
 
-bool Player::HandleDeath()
+bool Player::IsDead() const
 {
 
-    /*if (PlayerAvatarImageComponent)
+	if (HealthLeft > 0)
     {
-        PlayerAvatarImageComponent->SetVisible(false);
-    }*/
-	HealthLeft--;
-
-    if (HealthLeft > 0)
-    {
-        bInvulnerable = true;
-        RespawnTimer = 0.0f;
         return false;
     }
     else
     {
-        SetEnabled(false);
         return true;
     }
 }

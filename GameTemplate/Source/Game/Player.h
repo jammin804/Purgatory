@@ -22,12 +22,15 @@ protected:
     virtual void OnUpdate(float DeltaTime) override;
 	virtual void OnShutdown() override;
 	virtual void OnCollision(GameObject* Other) override;
+
+	void TakeDamage();
+
 	virtual void OnEvent(const EventMessage& Msg) override;
 	virtual void OnRestart() override;
 
 public:
     void SetAvatarImage(string ImagePath);
-    bool HandleDeath();
+    bool IsDead() const;
     void CreateCross(float DirX, float DirY);
     const vector<Cross*>& GetCross() const { return Crosses; }
     const BoxCollisionComponent* GetCollision() const { return Collision; }

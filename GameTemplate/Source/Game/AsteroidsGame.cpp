@@ -16,6 +16,7 @@
 
 void AsteroidsGame::OnInit()
 {
+
     GFlow = GameObject::CreateInstance<GameFlow>();
     BG = GameObject::CreateInstance<Background>();
 	Player1 = GameObject::CreateInstance<Player>();

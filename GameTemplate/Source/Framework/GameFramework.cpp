@@ -17,7 +17,6 @@ GameFramework* GameFramework::Instance = nullptr;
 const int Globals::WindowSizeX = 1280;
 const int Globals::WindowSizeY = 720;
 
-#pragma optimize("", off)
 
 //////////////////////////////////////////////////////////////////////////
 GameFramework::GameFramework()
@@ -368,5 +367,3 @@ void GameFramework::Shutdown()
     delete Instance;
     Instance = nullptr;
 }
-
-#pragma optimize("", on)
