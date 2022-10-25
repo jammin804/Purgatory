@@ -9,6 +9,7 @@ void UIShop::OnInit()
 {
 	TitleText = GameComponent::CreateInstance<TextComponent>(this);
 	CoinText = GameComponent::CreateInstance<TextComponent>(this);
+	ContinueText = GameComponent::CreateInstance<TextComponent>(this);
 
 	WeaponUpgradeText = GameComponent::CreateInstance<TextComponent>(this);
 	WeaponUpgradeItemCostText = GameComponent::CreateInstance<TextComponent>(this);
@@ -40,6 +41,10 @@ void UIShop::OnPostInit()
 	CoinText->SetFont("Fonts/Boxy-Bold.ttf", 20);
 	//CoinText->SetText("Coins: " + to_string(CurrentNumberOfCoins)); // Need to pull in players money
 	UpdateCoinShopText();
+
+	ContinueText->SetOffset(MiddleX, 575);
+	ContinueText->SetFont("Fonts/Boxy-Bold.ttf", 20);
+	ContinueText->SetText("Press Enter to exit.");
 
 
 	/*	int CoinsCollected = player->col();

@@ -11,11 +11,14 @@
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_ttf.h>
 #include "BoxCollisionComponent.h"
+#include "vcruntime_typeinfo.h"
+#include "thread"
 
 GameFramework* GameFramework::Instance = nullptr;
 
 const int Globals::WindowSizeX = 1280;
 const int Globals::WindowSizeY = 720;
+const double Globals::FrameRate = 120.0;
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -45,7 +48,7 @@ bool GameFramework::InitInternal()
         return false;
     }
 
-    Timer = al_create_timer(1.0 / 120.0);
+    Timer = al_create_timer(1.0 / Globals::FrameRate);
     if (!Timer)
     {
         printf("couldn't initialize timer\n");
@@ -333,10 +336,32 @@ bool GameFramework::UpdateInternal()
             return false;
         });
 
+        bool bMultiThread = false;
+        vector<std::thread> threads;
+        if (bMultiThread)
+        {
+            threads.reserve(GameObjectsToRender.size());
+        }
         for (GameObject* GO : GameObjectsToRender)
         {
-            GO->Render();
+            if (bMultiThread)
+            {
+                auto threadOperation = [GO]() {GO->Render(); };
+                threads.push_back(std::thread (threadOperation));
+            }
+            else
+            {
+                GO->Render();
+            }
         }
+        if (bMultiThread)
+        {
+			for (std::thread& thread : threads)
+			{
+				thread.join();
+			}
+        }
+
 
         al_flip_display();
 

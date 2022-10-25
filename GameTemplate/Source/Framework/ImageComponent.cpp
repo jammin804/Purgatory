@@ -2,6 +2,7 @@
 
 #include "GameObject.h"
 #include <allegro5/bitmap_draw.h>
+#include <mutex>
 
 ImageComponent::ImageComponent(GameObject* Owner)
     : GameComponent(Owner, ComponentType::ImageComponent)

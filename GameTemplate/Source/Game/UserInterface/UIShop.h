@@ -37,6 +37,7 @@ public:
 private:
     TextComponent* TitleText = nullptr;
 	TextComponent* CoinText = nullptr;
+	TextComponent* ContinueText = nullptr;
 	TextComponent* WeaponUpgradeText = nullptr;
 	TextComponent* WeaponUpgradeItemCostText = nullptr;
 	TextComponent* WeaponUpgradeUserPrompt = nullptr;

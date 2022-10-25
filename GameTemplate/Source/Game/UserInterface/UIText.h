@@ -15,13 +15,13 @@ protected:
 
 public:
     void SetInGame();
-    //void SetGameOver(int FinalScore);
+
 	void SetGamePaused();
     void SetYouSurvived(int FinalScore);
     void UpdateScore(int NewScore);
     void UpdateLivesLeft(int NewLivesLeft);
     void UpdateTimeRemaining(int NewTimeMins, int NewTimeSeconds);
-	//void GetTimeRemaining(int RemainingTime);
+
 private:
     TextComponent* MiddleTextLine1 = nullptr;
     TextComponent* MiddleTextLine2 = nullptr;

@@ -36,6 +36,7 @@ public:
 		virtual void Restart(bool bShouldResetGame);
         virtual void OnEvent(const EventMessage& Msg);
 		void SetPaused(bool bIsPaused);
+        void SetShopPause(bool bIsInShop);
     public:
         void SetPlayerIsDead();
         void UpdateLivesLeft(int NewLivesLeft);

@@ -116,9 +116,6 @@ void GameFlow::OnUpdate(float DeltaTime)
 			if (Input->IsKeyJustPressed(ALLEGRO_KEY_ESCAPE))
 			{
 				SetPaused(true);
-
-				
-
 			}
 		}
         break;
@@ -129,62 +126,17 @@ void GameFlow::OnUpdate(float DeltaTime)
 			if (Input->IsKeyJustPressed(ALLEGRO_KEY_ESCAPE))
 			{
 				SetPaused(false);
-
 			}
 		}
 		break;
 	case EState::Shopping:
 		if (Input)
 		{
-			if (Input->IsKeyJustPressed(ALLEGRO_KEY_1))
-			{
-				const ShopItem& WeaponUpgrade = GameShop->GetShopItems()[0];
-				if (WeaponUpgrade.NumberBought <= 2)
-				{
-					int UpgradeCost = WeaponUpgrade.NumberBought == 0 ? WeaponUpgrade.ItemCost1 : WeaponUpgrade.ItemCost2;
-					if (player && player->GetNumberOfCoins() >= UpgradeCost)
-					{
-						player->SpendCoins(UpgradeCost);
-						GameShop->UpdateCoinShopText();
-						player->UpgradeWeaponLevel();
-						GameShop->UpgradeWeaponLevel(WeaponUpgrade); 
-					}
-				}
+			SetShopPause(true);
 
-			}
-			if (Input->IsKeyJustPressed(ALLEGRO_KEY_2))
-			{
-				const ShopItem& SpeedUpgrade = GameShop->GetShopItems()[1];
-				if (SpeedUpgrade.NumberBought <= 2)
-				{
-					int UpgradeCost = SpeedUpgrade.NumberBought == 0 ? SpeedUpgrade.ItemCost1 : SpeedUpgrade.ItemCost2;
-					if (player && player->GetNumberOfCoins() >= UpgradeCost)
-					{
-						player->SpendCoins(UpgradeCost);
-						GameShop->UpdateCoinShopText();
-						player->UpgradeSpeedLevel();
-						GameShop->UpgradeSpeedLevel(SpeedUpgrade); // This will swtich out the image, description and cost. Also, increase Numberbrought
-					}
-				}
-			}
-			if (Input->IsKeyJustPressed(ALLEGRO_KEY_3))
-			{
-				const ShopItem& HealthUpgrade = GameShop->GetShopItems()[2];
-				if (HealthUpgrade.NumberBought <= 2)
-				{
-					int UpgradeCost = HealthUpgrade.NumberBought == 0 ? HealthUpgrade.ItemCost1 : HealthUpgrade.ItemCost2;
-					if (player && player->GetNumberOfCoins() >= UpgradeCost)
-					{
-						player->SpendCoins(UpgradeCost);
-						GameShop->UpdateCoinShopText();
-						player->UpdgradeHealthLevel();
-						GameShop->UpgradeHealthLevel(HealthUpgrade); // This will swtich out the image, description and cost. Also, increase Numberbrought
-					}
-				}
-			}
 			if (Input->IsKeyJustPressed(ALLEGRO_KEY_ENTER))
 			{
-				Restart(true);
+				SetShopPause(false);
 			}
 		}
 		break;
@@ -283,6 +235,78 @@ void GameFlow::SetPaused(bool bIsPaused)
 		}
 	}
 
+}
+
+void GameFlow::SetShopPause(bool bIsInShop)
+{
+	if (bIsInShop)
+	{
+		CurrentState = EState::Shopping;
+		for (GameObject* Object : GameFlowGameObjects)
+		{
+			Object->SetEnabled(false);
+		}
+
+		if (Input->IsKeyJustPressed(ALLEGRO_KEY_1))
+		{
+			const ShopItem& WeaponUpgrade = GameShop->GetShopItems()[0];
+			if (WeaponUpgrade.NumberBought <= 2)
+			{
+				int UpgradeCost = WeaponUpgrade.NumberBought == 0 ? WeaponUpgrade.ItemCost1 : WeaponUpgrade.ItemCost2;
+				if (player && player->GetNumberOfCoins() >= UpgradeCost)
+				{
+					player->SpendCoins(UpgradeCost);
+					GameShop->UpdateCoinShopText();
+					player->UpgradeWeaponLevel();
+					GameShop->UpgradeWeaponLevel(WeaponUpgrade);
+				}
+			}
+
+		}
+		if (Input->IsKeyJustPressed(ALLEGRO_KEY_2))
+		{
+			const ShopItem& SpeedUpgrade = GameShop->GetShopItems()[1];
+			if (SpeedUpgrade.NumberBought <= 2)
+			{
+				int UpgradeCost = SpeedUpgrade.NumberBought == 0 ? SpeedUpgrade.ItemCost1 : SpeedUpgrade.ItemCost2;
+				if (player && player->GetNumberOfCoins() >= UpgradeCost)
+				{
+					player->SpendCoins(UpgradeCost);
+					GameShop->UpdateCoinShopText();
+					player->UpgradeSpeedLevel();
+					GameShop->UpgradeSpeedLevel(SpeedUpgrade); // This will swtich out the image, description and cost. Also, increase Numberbrought
+				}
+			}
+		}
+		if (Input->IsKeyJustPressed(ALLEGRO_KEY_3))
+		{
+			const ShopItem& HealthUpgrade = GameShop->GetShopItems()[2];
+			if (HealthUpgrade.NumberBought <= 2)
+			{
+				int UpgradeCost = HealthUpgrade.NumberBought == 0 ? HealthUpgrade.ItemCost1 : HealthUpgrade.ItemCost2;
+				if (player && player->GetNumberOfCoins() >= UpgradeCost)
+				{
+					player->SpendCoins(UpgradeCost);
+					GameShop->UpdateCoinShopText();
+					player->UpdgradeHealthLevel();
+					GameShop->UpgradeHealthLevel(HealthUpgrade); // This will swtich out the image, description and cost. Also, increase Numberbrought
+				}
+			}
+		}
+
+
+
+	}
+	else
+	{
+		CurrentState = EState::InGame;
+		for (GameObject* Object : GameFlowGameObjects)
+		{
+			Object->SetEnabled(true);
+		}
+
+
+	}
 }
 
 void GameFlow::SetPlayerIsDead()
