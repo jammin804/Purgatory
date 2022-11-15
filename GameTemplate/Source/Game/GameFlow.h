@@ -37,7 +37,10 @@ public:
         virtual void OnEvent(const EventMessage& Msg);
 		void SetPaused(bool bIsPaused);
         void SetShopPause(bool bIsInShop);
-    public:
+
+		void UpdateShop();
+
+public:
         void SetPlayerIsDead();
         void UpdateLivesLeft(int NewLivesLeft);
         void AddScore(int ScoreToAdd);
