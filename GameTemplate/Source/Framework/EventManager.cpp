@@ -2,6 +2,8 @@
 #include "GameObject.h"
 #include "EventMessage.h"
 
+//std::map<int, set<GameObject*>> ListenerMap; *Learning Purposes*
+
 std::map<int, set<GameObject*>> EventManager::ListenerMap;
 
 void EventManager::AddEventListener(GameObject* GO, int MsgId)

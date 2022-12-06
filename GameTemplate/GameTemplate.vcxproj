@@ -106,6 +106,7 @@
     <ProjectGuid>{3DB5F577-030C-4AB5-8B3B-21BCCB9CD44B}</ProjectGuid>
     <RootNamespace>GameTemplate</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Purgatory</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

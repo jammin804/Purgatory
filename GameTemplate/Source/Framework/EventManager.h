@@ -17,3 +17,11 @@ public:
 private:
 	static std::map<int, set<GameObject*>> ListenerMap;
 };
+
+//namespace EventManager *Learning Purposing*
+//{
+//	void AddEventListener(GameObject*, int);
+//	void RemoveEventListener(GameObject*, int);
+//	void BroadcastEvent(const EventMessage&);
+//
+//}
