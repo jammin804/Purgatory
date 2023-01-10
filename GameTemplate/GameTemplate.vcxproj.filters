@@ -45,7 +45,7 @@
     <ClCompile Include="Source\Framework\GameComponent.cpp">
       <Filter>Source Files\Framework</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\AsteroidsGame.cpp">
+    <ClCompile Include="Source\Game\PurgatoryGame.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
     <ClCompile Include="Source\Game\UserInterface\UIText.cpp">
@@ -149,7 +149,7 @@
     <ClInclude Include="Source\Framework\Globals.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\AsteroidsGame.h">
+    <ClInclude Include="Source\Game\PurgatoryGame.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\UserInterface\UIText.h">
@@ -260,5 +260,151 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Art\ammo.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\Background.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\background_base.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\Background_N.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\background_pause.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\background_with_tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\backgroundWall_H.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\backgroundWall_V.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\Bloodsplats.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\Bloodsplats_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\Coins.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\Column.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\cross.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\Enemy_Bat.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\Enemy_Bat_Chase.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\Enemy_Bat_Flee.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\Enemy_D.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\Enemy_D_Chase.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\Enemy_D_Flee.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\Enemy_Golem.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\Enemy_Golem_Chase.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\Enemy_Golem_Flee.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\enemyhealthbar.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\enemyhealthbar_layer.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\fear.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\healthbar.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\healthbar_border.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\healthbar_layer.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\Level.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\Level_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\Player_P.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\Player_P_Back.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\Player_P_Side.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\PowerUpIcon-Health1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\PowerUpIcon-Health2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\PowerUpIcon-NA.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\PowerUpIcon-Speed1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\PowerUpIcon-Speed2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\PowerUpIcon-WeaponBurst.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Art\PowerUpIcon-WeaponCirlce.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Audio\Coin_Drop.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="Audio\Explosion.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="Audio\Hit.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="Audio\Horror.mp3" />
+    <Media Include="Audio\Laser.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="Audio\Music.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="Audio\Pickup.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="Audio\Thruster.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
   </ItemGroup>
 </Project>

@@ -15,7 +15,7 @@ protected:
 // 	virtual void OnShutdown() override;
 // 	virtual void OnEvent(const EventMessage& Msg) override;
 // 	virtual void OnRestart() override;
-// 	virtual void SetEnabled(bool bEnabled) override;
+ 	virtual void SetEnabled(bool bEnabled) override;
 
 public:
 	Wall* CreateWall(float posX, float posY, int Width, int Height); 

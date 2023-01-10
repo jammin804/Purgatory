@@ -1,4 +1,4 @@
-#include "AsteroidsGame.h"
+#include "PurgatoryGame.h"
 
 #include "Game/Background.h"
 #include "Framework/BoxCollisionComponent.h"
@@ -51,6 +51,7 @@ void AsteroidsGame::OnPostInit()
     {
         GFlow->AddObjectToDisableAtStart(Player1);
         GFlow->AddObjectToDisableAtStart(EnemyMgr);
+		GFlow->AddObjectToDisableAtStart(LevelMgr);
 		GFlow->AddObjectToDisableAtStart(UI);
 		GFlow->SetRenderDepth(50);
 		GFlow->SetGUI(UI);

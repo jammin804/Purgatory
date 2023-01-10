@@ -125,15 +125,24 @@ void LevelManager::OnPostInit()
 	SetWorldPosition(-45 * 64, -24 * 64);
 }
 
+void LevelManager::SetEnabled(bool bEnabled)
+{
+	__super::SetEnabled(bEnabled);
+	for (auto WallIter = Walls.begin(); WallIter != Walls.end(); ++WallIter)
+	{
+		Wall& WallToUpdate = *(*WallIter);
+		WallToUpdate.SetEnabled(bEnabled);
+	}
+}
+
 Wall* LevelManager::CreateWall(float posX, float posY, int Width, int Height)
 {
 	if (Walls.size() < MaxWalls)
 	{
 		Wall* NewWall = GameObject::CreateInstance<Wall>();
 		NewWall->SetParent(this);
+		NewWall->SetEnabled(IsEnabled());
 		Walls.push_back(NewWall);
-
-		//NewWall->SetWorldPosition(posX, posY);
 
 		NewWall->SetWidth(Width);
 		NewWall->SetHeight(Height);

@@ -32,7 +32,7 @@
     <ClCompile Include="Source\Framework\MemoryManager.cpp" />
     <ClCompile Include="Source\Framework\SoundComponent.cpp" />
     <ClCompile Include="Source\Framework\TextComponent.cpp" />
-    <ClCompile Include="Source\Game\AsteroidsGame.cpp" />
+    <ClCompile Include="Source\Game\PurgatoryGame.cpp" />
     <ClCompile Include="Source\Game\Background.cpp" />
     <ClCompile Include="Source\Game\Coin.cpp" />
     <ClCompile Include="Source\Game\CoinManager.cpp" />
@@ -72,7 +72,7 @@
     <ClInclude Include="Source\Framework\MemoryManager.h" />
     <ClInclude Include="Source\Framework\SoundComponent.h" />
     <ClInclude Include="Source\Framework\TextComponent.h" />
-    <ClInclude Include="Source\Game\AsteroidsGame.h" />
+    <ClInclude Include="Source\Game\PurgatoryGame.h" />
     <ClInclude Include="Source\Game\Background.h" />
     <ClInclude Include="Source\Game\Coin.h" />
     <ClInclude Include="Source\Game\CoinManager.h" />
@@ -96,17 +96,167 @@
     <ClInclude Include="Source\Game\UserInterface\UIWelcomeMessage.h" />
   </ItemGroup>
   <ItemGroup>
-    <Font Include="Fonts\Boxy-Bold.ttf" />
+    <Font Include="Fonts\Boxy-Bold.ttf">
+      <DeploymentContent>true</DeploymentContent>
+    </Font>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Art\ammo.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\Background.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\backgroundWall_H.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\backgroundWall_V.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\background_base.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\Background_N.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\background_pause.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\background_with_tiles.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\Bloodsplats.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\Bloodsplats_2.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\Coins.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\Column.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\cross.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\enemyhealthbar.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\enemyhealthbar_layer.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\Enemy_Bat.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\Enemy_Bat_Chase.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\Enemy_Bat_Flee.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\Enemy_D.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\Enemy_D_Chase.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\Enemy_D_Flee.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\Enemy_Golem.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\Enemy_Golem_Chase.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\Enemy_Golem_Flee.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\fear.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\healthbar.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\healthbar_border.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\healthbar_layer.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\Level.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\Level_2.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\Player_P.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\Player_P_Back.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\Player_P_Side.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\PowerUpIcon-Health1.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\PowerUpIcon-Health2.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\PowerUpIcon-NA.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\PowerUpIcon-Speed1.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\PowerUpIcon-Speed2.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\PowerUpIcon-WeaponBurst.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="Art\PowerUpIcon-WeaponCirlce.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Audio\Coin_Drop.wav">
+      <DeploymentContent>true</DeploymentContent>
+    </Media>
+    <Media Include="Audio\Explosion.wav">
+      <DeploymentContent>true</DeploymentContent>
+    </Media>
+    <Media Include="Audio\Hit.wav">
+      <DeploymentContent>true</DeploymentContent>
+    </Media>
+    <Media Include="Audio\Horror.mp3">
+      <DeploymentContent>true</DeploymentContent>
+    </Media>
+    <Media Include="Audio\Laser.wav">
+      <DeploymentContent>true</DeploymentContent>
+    </Media>
+    <Media Include="Audio\Music.wav">
+      <DeploymentContent>true</DeploymentContent>
+    </Media>
+    <Media Include="Audio\Pickup.wav">
+      <DeploymentContent>true</DeploymentContent>
+    </Media>
+    <Media Include="Audio\Thruster.wav">
+      <DeploymentContent>true</DeploymentContent>
+    </Media>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{3DB5F577-030C-4AB5-8B3B-21BCCB9CD44B}</ProjectGuid>
     <RootNamespace>GameTemplate</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>Purgatory</ProjectName>
+    <ProjectName>PurgatoryGame</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
