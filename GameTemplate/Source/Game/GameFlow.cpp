@@ -11,7 +11,8 @@
 #include "Game/UserInterface/UIWelcomeMessage.h"
 #include "Game/UserInterface/UIPause.h"
 
-
+const float GameFlow::COURAGE_LOSS_SPEED = 0.5f;
+const float GameFlow::MAX_COURAGE = 10.0f;
 
 void GameFlow::OnInit()
 {
@@ -79,7 +80,6 @@ void GameFlow::OnUpdate(float DeltaTime)
                 if (GameUIText)
                 {
                     //GameUIText->SetInGame();
-                    GameUIText->UpdateTimeRemaining((int)TimeRemaining / 60, (int)TimeRemaining % 60);
                     GameUIText->UpdateLivesLeft(2);
                     GameUIText->UpdateScore(0);
                 }
@@ -87,17 +87,13 @@ void GameFlow::OnUpdate(float DeltaTime)
         }
         break;
     case EState::InGame:
-        TimeRemaining -= DeltaTime;
-        if (GameUIText)
-        {
-            GameUIText->UpdateTimeRemaining((int)TimeRemaining / 60, (int)TimeRemaining% 60);
-        }
+        CourageRemaining -= (DeltaTime * COURAGE_LOSS_SPEED);
 		if (GameUI)
 		{
 			
-			GameUI->SetFearPercentage(TimeRemaining / MAX_TIME);
+			GameUI->SetFearPercentage(1.0f-(CourageRemaining / MAX_COURAGE));
 		}
-        if (TimeRemaining <= 0.0f )
+        if (CourageRemaining <= 0.0f )
         {
 			SetShopPause(true);
            
@@ -129,7 +125,7 @@ void GameFlow::OnUpdate(float DeltaTime)
 			if (Input->IsKeyJustPressed(ALLEGRO_KEY_ENTER))
 			{
 				SetShopPause(false);
-				TimeRemaining = MAX_TIME;
+				CourageRemaining = MAX_COURAGE;
 			}
 		}
 		break;
@@ -168,7 +164,7 @@ void GameFlow::Restart(bool bShouldResetGame)
 		EndGameMessageText = nullptr;
 	}
 
-	TimeRemaining = MAX_TIME;
+	CourageRemaining = MAX_COURAGE;
 }
 
 void GameFlow::OnEvent(const EventMessage& Msg)
@@ -356,10 +352,12 @@ void GameFlow::AddObjectToDisableAtStart(GameObject* ObjectToDisable)
 
 void GameFlow::SetAllDead()
 {
-	TimeRemaining = 0;
+	CourageRemaining = 0;
 }
 
 void GameFlow::AddTime()
 {
-	TimeRemaining = min(TimeRemaining + 5.0f, MAX_TIME);
+	CourageRemaining = min(CourageRemaining + 5.0f, MAX_COURAGE);
 }
+
+

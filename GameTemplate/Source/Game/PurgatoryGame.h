@@ -13,7 +13,7 @@ class CoinManager;
 class ExplosionManager;
 class LevelManager;
 
-class AsteroidsGame : public GameFramework
+class PurgatoryGame : public GameFramework
 {
 protected:
     virtual void OnInit() override;

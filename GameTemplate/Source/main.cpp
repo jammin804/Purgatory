@@ -1,9 +1,9 @@
 #include <stdio.h>
-#include "Game/AsteroidsGame.h"
+#include "Game/PurgatoryGame.h"
 
 int main()
 {
-    if (!GameFramework::Init<AsteroidsGame>())
+    if (!GameFramework::Init<PurgatoryGame>())
     {
         return 1;
     }

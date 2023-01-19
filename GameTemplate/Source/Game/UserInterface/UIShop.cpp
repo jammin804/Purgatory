@@ -168,7 +168,7 @@ void UIShop::UpgradeHealthLevel(const ShopItem& HealthUpgrade)
 		if (player->HealthLevel == 1)
 		{
 			HealthUpgradeItemCostText->SetText("Cost: " + to_string(HealthUpgrade.ItemCost2));
-			HealthUpgradeImage->LoadImage("Art/PowerUpIcon-WeaponCircle.png");
+			HealthUpgradeImage->LoadImage("Art/PowerUpIcon-Health2.png");
 		}
 		if (player->HealthLevel == 2)
 		{

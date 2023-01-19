@@ -56,9 +56,9 @@ public:
         vector<GameObject*> GameFlowGameObjects;
         int CurrentScore = 0;
         EState CurrentState = EState::Starting;
-		const float MAX_TIME = 10.0f;
-        float TimeRemaining = MAX_TIME;
-		int FearTimer;
+        static const float COURAGE_LOSS_SPEED;
+        static const float MAX_COURAGE;
+        float CourageRemaining = MAX_COURAGE;
         InputComponent* Input = nullptr;
         UIText* GameUIText = nullptr;
 		UIShop* GameShop = nullptr;

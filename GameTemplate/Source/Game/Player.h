@@ -58,6 +58,8 @@ private:
 	void ShootOrbital();
 	void ShootBase();
 	void UpdateWeapon();
+	void UpdateHealth();
+	void UpdateSpeed();
 	void UpdateSprite();
 	void UpdateMovement(float DeltaTime);
 	void UpdateRespawn(float DeltaTime);

@@ -42,6 +42,8 @@ public:
 
     void SetGameOver() { bIsGameOver = true;}
 
+    void SetWindowTitle(const char* title);
+
     FontManager& GetFontManager() { return FntManager; }
     BitmapManager& GetBitmapManager() { return BmpManager; }
 

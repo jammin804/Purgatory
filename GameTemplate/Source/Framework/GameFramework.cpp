@@ -392,3 +392,8 @@ void GameFramework::Shutdown()
     delete Instance;
     Instance = nullptr;
 }
+
+void GameFramework::SetWindowTitle(const char* title)
+{
+    al_set_window_title(Display, title);
+}

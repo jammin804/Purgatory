@@ -20,7 +20,6 @@ public:
     void SetYouSurvived(int FinalScore);
     void UpdateScore(int NewScore);
     void UpdateLivesLeft(int NewLivesLeft);
-    void UpdateTimeRemaining(int NewTimeMins, int NewTimeSeconds);
 
 private:
     TextComponent* MiddleTextLine1 = nullptr;

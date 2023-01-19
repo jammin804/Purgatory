@@ -14,9 +14,9 @@
 #include "Game/Sfx.h"
 #include "Game/LevelManager.h"
 
-void AsteroidsGame::OnInit()
+void PurgatoryGame::OnInit()
 {
-
+	SetWindowTitle("Purgatory | v1.0");
     GFlow = GameObject::CreateInstance<GameFlow>();
     BG = GameObject::CreateInstance<Background>();
 	Player1 = GameObject::CreateInstance<Player>();
@@ -27,7 +27,7 @@ void AsteroidsGame::OnInit()
 	UI = GameObject::CreateInstance<UIHUD>();
 }
 
-void AsteroidsGame::OnPostInit()
+void PurgatoryGame::OnPostInit()
 {
     if (BG)
     {

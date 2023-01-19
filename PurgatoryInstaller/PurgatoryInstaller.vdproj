@@ -15,49 +15,49 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_10DE36D93BE04157939D4E95601CF45A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_2770BDD817EB47F386C2EBF92AEBCE18"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_2874C7D992A64438A267708033ADDED7"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_3151096631B94E8D8FFDE0C5111467C1"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_3CABD3E3261E4E83B42CADB59ED2E900"
+        "MsmKey" = "8:_50D4BD01DAB64B6C8C64A887FCA860FC"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_ADB69040F39F4ED0B97576D24CBF0162"
+        "MsmKey" = "8:_514657AE11204E6EB69AFC48BEBA916D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_BA90F2D36C5C4F65B167B4D84D4FA74A"
+        "MsmKey" = "8:_565D268857404F30990C2336971ACF2C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_E7BDD183E9E648BEB48E1D63DA99FE44"
+        "MsmKey" = "8:_5B8D2B3C3CA0419DA0185C82BA14566C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6AE4EEA4E50E42A4B9D091A3672ADF64"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D64E8B435AEB41488D29E71457693B4C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DECA9E725CB84904835AC9B9952CFB28"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -79,6 +79,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -95,6 +111,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -116,10 +148,10 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_10DE36D93BE04157939D4E95601CF45A"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_50D4BD01DAB64B6C8C64A887FCA860FC"
             {
-            "SourcePath" = "8:..\\GameTemplate\\x64\\Debug\\allegro-debug-5.2.dll"
-            "TargetName" = "8:allegro-debug-5.2.dll"
+            "SourcePath" = "8:..\\GameTemplate\\x64\\Release\\allegro_acodec-5.2.dll"
+            "TargetName" = "8:allegro_acodec-5.2.dll"
             "Tag" = "8:"
             "Folder" = "8:_6AA792FA48CD42519AFF7A677F0F99CF"
             "Condition" = "8:"
@@ -136,10 +168,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2770BDD817EB47F386C2EBF92AEBCE18"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_514657AE11204E6EB69AFC48BEBA916D"
             {
-            "SourcePath" = "8:..\\GameTemplate\\x64\\Debug\\allegro_image-debug-5.2.dll"
-            "TargetName" = "8:allegro_image-debug-5.2.dll"
+            "SourcePath" = "8:..\\GameTemplate\\x64\\Release\\allegro_ttf-5.2.dll"
+            "TargetName" = "8:allegro_ttf-5.2.dll"
             "Tag" = "8:"
             "Folder" = "8:_6AA792FA48CD42519AFF7A677F0F99CF"
             "Condition" = "8:"
@@ -156,10 +188,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2874C7D992A64438A267708033ADDED7"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_565D268857404F30990C2336971ACF2C"
             {
-            "SourcePath" = "8:..\\GameTemplate\\x64\\Debug\\allegro_audio-debug-5.2.dll"
-            "TargetName" = "8:allegro_audio-debug-5.2.dll"
+            "SourcePath" = "8:..\\GameTemplate\\x64\\Release\\allegro_primitives-5.2.dll"
+            "TargetName" = "8:allegro_primitives-5.2.dll"
             "Tag" = "8:"
             "Folder" = "8:_6AA792FA48CD42519AFF7A677F0F99CF"
             "Condition" = "8:"
@@ -176,10 +208,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3CABD3E3261E4E83B42CADB59ED2E900"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5B8D2B3C3CA0419DA0185C82BA14566C"
             {
-            "SourcePath" = "8:..\\GameTemplate\\x64\\Debug\\allegro_font-debug-5.2.dll"
-            "TargetName" = "8:allegro_font-debug-5.2.dll"
+            "SourcePath" = "8:..\\GameTemplate\\x64\\Release\\allegro_image-5.2.dll"
+            "TargetName" = "8:allegro_image-5.2.dll"
             "Tag" = "8:"
             "Folder" = "8:_6AA792FA48CD42519AFF7A677F0F99CF"
             "Condition" = "8:"
@@ -196,10 +228,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ADB69040F39F4ED0B97576D24CBF0162"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6AE4EEA4E50E42A4B9D091A3672ADF64"
             {
-            "SourcePath" = "8:..\\GameTemplate\\x64\\Debug\\allegro_ttf-debug-5.2.dll"
-            "TargetName" = "8:allegro_ttf-debug-5.2.dll"
+            "SourcePath" = "8:..\\GameTemplate\\x64\\Release\\allegro_font-5.2.dll"
+            "TargetName" = "8:allegro_font-5.2.dll"
             "Tag" = "8:"
             "Folder" = "8:_6AA792FA48CD42519AFF7A677F0F99CF"
             "Condition" = "8:"
@@ -216,10 +248,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BA90F2D36C5C4F65B167B4D84D4FA74A"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D64E8B435AEB41488D29E71457693B4C"
             {
-            "SourcePath" = "8:..\\GameTemplate\\x64\\Debug\\allegro_acodec-debug-5.2.dll"
-            "TargetName" = "8:allegro_acodec-debug-5.2.dll"
+            "SourcePath" = "8:..\\GameTemplate\\x64\\Release\\allegro_audio-5.2.dll"
+            "TargetName" = "8:allegro_audio-5.2.dll"
             "Tag" = "8:"
             "Folder" = "8:_6AA792FA48CD42519AFF7A677F0F99CF"
             "Condition" = "8:"
@@ -236,10 +268,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E7BDD183E9E648BEB48E1D63DA99FE44"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DECA9E725CB84904835AC9B9952CFB28"
             {
-            "SourcePath" = "8:..\\GameTemplate\\x64\\Debug\\allegro_primitives-debug-5.2.dll"
-            "TargetName" = "8:allegro_primitives-debug-5.2.dll"
+            "SourcePath" = "8:..\\GameTemplate\\x64\\Release\\allegro-5.2.dll"
+            "TargetName" = "8:allegro-5.2.dll"
             "Tag" = "8:"
             "Folder" = "8:_6AA792FA48CD42519AFF7A677F0F99CF"
             "Condition" = "8:"
@@ -313,7 +345,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Purgatory"
         "ProductCode" = "8:{8BA1BDB7-165A-4DAD-BFC5-44BCCAA5F961}"
-        "PackageCode" = "8:{C2808D80-B15C-4C72-B8DA-ECB46D74E904}"
+        "PackageCode" = "8:{1621633D-6B85-447D-9AD6-693D9B8F9C0B}"
         "UpgradeCode" = "8:{F9F6F0D0-B2FB-40C4-B88E-39DF1EEA8AEE}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -321,10 +353,10 @@
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
         "ProductVersion" = "8:1.0.0"
-        "Manufacturer" = "8:"
+        "Manufacturer" = "8:Purgatory"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:Purgatory"
+        "Title" = "8:Purgatory v1.0"
         "Subject" = "8:"
         "ARPCONTACT" = "8:"
         "Keywords" = "8:"
@@ -834,7 +866,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_3151096631B94E8D8FFDE0C5111467C1"
             {
-            "SourcePath" = "8:..\\GameTemplate\\x64\\Debug\\PurgatoryGame.exe"
+            "SourcePath" = "8:..\\GameTemplate\\x64\\Release\\PurgatoryGame.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_6AA792FA48CD42519AFF7A677F0F99CF"
