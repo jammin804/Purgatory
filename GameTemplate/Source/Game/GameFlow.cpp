@@ -291,7 +291,7 @@ void GameFlow::UpdateShop()
 				player->SpendCoins(UpgradeCost);
 				GameShop->UpdateCoinShopText();
 				player->UpgradeSpeedLevel();
-				GameShop->UpgradeSpeedLevel(SpeedUpgrade); // This will swtich out the image, description and cost. Also, increase Numberbrought
+				GameShop->UpgradeSpeedLevel(SpeedUpgrade); // This will switch out the image, description and cost. Also, increase Numberbrought
 			}
 		}
 	}
@@ -305,8 +305,8 @@ void GameFlow::UpdateShop()
 			{
 				player->SpendCoins(UpgradeCost);
 				GameShop->UpdateCoinShopText();
-				player->UpdgradeHealthLevel();
-				GameShop->UpgradeHealthLevel(HealthUpgrade); // This will swtich out the image, description and cost. Also, increase Numberbrought
+				player->UpgradeHealthLevel();
+				GameShop->UpgradeHealthLevel(HealthUpgrade); // This will switch out the image, description and cost. Also, increase Numberbrought
 			}
 		}
 	}

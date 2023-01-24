@@ -85,46 +85,6 @@ void Player::UpdateWeapon()
 	}
 }
 
-void Player::UpdateHealth()
-{
-	//Checks if health was upgraded
-	if (HealthLevel == 0)
-	{
-		MaxLife = BASE_LIFE;
-	}
-	else if (HealthLevel == 1)
-	{
-		MaxLife = BASE_LIFE + 5;
-	}
-	else
-	{
-		MaxLife = BASE_LIFE + 10;
-	}
-
-	SetLivesLeft(MaxLife);
-
-	//BG->SetPosition(0.0f, 0.0f);
-}
-
-void Player::UpdateSpeed()
-{
-	if (SpeedLevel == 0)
-	{
-		PlayerVerticalMovementSpeed = BASE_MOVEMENT_SPEED;
-		PlayerHorizontalMovementSpeed = BASE_MOVEMENT_SPEED;
-	}
-	else if (SpeedLevel == 1)
-	{
-		PlayerVerticalMovementSpeed = BASE_MOVEMENT_SPEED * 1.5f;
-		PlayerHorizontalMovementSpeed = BASE_MOVEMENT_SPEED * 1.5f;
-	}
-	else
-	{
-		PlayerVerticalMovementSpeed = BASE_MOVEMENT_SPEED * 2.0f;
-		PlayerHorizontalMovementSpeed = BASE_MOVEMENT_SPEED * 2.0f;
-	}
-}
-
 void Player::UpdateSprite()
 {
 	//Update Sprite
@@ -316,11 +276,6 @@ void Player::ShootBase()
 	CreateCross(LookingDirectionX, LookingDirectionY);
 }
 
-void Player::OnRestart()
-{
-
-
-}
 
 void Player::SetAvatarImage(string ImagePath)
 {
@@ -373,6 +328,48 @@ void Player::CollectCoin()
 	{
 		CoinSoundComponentPickup->Play();
 	}
+}
+
+void Player::UpgradeSpeedLevel()
+{
+	SpeedLevel = SpeedLevel < 2 ? SpeedLevel + 1 : SpeedLevel;
+	
+	if (SpeedLevel == 0)
+	{
+		PlayerVerticalMovementSpeed = BASE_MOVEMENT_SPEED;
+		PlayerHorizontalMovementSpeed = BASE_MOVEMENT_SPEED;
+	}
+	else if (SpeedLevel == 1)
+	{
+		PlayerVerticalMovementSpeed = BASE_MOVEMENT_SPEED * 1.5f;
+		PlayerHorizontalMovementSpeed = BASE_MOVEMENT_SPEED * 1.5f;
+	}
+	else
+	{
+		PlayerVerticalMovementSpeed = BASE_MOVEMENT_SPEED * 2.0f;
+		PlayerHorizontalMovementSpeed = BASE_MOVEMENT_SPEED * 2.0f;
+	}
+}
+
+void Player::UpgradeHealthLevel()
+{
+	HealthLevel = HealthLevel < 2 ? HealthLevel + 1 : HealthLevel;
+	
+	//Checks if health was upgraded
+	if (HealthLevel == 0)
+	{
+		MaxLife = BASE_LIFE;
+	}
+	else if (HealthLevel == 1)
+	{
+		MaxLife = BASE_LIFE + 5;
+	}
+	else
+	{
+		MaxLife = BASE_LIFE + 10;
+	}
+
+	SetLivesLeft(MaxLife);
 }
 
 void Player::RewindPosition()

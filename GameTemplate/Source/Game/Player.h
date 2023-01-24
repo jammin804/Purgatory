@@ -26,7 +26,6 @@ protected:
 	void TakeDamage();
 
 	virtual void OnEvent(const EventMessage& Msg) override;
-	virtual void OnRestart() override;
 
 public:
     void SetAvatarImage(string ImagePath);
@@ -43,8 +42,8 @@ public:
 	int GetNumberOfCoins() const { return NumberOfCoins; }
 	void SetBackground(Background* NewBG) { BG = NewBG; }
 	void UpgradeWeaponLevel() { WeaponLevel = WeaponLevel < 2 ? WeaponLevel+1 : WeaponLevel; }
-	void UpgradeSpeedLevel() { SpeedLevel = SpeedLevel < 2 ? SpeedLevel + 1 : SpeedLevel; }
-	void UpdgradeHealthLevel() { HealthLevel = HealthLevel < 2 ? HealthLevel + 1 : HealthLevel; }
+	void UpgradeSpeedLevel();
+	void UpgradeHealthLevel();
 	void SpendCoins(int NumberOfCoinsToSpend) { NumberOfCoins -= NumberOfCoinsToSpend; }
 	void RewindPosition();
 	int WeaponLevel = 0;
@@ -58,8 +57,6 @@ private:
 	void ShootOrbital();
 	void ShootBase();
 	void UpdateWeapon();
-	void UpdateHealth();
-	void UpdateSpeed();
 	void UpdateSprite();
 	void UpdateMovement(float DeltaTime);
 	void UpdateRespawn(float DeltaTime);

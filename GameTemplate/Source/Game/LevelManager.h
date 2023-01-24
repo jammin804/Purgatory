@@ -3,8 +3,16 @@
 #include "Framework/GameObject.h"
 
 class Wall;
+class Enemy;
 
 using namespace std;
+
+enum class SpawnType
+{
+	Empty,
+	Wall,
+	Enemy
+};
 
 class LevelManager : public GameObject
 {
@@ -23,7 +31,7 @@ public:
 	vector<Wall*>& GetCoins() { return Walls; }
 private:
 	SBitmapCache* LevelData;
-	vector<vector <bool>> SpawnPositions;
+	vector<vector <SpawnType>> SpawnPositions;
 	vector<Wall*> Walls;
 	int MaxWalls = 100;
 };

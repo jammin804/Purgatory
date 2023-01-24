@@ -3,6 +3,7 @@
 #include "GameEvent.h"
 #include "Framework/EventManager.h"
 #include "Wall.h"
+#include "Enemy.h"
 
 
 
@@ -19,13 +20,27 @@ void LevelManager::OnInit()
 			SpawnPositions.resize(LevelData->ImageHeight);
 			for (int i = 0; i < SpawnPositions.size(); i++)
 			{
-				vector<bool>& RowData = SpawnPositions[i];
+				vector<SpawnType>& RowData = SpawnPositions[i];
 				RowData.resize(LevelData->ImageWidth);
 
 				for (int j = 0; j < RowData.size(); ++j)
 				{
-					ALLEGRO_COLOR Color = al_get_pixel(BitMapData, i, j);
-					RowData[j] = Color.r > 0 ? false : true;
+					ALLEGRO_COLOR Color = al_get_pixel(BitMapData, j, i);
+					//RowData[j] = Color.r > 0 ? SpawnType::Empty : SpawnType::Wall;
+					//Checking the color white first then check it if it has any red if so classify it as an enemy
+					if (Color.r == 255 && Color.g == 255 && Color.b == 255)
+					{
+						RowData[j]= SpawnType::Empty;
+					}
+					else if (Color.r == 0 && Color.g == 0 && Color.b == 0)
+					{
+						RowData[j] = SpawnType::Wall;
+					}
+					else if (Color.r == 255 && Color.g == 0 && Color.b == 0)
+					{
+						RowData[j] = SpawnType::Enemy;
+					}
+
 				}
 			}
 
@@ -60,7 +75,7 @@ void LevelManager::OnPostInit()
 
 	for (int i = 0; i < SpawnPositions.size(); i++)
 	{
-		vector<bool>& RowData = SpawnPositions[i];
+		vector<SpawnType>& RowData = SpawnPositions[i];
 		bool isCurrentlyCreatingHorizontalWall = false;
 		WallData HorizontalWall;
 
@@ -72,8 +87,8 @@ void LevelManager::OnPostInit()
 
 		for (int j = 0; j < RowData.size(); ++j)
 		{
-			bool ColumnData = RowData[j];
-			if (ColumnData == true)
+			SpawnType ColumnData = RowData[j];
+			if (ColumnData == SpawnType::Wall)
 			{
 				if (isCurrentlyCreatingHorizontalWall)
 				{
