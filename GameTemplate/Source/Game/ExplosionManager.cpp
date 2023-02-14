@@ -1,5 +1,5 @@
 #include "ExplosionManager.h"
-#include "GameEvent.h"
+#include "GameEventMessage.h"
 #include "Framework/EventManager.h"
 #include "Explosion.h"
 #include "Framework/EventMessage.h"
@@ -7,7 +7,7 @@
 void ExplosionManager::OnInit()
 {
 	Explosions.reserve(25); //May optimize to a pool via resize
-	AddEventListener(GameEvent::EnemyHurt);
+	AddEventListener(GameEventMessage::EnemyHurt);
 }
 
 void ExplosionManager::OnUpdate(float DeltaTime)
@@ -27,12 +27,12 @@ void ExplosionManager::OnUpdate(float DeltaTime)
 
 void ExplosionManager::OnShutdown()
 {
-	RemoveEventListener(GameEvent::EnemyHurt);
+	RemoveEventListener(GameEventMessage::EnemyHurt);
 }
 
 void ExplosionManager::OnEvent(const EventMessage& Msg)
 {
-	if(Msg.messageId == GameEvent::EnemyHurt)
+	if(Msg.messageId == GameEventMessage::EnemyHurt)
 	{
 		if (Msg.payload.size() < 3)
 		{

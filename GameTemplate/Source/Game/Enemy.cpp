@@ -4,7 +4,7 @@
 #include "Game/Player.h"
 #include "Background.h"
 #include "../GameObjectTypes.h"
-#include "GameEvent.h"
+#include "GameEventMessage.h"
 #include "Framework/EventManager.h"
 #include "Framework/EventMessage.h"
 
@@ -535,7 +535,7 @@ void Enemy::TakeDamage()
 		ExplosionScale = 2.2f;
 	}
 
-	EventMessage Evt(GameEvent::EnemyHurt);
+	EventMessage Evt(GameEventMessage::EnemyHurt);
 	EventPayload WorldPosX, WorldPosY, Scale;
 
 	WorldPosX.SetAsFloat(GetWorldPositionX());
@@ -549,7 +549,7 @@ void Enemy::TakeDamage()
 
 	if (EnemyHealthLeft < 0.0f)
 	{
- 		EventMessage Evt(GameEvent::EnemyDied);
+ 		EventMessage Evt(GameEventMessage::EnemyDied);
 		Evt.payload.push_back(WorldPosX);
 		Evt.payload.push_back(WorldPosY);
 		EventManager::BroadcastEvent(Evt);

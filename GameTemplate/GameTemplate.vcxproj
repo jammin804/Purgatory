@@ -72,13 +72,14 @@
     <ClInclude Include="Source\Framework\MemoryManager.h" />
     <ClInclude Include="Source\Framework\SoundComponent.h" />
     <ClInclude Include="Source\Framework\TextComponent.h" />
+    <ClInclude Include="Source\Game\GameGlobals.h" />
     <ClInclude Include="Source\Game\PurgatoryGame.h" />
     <ClInclude Include="Source\Game\Background.h" />
     <ClInclude Include="Source\Game\Coin.h" />
     <ClInclude Include="Source\Game\CoinManager.h" />
     <ClInclude Include="Source\Game\Enemy.h" />
     <ClInclude Include="Source\Game\EnemyManager.h" />
-    <ClInclude Include="Source\Game\GameEvent.h" />
+    <ClInclude Include="Source\Game\GameEventMessage.h" />
     <ClInclude Include="Source\Game\Explosion.h" />
     <ClInclude Include="Source\Game\ExplosionManager.h" />
     <ClInclude Include="Source\Game\GameFlow.h" />

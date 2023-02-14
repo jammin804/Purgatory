@@ -2,22 +2,21 @@
 #include "Enemy.h"
 #include "Framework/Globals.h"
 #include "Background.h"
-#include "GameEvent.h"
+#include "GameEventMessage.h"
 #include "Framework/EventManager.h"
 #include "Framework/EventMessage.h"
+#include "Game/GameGlobals.h"
 
 void EnemyManager::OnInit()
 {
 	Enemies.reserve(NumberOfEnemiesToSpawn);
+	AddEventListener(GameEventMessage::SpawnEnemy);
 }
 
 void EnemyManager::OnPostInit()
 {
-	if (Player1)
-	{
-		OnRestart();
-	}
-
+	
+	SetWorldPosition(-45 * GameGlobals::WorldScale, -24 * GameGlobals::WorldScale);
 }
 
 void EnemyManager::OnUpdate(float DeltaTime)
@@ -40,7 +39,7 @@ void EnemyManager::OnUpdate(float DeltaTime)
     {
         if (Enemies.size() == 0)
         {
-            EventManager::BroadcastEvent(GameEvent::AllEnemiesDead);
+            EventManager::BroadcastEvent(GameEventMessage::AllEnemiesDead);
         }
     }
 }
@@ -53,10 +52,21 @@ void EnemyManager::OnRestart()
 	}
 	Enemies.clear();
 
-	for (int i = 0; i < NumberOfEnemiesToSpawn; ++i)
+	//for (int i = 0; i < NumberOfEnemiesToSpawn; ++i)
+	//{
+	//	Enemy* NewEnemy = CreateEnemy();
+	//	SetRandomPosition(*NewEnemy);
+	//}
+
+
+}
+
+void EnemyManager::OnEvent(const EventMessage& Msg)
+{
+	if (Msg == GameEventMessage::SpawnEnemy)
 	{
 		Enemy* NewEnemy = CreateEnemy();
-		SetRandomPosition(*NewEnemy);
+		NewEnemy->SetPosition(Msg.payload[0].GetAsFloat() * GameGlobals::WorldScale, Msg.payload[1].GetAsFloat() * GameGlobals::WorldScale);
 	}
 }
 
@@ -65,7 +75,7 @@ Enemy* EnemyManager::CreateEnemy(int SplitsLeft /*= 2*/)
     Enemy* NewEnemy = GameObject::CreateInstance<Enemy>();
 	NewEnemy->SetEnabled(false);
 	int EnemyTypeRandomizer = rand() % static_cast <int> (EEnemyType::COUNT);
-	NewEnemy->SetParent(GetParent());
+	NewEnemy->SetParent(this);
 	NewEnemy->SetPlayer(Player1);
 	NewEnemy->SetEnemyType(static_cast <EEnemyType> (EnemyTypeRandomizer));
     Enemies.push_back(NewEnemy);
@@ -213,4 +223,9 @@ void EnemyManager::SetRandomPosition(Enemy& EnemyToPosition)
     EnemyToPosition.SetMovementDirection(StartDirX, StartDirY);
 
 	NumberOfEnemiesInASpace++;
+}
+
+void EnemyManager::OnShutdown()
+{
+	RemoveEventListener(GameEventMessage::SpawnEnemy);
 }

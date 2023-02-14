@@ -1,9 +1,10 @@
 #include "LevelManager.h"
 #include "Framework/EventMessage.h"
-#include "GameEvent.h"
+#include "GameEventMessage.h"
 #include "Framework/EventManager.h"
 #include "Wall.h"
 #include "Enemy.h"
+#include "GameGlobals.h"
 
 
 
@@ -28,15 +29,11 @@ void LevelManager::OnInit()
 					ALLEGRO_COLOR Color = al_get_pixel(BitMapData, j, i);
 					//RowData[j] = Color.r > 0 ? SpawnType::Empty : SpawnType::Wall;
 					//Checking the color white first then check it if it has any red if so classify it as an enemy
-					if (Color.r == 255 && Color.g == 255 && Color.b == 255)
-					{
-						RowData[j]= SpawnType::Empty;
-					}
-					else if (Color.r == 0 && Color.g == 0 && Color.b == 0)
+					if (Color.r == 0.0f && Color.g == 0.0f && Color.b == 0.0f)
 					{
 						RowData[j] = SpawnType::Wall;
 					}
-					else if (Color.r == 255 && Color.g == 0 && Color.b == 0)
+					else if (Color.r >= 0.9f && Color.g <= 0.1f && Color.b <= 0.1f)
 					{
 						RowData[j] = SpawnType::Enemy;
 					}
@@ -50,6 +47,7 @@ void LevelManager::OnInit()
 
 void LevelManager::OnPostInit()
 {
+	//Should I place the enemy manager here or replicate the code below?
 	struct WallData
 	{
 		int WorldPosX;
@@ -67,7 +65,7 @@ void LevelManager::OnPostInit()
             if (VerticalWall.WorldPosX == CurrentX && VerticalWall.WorldPosY + VerticalWall.Length == CurrentY)
             {
                 VerticalWall.Length++;
-                return true;//found it
+                return true;
             }
         }
         return false;
@@ -88,7 +86,18 @@ void LevelManager::OnPostInit()
 		for (int j = 0; j < RowData.size(); ++j)
 		{
 			SpawnType ColumnData = RowData[j];
-			if (ColumnData == SpawnType::Wall)
+			if (ColumnData == SpawnType::Enemy)
+			{
+				EventMessage Evt(GameEventMessage::SpawnEnemy);
+				EventPayload EnemyPositionX;
+				EventPayload EnemyPositionY;
+				EnemyPositionX.SetAsInt(j);
+				EnemyPositionY.SetAsInt(i);
+				Evt.payload.push_back(EnemyPositionX);
+				Evt.payload.push_back(EnemyPositionY);
+				EventManager::BroadcastEvent(Evt);
+			}
+			else if (ColumnData == SpawnType::Wall)
 			{
 				if (isCurrentlyCreatingHorizontalWall)
 				{
@@ -116,6 +125,8 @@ void LevelManager::OnPostInit()
 					CreateHorizontalWall(HorizontalWall);
 				}
 			}
+
+			
 			
 		}
 		if (isCurrentlyCreatingHorizontalWall)
@@ -137,7 +148,7 @@ void LevelManager::OnPostInit()
 		CreateWall(VerticalWall.WorldPosX, VerticalWall.WorldPosY, 1, VerticalWall.Length);
 	}
 
-	SetWorldPosition(-45 * 64, -24 * 64);
+	SetWorldPosition(-45 * GameGlobals::WorldScale, -24 * GameGlobals::WorldScale);
 }
 
 void LevelManager::SetEnabled(bool bEnabled)

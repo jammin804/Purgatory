@@ -3,12 +3,12 @@
 #include "Framework/Globals.h"
 #include "Framework/EventMessage.h"
 #include "Framework/EventManager.h"
-#include "GameEvent.h"
+#include "GameEventMessage.h"
 
 void CoinManager::OnInit()
 {
 	Coins.reserve(MaxCoins);
-	AddEventListener(GameEvent::EnemyDied);
+	AddEventListener(GameEventMessage::EnemyDied);
 }
 
 void CoinManager::OnUpdate(float DeltaTime)
@@ -29,12 +29,12 @@ void CoinManager::OnUpdate(float DeltaTime)
 
 void CoinManager::OnShutdown()
 {
-	RemoveEventListener(GameEvent::EnemyDied);
+	RemoveEventListener(GameEventMessage::EnemyDied);
 }
 
 void CoinManager::OnEvent(const EventMessage& Msg)
 {
-	if (Msg.messageId == GameEvent::EnemyDied)
+	if (Msg.messageId == GameEventMessage::EnemyDied)
 	{
 		if (Msg.payload.size() < 2)
 		{

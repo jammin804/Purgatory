@@ -2,8 +2,9 @@
 #include "Framework/ImageComponent.h"
 #include "Framework/BoxCollisionComponent.h"
 #include "../GameObjectTypes.h"
-#include "Player.h"
-#include "Enemy.h"
+#include "Game/Player.h"
+#include "Game/Enemy.h"
+#include "Game/GameGlobals.h"
 
 
 void Wall::OnInit()
@@ -29,9 +30,8 @@ void Wall::OnPostInit()
 		ImageCpt->SetTilingU(Width);
 		ImageCpt->SetTilingV(Height);
 
-		//TODO:Start Posx Start PosY and multiple by the width and height
-		StartPosX = StartPosX * CollisionScaleX;
-		StartPosY = StartPosY * CollisionScaleY;
+		StartPosX = StartPosX * GameGlobals::WorldScale;
+		StartPosY = StartPosY * GameGlobals::WorldScale;
 
 		SetPosition(StartPosX, StartPosY);
 

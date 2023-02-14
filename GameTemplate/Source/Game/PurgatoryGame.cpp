@@ -13,6 +13,9 @@
 #include "Game/ExplosionManager.h"
 #include "Game/Sfx.h"
 #include "Game/LevelManager.h"
+#include "Game/GameGlobals.h"
+
+const float GameGlobals::WorldScale = 64.0f;
 
 void PurgatoryGame::OnInit()
 {

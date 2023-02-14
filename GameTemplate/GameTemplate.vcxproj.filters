@@ -224,7 +224,7 @@
     <ClInclude Include="Source\Framework\EventManager.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\GameEvent.h">
+    <ClInclude Include="Source\Game\GameEventMessage.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\ExplosionManager.h">
@@ -252,6 +252,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\UserInterface\UIPause.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\GameGlobals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

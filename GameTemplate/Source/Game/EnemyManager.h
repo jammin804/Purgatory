@@ -16,6 +16,8 @@ class EnemyManager : public GameObject
 		virtual void OnPostInit() override;
         virtual void OnUpdate(float DeltaTime) override;
 		virtual void OnRestart() override;
+        virtual void OnEvent(const EventMessage& Msg) override;
+        virtual void OnShutdown() override;
 
     public:      
 		const vector<Enemy*>& GetEnemies() const { return Enemies; }

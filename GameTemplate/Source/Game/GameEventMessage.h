@@ -1,6 +1,6 @@
 #pragma once
 #include "Framework/EString.h"
-namespace GameEvent
+namespace GameEventMessage
 {
 	enum IDs
 	{
@@ -10,7 +10,8 @@ namespace GameEvent
 		AllEnemiesDead,
 		CrossDestroyed,
 		PlayerDied,
-		PlayerTakeDamage
+		PlayerTakeDamage,
+		SpawnEnemy
 	};
 
 }

@@ -6,7 +6,7 @@
 #include "Framework/BoxCollisionComponent.h"
 #include "Cross.h"
 #include "Background.h"
-#include "GameEvent.h"
+#include "GameEventMessage.h"
 #include "Framework/EventManager.h"
 #include "Enemy.h"
 #include "../GameObjectTypes.h"
@@ -24,7 +24,7 @@ void Player::OnInit()
     InputComp = GameComponent::CreateInstance<InputComponent>(this);
 	CoinSoundComponentPickup = GameComponent::CreateInstance<SoundComponent>(this);
     Collision = GameComponent::CreateInstance<BoxCollisionComponent>(this);
-	AddEventListener(GameEvent::CrossDestroyed);
+	AddEventListener(GameEventMessage::CrossDestroyed);
 
     Crosses.reserve(200);
 }
@@ -173,7 +173,7 @@ void Player::UpdateRespawn(float DeltaTime)
 
 void Player::OnShutdown()
 {
-	RemoveEventListener(GameEvent::CrossDestroyed);
+	RemoveEventListener(GameEventMessage::CrossDestroyed);
 }
 
 void Player::OnCollision(GameObject* Other)
@@ -208,14 +208,14 @@ void Player::TakeDamage()
 	{
 		SetEnabled(false);
 
-		EventManager::BroadcastEvent(GameEvent::PlayerDied);
+		EventManager::BroadcastEvent(GameEventMessage::PlayerDied);
 	}
 	else
 	{
 		bInvulnerable = true;
 		RespawnTimer = 0.0f;
 
-		EventMessage Evt(GameEvent::PlayerTakeDamage);
+		EventMessage Evt(GameEventMessage::PlayerTakeDamage);
 		EventPayload HPLeft;
 		HPLeft.SetAsInt(HealthLeft);
 		Evt.payload.push_back(HPLeft);
@@ -225,7 +225,7 @@ void Player::TakeDamage()
 
 void Player::OnEvent(const EventMessage& Msg)
 {
-	if (Msg == GameEvent::CrossDestroyed)
+	if (Msg == GameEventMessage::CrossDestroyed)
 	{
 		for (auto Iter = Crosses.begin(); Iter != Crosses.end();)
 		{

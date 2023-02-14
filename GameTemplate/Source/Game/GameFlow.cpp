@@ -2,7 +2,7 @@
 #include "Framework/EventManager.h"
 #include "Framework/EventMessage.h"
 #include "Framework/InputComponent.h"
-#include "Game/GameEvent.h"
+#include "Game/GameEventMessage.h"
 #include "Game/Player.h"
 #include "Game/UserInterface/UIEndGameMessage.h"
 #include "Game/UserInterface/UIHUD.h"
@@ -21,10 +21,10 @@ void GameFlow::OnInit()
 	WelcomeMessageText = GameObject::CreateInstance<UIWelcomeMessage>();
 	GameShop = GameObject::CreateInstance<UIShop>();
 
-	AddEventListener(GameEvent::EnemyDied);
-	AddEventListener(GameEvent::PlayerDied);
-	AddEventListener(GameEvent::PlayerTakeDamage);
-	AddEventListener(GameEvent::AllEnemiesDead);
+	AddEventListener(GameEventMessage::EnemyDied);
+	AddEventListener(GameEventMessage::PlayerDied);
+	AddEventListener(GameEventMessage::PlayerTakeDamage);
+	AddEventListener(GameEventMessage::AllEnemiesDead);
 }
 
 void GameFlow::OnPostInit()
@@ -143,10 +143,10 @@ void GameFlow::OnUpdate(float DeltaTime)
 
 void GameFlow::OnShutdown()
 {
-	RemoveEventListener(GameEvent::EnemyDied);
-	RemoveEventListener(GameEvent::PlayerDied);
-	RemoveEventListener(GameEvent::PlayerTakeDamage);
-	RemoveEventListener(GameEvent::AllEnemiesDead);
+	RemoveEventListener(GameEventMessage::EnemyDied);
+	RemoveEventListener(GameEventMessage::PlayerDied);
+	RemoveEventListener(GameEventMessage::PlayerTakeDamage);
+	RemoveEventListener(GameEventMessage::AllEnemiesDead);
 }
 
 void GameFlow::Restart(bool bShouldResetGame)
@@ -169,11 +169,11 @@ void GameFlow::Restart(bool bShouldResetGame)
 
 void GameFlow::OnEvent(const EventMessage& Msg)
 {
-	if (Msg == GameEvent::EnemyDied)
+	if (Msg == GameEventMessage::EnemyDied)
 	{
 		AddTime();
 	}
-	else if(Msg == GameEvent::PlayerTakeDamage)
+	else if(Msg == GameEventMessage::PlayerTakeDamage)
 	{
 		if (Msg.payload.size() < 1)
 		{
@@ -182,11 +182,11 @@ void GameFlow::OnEvent(const EventMessage& Msg)
 
 		UpdateLivesLeft(Msg.payload[0].GetAsInt());
 	}
-	else if (Msg == GameEvent::PlayerDied)
+	else if (Msg == GameEventMessage::PlayerDied)
 	{
 		SetPlayerIsDead();
 	}
-	else if (Msg == GameEvent::AllEnemiesDead)
+	else if (Msg == GameEventMessage::AllEnemiesDead)
 	{
 		SetAllDead();
 	}

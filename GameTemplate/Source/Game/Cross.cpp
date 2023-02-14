@@ -3,7 +3,7 @@
 #include "Framework/BoxCollisionComponent.h"
 #include "Framework/SoundComponent.h"
 #include "../GameObjectTypes.h"
-#include "GameEvent.h"
+#include "GameEventMessage.h"
 #include "Framework/EventManager.h"
 #include "Framework/EventMessage.h"
 
@@ -77,7 +77,7 @@ void Cross::OnCollision(GameObject* Other)
 	if (Other->GetType() == static_cast<int>(GOT_Enemy))
 	{
 		RequestDestroy();
-		EventManager::BroadcastEvent(GameEvent::CrossDestroyed);	
+		EventManager::BroadcastEvent(GameEventMessage::CrossDestroyed);	
 	}
 }
 
