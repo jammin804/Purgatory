@@ -39,7 +39,7 @@ void EnemyManager::OnUpdate(float DeltaTime)
     {
         if (Enemies.size() == 0)
         {
-            EventManager::BroadcastEvent(GameEventMessage::AllEnemiesDead);
+             EventManager::BroadcastEvent(GameEventMessage::AllEnemiesDead);
         }
     }
 }
@@ -92,7 +92,7 @@ void EnemyManager::SetEnabled(bool bEnabled)
     }
 }
 
-void EnemyManager::SetRandomPosition(Enemy& EnemyToPosition)
+void EnemyManager::SetRandomPosition(Enemy& EnemyToPosition) //Should this be removed since we have control of enemy spawn?
 {
 	const Background* BG = static_cast <const Background*> (GetParent());
 

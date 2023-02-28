@@ -32,6 +32,7 @@
     <ClCompile Include="Source\Framework\MemoryManager.cpp" />
     <ClCompile Include="Source\Framework\SoundComponent.cpp" />
     <ClCompile Include="Source\Framework\TextComponent.cpp" />
+    <ClCompile Include="Source\Game\Levels.cpp" />
     <ClCompile Include="Source\Game\PurgatoryGame.cpp" />
     <ClCompile Include="Source\Game\Background.cpp" />
     <ClCompile Include="Source\Game\Coin.cpp" />
@@ -73,6 +74,7 @@
     <ClInclude Include="Source\Framework\SoundComponent.h" />
     <ClInclude Include="Source\Framework\TextComponent.h" />
     <ClInclude Include="Source\Game\GameGlobals.h" />
+    <ClInclude Include="Source\Game\Levels.h" />
     <ClInclude Include="Source\Game\PurgatoryGame.h" />
     <ClInclude Include="Source\Game\Background.h" />
     <ClInclude Include="Source\Game\Coin.h" />

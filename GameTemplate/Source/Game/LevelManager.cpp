@@ -161,6 +161,7 @@ void LevelManager::SetEnabled(bool bEnabled)
 	}
 }
 
+
 Wall* LevelManager::CreateWall(float posX, float posY, int Width, int Height)
 {
 	if (Walls.size() < MaxWalls)

@@ -44,7 +44,7 @@ public:
 
     void SetWindowTitle(const char* title);
 
-    FontManager& GetFontManager() { return FntManager; }
+    FontManager& GetFontManager() { return *(FontManager::GetInstance()); }
     BitmapManager& GetBitmapManager() { return BmpManager; }
 
 private:
@@ -78,7 +78,6 @@ private:
     struct ALLEGRO_EVENT_QUEUE* EventQueue;
     struct ALLEGRO_DISPLAY* Display;
 
-    FontManager FntManager;
     BitmapManager BmpManager;
 
     double TimeOfLastUpdate = 0.0;

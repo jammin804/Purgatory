@@ -2,9 +2,11 @@
 #include <allegro5/allegro_ttf.h>
 
 ALLEGRO_FONT* Globals::DefaultFont;
+FontManager* FontManager::Instance = nullptr;
 
 void FontManager::Init()
 {
+    
     Globals::DefaultFont = al_create_builtin_font();
     if (!Globals::DefaultFont)
     {
@@ -20,6 +22,17 @@ void FontManager::Shutdown()
         al_destroy_font(KeyPair.second);
     }
     FontMap.clear();
+}
+
+
+
+FontManager* FontManager::GetInstance()
+{
+    if (Instance == nullptr)
+    {
+        Instance = new FontManager();
+    }
+	return Instance;
 }
 
 ALLEGRO_FONT* FontManager::FindOrAddFont(EString FontPath, int Size)

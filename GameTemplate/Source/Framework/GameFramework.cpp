@@ -116,7 +116,7 @@ bool GameFramework::InitInternal()
     }
 
     BmpManager.Init();
-    FntManager.Init();
+    GetFontManager().Init();
 
     GameObjects.reserve(512);
     InputComponents.reserve(4);
@@ -374,7 +374,7 @@ bool GameFramework::UpdateInternal()
 void GameFramework::ShutdownInternal()
 {
     BmpManager.Shutdown();
-    FntManager.Shutdown();
+    GetFontManager().Shutdown();
 
     for (GameObject* GO : GameObjects)
     {

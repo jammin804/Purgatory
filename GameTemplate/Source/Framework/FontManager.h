@@ -32,13 +32,17 @@ struct FontKey
 
 class FontManager
 {
-    friend class GameFramework;
-    void Init();
-    void Shutdown();
+
 public:
+    static FontManager* GetInstance();
     ALLEGRO_FONT* FindOrAddFont(EString FontPath, int Size);
+	void Init();
+	void Shutdown();
 
 private:
     FontManager() = default;
+
+private:
+    static FontManager* Instance;
      map<FontKey, ALLEGRO_FONT*> FontMap;
 };

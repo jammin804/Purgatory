@@ -135,6 +135,9 @@
     <ClCompile Include="Source\Game\UserInterface\UIPause.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Game\Levels.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Framework\GameFramework.h">
@@ -255,6 +258,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\GameGlobals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Levels.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

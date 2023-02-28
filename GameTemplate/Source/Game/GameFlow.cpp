@@ -95,6 +95,7 @@ void GameFlow::OnUpdate(float DeltaTime)
 		}
         if (CourageRemaining <= 0.0f )
         {
+
 			SetShopPause(true);
            
 			GameShop->UpdateCoinShopText();
@@ -189,6 +190,7 @@ void GameFlow::OnEvent(const EventMessage& Msg)
 	else if (Msg == GameEventMessage::AllEnemiesDead)
 	{
 		SetAllDead();
+		//Make a fuction to change level png
 	}
 }
 
