@@ -2,6 +2,7 @@
 #include "Framework/EventMessage.h"
 #include "GameEventMessage.h"
 #include "Framework/EventManager.h"
+#include "Framework/EventMessage.h"
 #include "Wall.h"
 #include "Enemy.h"
 #include "GameGlobals.h"
@@ -10,14 +11,21 @@
 
 void LevelManager::OnInit()
 {
-	LevelData = GameFramework::Get().GetBitmapManager().FindOrAddBitmap("Art/Level.png");
+	ReadLevelImage(LevelImage);
+
+	AddEventListener(GameEventMessage::AllEnemiesDead);
+}
+
+void LevelManager::ReadLevelImage(string LevelImagePath)
+{
+	LevelData = GameFramework::Get().GetBitmapManager().FindOrAddBitmap(LevelImagePath);
 	if (LevelData)
 	{
 		ALLEGRO_BITMAP* BitMapData = LevelData->ImageBitmap;
 		if (BitMapData)
 		{
 			al_lock_bitmap(BitMapData, al_get_bitmap_format(BitMapData), ALLEGRO_LOCK_READONLY);
-			
+
 			SpawnPositions.resize(LevelData->ImageHeight);
 			for (int i = 0; i < SpawnPositions.size(); i++)
 			{
@@ -47,7 +55,6 @@ void LevelManager::OnInit()
 
 void LevelManager::OnPostInit()
 {
-	//Should I place the enemy manager here or replicate the code below?
 	struct WallData
 	{
 		int WorldPosX;
@@ -162,6 +169,15 @@ void LevelManager::SetEnabled(bool bEnabled)
 }
 
 
+void LevelManager::OnEvent(const EventMessage& Msg)
+{
+	if (Msg == GameEventMessage::AllEnemiesDead)
+	{
+		//Switch Level?
+	}
+}
+
+
 Wall* LevelManager::CreateWall(float posX, float posY, int Width, int Height)
 {
 	if (Walls.size() < MaxWalls)
@@ -180,4 +196,9 @@ Wall* LevelManager::CreateWall(float posX, float posY, int Width, int Height)
 	}
 
 	return nullptr;
+}
+
+void LevelManager::OnShutdown()
+{
+	RemoveEventListener(GameEventMessage::AllEnemiesDead);
 }

@@ -190,7 +190,7 @@ void GameFlow::OnEvent(const EventMessage& Msg)
 	else if (Msg == GameEventMessage::AllEnemiesDead)
 	{
 		SetAllDead();
-		//Make a fuction to change level png
+		//Make a function to change level png
 	}
 }
 
