@@ -22,13 +22,16 @@ protected:
 
 
 	virtual void OnPostInit() override;
- 	virtual void SetEnabled(bool bEnabled) override;
+
+	virtual void SetEnabled(bool bEnabled) override;
 	virtual void OnEvent(const EventMessage& Msg) override;
 	virtual void OnShutdown() override;
 
 private:
 	Wall* CreateWall(float posX, float posY, int Width, int Height); 
 	void ReadLevelImage(string LevelImagePath);
+	void PopulateWorld();
+	void UnloadWorld();
 
 private:
 	SBitmapCache* LevelData;

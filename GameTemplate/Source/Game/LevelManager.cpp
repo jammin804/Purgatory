@@ -26,6 +26,7 @@ void LevelManager::ReadLevelImage(string LevelImagePath)
 		{
 			al_lock_bitmap(BitMapData, al_get_bitmap_format(BitMapData), ALLEGRO_LOCK_READONLY);
 
+			SpawnPositions.clear();
 			SpawnPositions.resize(LevelData->ImageHeight);
 			for (int i = 0; i < SpawnPositions.size(); i++)
 			{
@@ -43,7 +44,7 @@ void LevelManager::ReadLevelImage(string LevelImagePath)
 					}
 					else if (Color.r >= 0.9f && Color.g <= 0.1f && Color.b <= 0.1f)
 					{
-						RowData[j] = SpawnType::Enemy;
+ 						RowData[j] = SpawnType::Enemy;
 					}
 
 				}
@@ -54,6 +55,24 @@ void LevelManager::ReadLevelImage(string LevelImagePath)
 }
 
 void LevelManager::OnPostInit()
+{
+	PopulateWorld();
+}
+
+void LevelManager::UnloadWorld()
+{
+	for (auto WallIter = Walls.begin(); WallIter != Walls.end(); ++WallIter)
+	{
+		(*WallIter)->RequestDestroy();
+	}
+	Walls.clear();
+
+	EventManager::BroadcastEvent(GameEventMessage::DespawnEnemy);
+}
+
+
+
+void LevelManager::PopulateWorld()
 {
 	struct WallData
 	{
@@ -67,15 +86,15 @@ void LevelManager::OnPostInit()
 
 	auto ExtendVerticalWall = [](vector<WallData>& VerticalWalls, int CurrentX, int CurrentY)->bool
 	{
-        for (WallData& VerticalWall : VerticalWalls)
-        {
-            if (VerticalWall.WorldPosX == CurrentX && VerticalWall.WorldPosY + VerticalWall.Length == CurrentY)
-            {
-                VerticalWall.Length++;
-                return true;
-            }
-        }
-        return false;
+		for (WallData& VerticalWall : VerticalWalls)
+		{
+			if (VerticalWall.WorldPosX == CurrentX && VerticalWall.WorldPosY + VerticalWall.Length == CurrentY)
+			{
+				VerticalWall.Length++;
+				return true;
+			}
+		}
+		return false;
 	};
 
 	for (int i = 0; i < SpawnPositions.size(); i++)
@@ -86,8 +105,8 @@ void LevelManager::OnPostInit()
 
 		auto CreateHorizontalWall = [this, &isCurrentlyCreatingHorizontalWall](const WallData& HorizontalWall)
 		{
-            CreateWall(HorizontalWall.WorldPosX, HorizontalWall.WorldPosY, HorizontalWall.Length, 1);
-            isCurrentlyCreatingHorizontalWall = false;
+			CreateWall(HorizontalWall.WorldPosX, HorizontalWall.WorldPosY, HorizontalWall.Length, 1);
+			isCurrentlyCreatingHorizontalWall = false;
 		};
 
 		for (int j = 0; j < RowData.size(); ++j)
@@ -116,7 +135,7 @@ void LevelManager::OnPostInit()
 					isCurrentlyCreatingHorizontalWall = true;
 					HorizontalWall.Length = 1;
 					HorizontalWall.WorldPosX = j;
-                    HorizontalWall.WorldPosY = i;
+					HorizontalWall.WorldPosY = i;
 					HorizontalWall.bIsVerticalWall = false;
 				}
 			}
@@ -133,17 +152,17 @@ void LevelManager::OnPostInit()
 				}
 			}
 
-			
-			
+
+
 		}
 		if (isCurrentlyCreatingHorizontalWall)
 		{
-            if (HorizontalWall.Length == 1)
-            {
+			if (HorizontalWall.Length == 1)
+			{
 				VerticalWalls.push_back(HorizontalWall);
 				isCurrentlyCreatingHorizontalWall = false;
 			}
-			else 
+			else
 			{
 				CreateHorizontalWall(HorizontalWall);
 			}
@@ -173,7 +192,9 @@ void LevelManager::OnEvent(const EventMessage& Msg)
 {
 	if (Msg == GameEventMessage::AllEnemiesDead)
 	{
-		//Switch Level?
+ 		UnloadWorld();
+		ReadLevelImage("Art/Level_2.png");
+		PopulateWorld();
 	}
 }
 

@@ -25,7 +25,8 @@ class EnemyManager : public GameObject
 		void SetPlayer(const Player* NewPlayer) { Player1 = NewPlayer; }
     private:
         void SetRandomPosition(Enemy& EnemyToPosition);
-        Enemy* CreateEnemy(const int MAX_ENEMY_HEALTH = 2); //Changed Splits Left to Max Enemy Health
+        Enemy* CreateEnemy();
+        void ClearEnemy();
 private:
         vector<Enemy*> Enemies;
         int NumberOfEnemiesToSpawn = 20; //TODO: Is this needed?

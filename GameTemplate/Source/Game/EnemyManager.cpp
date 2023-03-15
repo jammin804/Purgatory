@@ -11,6 +11,7 @@ void EnemyManager::OnInit()
 {
 	Enemies.reserve(NumberOfEnemiesToSpawn);
 	AddEventListener(GameEventMessage::SpawnEnemy);
+	AddEventListener(GameEventMessage::DespawnEnemy);
 }
 
 void EnemyManager::OnPostInit()
@@ -46,18 +47,7 @@ void EnemyManager::OnUpdate(float DeltaTime)
 
 void EnemyManager::OnRestart()
 {
-	for (Enemy* CurrentEnemy : Enemies)
-	{
-		CurrentEnemy->RequestDestroy();
-	}
-	Enemies.clear();
-
-	//for (int i = 0; i < NumberOfEnemiesToSpawn; ++i)
-	//{
-	//	Enemy* NewEnemy = CreateEnemy();
-	//	SetRandomPosition(*NewEnemy);
-	//}
-
+	ClearEnemy();
 
 }
 
@@ -68,9 +58,14 @@ void EnemyManager::OnEvent(const EventMessage& Msg)
 		Enemy* NewEnemy = CreateEnemy();
 		NewEnemy->SetPosition(Msg.payload[0].GetAsFloat() * GameGlobals::WorldScale, Msg.payload[1].GetAsFloat() * GameGlobals::WorldScale);
 	}
+	
+	if (Msg == GameEventMessage::DespawnEnemy)
+	{
+		ClearEnemy();
+	}
 }
 
-Enemy* EnemyManager::CreateEnemy(int SplitsLeft /*= 2*/)
+Enemy* EnemyManager::CreateEnemy()
 {
     Enemy* NewEnemy = GameObject::CreateInstance<Enemy>();
 	NewEnemy->SetEnabled(false);
@@ -80,6 +75,16 @@ Enemy* EnemyManager::CreateEnemy(int SplitsLeft /*= 2*/)
 	NewEnemy->SetEnemyType(static_cast <EEnemyType> (EnemyTypeRandomizer));
     Enemies.push_back(NewEnemy);
     return NewEnemy;
+}
+
+void EnemyManager::ClearEnemy()
+{
+	for (Enemy* CurrentEnemy : Enemies)
+	{
+		CurrentEnemy->RequestDestroy();
+	}
+	Enemies.clear();
+
 }
 
 void EnemyManager::SetEnabled(bool bEnabled)
@@ -228,4 +233,5 @@ void EnemyManager::SetRandomPosition(Enemy& EnemyToPosition) //Should this be re
 void EnemyManager::OnShutdown()
 {
 	RemoveEventListener(GameEventMessage::SpawnEnemy);
+	RemoveEventListener(GameEventMessage::DespawnEnemy);
 }

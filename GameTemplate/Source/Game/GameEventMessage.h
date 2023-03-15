@@ -11,7 +11,8 @@ namespace GameEventMessage
 		CrossDestroyed,
 		PlayerDied,
 		PlayerTakeDamage,
-		SpawnEnemy
+		SpawnEnemy,
+		DespawnEnemy
 	};
 
 }
